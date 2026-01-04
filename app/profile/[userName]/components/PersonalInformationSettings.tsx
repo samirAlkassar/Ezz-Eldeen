@@ -7,16 +7,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddressItem from "./AddressItem";
 import AddressForm from "./AddressForm";
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
+import { Address } from "@/features/user/types";
 
 
 
 const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
     const user = useSelector((state: RootState) => state.currentUser.user?.user);
     const dispatch = useDispatch<AppDispatch>();
-    const [editingAddress, setEditingAddress] = useState<any | null>(null);
+    const [editingAddress, setEditingAddress] = useState<Address | null>(null);
     const [showAddressForm, setShowAddressForm] = useState(false);
-    const loading = useSelector((state: RootState)=> state.currentUser.loading);
     const { toast } = useToast();
     const [userData, setUserData] = useState({
         picturePath : "",
@@ -24,7 +24,7 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
         secondName : "",
         email : "",
         phone: "",
-        addresses: [] as any[],
+        addresses: [] as Address[],
     });
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
         setShowAddressForm(true);
     };
 
-    const openEditAddress = (addr: any) => {
+    const openEditAddress = (addr: Address) => {
         setEditingAddress(addr);
         setShowAddressForm(true);
     };
@@ -68,15 +68,15 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
             }));
             toast({ title: "User profile updated", description: "Your profile information is updated successfully",variant: "success", position: "bottom-right", icon: <UserIcon size={20}/> })
         } catch (error){
-            toast({ title: "Error", description: "Failed to update user info",variant: "error", position: "bottom-right", icon: <Map size={20}/> })
+            toast({ title: "Error", description: `${error}`,variant: "error", position: "bottom-right", icon: <Map size={20}/> })
         }
 
 
     };
 
-    const handleAddressSubmit = async (data: any) => {
+    const handleAddressSubmit = async (data: Address) => {
         if (editingAddress) {
-            await dispatch(updateAddress({ addressId: editingAddress._id, data }));
+            await dispatch(updateAddress({ addressId: editingAddress._id as string, data }));
             toast({ title: "Address updated", description: "Your address is updated successfully",variant: "success", position: "bottom-right", icon: <Map size={20}/> })
         } else {
             await dispatch(addAddress(data));
@@ -119,18 +119,18 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
                     <p className="text-gray-500">No addresses found.</p>
                 )}
 
-                {userData.addresses.map((addr, index) => (
+                {userData.addresses.map((addr) => (
                     <AddressItem
                         key={addr._id}
                         address={addr}
                         onEdit={() => openEditAddress(addr)}
-                        onDelete={() => handleDeleteAddress(addr._id)}
+                        onDelete={() => handleDeleteAddress(addr._id as string)}
                     />
                 ))}
                 <AnimatePresence mode="popLayout">
                     {showAddressForm && (
                             <AddressForm
-                                initial={editingAddress}
+                                initial={editingAddress as Address}
                                 onCancel={() => setShowAddressForm(false)}
                                 onSubmit={handleAddressSubmit}
                             />

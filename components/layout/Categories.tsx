@@ -65,7 +65,7 @@ const Categories = () => {
                     viewport={{ once: true, amount: 0.2 }}
                     className="text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center">
                     From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" />
-                    child's journey magical and educational.
+                    {`child's journey magical and educational.`}
                 </motion.p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full mt-8">
@@ -73,7 +73,6 @@ const Categories = () => {
                         <CategoryCard
                             key={index}
                             delayIndex={index}
-                            buttonText={category.buttonText}
                             title={category.title}
                             subtitle={category.subtitle}
                             icon={category.icon}
@@ -118,7 +117,7 @@ const Categories = () => {
                         transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
                         className="text-2xl md:text-3xl font-bold text-white">
-                        Can't Decide? Try Our Bundles!
+                        {`Can't Decide? Try Our Bundles!`}
                     </motion.h1>
 
                     <motion.p
@@ -138,7 +137,7 @@ const Categories = () => {
 
 
 const CategoryCard = ({ icon, theme, title, subtitle, delayIndex }:
-    { icon?: React.ReactNode, theme?: string, items?: {}, buttonText: string, title: string, subtitle: string, delayIndex: number }) => {
+    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number }) => {
     const router = useRouter();
     return (
         <motion.div

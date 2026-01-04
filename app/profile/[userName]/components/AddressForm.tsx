@@ -1,8 +1,9 @@
 import FormField from "@/components/ui/FormFeild";
+import { Address } from "@/features/user/types";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-const AddressForm = ({ initial, onSubmit, onCancel } : any) => {
+const AddressForm = ({ initial, onSubmit, onCancel } : {initial: Address, onSubmit: (updated: Address) => void, onCancel: ()=>void}) => {
     const [form, setForm] = useState(initial || {
         fullName: "",
         phone: "",
@@ -13,8 +14,9 @@ const AddressForm = ({ initial, onSubmit, onCancel } : any) => {
         country: "",
     });
 
-    const handleChange = (e: any) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
     };
 
     return (

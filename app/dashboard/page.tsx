@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import getCookies from "@/actions/getCookies";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Sidebar from "./components/Sidebar";
@@ -10,7 +10,7 @@ import StatusTab from "./components/StatusTab";
 import SettingsTab from "./components/SettingsTab";
 import ProductFormModal from "./components/ProductFormModal";
 import DeleteConfirm from "./components/DeleteConfirm";
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import { useToast } from "@/components/Toast";
 import { Trash, TriangleAlert } from "lucide-react";
 
@@ -38,7 +38,7 @@ export type Product = {
     category?: string;
     subcategory?: string;
     tags?: string[];
-    variants?: any[];
+    variants?: string[];
     images?: { url: string; alt?: string }[];
     createdAt?: string;
     updatedAt?: string;
@@ -66,7 +66,7 @@ export type Order = {
 
 const API_BASE = typeof window !== "undefined" ? (process.env.NEXT_PUBLIC_API_URL ?? "") : "";
 
-function debounce<T extends (...args: any[]) => void>(fn: T, delay = 300) {
+function debounce<T extends (...args: string[]) => void>(fn: T, delay = 300) {
     let t: ReturnType<typeof setTimeout> | null = null;
     return (...args: Parameters<T>) => {
         if (t) clearTimeout(t);
@@ -93,7 +93,7 @@ export default function DashboardPage() {
     const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
     const {toast} = useToast();
 
-    const fetchProducts = async () => {
+    const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
             const params = new URLSearchParams();
@@ -124,18 +124,18 @@ export default function DashboardPage() {
                 setProducts(data.products);
                 setTotal(data.pagination?.total ?? data.products.length);
             }
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error(err);
         } finally {
             setLoading(false);
         }
-    };
+    },[]);
 
     useEffect(() => {
         if (activeTab === "products") {
             fetchProducts();
         }
-    }, [page, activeTab]);
+    }, [page, activeTab, fetchProducts]);
 
     useEffect(() => {
         if (activeTab === "products") {
@@ -145,7 +145,7 @@ export default function DashboardPage() {
             }, 350);
             debounced();
         }
-    }, [search, categoryFilter, minPrice, maxPrice, activeTab]);
+    }, [search, categoryFilter, minPrice, maxPrice, activeTab, fetchProducts]);
 
     const createProduct = async (payload: FormData) => {
         const token = await getCookies("token");
@@ -245,7 +245,7 @@ export default function DashboardPage() {
                                 setDeletingProduct(null);
                                 fetchProducts();
                             } catch (err) {
-                                alert("Delete failed");
+                                alert(`Delete failed ${err}`);
                             }
                         }}
                     />

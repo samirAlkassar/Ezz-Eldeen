@@ -22,4 +22,4 @@ const CartItemSkeleton = () => {
     )
 }
 
-export default CartItemSkeleton;''
+export default CartItemSkeleton;

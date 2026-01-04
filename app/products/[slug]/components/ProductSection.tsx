@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 const ProductSection = ({product} : {product:  ProductType | null}) => {
     const [quantity, setQuantity] = useState<number>(1);
     const [selectedImage, setSelectedImage] = useState<number>();
-    const router = useRouter();''
+    const router = useRouter();
 
-    const features : any[] = [];
+    const features : string[] = [];
     return (
         <div className="flex gap-8 md:gap-10 lg:gap-15 flex-col xl:flex-row">
             <div className="flex-1 flex flex-col space-y-6">
@@ -37,7 +37,7 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
                             : "border-gray-200/50 hover:border-gray-200/50"
                         }`}
                         >
-                        <img src={img?.url} alt={img?.alt} className="w-full h-full object-cover" />
+                        <Image src={img?.url} alt={`${img?.alt}`} fill className="w-full h-full object-cover" />
                         </motion.button>
                     ))}
                 </div>

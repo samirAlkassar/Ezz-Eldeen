@@ -3,7 +3,7 @@ import { motion } from "motion/react"
 
 type FeaturesProps = {
     activeTab: "description" | "features" | "reviews" | "add-review";
-    features:  any[];
+    features:  string[];
 }
 
 const FeaturesTab = ({features, activeTab}:FeaturesProps) => {

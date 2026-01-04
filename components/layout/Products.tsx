@@ -5,12 +5,11 @@ import { Product } from "../Product";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
 import { fetchProducts } from "@/features/products/productsSlice";
-import { fetchCart, addToCart, updateCartItem, removeFromCart, clearCart } from "@/features/cart/cartSlice";
-import { fetchWishlist, addToWishlist, removeFromWishlist } from "@/features/wishlist/wishlistSlice";
+import { fetchCart } from "@/features/cart/cartSlice";
+import { fetchWishlist } from "@/features/wishlist/wishlistSlice";
 import Pagination from "../Pagination";
 import debounce from "lodash/debounce";
 import ProductsSearchBar from "../ProductsSearchBar"
-import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 export type CategoriesFilterType = "All Products" | "Toys & Games" | "School Supplies" | "Gifts";
@@ -25,11 +24,8 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
   const [sort, setSort] = useState<SortType>("createdAt");
   const [order, setOrder] = useState<OrderType>("desc");
   const dispatch = useDispatch<AppDispatch>();
-  const { products, pagination, loading, error } = useSelector(
+  const { products, pagination, error } = useSelector(
     (state: RootState) => state.products);
-  const router = useRouter();
-  const cart = useSelector((state: RootState) => state.cart.cart);
-  const loadingCart = useSelector((state: RootState) => state.cart.loading);
   const [currentPage, setCurrentPage] = useState(1);
   const wishlist = useSelector((state: RootState) => state.wishlist.items);
 
@@ -56,7 +52,7 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
           limit: isProductsPage ? 12 : 8,
         }));
       }, 400),
-    [dispatch]
+    [dispatch, isProductsPage]
   );
 
   useEffect(() => {
@@ -73,19 +69,6 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
     dispatch(fetchWishlist());
   }, [dispatch]);
 
-
-
-  const handleUpdateItem = (productId: string, quantity: number) => {
-    dispatch(updateCartItem({ productId, quantity }));
-  };
-
-  const handleRemoveItem = (productId: string) => {
-    dispatch(removeFromCart(productId));
-  };
-
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
 
 
   if (error) return <p>Error: {error}</p>;

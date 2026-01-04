@@ -4,7 +4,7 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { X } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion"

@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Product } from "@/components/Product";
-import { fetchWishlist, addToWishlist, removeFromWishlist } from "@/features/wishlist/wishlistSlice";
+import { fetchWishlist } from "@/features/wishlist/wishlistSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
 import { useEffect } from "react";

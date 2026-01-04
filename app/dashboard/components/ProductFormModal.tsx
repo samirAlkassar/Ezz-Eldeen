@@ -5,13 +5,14 @@ import React from "react";
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 import { useToast } from "@/components/Toast";
+import Image from "next/image";
 
 type ProductFormModalProps = {
     onClose: () => void;
     onSaved: () => void;
     existing: Product | null;
-    createProduct: (payload: FormData) => Promise<any>;
-    patchProduct: (id: string, payload: ProductUpdatePayload | FormData) => Promise<any>;
+    createProduct: (payload: FormData) => Promise<void>;
+    patchProduct: (id: string, payload: ProductUpdatePayload | FormData) => Promise<void>;
 };
 
 function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProduct }: ProductFormModalProps) {
@@ -55,10 +56,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
         return true;
     };
 
-    const parseTags = (tags: string) => tags
-        .split(",")
-        .map(tag => tag.trim())
-        .filter(Boolean);
+    const parseTags = (tags: string): string[] => tags.split(",").map(tag => tag.trim()).filter(Boolean);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -93,7 +91,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                 toast({title: "Product edited", description: "Product is Updated Successfully",variant:"default", icon: <Pencil />, position: "bottom-right"})
             
             } else {
-                const formData = new FormData();
+                const formData: FormData = new FormData();
                 formData.append("name", name);
                 formData.append("slug", slug);
                 formData.append("description", description);
@@ -109,8 +107,13 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                 toast({title: "New Product", description: "New Product created Successfully",variant: "success" ,icon: <Rocket />, position: "bottom-right"})
             }
             onSaved();
-        } catch (err: any) {
-            alert(err.message || "Save failed");
+        }
+        catch (err: unknown) {
+            if (err instanceof Error) {
+                alert(err.message);
+            } else {
+                alert("Save failed");
+            }
         } finally {
             setSaving(false);
         }
@@ -356,7 +359,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                             className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         />
                                         {preview && (
-                                            <img src={preview} alt="Preview" className="mt-3 w-32 h-32 object-cover rounded-lg border border-slate-200" />
+                                            <Image src={preview} alt="Preview" fill className="mt-3 w-32 h-32 object-cover rounded-lg border border-slate-200" />
                                         )}
                                     </div>
                                 </motion.div>
@@ -413,7 +416,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                         {preview && (
                                             <div>
                                                 <p className="text-base text-slate-700 font-medium mb-2">Product Image</p>
-                                                <img src={preview} alt="Product" className="w-40 h-40 object-cover rounded-lg border border-slate-200" />
+                                                <Image src={preview} alt="Product" fill className="w-40 h-40 object-cover rounded-lg border border-slate-200" />
                                             </div>
                                         )}
                                     </div>

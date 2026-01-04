@@ -2,7 +2,7 @@ import { CheckCircle, Star, TriangleAlert } from "lucide-react";
 import { addReview } from "@/features/products/productsSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/app/store";
-import { ProductType, ReviewData } from "@/features/products/types";
+import { ProductType } from "@/features/products/types";
 import { useState } from "react";
 import { useToast } from "@/components/Toast";
 

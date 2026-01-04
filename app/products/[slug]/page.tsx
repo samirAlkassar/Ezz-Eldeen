@@ -15,12 +15,12 @@ import FeaturesTab from "./components/Features";
 import ReviewsTab from "./components/ReviewsTab";
 import AddReviewForm from "./components/AddReviewForm";
 
-const productBySlug = () => {
+const ProductBySlug = () => {
     const params = useParams<{ slug: string }>();
     const dispatch = useDispatch<AppDispatch>();
     const [activeTab, setActiveTab] = useState<"description" | "features" | "reviews" | "add-review">("reviews");
 
-    const { product, relatedProducts, loading, error } = useSelector(
+    const { product, relatedProducts } = useSelector(
         (state: RootState) => state.products
     );
     const wishlist = useSelector((state: RootState) => state.wishlist.items);
@@ -35,7 +35,7 @@ const productBySlug = () => {
         dispatch(fetchWishlist());
     }, [dispatch]);
 
-    const features : any[] = [];
+    const features : string[] = [];
 
     return (
         <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
@@ -54,7 +54,7 @@ const productBySlug = () => {
                             ].map((tab) => (
                             <button
                                 key={tab.key}
-                                onClick={() => setActiveTab(tab.key as any)}
+                                onClick={() => setActiveTab(tab.key as "description" | "features" | "reviews" | "add-review")}
                                 className={`relative text-base md:text-2xl cursor-pointer pt-4 pb-3 font-medium transition-colors w-full xl:w-auto ${
                                 activeTab === tab.key
                                     ? "text-orange-500"
@@ -111,4 +111,4 @@ const productBySlug = () => {
     )
 };
 
-export default productBySlug;
+export default ProductBySlug;

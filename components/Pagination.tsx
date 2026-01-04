@@ -24,7 +24,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, isProductsPage }: {
         </motion.div>
     );
 };
-``
+
 export default Pagination
 
 

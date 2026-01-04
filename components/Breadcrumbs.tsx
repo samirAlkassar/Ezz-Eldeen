@@ -1,4 +1,5 @@
 import { Home } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, currentPage?: string}) => {
@@ -6,10 +7,10 @@ const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, current
     return (
         <div className="py-4">
             <nav className="flex items-center gap-2 text-sm text-gray-600 max-w-[85rem] mx-auto px-3">
-            <a href="/" className="hover:text-orange-500 transition flex gap-2 items-center">
+            <Link href="/" className="hover:text-orange-500 transition flex gap-2 items-center">
                 <Home size={16}/>
                 <p className="text-base">Home</p>
-            </a>
+            </Link>
             { previousPage &&
             <>
                 <span>/</span>

@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 type FormFieldType = {
-    value?: any;
+    value?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     className?: string;
     required?: boolean;

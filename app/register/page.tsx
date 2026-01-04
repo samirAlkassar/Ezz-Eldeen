@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useToast } from "@/components/Toast";
 import { CheckSquare, TriangleAlert } from 'lucide-react';
+import Image from 'next/image';
 
 export default function RegisterPage() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -158,9 +159,10 @@ export default function RegisterPage() {
                 </div>
             </div>
              <div className="hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden">
-                <img
+                <Image
                     src="/images/register-splash.jpg"
                     alt="Kids, school and toys illustration"
+                    fill
                     className="w-full h-full object-cover opacity-85"
                 />
             </div>

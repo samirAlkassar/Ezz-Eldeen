@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { fetchCurrentUser, selectUser } from "../features/auth/authSlice";
+import { fetchCurrentUser } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
 
@@ -13,7 +13,7 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children, role }: ProtectedRouteProps) {
     const router = useRouter();
-    const {currentUser, loading, error} = useSelector((state: RootState)=> state.user);
+    const {currentUser, loading} = useSelector((state: RootState)=> state.user);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function ProtectedRoute({ children, role }: ProtectedRouteProps) 
             }
         }
 
-    }, [currentUser, role, router]);
+    }, [currentUser, role, router, loading]);
 
     if (!currentUser?.role || (role && currentUser?.role !== role)) return null;
 

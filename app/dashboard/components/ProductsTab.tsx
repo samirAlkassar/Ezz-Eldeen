@@ -2,6 +2,7 @@ import { Product } from "../page";
 import { useState } from "react";
 import { Edit, Trash, Plus, Search } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import Image from "next/image";
 
 type ProductsTabProps = {
     products: Product[];
@@ -143,9 +144,10 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                     <tr key={product._id} className="hover:bg-slate-50 transition-colors duration-150">
                                         <td className="px-6 py-3.5">
                                             <div className="flex items-center gap-3">
-                                                <img 
+                                                <Image 
                                                     src={product.images?.[0]?.url ?? "/placeholder.jpg"} 
                                                     alt={product.name}
+                                                    fill
                                                     className="w-12 h-12 rounded-lg object-cover border border-slate-200"
                                                 />
                                                 <div>

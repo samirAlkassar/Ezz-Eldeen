@@ -7,11 +7,12 @@ import { fetchCurrentUser, selectUser, logout } from "../../features/auth/authSl
 import { Button } from "../ui/Button";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { fetchCart, addToCart, updateCartItem, removeFromCart, clearCart } from "@/features/cart/cartSlice";
+import { fetchCart} from "@/features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
 import Image from "next/image";
 import { useToast } from "@/components/Toast";
+import Link from "next/link";
 
 const Navbar = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -22,7 +23,6 @@ const Navbar = () => {
     const imageRef = useRef<HTMLButtonElement>(null);
     const { toast } = useToast();
     const cart = useSelector((state: RootState) => state.cart.cart);
-    const loadingCart = useSelector((state: RootState) => state.cart.loading);
     const router = useRouter();
     const handleScroll = useCallback(() => {
     const scrollThreshold = 440;
@@ -75,9 +75,9 @@ const Navbar = () => {
                     initial={{ scale: 0.9 }}
                     whileInView={{ scale: 1 }}
                     transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}>
-                    <a href="/" className={twMerge("text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                    <Link href="/" className={twMerge("text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
                         Ezz-Eldeen
-                    </a>
+                    </Link>
                 </motion.div>
 
                 <SlideTabes isScrolled={isScrolled}/>

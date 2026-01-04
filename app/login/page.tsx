@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import setCookies from "../../actions/setCoockies";
+import Image from 'next/image';
 
 export default function LoginPage() {
     const [email, setEmail] = useState<string>("");
@@ -117,9 +118,10 @@ export default function LoginPage() {
 
             {/* Right side (image) */}
             <div className="hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden -ml-26">
-                <img
+                <Image
                     src="/images/login-splash.jpg"
                     alt="Kids, school and toys illustration"
+                    fill
                     className="w-full h-full object-cover opacity-85"
                 />
             </div>

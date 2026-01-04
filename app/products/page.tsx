@@ -4,22 +4,29 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Products from "@/components/layout/Products";
 import { useSearchParams } from "next/navigation";
 import { CategoriesFilterType } from "@/components/ProductsSearchBar";
+import { Suspense } from "react";
 
-interface ProductsPageProps {}
-
-const ProductsPage: React.FC<ProductsPageProps> = () => {
+const ProductsPage: React.FC = () => {
   const searchParams = useSearchParams();
 
-  const category: CategoriesFilterType | any = searchParams.get("category");     
-  const search: string | null = searchParams.get("search");          
+  const categoryParam = searchParams.get("category");
+
+  const category: CategoriesFilterType =
+    categoryParam === "Toys & Games" ||
+    categoryParam === "School Supplies" ||
+    categoryParam === "Gifts" ||
+    categoryParam === "All Products"
+      ? categoryParam
+      : "All Products";
+
+  const search: string = searchParams.get("search") ?? "";
 
   return (
     <div className="max-w-[85rem] mx-auto pb-25">
       <Breadcrumbs currentPage="products" />
-      <Products 
-        search={search ?? ""}
-        category={category ?? ""}
-      />
+      <Suspense fallback={<div>Loading products...</div>}>
+        <Products search={search} category={category} />
+      </Suspense>
     </div>
   );
 };

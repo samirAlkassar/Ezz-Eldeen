@@ -13,12 +13,10 @@ const Portfolio = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const user = useSelector((state: RootState) => state.currentUser.user);
-    const loading = useSelector((state: RootState)=> state.currentUser.loading);
-    const error = useSelector((state: RootState)=> state.currentUser.error);
     
     useEffect(()=>{
         dispatch(fetchProfile());
-    },[]);
+    },[dispatch]);
 
     console.log("current user: ", user)
 

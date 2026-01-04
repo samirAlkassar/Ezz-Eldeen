@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Delete, HeartCrack, ShoppingCart, Star } from "lucide-react";
+import {HeartCrack, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import { ProductType } from "@/features/products/types";
 import { twMerge } from "tailwind-merge";

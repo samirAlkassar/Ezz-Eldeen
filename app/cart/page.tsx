@@ -29,7 +29,7 @@ const CartPage = () => {
             dispatch(fetchCart());
             toast({ title: "Removed from cart", description: "Item is removed from your cart successfully", variant: "default", position: "bottom-right", icon: <Trash size={20} /> })
         } catch (error) {
-            toast({ title: "Error", description: "Error removing item from cart", variant: "error", position: "bottom-right", icon: <TriangleAlert size={20} /> })
+            toast({ title: "Error", description: `${error}`, variant: "error", position: "bottom-right", icon: <TriangleAlert size={20} /> })
         }
     };
 

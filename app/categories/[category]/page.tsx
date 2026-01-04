@@ -1,18 +1,17 @@
 "use client";
 
-import Products from "@/components/layout/Products";
-import { EarthIcon, Gamepad2, Home, LayoutGrid } from "lucide-react";
+import { EarthIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useParams } from "next/navigation";
-import { CategoriesFilterType } from "@/components/layout/Products";
 import { categoriesList } from "@/components/layout/Categories";
 import { twMerge } from "tailwind-merge";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Products, { CategoriesFilterType } from "@/components/layout/Products";
 
 const Categories = () => {
   const params = useParams();
 
-  const undoSlug = (slug: any) => {
+  const undoSlug = (slug: string | string[] | undefined) => {
     return typeof slug === 'string' ? 
     slug.replace(/_/g, ' ').replace(/%26/g, '&') : 
     Array.isArray(slug) ? 
@@ -67,7 +66,7 @@ const Categories = () => {
 
       <div className="max-w-[85rem] mx-auto px-4">
           <div className="">
-            <Products category={undoSlug(params.category)}/>
+            <Products category={undoSlug(params.category) as CategoriesFilterType}/>
           </div>
       </div>
     </section>

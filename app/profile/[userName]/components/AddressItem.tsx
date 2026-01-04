@@ -1,4 +1,6 @@
-const AddressItem = ({ address, onEdit, onDelete }: any) => (
+import { Address } from "@/features/user/types";
+
+const AddressItem = ({ address, onEdit, onDelete }: {address : Address, onEdit : ()=> void, onDelete: ()=> void}) => (
     <div className="border border-gray-200 p-4 rounded-xl flex justify-between items-start">
         <div className="space-y-2 grid grid-cols-2 gap-y-1 gap-x-6 w-full">
             <div className="flex items-center gap-2">
