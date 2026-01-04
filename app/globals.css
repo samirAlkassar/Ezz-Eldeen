@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@keyframes bouncey {
+    0% {transform: translateY(0px) rotate(0deg)}
+    50% {transform: translateY(-6px) rotate(2deg)} 
+    100% {transform: translateY(0px) rotate(0deg)} 
+}
+.bounceAnimation{ animation: bouncey 4s ease-in-out infinite; }
+
+
+.splash-bg-radius {
+    border-radius: 30% 70% 0% 100% / 73% 0% 100% 27% ;
+}
+
+@keyframes border-shift {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 50% 50% 40% 60% / 50% 60% 40% 50%;
+  }
+  50% {
+    border-radius: 70% 30% 50% 50% / 40% 70% 30% 60%;
+  }
+  75% {
+    border-radius: 40% 60% 60% 40% / 70% 40% 60% 30%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+
+.borderShift{ animation: border-shift 10s ease-in-out infinite; }
+
+.heart {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes gradient {
+  0% { background-position: 25% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 25% 50%; }
+}
+
+.animate-gradient {
+  animation: gradient 4s ease infinite;
+}
