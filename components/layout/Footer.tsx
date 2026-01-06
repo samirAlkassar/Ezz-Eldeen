@@ -2,6 +2,7 @@
 
 import { Contact, Facebook, Instagram, Phone, Twitter } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {
@@ -26,10 +27,10 @@ const Footer = () => {
           <div className="md:ml-10 text-left">
             <h3 className="font-medium md:font-semibold md-2 md:mb-3 text-xl">Quick Links</h3>
             <ul className="space-y-2 text-gray-200 grid grid-cols-2 md:grid-cols-1">
-              <li><a href="/" className="hover:text-white transition text-lg">Home</a></li>
-              <li><a href="/products" className="hover:text-white transition text-lg">Projects</a></li>
-              <li><a href="/about" className="hover:text-white transition text-lg">About</a></li>
-              <li><a href="/contact" className="hover:text-white transition text-lg">Contact</a></li>
+              <li><Link href="/" className="hover:text-white transition text-lg">Home</Link></li>
+              <li><Link href="/products" className="hover:text-white transition text-lg">Projects</Link></li>
+              <li><Link href="/about" className="hover:text-white transition text-lg">About</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition text-lg">Contact</Link></li>
             </ul>
           </div>
 
@@ -37,9 +38,9 @@ const Footer = () => {
           <div>
             <h3 className="font-medium md:font-semibold mb-3 text-xl text-left">Follow Us</h3>
             <div className="flex justify-start gap-4">
-              <a href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Facebook /></a>
-              <a href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Instagram /></a>
-              <a href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Twitter /></a>
+              <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Facebook /></Link>
+              <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Instagram /></Link>
+              <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Twitter /></Link>
             </div>
           </div>
 
