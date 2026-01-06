@@ -49,6 +49,20 @@ const ProductsSearchBar = ({
     setCurrentPage(1);
   }, [searchTerm, currentCategory, minPrice, maxPrice, sort, order, setCurrentPage]);
 
+  const handleSearch = () => {
+    if (searchTerm.length !== 0 && currentCategory === "All Products") {
+      router.push(`/products?search=${searchTerm}`);
+    } else if (searchTerm.length === 0 && currentCategory !== "All Products") {
+      router.push(`/products?category=${currentCategory}`);
+    } else if (searchTerm.length !== 0 && currentCategory !== "All Products") {
+      router.push(
+        `/products?search=${searchTerm}&category=${currentCategory}`
+      );
+    } else {
+      router.push(`/products`);
+    }
+  };
+
   return (
     <div className="w-full space-y-4">
       <div className="relative mt-4 mb-6 px-4 py-0.5 sm:px-2 md:py-1 md:px-4 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
@@ -59,6 +73,7 @@ const ProductsSearchBar = ({
           type="text"
           value={searchTerm}
           onChange={(e) => {setSearchTerm(e.target.value)}}
+           onKeyDown={(e) => {if (e.key === "Enter") {handleSearch()}}}
           placeholder="Search products"
           className="bg-white w-full py-3 md:py-4 px-2 md:px-6 rounded-full text-lg lg:text-xl outline-none"
         />
