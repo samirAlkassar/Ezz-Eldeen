@@ -14,7 +14,7 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
     return (
         <div className="flex gap-8 md:gap-10 lg:gap-15 flex-col xl:flex-row">
             <div className="flex-1 flex flex-col space-y-6">
-                <div className="relative bg-gray-100 h-[400px] md:h-[620px] aspect-square rounded-2xl overflow-hidden">
+                <div className="relative bg-gray-100 h-[340px] sm:h-[400px] md:h-[620px] aspect-square rounded-2xl overflow-hidden">
                     <Image
                         src={product?.images[0]?.url || "/images/placeholder.jpg"}
                         alt={""}
@@ -31,7 +31,7 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
                         onClick={() => setSelectedImage(index)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`relative w-26 h-26 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                        className={`relative w-18 h-18 md:w-26 md:h-26 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
                             selectedImage === index 
                             ? "border-orange-400 shadow-lg" 
                             : "border-gray-200/50 hover:border-gray-200/50"
@@ -142,7 +142,7 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
                 </div>
 
                 <div className="flex gap-3 md:gap-4">
-                    <button className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-base md:text-lg rounded-xl md:rounded-full bg-orange-400 cursor-pointer hover:bg-orange-500 active:scale-95 transition-all duration-100 ease-in">
+                    <button className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-sm md:text-lg rounded-xl md:rounded-full bg-orange-400 cursor-pointer hover:bg-orange-500 active:scale-95 transition-all duration-100 ease-in">
                         <ShoppingCart />
                         <p>Add To Cart</p>
                     </button>

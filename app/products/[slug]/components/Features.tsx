@@ -25,7 +25,7 @@ const FeaturesTab = ({features, activeTab}:FeaturesProps) => {
             </motion.li>
             ))}
         </ul> :
-        <p className="text-2xl text-gray-600 text-center">No Features Avaliable</p>
+        <p className="text-center text-lg md:text-2xl text-gray-600">No Features Avaliable</p>
         )}
         </>
     );

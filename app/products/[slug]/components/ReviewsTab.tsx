@@ -1,33 +1,39 @@
 import { Star } from "lucide-react";
-import { ProductReview } from "@/features/products/types";
+import { ProductReview, ProductType } from "@/features/products/types";
 import formatTimeAgo from "@/hooks/formateDate";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { userAPI } from "@/features/user/userAPI";
+import AddReviewForm from "./AddReviewForm";
 
 type ReviewsProps = {
     activeTab: "description" | "features" | "reviews" | "add-review";
-    reviews: ProductReview[] | undefined;
+    product:  ProductType | null;
 }
 
-const ReviewsTab = ({ reviews, activeTab }: ReviewsProps) => {
+const ReviewsTab = ({ product, activeTab }: ReviewsProps) => {
     return (
         <>
-            {activeTab === "reviews" && (
-                reviews &&
-                    reviews?.length > 0 ?
-                    <div className="space-y-3 md:space-y-6 max-w-4xl">
-                        {reviews.map((review) => (
+            {activeTab === "reviews" && 
+            <div>
+                {
+                product?.reviews &&
+                    product?.reviews?.length > 0 ?
+                    <div className="space-y-4 md:space-y-6 max-w-4xl">
+                        {product?.reviews.map((review) => (
                             <div
                                 key={review._id}
-                                className="bg-white rounded-lg p-4 md:p-6 shadow-sm border border-gray-100">
+                                className="bg-white rounded-lg p-3 md:p-6 shadow-xs md:shadow-sm border border-gray-200">
                                 <ReviewHeaderSection review={review} id={review.user} />
-                                <p className="text-gray-700 text-lg md:text-xl">{review.comment}</p>
+                                <p className="text-gray-700 text-base sm:text-lg md:text-xl">{review.comment}</p>
                             </div>
                         ))}
                     </div> :
-                    <p className="text-center text-2xl text-gray-600">No Reviews Avaliable Yet</p>
-            )}
+                    <p className="text-center text-lg md:text-2xl text-gray-600">No Reviews Avaliable Yet</p>
+                }
+                <AddReviewForm product={product}/>
+            </div>
+            }
         </>
     );
 }
@@ -65,23 +71,22 @@ const ReviewHeaderSection = ({ review, id }: { review: ProductReview, id: string
     }, [id]);
     if (loading) {return <p>loading...</p>}
     return (
-        <div className="flex items-center justify-between mb-1">
+        <div className="flex items-start justify-between mb-1">
             <div className="font-semibold text-gray-700 text-lg md:text-xl flex items-start justify-center gap-2">
                 <Image
                     src={user?.picturePath || "/images/placeholder.jpg"}
                     alt={`${user?.firstName}`}
                     width={300}
                     height={300}
-                    className="rouned-full h-10 w-10 rounded-full object-cover" />
+                    className="rouned-full h-8 w-8 md:h-10 md:w-10 rounded-full object-cover" />
                 <div className="flex flex-col items-start justify-center">
-                    <p>{user?.firstName} {user?.lastName}</p>
-                    <div className="flex items-center gap-1 mb-4">
+                    <p className="font-medium text-base md:text-lg leading-tight mb-0.5">{user?.firstName} {user?.lastName}</p>
+                    <div className="flex items-center gap-0.5 md:gap-1 mb-4">
                         {[...Array(5)].map((_, i) => (
                             <Star
                                 key={i}
-                                size={18}
-                                className={`fill-current ${i < review.rating
-                                        ? "text-yellow-500"
+                                className={`fill-current h-4 w-4 md:h-5 md:w-5 ${i < review.rating
+                                        ? "text-yellow-400/80"
                                         : "text-gray-300"
                                     }`}
                             />

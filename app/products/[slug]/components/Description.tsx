@@ -9,7 +9,7 @@ const Description = ({activeTab, product}:DescriptionProps) => {
     return (
         <>
         {activeTab === "description" && (
-            <p className="text-gray-700 text-xl md:text-2xl leading-relaxed max-w-4xl">
+            <p className="text-gray-700 text-base sm:text-xl md:text-2xl leading-relaxed max-w-4xl">
                 {product?.description}
             </p>
             )}

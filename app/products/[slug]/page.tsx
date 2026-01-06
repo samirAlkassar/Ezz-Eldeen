@@ -43,14 +43,13 @@ const ProductBySlug = () => {
             <div className="max-w-[85rem] mx-auto px-4 py-6">
                 <ProductSection product={product}/>
                 
-                <div className="mt-30">
+                <div className="mt-22 md:mt-30">
                     <div>
                         <div className="flex gap-6 md:gap-12 border-b border-gray-200">
                             {[
                             { key: "reviews", label: `Reviews (${product?.reviews.length})` },
                             { key: "description", label: "Description" },
                             { key: "features", label: "Features" },
-                            { key: "add-review", label: "Leave a Review" },
                             ].map((tab) => (
                             <button
                                 key={tab.key}
@@ -77,23 +76,23 @@ const ProductBySlug = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="mt-12">
+                        className="mt-8 md:mt-12">
 
                         <Description product={product} activeTab={activeTab}/>
                         <FeaturesTab activeTab={activeTab} features={features}/>
-                        <ReviewsTab activeTab={activeTab} reviews={product?.reviews}/>
-                        <AddReviewForm product={product} activeTab={activeTab}/>
+                        <ReviewsTab activeTab={activeTab} product={product}/>
+                        
 
                     </motion.div>
                 </div>
 
                 <div className="mt-30 md:mt-20 lg:mt-30">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-start">
                         <div>
-                            <h1 className="text-2xl md:text-3xl lg:text-4xl text-gray-700 font-semibold">Similar Products</h1>
-                            <p className="text-gray-600 text-lg md:text-2xl mt-1 md:mt-3 max-w-[220px] md:max-w-full">List of products similar to this product</p>
+                            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-700 font-medium md:font-semibold">Similar Products</h1>
+                            <p className="text-gray-600 text-base sm:text-lg md:text-2xl sm:mt-1 md:mt-3 max-w-[200px] md:max-w-full">List of products similar to this product</p>
                         </div>
-                        <button className="bg-black rounded-full py-2 md:py-3 px-6 md:px-8 text-white text-lg cursor-pointer">Show More</button>
+                        <button className="bg-black rounded-full py-2 md:py-3 px-4 md:px-8 text-white text-sm sm:text-base md:text-lg cursor-pointer">Show More</button>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 xl:gap-x-6 gap-y-6 xl:gap-y-10 mt-8 mb-25">
                     {relatedProducts.map((product, index) => (

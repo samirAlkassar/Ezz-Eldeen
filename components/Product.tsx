@@ -57,14 +57,14 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
                 <div
                     onClick={()=>router.push(`/products/${product?.slug}`)} 
                     className={twMerge("bg-white flex items-center justify-center relative",
-                    size === "small" ? "rounded-lg h-46 mb-1" : "rounded-lg md:rounded-xl h-38 md:h-52 mb-2 md:mb-4"
+                    size === "small" ? "rounded-lg h-46 mb-1" : "rounded-lg md:rounded-xl h-38 md:h-52 lg:h-60 mb-2 md:mb-4"
                 )}>
                     <Image
                         src={product?.images?.[0]?.url ?? "/images/placeholder.jpg"}
                         alt={product?.name ?? "Product Image"}
                         width={200}
                         height={200}
-                        className="object-contain md:object-cover h-full hover:scale-[103%] transition-transform duration-300 cursor-pointer"
+                        className="object-contain h-full hover:scale-[103%] transition-transform duration-300 cursor-pointer"
                     />
 
                     <button onClick={(e) => {e.stopPropagation(); setOptimisticUpdate((prev) => !prev); toggleWishlist(); }} className={twMerge("absolute heart z-10",
