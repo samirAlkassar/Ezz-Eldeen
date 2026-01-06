@@ -12,8 +12,8 @@ const Footer = () => {
   if(isDashboardPage) {return}
   return (
     <footer className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white py-8 md:py-10">
-      <div className="container mx-auto px-4 sm:px-6 md:px-12">
-        <div className="grid md:grid-cols-4 gap-8 text-center md:text-left">
+      <div className="container mx-auto px-5 sm:px-6 md:px-12">
+        <div className="grid md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
           {/* Brand */}
           <div className="text-left">
             <h2 className="text-3xl md:text-4xl font-bold mb-2 md:mb-3">Ezz-Eldeen</h2>
@@ -36,7 +36,7 @@ const Footer = () => {
 
           {/* Socials */}
           <div>
-            <h3 className="font-medium md:font-semibold mb-3 text-lg md:text-xl text-left">Follow Us</h3>
+            <h3 className="font-medium md:font-semibold md-2 md:mb-3 text-lg md:text-xl text-left">Follow Us</h3>
             <div className="flex justify-start gap-4">
               <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Facebook /></Link>
               <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Instagram /></Link>
@@ -46,7 +46,7 @@ const Footer = () => {
 
           {/* Socials */}
           <div>
-            <h3 className="font-medium md:font-semibold mb-3 text-lg md:text-xl text-left">Contact Us</h3>
+            <h3 className="font-medium md:font-semibold md-2 md:mb-3 text-lg md:text-xl text-left">Contact Us</h3>
             <div className="flex flex-col justify-center md:justify-start gap-4">
               <a href="#" className="hover:text-white transition flex gap-2 text-sm"><Phone size={18}/><span>20+ 1001347513</span></a>
               <p className="mt-8 md:mt-0 text-left">Get Special Offers</p>
