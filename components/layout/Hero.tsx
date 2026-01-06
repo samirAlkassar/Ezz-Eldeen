@@ -35,7 +35,7 @@ const Hero = () => {
               transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
               className="text-6xl xl:text-7xl font-bold text-[#FF791A]">
-                Magic <span className="text-[#2B303B]"> awaits at </span><br />Ezz-Eldeen
+                Magic <span className="text-[#2B303B]"> awaits at </span><br className="hidden md:block"/>Ezz-Eldeen
             </motion.h1>
 
             <motion.p 
@@ -66,11 +66,11 @@ const Hero = () => {
             <div className="flex gap-4 mt-6 justify-center md:justify-start">
               <button 
                 onClick={()=>{router.push("#startshopping")}} 
-                className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-4 text-base sm:text-lg md:text-xl rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
+                className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-4 text-base sm:text-lg md:text-xl rounded-2xl md:rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
                 Start Shopping
               </button>
               <button 
-                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-4 text-base sm:text-lg md:text-xl rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
+                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-4 text-base sm:text-lg md:text-xl rounded-2xl md:rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
                 View Collections
               </button>
             </div>
@@ -92,8 +92,8 @@ const Hero = () => {
 const Numbers = ({text, number}:{text: string, number: string}) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold text-[#FF791A]">{number}</h1>
-      <span className="text-[#2B303B]">{text}</span>
+      <h1 className="text-3xl font-semibold md:font-bold text-[#FF791A]">{number}</h1>
+      <span className="text-[#2B303B] text-base">{text}</span>
     </div>
   )
 }

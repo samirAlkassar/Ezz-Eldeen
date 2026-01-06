@@ -48,13 +48,13 @@ const Categories = () => {
     const router = useRouter()
     return (
         <section className=" bg-gradient-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10 ">
-            <div className="flex flex-col items-center mt-20 w-full max-w-[90rem] mx-auto px-4 md:px-8">
+            <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full max-w-[90rem] mx-auto px-4 md:px-8">
                 <motion.h1
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-4xl text-center lg:text-5xl font-bold text-[#FF791A]">
+                    className="text-3xl text-center lg:text-5xl font-bold text-[#FF791A]">
                     <span className="text-[#2B303B]">Explore Our Amazing</span> Categories
                 </motion.h1>
 
@@ -63,7 +63,7 @@ const Categories = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center">
+                    className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center">
                     From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" />
                     {`child's journey magical and educational.`}
                 </motion.p>
@@ -81,13 +81,13 @@ const Categories = () => {
                     ))}
                 </div>
 
-                <div id={"startshopping"} className="pb-20 pt-40 w-full flex flex-col items-center">
+                <div id={"startshopping"} className="pb-20 pt-20 md:pt-40 w-full flex flex-col items-center">
                     <motion.h1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="text-4xl lg:text-5xl font-bold text-[#FF791A]">
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FF791A]">
                         <span className="text-[#2B303B]">Featured</span> Products
                     </motion.h1>
 
@@ -100,17 +100,17 @@ const Categories = () => {
                         Discover our most popular items that kids and parents love!
                     </motion.p>
                     <Products />
-                        <div className="w-full flex justify-center mt-10">
+                        <div className="w-full flex justify-center mt-6 md:mt-8">
                             <button
                                 onClick={() => router.push("/products")}
-                                className="bg-black text-white font-medium text-lg rounded-full shadow-md px-6 py-3 cursor-pointer active:scale-95">
+                                className="bg-black text-white font-medium text-base md:text-lg rounded-full shadow-md px-4 py-2 md:px-6 md:py-3 cursor-pointer active:scale-95">
                                 Show ALl Products
                                 </button>
                             </div>
                         </div>
 
 
-                <div className="py-8 bg-linear-to-l from-[#ff773c]/80 to-amber-500/80 w-full rounded-2xl sm:mt-6 lg:my-12 text-center flex flex-col items-center">
+                <div className="py-8 px-4 bg-linear-to-l from-[#ff773c]/80 to-amber-500/80 w-full rounded-2xl sm:mt-6 lg:my-12 text-center flex flex-col items-center">
                     <motion.h1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -125,10 +125,10 @@ const Categories = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="text-base md:text-lg text-white mt-2 text-center">
+                        className="text-lg text-white mt-2 text-center">
                         Get amazing value with our carefully curated bundles that combine the best products for<br />every age and interest.
                     </motion.p>
-                    <button className="bg-white text-amber-500 cursor-pointer px-6 py-4 rounded-full text-xl mt-12">View Bundles</button>
+                    <button className="bg-white text-amber-500 cursor-pointer px-4 py-2 md:px-6 md:py-4 rounded-full text-lg md:text-xl mt-12">View Bundles</button>
                 </div>
             </div>
         </section>

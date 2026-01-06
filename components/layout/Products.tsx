@@ -92,7 +92,7 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
         order={order}
         setOrder={setOrder} />}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 xl:gap-x-6 gap-y-6 xl:gap-y-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3.5 xl:gap-x-6 gap-y-8 xl:gap-y-12">
         {products.map((product, index) => (
           <Product
             key={product._id}

@@ -48,8 +48,8 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
                 ease: [0.25, 0.1, 0.25, 1]
             }}
             viewport={{ once: true, amount: 0.2 }}
-            className={twMerge("bg-white shadow-lg transition-shadow duration-300 flex flex-col relative justify-between",
-                size === "small" ? "rounded-xl px-3 py-4" : "rounded-xl md:rounded-2xl px-2 py-3 md:px-4 md:py-5"
+            className={twMerge("bg-white shadow-sm md:shadow-lg transition-shadow duration-300 flex flex-col relative justify-between",
+                size === "small" ? "rounded-xl px-3 py-4" : "rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-5"
             )}
         >
             <div>
@@ -57,28 +57,28 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
                 <div
                     onClick={()=>router.push(`/products/${product?.slug}`)} 
                     className={twMerge("bg-white flex items-center justify-center relative",
-                    size === "small" ? "rounded-lg h-46 mb-1" : "rounded-lg md:rounded-xl h-52 mb-2 md:mb-4"
+                    size === "small" ? "rounded-lg h-46 mb-1" : "rounded-lg md:rounded-xl h-38 md:h-52 mb-2 md:mb-4"
                 )}>
                     <Image
                         src={product?.images?.[0]?.url ?? "/images/placeholder.jpg"}
                         alt={product?.name ?? "Product Image"}
                         width={200}
                         height={200}
-                        className="object-cover h-full hover:scale-[103%] transition-transform duration-300 cursor-pointer"
+                        className="object-contain md:object-cover h-full hover:scale-[103%] transition-transform duration-300 cursor-pointer"
                     />
 
                     <button onClick={(e) => {e.stopPropagation(); setOptimisticUpdate((prev) => !prev); toggleWishlist(); }} className={twMerge("absolute heart z-10",
-                        size === "small" ? "scale-[85%] -top-4 -right-4" : "scale-90 -top-8 -right-8"
+                        size === "small" ? "scale-[85%] -top-4 -right-4" : "scale-80 md:scale-90 -top-10 -right-10 md:-top-8 md:-right-8"
                     )}
                         style={{ transitionDuration: `${isInWishList ? "1s" : ""}`, backgroundPosition: `${isInWishList ? "-2800px 0" : ""}` }} />
-                    <div className="absolute top-1 left-1 bg-orange-400 backdrop-blur-sm rounded-full py-1 px-2 md:py-1.5 md:px-3 flex items-center justify-center gap-1.5 shadow-md">
+                    <div className="absolute -top-1 -left-1 md:top-1 md:left-1 bg-orange-400 backdrop-blur-sm rounded-full py-1 px-2 md:py-1.5 md:px-3 flex items-center justify-center gap-1.5 shadow-md">
                         <Star size={14} className="text-white fill-current"/>
                         <p className="text-xs font-semibold text-white">{product?.averageRating}</p>
                     </div>
                 </div>
 
                 {/* Product Info */}
-                <h3 className="text-lg md:text-xl font-medium line-clamp-1">{product.name}</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-medium line-clamp-2 md:line-clamp-1 text-gray-800">{product.name}</h3>
                 {/* <p className={twMerge("text-gray-500 mb-2", size === "small" ? "text-xs line-clamp-1" : "text-sm line-clamp-2")}>{product.description}</p> */}
 
                 
@@ -100,15 +100,15 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
             </div>
 
 
-            <div className="flex justify-between items-center gap-1 md:gap-3 pt-3 border-t border-gray-100">
+            <div className="flex justify-between items-center gap-1 md:gap-3 pt-1 md:pt-3 md:border-t border-gray-100">
                 <div className="flex flex-col">
                     <span className="text-xs text-gray-500 font-medium md:mb-0.5">Price</span>
-                    <p className="text-gray-900 text-xl md:text-2xl font-bold truncate max-w-12">${product?.price}</p>
+                    <p className="text-gray-900 text-lg md:leading-6 sm:text-xl md:text-2xl font-bold truncate max-w-12">${product?.price}</p>
                 </div>
                 <button 
                     onClick={() => handleAddToCart(product?._id)} 
-                    className="py-3 px-2 md:py-2 md:px-4 rounded-xl md:rounded-full text-sm md:text-base bg-orange-400 hover:bg-orange-500 active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
-                    <ShoppingCart size={20}/>
+                    className="py-2.5 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base bg-orange-400 hover:bg-orange-500 active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
+                    <ShoppingCart size={20} className="hidden sm:block"/>
                     <p>Add to cart</p>
                 </button>
             </div>
