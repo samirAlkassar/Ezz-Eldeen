@@ -117,7 +117,7 @@ export default function LoginPage() {
             </div>
 
             {/* Right side (image) */}
-            <div className="hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden -ml-26">
+            <div className="relative hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden -ml-26">
                 <Image
                     src="/images/login-splash.jpg"
                     alt="Kids, school and toys illustration"

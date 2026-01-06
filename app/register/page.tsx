@@ -158,7 +158,7 @@ export default function RegisterPage() {
                     </p>
                 </div>
             </div>
-             <div className="hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden">
+             <div className="relative hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden">
                 <Image
                     src="/images/register-splash.jpg"
                     alt="Kids, school and toys illustration"

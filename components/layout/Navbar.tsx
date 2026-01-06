@@ -70,12 +70,13 @@ const Navbar = () => {
 
     return (
         <NavbarWrapper isScrolled={isScrolled}>
-            <div className="w-full max-w-7xl mx-auto py-4 flex justify-between text-white px-8">
+            <div className="w-full max-w-7xl mx-auto py-3 px-4 md:py-4 md:px-8 flex justify-between text-white">
                 <motion.div 
                     initial={{ scale: 0.9 }}
                     whileInView={{ scale: 1 }}
-                    transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}>
-                    <Link href="/" className={twMerge("text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                    transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}
+                    className="flex items-center justify-start">
+                    <Link href="/" className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
                         Ezz-Eldeen
                     </Link>
                 </motion.div>
@@ -105,7 +106,7 @@ const Navbar = () => {
                             <button
                                 ref={imageRef}
                                 onClick={() => {setMenuOpen((prev) => !prev)}}
-                                className={twMerge("flex items-center gap-2 p-1  active:scale-95 rounded-lg cursor-pointer",
+                                className={twMerge("flex items-center gap-1 md:gap-2 p-1  active:scale-95 rounded-lg cursor-pointer",
                                     isScrolled? "hover:bg-gray-500/20" : "hover:bg-orange-300/20"
                                 )}
                             >
@@ -126,7 +127,7 @@ const Navbar = () => {
                                
                                 <ChevronDown
                                     size={18}
-                                    className={`transition-transform ${menuOpen ? "rotate-180" : "rotate-0"} ${isScrolled && "text-black"}`}
+                                    className={`transition-transform hidden md:block ${menuOpen ? "rotate-180" : "rotate-0"} ${isScrolled && "text-black"}`}
                                 />
                             </button>
 
@@ -155,11 +156,11 @@ const Navbar = () => {
                         <div className="flex gap-4 text-lg font-medium">
                             <a
                                 href="/login"
-                                className="bg-white text-[#FF773C] px-4 py-1 rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors"
+                                className="bg-white text-[#FF773C] text-base md:text-lg py-0.5 px-3 md:px-4 md:py-1 rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors"
                             >
                                 Login
                             </a>
-                            <a href="/register" className={twMerge("py-1", isScrolled ? "text-gray-800" : "text-white")}>
+                            <a href="/register" className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
                                 Register
                             </a>
                         </div>
