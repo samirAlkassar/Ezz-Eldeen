@@ -46,22 +46,22 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
+        <div className="py-12 md:min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
             {/* Left side (orange theme with login card) */}
             <div className="relative flex-1 flex justify-center items-center p-6">
-                <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-md">
+                <div className="bg-white shadow-md md:shadow-2xl rounded-xl md:rounded-3xl p-6 md:p-8 w-full max-w-md">
                     <h2 className="text-3xl font-extrabold text-center text-[#FF791A] mb-6">
                         Login to Your Account
                     </h2>
-                    <form onSubmit={handleSubmit} className="space-y-5">
+                    <form onSubmit={handleSubmit} className="space-y-3 md:space-y-5">
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 md:mb-1">
                                 Email
                             </label>
                             <input
                                 id="email"
                                 type="email"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 autoComplete="email"
@@ -69,13 +69,13 @@ export default function LoginPage() {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 md:mb-1">
                                 Password
                             </label>
                             <input
                                 id="password"
                                 type="password"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 autoComplete="current-password"
@@ -85,7 +85,7 @@ export default function LoginPage() {
                         {error && <div className="text-red-500 text-sm">{error}</div>}
                         <button
                             type="submit"
-                            className="bg-[#FF791A] w-full text-white px-4 py-2 text-lg rounded-full cursor-pointer shadow-md active:scale-95 transition-transform duration-150"
+                            className="bg-[#FF791A] w-full mt-4 text-white py-1.5 px-4 md:py-2 text-lg rounded-xl md:rounded-full cursor-pointer shadow-sm md:shadow-md active:scale-95 transition-transform duration-150"
                         >
                              {loading ? (
                             <span className="flex items-center justify-center gap-2">

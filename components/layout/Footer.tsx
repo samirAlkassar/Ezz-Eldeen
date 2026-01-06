@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 text-center md:text-left">
           {/* Brand */}
           <div className="text-left">
-            <h2 className="text-4xl font-bold mb-2 md:mb-3">Ezz-Eldeen</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-2 md:mb-3">Ezz-Eldeen</h2>
             <p className="text-base md:text-lg text-gray-200 max-w-md">
               Making childhood magical with the best school supplies, gifts, and toys.
               We believe every child deserves to learn, play, and grow with joy!
@@ -25,18 +25,18 @@ const Footer = () => {
 
           {/* Links */}
           <div className="md:ml-10 text-left">
-            <h3 className="font-medium md:font-semibold md-2 md:mb-3 text-xl">Quick Links</h3>
+            <h3 className="font-medium md:font-semibold md-2 md:mb-3 text-lg md:text-xl">Quick Links</h3>
             <ul className="space-y-2 text-gray-200 grid grid-cols-2 md:grid-cols-1">
-              <li><Link href="/" className="hover:text-white transition text-lg">Home</Link></li>
-              <li><Link href="/products" className="hover:text-white transition text-lg">Projects</Link></li>
-              <li><Link href="/about" className="hover:text-white transition text-lg">About</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition text-lg">Contact</Link></li>
+              <li><Link href="/" className="hover:text-white transition">Home</Link></li>
+              <li><Link href="/products" className="hover:text-white transition">Projects</Link></li>
+              <li><Link href="/about" className="hover:text-white transition">About</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition">Contact</Link></li>
             </ul>
           </div>
 
           {/* Socials */}
           <div>
-            <h3 className="font-medium md:font-semibold mb-3 text-xl text-left">Follow Us</h3>
+            <h3 className="font-medium md:font-semibold mb-3 text-lg md:text-xl text-left">Follow Us</h3>
             <div className="flex justify-start gap-4">
               <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Facebook /></Link>
               <Link href="#" className="hover:text-white transition bg-white/30 rounded-full p-3 cursor-pointer hover:bg-white/40 active:scale-95 duration-75 ease-in"><Instagram /></Link>
@@ -46,9 +46,9 @@ const Footer = () => {
 
           {/* Socials */}
           <div>
-            <h3 className="font-medium md:font-semibold mb-3 text-xl text-left">Contact Us</h3>
+            <h3 className="font-medium md:font-semibold mb-3 text-lg md:text-xl text-left">Contact Us</h3>
             <div className="flex flex-col justify-center md:justify-start gap-4">
-              <a href="#" className="hover:text-white transition flex gap-2"><Phone /><span>20+ 1001347513</span></a>
+              <a href="#" className="hover:text-white transition flex gap-2 text-sm"><Phone size={18}/><span>20+ 1001347513</span></a>
               <p className="mt-8 md:mt-0 text-left">Get Special Offers</p>
               <div className="flex gap-2 flex-row md:flex-col">
                 <input

@@ -55,16 +55,16 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen flex bg-[#FFF4EC]">
+        <div className="py-12 md:min-h-screen flex bg-[#FFF4EC]">
             <div className="relative flex-1 flex justify-center items-center p-6">
                 <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-md">
                     <h2 className="text-3xl font-extrabold text-center text-[#FF791A] mb-6">
                         Create an account
                     </h2>
-                    <form className="space-y-4" onSubmit={handleSubmit}>
+                    <form className="space-y-3 md:space-y-5" onSubmit={handleSubmit}>
                         <div className='flex gap-4'>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-gray-700 md:mb-1">
                                 First Name
                                 </label>
                                 <input
@@ -73,11 +73,11 @@ export default function RegisterPage() {
                                     value={form.firstName}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                    className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-gray-700 md:mb-1">
                                 Last Name
                                 </label>
                                 <input
@@ -86,13 +86,13 @@ export default function RegisterPage() {
                                     value={form.lastName}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                    className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                                 />
                             </div>
    
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-gray-700 md:mb-1">
                                 Email
                             </label>
                             <input
@@ -101,11 +101,11 @@ export default function RegisterPage() {
                                 value={form.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                             />
                         </div>
                         <div>
-                            <label className={`block text-sm font-medium text-gray-700 mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
+                            <label className={`block text-sm font-medium text-gray-700 md:mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
                                 Password
                             </label>
                             <input
@@ -114,11 +114,11 @@ export default function RegisterPage() {
                                 value={form.password}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                             />
                         </div>
                         <div>
-                            <label className={`block text-sm font-medium text-gray-700 mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
+                            <label className={`block text-sm font-medium text-gray-700 md:mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
                                 Confirm Password
                             </label>
                             <input
@@ -127,7 +127,7 @@ export default function RegisterPage() {
                                 value={form.confirmPassword}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                             />
                         </div>
                         {error && (
@@ -135,7 +135,7 @@ export default function RegisterPage() {
                         )}
                         <button
                                 type="submit"
-                                className="bg-[#FF791A] w-full text-white px-4 py-2 text-lg rounded-full cursor-pointer shadow-md active:scale-95 transition-transform duration-150"
+                                className="bg-[#FF791A] mt-4 w-full text-white py-1.5 px-4 md:py-2 text-lg rounded-xl md:rounded-full cursor-pointer shadow-sm md:shadow-md active:scale-95 transition-transform duration-150"
                             >
                             {loading ? (
                             <span className="flex items-center justify-center gap-2">

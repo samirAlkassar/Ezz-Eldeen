@@ -83,7 +83,7 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
 
                 
                 {/* Categories */}
-                <div className="flex items-center justify-start gap-1.5 mb-3 flex-wrap mt-2">
+                <div className="hidden md:flex items-center justify-start gap-1.5 mb-3 flex-wrap mt-2">
                     {product?.category && 
                         <span 
                             onClick={()=>router.push(`/categories/${product?.category.replace(/\s+/g, '_')}`)}
@@ -100,9 +100,9 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
             </div>
 
 
-            <div className="flex justify-between items-center gap-1 md:gap-3 pt-1 md:pt-3 md:border-t border-gray-100">
+            <div className="flex justify-between items-center gap-1 md:gap-3 pt-3 md:border-t border-gray-100">
                 <div className="flex flex-col">
-                    <span className="text-xs text-gray-500 font-medium md:mb-0.5">Price</span>
+                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5">Price</span>
                     <p className="text-gray-900 text-lg md:leading-6 sm:text-xl md:text-2xl font-bold truncate max-w-12">${product?.price}</p>
                 </div>
                 <button 
