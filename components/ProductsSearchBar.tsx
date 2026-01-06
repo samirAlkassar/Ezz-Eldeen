@@ -51,23 +51,23 @@ const ProductsSearchBar = ({
 
   return (
     <div className="w-full space-y-4">
-      <div className="relative mt-4 mb-6 py-0.5 px-2 md:py-1 md:px-4 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
-        <div className="pl-2">
-          <Search size={28} className="text-orange-400" />
+      <div className="relative mt-4 mb-6 px-4 py-0.5 sm:px-2 md:py-1 md:px-4 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
+        <div className="md:pl-2">
+          <Search className="text-orange-400 md:w-7 md:h-7" />
         </div>
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => {setSearchTerm(e.target.value)}}
           placeholder="Search products"
-          className="bg-white w-full py-4 px-2 md:px-6 rounded-full text-xl outline-none"
+          className="bg-white w-full py-3 md:py-4 px-2 md:px-6 rounded-full text-lg lg:text-xl outline-none"
         />
 
         <button
           onClick={() => {
             setShowCategoriesMenu((prev) => !prev);
           }}
-          className="text-lg px-2 md:px-4 py-2 rounded-lg hover:bg-gray-50 cursor-pointer flex gap-1 items-center justify-between md:min-w-46"
+          className="text-lg p-1 md:px-4 rounded-lg hover:bg-gray-50 cursor-pointer flex gap-1 items-center justify-between md:min-w-46"
         >
           <p className="truncate hidden md:block">{currentCategory}</p>
           <ChevronDown size={22} />
@@ -77,7 +77,7 @@ const ProductsSearchBar = ({
           onClick={() => {
             setShowFiltersMenu((prev) => !prev);
           }}
-          className="text-lg px-4 py-2 rounded-lg hover:bg-gray-50 cursor-pointer flex gap-1 items-center justify-between"
+          className="text-lg p-1 md:px-4 md:py-2 rounded-lg hover:bg-gray-50 cursor-pointer flex gap-1 items-center justify-between"
         >
           <SlidersHorizontal size={22} />
         </button>
@@ -90,7 +90,7 @@ const ProductsSearchBar = ({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 23 }}
               transition={{ delay: 0, duration: 0.1, ease: "easeOut" }}
-              className="absolute p-2 bg-white top-16 md:right-40 z-20 rounded-lg shadow-xl border-gray-50 border grid grid-cols-2 gap-2">
+              className="absolute p-1 sm:p-2 bg-white top-16 md:right-40 z-20 rounded-lg shadow-xl border-gray-50 border grid grid-cols-2 gap-2">
               <SearchBarCategoriesButton
                 currentCategory={currentCategory}
                 setCurrentCategory={setCurrentCategory}
@@ -127,7 +127,7 @@ const ProductsSearchBar = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ delay: 0, duration: 0.15, ease: "easeOut" }}
-              className="absolute p-6 bg-white top-20 right-4 z-20 rounded-lg shadow-xl border-gray-50 border w-96">
+              className="absolute p-4 md:p-6 bg-white top-16 md:top-20 right-4 z-20 rounded-lg shadow-xl border-gray-50 border lg:w-96">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold text-gray-800">Filters</h3>
                 <button
@@ -148,7 +148,7 @@ const ProductsSearchBar = ({
                       type="number"
                       value={minPrice}
                       onChange={(e) => setMinPrice(Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-orange-400"
+                      className="w-full px-2 py-1 md:px-3 md:py-2 border border-gray-200 rounded-lg outline-none focus:border-orange-400"
                       placeholder="0"/>
                   </div>
                   <span className="text-gray-400 mt-5">-</span>
@@ -158,7 +158,7 @@ const ProductsSearchBar = ({
                       type="number"
                       value={maxPrice}
                       onChange={(e) => setMaxPrice(Number(e.target.value))}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-orange-400"
+                      className="w-full px-2 py-1 md:px-3 md:py-2 border border-gray-200 rounded-lg outline-none focus:border-orange-400"
                       placeholder="200000"/>
                   </div>
                 </div>
@@ -214,12 +214,12 @@ const ProductsSearchBar = ({
                     setSort("createdAt");
                     setOrder("desc");
                   }}
-                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer">
+                  className="flex-1 px-4 py-1.5 md:py-2 font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer">
                   Reset
                 </button>
                 <button
                   onClick={() => setShowFiltersMenu(false)}
-                  className="flex-1 px-4 py-2 bg-orange-400 rounded-lg hover:bg-orange-500 text-gray-800 cursor-pointer">
+                  className="flex-1 px-4 py-1.5 md:py-2 font-semibold bg-orange-400 rounded-lg hover:bg-orange-500 text-gray-800 cursor-pointer">
                   Apply
                 </button>
               </div>
@@ -266,7 +266,7 @@ const SearchBarCategoriesButton = ({
         setShowCategoriesMenu(false);
       }}
       className={twMerge(
-        "rounded-lg hover:bg-gray-50 px-8 py-4 cursor-pointer", currentCategory === (children as CategoriesFilterType) ? "bg-gray-100" : "bg-transparent")}>
+        "rounded-lg hover:bg-gray-50 px-6 py-3 md:px-8 md:py-4 cursor-pointer text-sm md:text-base", currentCategory === (children as CategoriesFilterType) ? "bg-gray-100" : "bg-transparent")}>
       {children}
     </button>
   );
@@ -284,7 +284,7 @@ const FilterButton = ({
   return (
     <button
       onClick={onClick}
-      className={twMerge("px-4 py-2 rounded-lg text-sm transition-colors", active ? "bg-orange-400 text-gray-800" : "bg-gray-100 text-gray-700 hover:bg-gray-200")}>
+      className={twMerge("px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-sm transition-colors", active ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200")}>
       {children}
     </button>
   );

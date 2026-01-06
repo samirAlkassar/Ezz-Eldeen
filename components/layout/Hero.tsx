@@ -23,7 +23,7 @@ const Hero = () => {
     const router = useRouter();
 
     return (
-        <main className="py-18 relative px-4 sm:px-8 overflow-hidden">
+        <main className="py-12 md:py-18 relative px-4 sm:px-8">
         <HeroBackground />
         <div className="flex flex-col lg:flex-row w-full max-w-[85rem] mx-auto">
           <div className="w-full lg:mt-12">
@@ -34,7 +34,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-5xl md:text-6xl xl:text-7xl font-bold text-[#FF791A]">
+              className="text-6xl xl:text-7xl font-bold text-[#FF791A]">
                 Magic <span className="text-[#2B303B]"> awaits at </span><br />Ezz-Eldeen
             </motion.h1>
 
@@ -43,10 +43,10 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-lg lg:text-xl text-[#2B303B]/80 mt-5">
+              className="text-base sm:text-lg lg:text-xl text-[#2B303B]/80 mt-5">
               Discover amazing school supplies, delightful toys, <br className="hidden md:block"/>and perfect gifts that spark imagination and learning in every child.
             </motion.p> 
-            <div className="md:pr-8 mt-18">
+            <div className="md:pr-8 mt-12 md:mt-18">
               <ProductsSearchBar 
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
@@ -63,14 +63,19 @@ const Hero = () => {
                 setOrder={setOrder}
               />
             </div>
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-4 mt-6 justify-center md:justify-start">
               <button 
                 onClick={()=>{router.push("#startshopping")}} 
-                className="bg-gradient-to-r from-[#FF791A] to-orange-500 hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-5 md:px-6 py-3 text-lg md:text-xl rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">Start Shopping</button>
-              <button className="bg-white text-black px-5 md:px-6 py-3 text-lg md:text-xl rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">View Collections</button>
+                className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-4 text-base sm:text-lg md:text-xl rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
+                Start Shopping
+              </button>
+              <button 
+                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-4 text-base sm:text-lg md:text-xl rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
+                View Collections
+              </button>
             </div>
 
-            <div className="grid grid-cols-3 mt-18 mr-6">
+            <div className="grid grid-cols-3 mt-12 md:mt-18 md:mr-6">
               <Numbers text="Happy Kids" number="1000+"/>
               <Numbers text="Products" number="500+"/>
               <Numbers text="Support" number="24/7"/>

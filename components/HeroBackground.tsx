@@ -1,7 +1,8 @@
 const HeroBackground = () => {
     return (
-        <div className="bg-[#FFF4EC]/40 inset-0 absolute -z-10">
+        <div className="bg-[#FFF4EC]/40 inset-0 absolute -z-10 overflow-clip">
             <span className="h-[180px] w-[220px] bg-blue-400/20 absolute top-[15%] left-[10%] rounded-full blur-2xl animate-pulse"></span>
+            <span className="h-[100px] w-[100px] bg-red-400/40 absolute top-[2%] left-[2%] rounded-full blur-2xl animate-pulse"></span>
             <span className="h-[240px] w-[200px] bg-green-500/30 absolute top-[40%] left-[70%] rounded-full blur-2xl animate-pulse"></span>
             <span className="h-[150px] w-[180px] bg-orange-600/25 absolute top-[65%] left-[30%] rounded-full blur-2xl animate-pulse"></span>
             <span className="h-[220px] w-[200px] bg-red-500/15 absolute top-[20%] left-[50%] rounded-full blur-2xl animate-pulse"></span>
