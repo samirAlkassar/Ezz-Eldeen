@@ -81,7 +81,6 @@ const Navbar = () => {
                     </Link>
                 </motion.div>
 
-                <SlideTabes isScrolled={isScrolled}/>
 
                 <div className="flex gap-2 items-center relative">
                     <div onClick={() => {router.push( user ? '/wishlist' : '/register'); !user && 
@@ -167,6 +166,9 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
+            <div className="bg-white py-2 w-full flex items-center justify-center">
+                <SlideTabes isScrolled={isScrolled}/>
+            </div>
         </NavbarWrapper>
     );
 };
@@ -245,7 +247,7 @@ const Tab = ({
                 });
             }}
             className={twMerge("relative z-10 block cursor-pointer px-2 py-1.5 text-lg active:scale-95 transition-all duration-100 ease-in",
-                isScrolled ? "text-black" : "text-white"
+                isScrolled ? "text-black" : "text-black"
             )}
         >
             <a
