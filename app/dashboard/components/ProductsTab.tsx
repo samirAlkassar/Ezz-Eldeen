@@ -143,12 +143,13 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                 products.map((product) => (
                                     <tr key={product._id} className="hover:bg-slate-50 transition-colors duration-150">
                                         <td className="px-6 py-3.5">
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-3 relative">
                                                 <Image 
                                                     src={product.images?.[0]?.url ?? "/placeholder.jpg"} 
                                                     alt={product.name}
-                                                    fill
-                                                    className="w-12 h-12 rounded-lg object-cover border border-slate-200"
+                                                    width={80}
+                                                    height={80}
+                                                    className="w-12 h-12 rounded-lg object-contain border border-slate-200"
                                                 />
                                                 <div>
                                                     <p className="text-sm font-medium text-slate-800">{product.name}</p>

@@ -92,7 +92,7 @@ export default function DashboardPage() {
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
     const {toast} = useToast();
-
+    
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
@@ -129,7 +129,7 @@ export default function DashboardPage() {
         } finally {
             setLoading(false);
         }
-    },[]);
+    },[page, limit, search, categoryFilter, minPrice, maxPrice]);
 
     useEffect(() => {
         if (activeTab === "products") {
@@ -137,15 +137,7 @@ export default function DashboardPage() {
         }
     }, [page, activeTab, fetchProducts]);
 
-    useEffect(() => {
-        if (activeTab === "products") {
-            const debounced = debounce(() => {
-                setPage(1);
-                fetchProducts();
-            }, 350);
-            debounced();
-        }
-    }, [search, categoryFilter, minPrice, maxPrice, activeTab, fetchProducts]);
+
 
     const createProduct = async (payload: FormData) => {
         const token = await getCookies("token");

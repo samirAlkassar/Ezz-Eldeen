@@ -359,7 +359,9 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                             className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         />
                                         {preview && (
-                                            <Image src={preview} alt="Preview" fill className="mt-3 w-32 h-32 object-cover rounded-lg border border-slate-200" />
+                                            <div className="relative">
+                                                <Image src={preview} width={50} height={50} alt="Preview" className="mt-3 w-32 h-32 object-cover rounded-lg border border-slate-200" />
+                                            </div>
                                         )}
                                     </div>
                                 </motion.div>
@@ -414,9 +416,9 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                             </div>
                                         </div>
                                         {preview && (
-                                            <div>
+                                            <div className="relative">
                                                 <p className="text-base text-slate-700 font-medium mb-2">Product Image</p>
-                                                <Image src={preview} alt="Product" fill className="w-40 h-40 object-cover rounded-lg border border-slate-200" />
+                                                <Image src={preview} alt="Product" width={40} height={40} className="w-40 h-40 object-cover rounded-lg border border-slate-200" />
                                             </div>
                                         )}
                                     </div>

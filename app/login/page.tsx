@@ -46,7 +46,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="py-12 md:min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
+        <div className="py-12 md:py-0 md:min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
             {/* Left side (orange theme with login card) */}
             <div className="relative flex-1 flex justify-center items-center p-6">
                 <div className="bg-white shadow-md md:shadow-2xl rounded-xl md:rounded-3xl p-6 md:p-8 w-full max-w-md">
