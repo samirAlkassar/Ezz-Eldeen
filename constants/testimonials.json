@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Ahmed M.",
+    "location": "Cairo",
+    "rating": 5,
+    "text": "Honestly one of the smoothest shopping experiences I’ve had online. The product quality was exactly as described and delivery was fast."
+  },
+  {
+    "id": 2,
+    "name": "Sara K.",
+    "location": null,
+    "rating": 5,
+    "text": "Great prices, clear product details, and the checkout process was super easy. I’ve already placed my second order."
+  },
+  {
+    "id": 3,
+    "name": "Omar H.",
+    "location": null,
+    "rating": 5,
+    "text": "Customer support was very responsive and helpful. You can tell this store actually cares about its customers."
+  }
+]
