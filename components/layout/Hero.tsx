@@ -33,7 +33,7 @@ const Hero = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="absolute w-100 h-100 flex items-center justify-center -right-40 -top-20 scale-105">
+              className="absolute w-100 h-100 md:flex items-center justify-center -right-40 -top-20 scale-105 hidden">
               <img src="./images/cloud.png" alt="cloud" className="absolute bounceAnimation"/>
               <img src="./images/bear.png" alt="cloud" className="absolute bounceAnimation mb-4"/>
             </motion.div>
@@ -42,7 +42,7 @@ const Hero = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="absolute w-100 h-100 flex items-center justify-center -left-35 scale-x-[-1] sclae-95 -rotate-10">
+              className="absolute w-100 h-100 md:flex items-center justify-center -left-35 scale-x-[-1] sclae-95 -rotate-10 hidden">
               <img src="./images/cloud.png" alt="cloud" className="absolute bounceAnimation"/>
               <img src="./images/colors.png" alt="cloud" className="absolute bounceAnimation mb-5"/>
             </motion.div>
