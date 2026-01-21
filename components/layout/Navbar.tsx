@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, ShoppingCart, ChevronDown, Settings, User, LogOut, LayoutDashboard, LogIn, LogOutIcon } from "lucide-react";
+import { Heart, ShoppingCart, ChevronDown, Settings, User, LogOut, LayoutDashboard, LogIn, LogOutIcon, Menu } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchCurrentUser, selectUser, logout } from "../../features/auth/authSlice";
@@ -19,6 +19,7 @@ const Navbar = () => {
     const user = useSelector(selectUser);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [showBottomMenu, setShowBottomMenu] = useState(true);
     const menuRef = useRef<HTMLUListElement>(null);
     const imageRef = useRef<HTMLButtonElement>(null);
     const { toast } = useToast();
@@ -33,8 +34,11 @@ const Navbar = () => {
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
         handleScroll();
+        if (isScrolled) {
+            setShowBottomMenu(false)
+        } else {setShowBottomMenu(true)}
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [handleScroll]);
+    }, [handleScroll, isScrolled]);
 
     useEffect(() => {
         dispatch(fetchCurrentUser());
@@ -71,15 +75,38 @@ const Navbar = () => {
     return (
         <NavbarWrapper isScrolled={isScrolled}>
             <div className="w-full max-w-7xl mx-auto px-4 py-4 md:px-8 flex justify-between text-white">
-                <motion.div 
-                    initial={{ scale: 0.9 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}
-                    className="flex items-center justify-start">
-                    <Link href="/" className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
-                        Ezz-Eldeen
-                    </Link>
-                </motion.div>
+                {
+                isScrolled ? 
+                    <div className="flex items-center justify-start gap-4">
+                        <motion.button 
+                            initial={{ scale: 0.1, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.2, duration: 0.2, ease: "easeIn" }}
+                            onClick={()=>setShowBottomMenu(prev => !prev)}
+                            className="cursor-pointer">
+                            <Menu size={28} className={twMerge(isScrolled? "text-black" : "text-white")}/>
+                        </motion.button>
+                        <motion.div
+                            initial={{x: -50 }}
+                            whileInView={{x:0 }}
+                            transition={{ delay: 0, duration: 0.3, ease: "easeIn" }}>
+                            <Link href="/" className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                                Ezz-Eldeen
+                            </Link>
+                        </motion.div>
+                    </div>: 
+                    <motion.div 
+                        initial={{ scale: 0.9 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}
+                        className="flex items-center justify-start gap-4">
+                        <Link href="/" className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                            Ezz-Eldeen
+                        </Link>
+                    </motion.div>
+                }
+
+
 
 
                 <div className="flex gap-2 items-center relative">
@@ -166,8 +193,8 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
-            <div className="bg-white py-2 w-full flex items-center justify-center">
-                <SlideTabes isScrolled={isScrolled}/>
+            <div className="bg-white w-full flex items-center justify-center">
+                <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu}/>
             </div>
         </NavbarWrapper>
     );
@@ -180,7 +207,7 @@ type tabesPositionTypes = {
     color?: string;
 };
 
-const SlideTabes = ({isScrolled}:{isScrolled:boolean}) => {
+const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottomMenu: boolean}) => {
     const [position, setPosition] = useState<tabesPositionTypes>({
         left: 0,
         width: 0,
@@ -189,21 +216,30 @@ const SlideTabes = ({isScrolled}:{isScrolled:boolean}) => {
     });
     const router = useRouter();
     return (
-        <ul
-            onMouseLeave={() => {
-                setPosition({ opacity: 0 });
-            }}
-            className="hidden md:flex items-center relative"
-        >
-            <Tab onClick={()=>router.push('/')} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
-            <Tab onClick={()=>router.push('/categories/Toys_&_Games')} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
-            <Tab onClick={()=>router.push('/categories/School_Supplies')} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
-            <Tab onClick={()=>router.push('/categories/Gifts')}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
-            <Tab onClick={()=>router.push('/contact')}isScrolled={isScrolled}  setPosition={setPosition}>Contact</Tab>
-            <Tab onClick={()=>router.push('/about')}isScrolled={isScrolled}  setPosition={setPosition}>About</Tab>
+        <AnimatePresence>
+        {showBottomMenu && 
+            <motion.ul
+                initial={isScrolled && { opacity: 0, height: 0, y: -10, x: -40 }}
+                animate={{ opacity: 1, height: 60, y: 0, x:0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.15 }}
+                onMouseLeave={() => {
+                    setPosition({ opacity: 0 });
+                }}
+                className={twMerge("hidden md:flex items-center relative py-2 transition-al")}
+            >
+                <Tab onClick={()=>router.push('/')} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
+                <Tab onClick={()=>router.push('/categories/Toys_&_Games')} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
+                <Tab onClick={()=>router.push('/categories/School_Supplies')} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
+                <Tab onClick={()=>router.push('/categories/Gifts')}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
+                <Tab onClick={()=>router.push('/contact')}isScrolled={isScrolled}  setPosition={setPosition}>Contact</Tab>
+                <Tab onClick={()=>router.push('/about')}isScrolled={isScrolled}  setPosition={setPosition}>About</Tab>
 
-            <Cursor position={position} />
-        </ul>
+                <Cursor position={position} />
+            </motion.ul>
+        }
+        </AnimatePresence>
+
     );
 };
 
