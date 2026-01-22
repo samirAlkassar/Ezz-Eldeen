@@ -18,6 +18,8 @@ const ProductsByCategory = () => {
     const [category, setCategory] = useState<CategoriesFilterType>("All Products");
     const dispatch = useDispatch<AppDispatch>();
     const [isDragging, setIsDragging] = useState(false);
+    const [carouselSlidesNumber, setCarouselSlidesNumber] = useState(4);
+    const [isClient, setIsClient] = useState(false);
     const { products, pagination, error } = useSelector(
         (state: RootState) => state.products);
     
@@ -48,36 +50,46 @@ const ProductsByCategory = () => {
         [dispatch, isProductsPage]
     );
 
+    useEffect(() => {
+        const mobileQuery = window.matchMedia("(max-width: 479px)");
+        const tabletQuery = window.matchMedia("(min-width: 480px) and (max-width: 1023px)");
+        const desktopQuery = window.matchMedia("(min-width: 1024px)");
+
+        const handleBreakpointChange = () => {
+            if (mobileQuery.matches) {
+                setCarouselSlidesNumber(2)
+            } else if (tabletQuery.matches) {
+                setCarouselSlidesNumber(3)
+            } else if (desktopQuery.matches) {
+                setCarouselSlidesNumber(4)
+            }
+        };
+
+        handleBreakpointChange();
+
+        mobileQuery.addEventListener("change", handleBreakpointChange);
+        tabletQuery.addEventListener("change", handleBreakpointChange);
+        desktopQuery.addEventListener("change", handleBreakpointChange);
+
+        return () => {
+            mobileQuery.removeEventListener("change", handleBreakpointChange);
+            tabletQuery.removeEventListener("change", handleBreakpointChange);
+            desktopQuery.removeEventListener("change", handleBreakpointChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const settings = {
         infinite: false,
-        slidesToShow: 4,
+        slidesToShow: carouselSlidesNumber,
         swipeToSlide: true,
+        initialSlide: 0,
         dots: true,
         speed: 500,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                slidesToShow: 3,
-                infinite: true,
-                dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                slidesToShow: 2,
-                initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                slidesToShow: 1,
-                }
-            }
-            ],
-
+        mobileFirst:true,
         beforeChange: () => {
             setIsDragging(true);
         },
@@ -97,18 +109,20 @@ const ProductsByCategory = () => {
                 ))}
             </div>
             <div className="slider-container mt-10">
-                <Slider {...settings} className="">
-                    {products.map((product, index) => (
+                {isClient && (
+                    <Slider {...settings} className="">
+                        {products.map((product, index) => (
                         <div key={product._id} className="px-2 md:px-3 pt-2 pb-6 h-full">
                             <Product
-                                product={product}
-                                index={index}
-                                wishlist={wishlist}
-                                isDragging={isDragging}
+                            product={product}
+                            index={index}
+                            wishlist={wishlist}
+                            isDragging={isDragging}
                             />
                         </div>
-                    ))}
-                </Slider>
+                        ))}
+                    </Slider>
+                )}
             </div>
         </div>
     )
