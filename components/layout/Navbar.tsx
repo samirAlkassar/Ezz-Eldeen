@@ -26,7 +26,7 @@ const Navbar = () => {
     const cart = useSelector((state: RootState) => state.cart.cart);
     const router = useRouter();
     const handleScroll = useCallback(() => {
-    const scrollThreshold = 440;
+    const scrollThreshold = 420;
         setIsScrolled(window.scrollY > scrollThreshold);
     }, []);
     

@@ -11,7 +11,7 @@ import { addToCart } from "@/features/cart/cartSlice";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/Toast";
 
-export const Product = ({ product, index, wishlist, size = "medium" }: { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium" }) => {
+export const Product = ({ product, index, wishlist, size = "medium", isDragging }: { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean }) => {
     const productIsInWishlist = wishlist.some(item => item._id === product._id);
     const [optimisticUpdate, setOptimisticUpdate] = useState<boolean | null>(null);
     const isInWishList = optimisticUpdate !== null ? optimisticUpdate : Boolean(productIsInWishlist);
@@ -37,6 +37,15 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
         }
     };
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+            }
+        router.push(`/products/${product?.slug}`)
+    };
+
     return (
         <motion.div
             key={product?._id}
@@ -48,14 +57,14 @@ export const Product = ({ product, index, wishlist, size = "medium" }: { product
                 ease: [0.25, 0.1, 0.25, 1]
             }}
             viewport={{ once: true, amount: 0.2 }}
-            className={twMerge("bg-white shadow-sm md:shadow-lg transition-shadow duration-300 flex flex-col relative justify-between",
+            className={twMerge("bg-white shadow-sm md:shadow-lg transition-shadow duration-300 flex flex-col relative justify-between flex-1 h-full",
                 size === "small" ? "rounded-xl px-3 py-4" : "rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-5"
             )}
         >
             <div>
                 {/* Product Image */}
                 <div
-                    onClick={()=>router.push(`/products/${product?.slug}`)} 
+                    onClick={handleClick} 
                     className={twMerge("bg-white flex items-center justify-center relative",
                     size === "small" ? "rounded-lg h-46 mb-1" : "rounded-lg md:rounded-xl h-38 md:h-52 lg:h-60 mb-2 md:mb-4"
                 )}>

@@ -63,7 +63,7 @@ const AddReviewForm = ({product}: AddReviewFormProps) => {
                     value={comment}
                     onChange={(e)=>setComment(e.target.value)}
                     rows={4}
-                    className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
+                    className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-lg md:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
                     placeholder="Write your honest review..."
                 />
             </div>

@@ -63,3 +63,58 @@ html {
     -o-transform: scale(-1, -1);
     transform: scale(-1, -1);
 }
+
+.slick-list {
+  margin: 0 -12px;
+}
+
+/* Arrow container */
+.slick-prev,
+.slick-next {
+  width: 48px;
+  height: 48px;
+  z-index: 20;
+}
+
+/* Arrow icon */
+.slick-prev:before,
+.slick-next:before {
+  font-size: 48px;
+  color: #f97316; /* Tailwind orange-500 */
+  opacity: 1;
+}
+
+/* Optional hover effect */
+.slick-prev,
+.slick-next {
+  display: hidden !important; /* orange-600 */
+}
+
+.slick-prev {
+  left: -55px;
+}
+
+.slick-next {
+  right: -55px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px !important;
+  color: #f97316 !important; /* Tailwind orange-500 */
+  opacity: 1;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: auto !important;
+  display: flex !important;
+}
+
+.slick-slide > div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}

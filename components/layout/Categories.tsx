@@ -4,6 +4,7 @@ import Products from "./Products"
 import { Car, Gift, GraduationCap, Group } from "lucide-react";
 import { motion } from "motion/react"
 import { useRouter } from "next/navigation";
+import ProductsByCategory from "../ProductsByCategory";
 
 export const categoriesList = [
     {
@@ -43,6 +44,8 @@ export const categoriesList = [
         subcategories: ["School Starter Packs", "Play & Learn Sets", "Gift Bundles", "Seasonal Packages"]
     }
 ]
+
+
 
 const Categories = () => {
     const router = useRouter()
@@ -109,6 +112,9 @@ const Categories = () => {
                         </button>
                     </div>
                 </div>
+
+
+                <ProductsByCategory />
 
 
                 <div className="py-8 px-4 bg-linear-to-l from-[#ff773c]/80 to-amber-500/80 w-full rounded-2xl sm:mt-6 lg:my-12 text-center flex flex-col items-center">
