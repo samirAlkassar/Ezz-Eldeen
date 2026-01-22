@@ -74,7 +74,7 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="mt-12 w-full">
+    <div className="mt-12 w-full overflow-hidden">
       {/* {loading && <p className="text-center text-gray-500">Loading products...</p>} */}
       {isProductsPage &&
         <ProductsSearchBar
@@ -92,7 +92,7 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
         order={order}
         setOrder={setOrder} />}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
         {products.map((product, index) => (
           <Product
             key={product._id}

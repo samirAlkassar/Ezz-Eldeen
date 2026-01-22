@@ -100,14 +100,15 @@ const Categories = () => {
                         Discover our most popular items that kids and parents love!
                     </motion.p>
                     <Products />
-                        <div className="w-full flex justify-center mt-6 md:mt-8">
-                            <button
-                                onClick={() => router.push("/products")}
-                                className="bg-black text-white font-medium text-base md:text-lg rounded-full shadow-md px-4 py-2 md:px-6 md:py-3 cursor-pointer active:scale-95">
-                                Show ALl Products
-                                </button>
-                            </div>
-                        </div>
+                    
+                    <div className="w-full flex justify-center mt-6 md:mt-8">
+                        <button
+                            onClick={() => router.push("/products")}
+                            className="bg-black text-white font-medium text-base md:text-lg rounded-full shadow-md px-4 py-2 md:px-6 md:py-3 cursor-pointer active:scale-95">
+                            Show ALl Products
+                        </button>
+                    </div>
+                </div>
 
 
                 <div className="py-8 px-4 bg-linear-to-l from-[#ff773c]/80 to-amber-500/80 w-full rounded-2xl sm:mt-6 lg:my-12 text-center flex flex-col items-center">

@@ -23,7 +23,7 @@ const Hero = () => {
     const router = useRouter();
 
     return (
-        <main className="py-12 md:py-16 relative px-4 sm:px-8">
+        <main className="py-12 md:py-16 relative px-4 sm:px-8 overflow-x-hidden">
         <HeroBackground />
         <div className="flex items-center justify-center w-full max-w-[85rem] mx-auto">
           <div className="w-full max-w-4xl 2xl:mt-8 relative">
@@ -33,7 +33,7 @@ const Hero = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="absolute w-100 h-100 md:flex items-center justify-center -right-40 -top-20 scale-105 hidden">
+              className="absolute w-100 h-100 lg:flex items-center justify-center -right-40 -top-20 scale-105 hidden">
               <img src="./images/cloud.png" alt="cloud" className="absolute bounceAnimation"/>
               <img src="./images/bear.png" alt="cloud" className="absolute bounceAnimation mb-4"/>
             </motion.div>
@@ -42,7 +42,7 @@ const Hero = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="absolute w-100 h-100 md:flex items-center justify-center -left-35 scale-x-[-1] sclae-95 -rotate-10 hidden">
+              className="absolute w-100 h-100 lg:flex items-center justify-center -left-35 scale-x-[-1] sclae-95 -rotate-10 hidden">
               <img src="./images/cloud.png" alt="cloud" className="absolute bounceAnimation"/>
               <img src="./images/colors.png" alt="cloud" className="absolute bounceAnimation mb-5"/>
             </motion.div>
@@ -56,7 +56,7 @@ const Hero = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-6xl xl:text-7xl font-bold text-[#ec681c] text-center relative">
                 Magic <span className="text-white"> awaits at </span><br className="hidden md:block"/> <span className="text-yellow-300">Ezz-Eldeen</span>
-                <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className="absolute -top-5 left-40 -z-10"/>
+                <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className="absolute -top-5 -left-5 md:left-40 -z-10"/>
             </motion.h1>
 
             <motion.p 
@@ -67,7 +67,7 @@ const Hero = () => {
               className="text-base sm:text-base lg:text-lg text-white mt-4 text-center">
               Discover amazing school supplies, delightful toys, and perfect gifts <br className="hidden md:block"/> that spark imagination and learning in every child.
             </motion.p> 
-            <div className="md:pr-8 mt-12 md:mt-18 max-w-3xl mx-auto">
+            <div className="mt-12 md:mt-18 max-w-3xl mx-auto">
               <ProductsSearchBar 
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
