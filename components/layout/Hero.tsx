@@ -56,7 +56,7 @@ const Hero = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-6xl xl:text-7xl font-bold text-[#ec681c] text-center relative">
                 Magic <span className="text-white"> awaits at </span><br className="hidden md:block"/> <span className="text-yellow-300">Ezz-Eldeen</span>
-                <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className="absolute -top-5 -left-5 md:left-40 -z-10"/>
+                <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className="absolute -top-5 left-5 md:left-40 -z-10"/>
             </motion.h1>
 
             <motion.p 
