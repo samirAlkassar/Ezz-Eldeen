@@ -6,16 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
 import { fetchProducts } from "@/features/products/productsSlice";
 import { useEffect, useMemo, useState } from "react";
-import {CategoriesFilterType, SortType, OrderType} from "../components/layout/Products";
+import {CategoriesFilterType} from "../components/layout/Products";
 import debounce from "lodash/debounce";
 import { usePathname } from "next/navigation";
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { twMerge } from "tailwind-merge";
 
 const ProductsByCategory = () => {
     const [category, setCategory] = useState<CategoriesFilterType>("All Products");
+    const [subcategory, setSubCategory] = useState("puzzles");
     const dispatch = useDispatch<AppDispatch>();
     const [isDragging, setIsDragging] = useState(false);
     const [carouselSlidesNumber, setCarouselSlidesNumber] = useState(4);
@@ -27,28 +29,23 @@ const ProductsByCategory = () => {
     const isProductsPage = pathname.startsWith("/products") || pathname.startsWith("/categories");
     const wishlist = useSelector((state: RootState) => state.wishlist.items);
 
-    useEffect(() => {
-        if (category) {
-            setCategory(category);
-        }
-        }, [category]);
-
-        const debouncedFetch = useMemo(
+    const debouncedFetch = useMemo(
         () =>
-            debounce((searchTerm: string, category: CategoriesFilterType, page: number, minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => {
+            debounce((category: CategoriesFilterType, subcategory) => {
             dispatch(fetchProducts({
-                search: searchTerm,
                 category: category === "All Products" ? "" : category,
-                minPrice: minPrice,
-                maxPrice: maxPrice,
-                sort: sort,
-                order: order,
-                page: page,
+                subcategory: subcategory,
                 limit: isProductsPage ? 12 : 8,
             }));
-            }, 400),
-        [dispatch, isProductsPage]
-    );
+        }, 400),
+    [dispatch, isProductsPage]);
+
+    useEffect(() => {
+        debouncedFetch(category, subcategory);
+        return () => {
+            debouncedFetch.cancel();
+        };
+    }, [category, subcategory, debouncedFetch]);
 
     useEffect(() => {
         const mobileQuery = window.matchMedia("(max-width: 479px)");
@@ -100,15 +97,23 @@ const ProductsByCategory = () => {
 
     return (
         <div className="w-full pt-4 pb-16 md:pb-14">
-            <h1 className="text-4xl text-gray-800 font-semibold">Explore By Categories</h1>
-            <div className="flex gap-2 mt-3 flex-wrap">
-                {subcategories.map((subcategory)=>(
-                    <div key={subcategory} className="border-1 border-gray-700 rounded-full py-1.5 px-4 text-base cursor-pointer">
-                        {subcategory}
-                    </div> 
-                ))}
+            <h1 className="text-2xl md:text-4xl text-gray-800 font-semibold">Explore By Categories</h1>
+            <div className="overflow-x-scroll no-scrollbar relative bg-linear-90 from-transparent to-white h-full">
+                {/* <span className="absolute blcok bg-linear-90 from-transparent to-red-400 h-full w-full top-0 right-0 z-10"/> */}
+                <div className="flex gap-1 gap-y-2 md:gap-2 mt-4 md:w-fit w-200 ">
+                    {subcategories.map((subcategoryItem)=>(
+                        <div 
+                            key={subcategoryItem} 
+                            onClick={()=>setSubCategory(subcategoryItem)}
+                            className={twMerge("border-1 border-gray-700 rounded-full py-1 md:py-1.5 px-2.5 md:px-4 text-sm md:text-base cursor-pointer", 
+                            subcategory === subcategoryItem ? "bg-gray-800 text-white" : "text-gray-800"
+                        )}>
+                            {subcategoryItem}
+                        </div> 
+                    ))}
+                </div>
             </div>
-            <div className="slider-container mt-10">
+            <div className="slider-container mt-6 md:mt-10">
                 {isClient && (
                     <Slider {...settings} className="">
                         {products.map((product, index) => (

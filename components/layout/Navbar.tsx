@@ -193,7 +193,7 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
-            <div className="bg-white w-full flex items-center justify-center">
+            <div className="bg-white w-full flex items-center justify-center shadow-sm">
                 <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu}/>
             </div>
         </NavbarWrapper>
