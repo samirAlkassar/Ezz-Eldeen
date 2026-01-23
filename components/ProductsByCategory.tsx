@@ -76,7 +76,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
         drag: true,
         speed: 700,
         snap: true,
-        flickPower: 500 ,
+        flickPower: 9000 ,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         breakpoints: {
             700: { perPage: 2 },
