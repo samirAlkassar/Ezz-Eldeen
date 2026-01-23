@@ -61,7 +61,7 @@ const ProductsSearchBar = ({
   };
 
   return (
-    <div className="w-[90%] md:w-full mx-auto space-y-4">
+    <div className="w-full mx-auto space-y-4">
       <div className="relative mt-4 mb-6 px-2.5 py-0.5 sm:px-2 md:px-2 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
         <div className="md:pl-2">
           <Search className="text-orange-400 md:w-7 md:h-7" />
@@ -72,7 +72,7 @@ const ProductsSearchBar = ({
           onChange={(e) => {setSearchTerm(e.target.value)}}
            onKeyDown={(e) => {if (e.key === "Enter") {handleSearch()}}}
           placeholder="Search products"
-          className="bg-white w-full py-1.5 sm:py-3 md:py-4 px-1 sm:px-2 md:px-6 rounded-full text-base sm:text-lg lg:text-xl outline-none"/>
+          className="bg-white w-full py-2 sm:py-3 md:py-4 px-1 sm:px-2 md:px-6 rounded-full text-base sm:text-lg lg:text-xl outline-none"/>
 
         <button
           onClick={() => {

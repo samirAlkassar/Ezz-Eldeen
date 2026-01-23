@@ -57,7 +57,7 @@ const Categories = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-3xl text-center lg:text-5xl font-bold text-[#FF791A]">
+                    className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-[#FF791A]">
                     <span className="text-[#2B303B]">Explore Our Amazing</span> Categories
                 </motion.h1>
 
@@ -90,7 +90,7 @@ const Categories = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FF791A]">
+                        className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#FF791A]">
                         <span className="text-[#2B303B]">Featured</span> Products
                     </motion.h1>
 
@@ -99,8 +99,8 @@ const Categories = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="text-base lg:text-xl text-[#2B303B]/80 mt-3 text-center">
-                        Discover our most popular items that kids and parents love!
+                        className="text-base lg:text-xl text-[#2B303B]/80 mt-2 md:mt-3 text-center">
+                        Discover our most popular items <span className="hidden md:block">that kids and parents love!</span>
                     </motion.p>
                     <Products />
                     

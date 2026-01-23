@@ -44,14 +44,14 @@ const Hero = () => {
               <img src="./images/colors.png" alt="cloud" className="absolute bounceAnimation mb-5"/>
             </motion.div>
 
-            <span className="text-white flex max-w-lg pl-10 mx-auto items-center gap-1"><Star size={16} className="text-amber-400 fill-current scale-90 lg:scale-100"/> <p className="text-xs lg:text-sm xl:text-base">Kids store in Egypt</p></span>
+            <span className="text-white flex max-w-lg pl-6 mx-auto items-center gap-1"><Star size={16} className="text-amber-400 fill-current scale-90 lg:scale-100"/> <p className="text-xs lg:text-sm xl:text-base">Kids store in Egypt</p></span>
 
             <motion.h1  
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-4xl sm:text-6xl xl:text-7xl font-bold text-white md:text-[#ec681c] text-center relative">
+              className="text-5xl sm:text-6xl xl:text-7xl font-bold text-white md:text-[#ec681c] text-center relative">
                 Magic <span className="text-white"> awaits at </span><br className="hidden md:block"/> <span className="text-yellow-300">Ezz-Eldeen</span>
                 <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className="absolute -top-5 left-5 md:left-40 -z-10 hidden md:block"/>
             </motion.h1>
@@ -84,11 +84,11 @@ const Hero = () => {
             <div className="flex gap-4 mt-6 justify-center w-[90%] mx-auto md:w-full">
               <button 
                 onClick={()=>{router.push("#startshopping")}} 
-                className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-2 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
+                className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
                 Start Shopping
               </button>
               <button 
-                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-2 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
+                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
                 View Collections
               </button>
             </div>
