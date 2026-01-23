@@ -112,7 +112,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
             <div className="flex justify-between items-center gap-1 md:gap-3 pt-3 md:border-t border-gray-100">
                 <div className="flex flex-col">
                     <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5">Price</span>
-                    <p className="text-gray-900 text-lg md:leading-6 sm:text-xl md:text-2xl font-semibold md:font-bold truncate max-w-12">${product?.price}</p>
+                    <p className="text-gray-900 text-lg md:leading-6 sm:text-xl md:text-2xl font-semibold md:font-bold truncate max-w-12 md:max-w-fit">${product?.price}</p>
                 </div>
                 <button 
                     onClick={() => handleAddToCart(product?._id)} 

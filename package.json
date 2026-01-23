@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
     "class-variance-authority": "^0.7.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.544.0",
@@ -18,10 +20,8 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-redux": "^9.2.0",
-    "react-slick": "^0.31.0",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
-    "slick-carousel": "^1.8.1",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {

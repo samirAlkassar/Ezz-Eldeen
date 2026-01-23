@@ -5,10 +5,7 @@ import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
-
-export type CategoriesFilterType = "All Products" | "Toys & Games" | "Gifts" | "School Supplies";
-export type SortType = "createdAt" | "price" | "name";
-export type OrderType = "asc" | "desc";
+import { CategoriesFilterType, SortType, OrderType } from "./layout/Products";
 
 interface ProductsSearchBarProps {
   searchTerm: string;
@@ -193,11 +190,6 @@ const ProductsSearchBar = ({
                     active={sort === "price"}
                     onClick={() => setSort("price")}>
                     Price
-                  </FilterButton>
-                  <FilterButton
-                    active={sort === "name"}
-                    onClick={() => setSort("name")}>
-                    Name
                   </FilterButton>
                 </div>
               </div>

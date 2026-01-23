@@ -13,7 +13,7 @@ import ProductsSearchBar from "../ProductsSearchBar"
 import { usePathname } from "next/navigation";
 
 export type CategoriesFilterType = "All Products" | "Toys & Games" | "School Supplies" | "Gifts";
-export type SortType = "createdAt" | "price" | "name";
+export type SortType = "createdAt" | "price" | "rating";
 export type OrderType = "asc" | "desc";
 
 const Products = ({ category, search }: { category?: CategoriesFilterType, search? : string }) => {
@@ -49,9 +49,9 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
           sort: sort,
           order: order,
           page: page,
-          limit: isProductsPage ? 12 : 8,
+          limit: isProductsPage ? 12 : 4,
         }));
-      }, 400),
+      }, 200),
     [dispatch, isProductsPage]
   );
 
