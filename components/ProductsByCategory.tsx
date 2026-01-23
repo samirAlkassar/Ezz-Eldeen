@@ -13,9 +13,10 @@ import { ProductType } from "@/features/products/types";
 import { getProductsApi } from "@/features/products/productsAPI";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
-const ProductsByCategory = () => {
+const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories"}: {title?: string, section?: "categories" | "rating" | "new"}) => {
     const [category, setCategory] = useState<CategoriesFilterType>("All Products");
     const [subcategory, setSubCategory] = useState("puzzles");
     const [isDragging, setIsDragging] = useState(false);
@@ -32,8 +33,8 @@ const ProductsByCategory = () => {
 
             const data = await getProductsApi({
                 categories: category === "All Products" ? "" : category,
-                subcategory,
-                sort: "rating",
+                subcategory: section === "categories" ? subcategory : "",
+                sort: section === "new" ? "createdAt" : "rating",
                 limit: 12
             });
 
@@ -50,7 +51,7 @@ const ProductsByCategory = () => {
         () =>
             debounce((category, subcategory) => {
             fetchProducts(category, subcategory);
-            }, 200),
+            }, 400),
         [fetchProducts]
         );
 
@@ -72,6 +73,8 @@ const ProductsByCategory = () => {
         arrows: false,
         drag: true,
         speed: 700,
+        snap: true,
+        flickPower: 500 ,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         breakpoints: {
             700: { perPage: 2 },
@@ -81,9 +84,14 @@ const ProductsByCategory = () => {
 
 
     return (
-        <div className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden">
-            <h1 className="text-2xl md:text-4xl text-gray-800 font-semibold">Shope By Categories</h1>
-            <div className="flex gap-1 gap-y-2 md:gap-2 mt-4 flex-wrap">
+        <div className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden mb-4 md:mb-12">
+            <div className="flex w-full justify-between items-center">
+                <h1 className="text-2xl md:text-4xl text-gray-800 font-semibold">{title}</h1>
+                <button className="rounded-full bg-gray-800 text-white text-sm md:text-xl px-3 md:px-5 py-1 md:py-1.5 flex items-center justify-center md:gap-1 cursor-pointer hover:[&_svg]:translate-x-1">
+                    <p>Show All</p> <ChevronRight size={24} className="arrow transition-all duration-75 ease-in scale-80 md:scale-100"/>
+                </button>
+            </div>
+            {section === "categories" && <div className="flex gap-1 gap-y-2 md:gap-2 mt-4 flex-wrap mb-4">
                 {subcategories.map((subcategoryItem)=>(
                     <div 
                         key={subcategoryItem} 
@@ -94,8 +102,8 @@ const ProductsByCategory = () => {
                         {subcategoryItem}
                     </div> 
                 ))}
-            </div>
-            <div className="slider-container mt-6 md:mt-10">
+            </div>}
+            <div className="slider-container mt-6 md:mt-6">
                 {isClient && (
                 <Splide
                     options={splideOptions}

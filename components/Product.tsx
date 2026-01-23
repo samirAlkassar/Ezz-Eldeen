@@ -50,9 +50,9 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
         <motion.div
             key={product?._id}
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{
-                duration: 0.5,
+                duration: 0.2,
                 delay: (index % 4) * 0.1, // reset every 8 items
                 ease: [0.25, 0.1, 0.25, 1]
             }}

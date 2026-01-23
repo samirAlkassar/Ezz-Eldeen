@@ -66,7 +66,7 @@ const Categories = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center">
+                    className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center hidden md:block">
                     From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" />
                     {`child's journey magical and educational.`}
                 </motion.p>
@@ -115,6 +115,8 @@ const Categories = () => {
 
 
                 <ProductsByCategory />
+                <ProductsByCategory title="Best Rating" section="rating"/>
+                <ProductsByCategory title="Recently Added" section="new"/>
 
 
                 <div className="py-8 px-4 bg-linear-to-l from-[#ff773c]/80 to-amber-500/80 w-full rounded-2xl sm:mt-6 lg:my-12 text-center flex flex-col items-center">

@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const HeroBackground = () => {
     return (
-        <div className="bg-[#FFF4EC]/40 inset-0 absolute -z-10 overflow-clip">
+        <div className="bg-orange-400/40 inset-0 absolute -z-10 overflow-clip">
             <div className="relative w-full h-full">
-                <div className="bg-linear-90 from-white to-white opacity-10 inset-0 absolute z-10"></div>
+                <div className="bg-linear-0 md:bg-linear-90 from-gray-500 md:from-orange-400 to-amber-900 md:to-amber-700 opacity-50 md:opacity-40 inset-0 absolute z-10"></div>
                 <Image src={"/images/herosplash.jpg"} alt={"splash image"} fill className="object-cover"/>
             </div>
             {/* <span className="h-[180px] w-[220px] bg-blue-400/20 absolute top-[15%] left-[10%] rounded-full blur-2xl animate-pulse"></span>

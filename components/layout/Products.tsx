@@ -51,7 +51,7 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
           page: page,
           limit: isProductsPage ? 12 : 4,
         }));
-      }, 200),
+      }, 400),
     [dispatch, isProductsPage]
   );
 
