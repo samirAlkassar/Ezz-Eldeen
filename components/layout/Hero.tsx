@@ -84,11 +84,11 @@ const Hero = () => {
             <div className="flex gap-4 mt-6 justify-center w-full">
               <button 
                 onClick={()=>{router.push("#startshopping")}} 
-                className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
+                className="bg-gradient-to-r from-gray-900 font-semibold to-gray-800 w-full sm:w-fit hover:from-gray-800 hover:to-gray-700 shadow-sm text-white px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-full sm:rounded-2xl md:rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">
                 Start Shopping
               </button>
               <button 
-                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
+                className="bg-white text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-full sm:rounded-2xl md:rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
                 View Collections
               </button>
             </div>
