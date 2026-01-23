@@ -19,7 +19,9 @@ const ProductsClient = () => {
 
   const search: string = searchParams.get("search") ?? "";
 
-  return <Products search={search} category={category} />;
+  const subCategory: string = searchParams.get("subCategory") ?? "";
+
+  return <Products search={search} category={category} subCategory={subCategory}/>;
 };
 
 export default ProductsClient;

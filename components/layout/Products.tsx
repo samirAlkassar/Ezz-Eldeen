@@ -16,9 +16,10 @@ export type CategoriesFilterType = "All Products" | "Toys & Games" | "School Sup
 export type SortType = "createdAt" | "price" | "rating";
 export type OrderType = "asc" | "desc";
 
-const Products = ({ category, search }: { category?: CategoriesFilterType, search? : string }) => {
+const Products = ({ category, search, subCategory = "" }: { category?: CategoriesFilterType, search? : string, subCategory?: string }) => {
   const [searchTerm, setSearchTerm] = useState<string>(search || "");
   const [currentCategory, setCurrentCategory] = useState<CategoriesFilterType>("All Products");
+  const [currentSubCategory, setCurrentSubCategory] = useState<string>("puzzles");
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(200000);
   const [sort, setSort] = useState<SortType>("createdAt");
@@ -38,12 +39,19 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
     }
   }, [category]);
 
+  useEffect(() => {
+    if (subCategory) {
+      setCurrentSubCategory(subCategory);
+    }
+  }, [subCategory]);
+
   const debouncedFetch = useMemo(
     () =>
-      debounce((searchTerm: string, category: CategoriesFilterType, page: number, minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => {
+      debounce((searchTerm: string, category: CategoriesFilterType, subcategory: string, page: number, minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => {
         dispatch(fetchProducts({
           search: searchTerm,
           category: category === "All Products" ? "" : category,
+          subcategory: subCategory === "" ? "" : subCategory,
           minPrice: minPrice,
           maxPrice: maxPrice,
           sort: sort,
@@ -56,13 +64,13 @@ const Products = ({ category, search }: { category?: CategoriesFilterType, searc
   );
 
   useEffect(() => {
-    debouncedFetch(searchTerm, currentCategory, currentPage, minPrice, maxPrice, sort, order);
+    debouncedFetch(searchTerm, currentCategory, currentSubCategory, currentPage, minPrice, maxPrice, sort, order,);
 
     // Cleanup function to cancel pending debounced calls
     return () => {
       debouncedFetch.cancel();
     };
-  }, [searchTerm, currentCategory, currentPage, minPrice, maxPrice, sort, order, debouncedFetch]);
+  }, [searchTerm, currentCategory, currentSubCategory, currentPage, minPrice, maxPrice, sort, order, debouncedFetch]);
 
   useEffect(() => {
     dispatch(fetchCart());

@@ -80,10 +80,10 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
                         size === "small" ? "scale-[85%] -top-4 -right-4" : "scale-80 md:scale-90 -top-10 -right-10 md:-top-8 md:-right-8"
                     )}
                         style={{ transitionDuration: `${isInWishList ? "1s" : ""}`, backgroundPosition: `${isInWishList ? "-2800px 0" : ""}` }} />
-                    <div className="absolute -top-1 -left-1 md:top-1 md:left-1 bg-orange-400 backdrop-blur-sm rounded-full py-1 px-2 md:py-1.5 md:px-3 flex items-center justify-center gap-1.5 shadow-md">
+                    {/* <div className="absolute -top-1 -left-1 md:top-1 md:left-1 bg-orange-400 backdrop-blur-sm rounded-full py-1 px-2 md:py-1.5 md:px-3 flex items-center justify-center gap-1.5 shadow-md">
                         <Star size={14} className="text-white fill-current"/>
                         <p className="text-xs font-semibold text-white">{product?.averageRating}</p>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Product Info */}

@@ -50,7 +50,7 @@ export const categoriesList = [
 const Categories = () => {
     const router = useRouter()
     return (
-        <section className=" bg-gradient-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10 ">
+        <section className=" bg-gradient-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full max-w-[90rem] mx-auto px-4 md:px-8">
                 <motion.h1
                     initial={{ opacity: 0, y: 18 }}
@@ -100,7 +100,7 @@ const Categories = () => {
                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
                         className="text-base lg:text-xl text-[#2B303B]/80 mt-2 md:mt-3 text-center">
-                        Discover our most popular items <span className="hidden md:block">that kids and parents love!</span>
+                        Discover our most popular items <span className="hidden md:inline">that kids and parents love!</span>
                     </motion.p>
                     <Products />
                     

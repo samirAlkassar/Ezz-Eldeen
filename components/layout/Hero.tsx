@@ -23,7 +23,7 @@ const Hero = () => {
         <main className="py-12 md:py-16 relative px-4 sm:px-8 ">
         <HeroBackground />
         <div className="flex items-center justify-center w-full max-w-[85rem] mx-auto">
-          <div className="w-full max-w-4xl 2xl:mt-8 relative">
+          <div className="w-full max-w-xs md:max-w-4xl 2xl:mt-8 relative">
 
             <motion.div 
               initial={{ scale: 0 }}
@@ -51,7 +51,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-5xl sm:text-6xl xl:text-7xl font-bold text-white md:text-[#ec681c] text-center relative">
+              className="text-5xl sm:text-6xl xl:text-7xl font-bold text-white text-center relative">
                 Magic <span className="text-white"> awaits at </span><br className="hidden md:block"/> <span className="text-yellow-300">Ezz-Eldeen</span>
                 <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className="absolute -top-5 left-5 md:left-40 -z-10 hidden md:block"/>
             </motion.h1>
@@ -61,8 +61,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-base sm:text-base lg:text-lg text-white mt-2 md:mt-4 text-center">
-              Discover amazing school supplies,<br className="block md:hidden"/> delightful toys, and perfect gifts <br className="hidden md:block"/> <span className="hidden md:block">that spark imagination and learning in every child.</span>
+              className="text-base sm:text-base lg:text-2xl text-white mt-2 md:mt-4 text-center max-w-xl mx-auto">
+              Discover amazing school supplies,<br className="block md:hidden"/> toys, and gifts <br className="hidden md:block"/> <span className="hidden md:block">that spark imagination and learning in every child.</span>
             </motion.p> 
             <div className="mt-12 md:mt-18 max-w-3xl mx-auto">
               <ProductsSearchBar 
@@ -81,7 +81,7 @@ const Hero = () => {
                 setOrder={setOrder}
               />
             </div>
-            <div className="flex gap-4 mt-6 justify-center w-[90%] mx-auto md:w-full">
+            <div className="flex gap-4 mt-6 justify-center w-full">
               <button 
                 onClick={()=>{router.push("#startshopping")}} 
                 className="bg-gradient-to-r from-[#FF791A] font-semibold to-orange-500 w-full sm:w-fit hover:from-[#ff6b02] hover:to-orange-500 shadow-sm text-white px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-lg sm:rounded-2xl md:rounded-full cursor-pointer active:scale-[97%] transition-all duration-75">

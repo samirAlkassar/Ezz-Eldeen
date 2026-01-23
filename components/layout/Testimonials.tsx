@@ -30,7 +30,7 @@ const TestimonialsCard = ({name, testimonial, rating, location, id}: {name: stri
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{
-            delay: 0.3 + id * 0.15,
+            delay: 0.1 + id * 0.15,
             duration: 0.4,
             ease: "easeOut",
             }}
