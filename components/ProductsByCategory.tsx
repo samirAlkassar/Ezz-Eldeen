@@ -38,8 +38,9 @@ const ProductsByCategory = () => {
             });
 
             setProducts(data.products);
-        } catch (error: any) {
-            setError(error.message || "something went wrong");
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                setError(err.message); }
         } finally {
             setLoading(false);
         }

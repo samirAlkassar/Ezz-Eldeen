@@ -7,10 +7,7 @@ import HeroBackground from "@/components/HeroBackground";
 import ProductsSearchBar from "../ProductsSearchBar";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { CategoriesFilterType } from "../ProductsSearchBar";
-
-export type SortType = "createdAt" | "price" | "name";
-export type OrderType = "asc" | "desc";
+import { CategoriesFilterType, SortType, OrderType } from "./Products";
 
 const Hero = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");

@@ -2,7 +2,7 @@
 
 import Products from "@/components/layout/Products";
 import { useSearchParams } from "next/navigation";
-import { CategoriesFilterType } from "@/components/ProductsSearchBar";
+import { CategoriesFilterType } from "@/components/layout/Products";
 
 const ProductsClient = () => {
   const searchParams = useSearchParams();
