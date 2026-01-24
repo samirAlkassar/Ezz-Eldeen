@@ -13,6 +13,7 @@ import { AppDispatch, RootState } from "@/app/store";
 import Image from "next/image";
 import { useToast } from "@/components/Toast";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -25,11 +26,15 @@ const Navbar = () => {
     const { toast } = useToast();
     const cart = useSelector((state: RootState) => state.cart.cart);
     const router = useRouter();
+    const pathname = usePathname();
+    const isHomePage = pathname.endsWith("/");
+
     const handleScroll = useCallback(() => {
-    const scrollThreshold = 420;
-        setIsScrolled(window.scrollY > scrollThreshold);
-    }, []);
-    
+        const scrollThreshold = 420;
+        if (!isHomePage) {
+            setIsScrolled(true)
+        } else {setIsScrolled(window.scrollY > scrollThreshold);}
+    },[isHomePage]);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -73,18 +78,18 @@ const Navbar = () => {
     }, []);
 
     return (
-        <NavbarWrapper isScrolled={isScrolled}>
+        <NavbarWrapper isScrolled={isScrolled} isHomePage={isHomePage}>
             <div className="w-full max-w-7xl mx-auto px-4 py-3.5 md:py-4 md:px-8 flex justify-between text-white">
                 {
                 isScrolled ? 
-                    <div className="flex items-center justify-start gap-4">
+                    <div className="flex items-center justify-start gap-2 md:gap-4">
                         <motion.button 
                             initial={{ scale: 0.1, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.2, ease: "easeIn" }}
                             onClick={()=>setShowBottomMenu(prev => !prev)}
                             className="cursor-pointer">
-                            <Menu size={28} className={twMerge(isScrolled? "text-black" : "text-white")}/>
+                            <Menu size={28} className={twMerge("scale-90 md:scale-100",isScrolled? "text-gray-800" : "text-white")}/>
                         </motion.button>
                         <motion.div
                             initial={{x: -50 }}
@@ -226,7 +231,7 @@ const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottom
                 onMouseLeave={() => {
                     setPosition({ opacity: 0 });
                 }}
-                className={twMerge("hidden md:flex items-center relative py-2 transition-al")}
+                className={twMerge("flex items-center relative py-2 transition-al")}
             >
                 <Tab onClick={()=>router.push('/')} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
                 <Tab onClick={()=>router.push('/categories/Toys_&_Games')} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
@@ -306,16 +311,15 @@ const Cursor = ({ position }: { position: tabesPositionTypes }) => {
     );
 };
 
-const NavbarWrapper = ({children, isScrolled}:{children: React.ReactNode, isScrolled:boolean}) => {
+const NavbarWrapper = ({children, isScrolled, isHomePage}:{children: React.ReactNode, isScrolled:boolean, isHomePage: boolean}) => {
     return (
     isScrolled ? 
         <motion.nav 
-            initial={{ translateY: -30  }}
-            animate={{ translateY: 0}}
-            transition={{ delay: 0, duration: 0.3, ease: "easeInOut" }}
-            className="w-full z-50 bg-white sticky top-0 shadow-sm">{children}</motion.nav> :
-        <nav
-            className="w-full z-50 bg-[#FF773C] relative">{children}</nav>
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="w-full z-50 bg-white sticky top-0 shadow-sm">{children}</motion.nav> :
+        <nav className="w-full z-50 relative bg-[#FF773C]">{children}</nav>
     )
 }
 

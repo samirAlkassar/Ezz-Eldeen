@@ -82,7 +82,7 @@ const Products = ({ category, search, subCategory = "" }: { category?: Categorie
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="mt-12 w-full overflow-hidden">
+    <div className="mt-0 md:mt-12 w-full overflow-hidden">
       {/* {loading && <p className="text-center text-gray-500">Loading products...</p>} */}
       {isProductsPage &&
         <ProductsSearchBar

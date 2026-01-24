@@ -12,6 +12,11 @@ import GiftsCategoryImage from "../../public/images/1abdcf7f18364e53f0ef60ad5ba4
 import bundlesCategoryImage from "../../public/images/deadfdfce64bf13e0a1aad8aabd6df4b.jpg"
 import { StaticImageData } from "next/dist/shared/lib/get-img-props";
 
+import ToysCategorySectionImage from "../../public/images/twister-car.png";
+import SchoolCategorySectionImage from "../../public/images/school-supplies.png";
+import GiftsCategorySectionImage from "../../public/images/gift.png";
+import BundlesCategorySectionImage from "../../public/images/school-supplies.png";
+
 export const categoriesList = [
     {
         title: "School Supplies",
@@ -21,7 +26,8 @@ export const categoriesList = [
         theme: "bg-gradient-to-l from-[#6eCe7e] to-[#3ba94d]",
         buttonText: "Explore School Supplies",
         subcategories: ["Notebooks", "Pencils & Pens", "Art Supplies", "Backpacks"],
-        image: SchoolCategoryImage
+        image: SchoolCategoryImage,
+        sectionImage: SchoolCategorySectionImage
     },
     {
         title: "Toys & Games",
@@ -31,7 +37,8 @@ export const categoriesList = [
         theme: "bg-gradient-to-l from-[#9D4EDD] to-[#7b2cbf]",
         buttonText: "Explore Toys & Games",
         subcategories: ["Building Blocks", "Board Games", "Action Figures", "Puzzles"],
-        image: toysCategoryImage
+        image: toysCategoryImage,
+        sectionImage: ToysCategorySectionImage
     },
     {
         title: "Gifts",
@@ -41,7 +48,8 @@ export const categoriesList = [
         theme: "bg-gradient-to-l from-[#ff6f61] to-[#ff4858]",
         buttonText: "Explore Gifts",
         subcategories: ["Birthday Gifts", "Holiday Gifts", "Personalized Items", "Gift Sets"],
-        image: GiftsCategoryImage
+        image: GiftsCategoryImage,
+        sectionImage: GiftsCategorySectionImage
     },
     {
         title: "Bundles",
@@ -51,7 +59,8 @@ export const categoriesList = [
         theme: "bg-gradient-to-l from-[#4D96FF] to-[#2563eb]",
         buttonText: "Explore Bundles",
         subcategories: ["School Starter Packs", "Play & Learn Sets", "Gift Bundles", "Seasonal Packages"],
-        image: bundlesCategoryImage
+        image: bundlesCategoryImage,
+        sectionImage: BundlesCategorySectionImage
     }
 ]
 
