@@ -5,7 +5,7 @@ import { Car, Gift, GraduationCap, Group } from "lucide-react";
 import { motion } from "motion/react"
 import { useRouter } from "next/navigation";
 import ProductsByCategory from "../ProductsByCategory";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import toysCategoryImage from "../../public/images/97d10db78e9174ad0f2d62c705c6f051.jpg"
 import SchoolCategoryImage from "../../public/images/639b30f87da6fecd1044dc4ba17a3270.jpg"
 import GiftsCategoryImage from "../../public/images/1abdcf7f18364e53f0ef60ad5ba4370c.jpg"
@@ -209,7 +209,7 @@ const Categories = () => {
 
 
 const CategoryCard = ({ icon, theme, title, subtitle, delayIndex, image }:
-    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number, image?: any }) => {
+    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number, image?: StaticImageData }) => {
     const router = useRouter();
     return (
         <motion.div
