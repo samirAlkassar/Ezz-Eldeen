@@ -6,6 +6,10 @@ import { motion } from "motion/react"
 import { useRouter } from "next/navigation";
 import ProductsByCategory from "../ProductsByCategory";
 import Image from "next/image";
+import toysCategoryImage from "../../public/images/97d10db78e9174ad0f2d62c705c6f051.jpg"
+import SchoolCategoryImage from "../../public/images/639b30f87da6fecd1044dc4ba17a3270.jpg"
+import GiftsCategoryImage from "../../public/images/1abdcf7f18364e53f0ef60ad5ba4370c.jpg"
+import bundlesCategoryImage from "../../public/images/deadfdfce64bf13e0a1aad8aabd6df4b.jpg"
 
 export const categoriesList = [
     {
@@ -15,7 +19,8 @@ export const categoriesList = [
         sectionIcon: <GraduationCap size={56} />,
         theme: "bg-gradient-to-l from-[#6eCe7e] to-[#3ba94d]",
         buttonText: "Explore School Supplies",
-        subcategories: ["Notebooks", "Pencils & Pens", "Art Supplies", "Backpacks"]
+        subcategories: ["Notebooks", "Pencils & Pens", "Art Supplies", "Backpacks"],
+        image: SchoolCategoryImage
     },
     {
         title: "Toys & Games",
@@ -24,7 +29,8 @@ export const categoriesList = [
         sectionIcon: <Car size={56} />,
         theme: "bg-gradient-to-l from-[#9D4EDD] to-[#7b2cbf]",
         buttonText: "Explore Toys & Games",
-        subcategories: ["Building Blocks", "Board Games", "Action Figures", "Puzzles"]
+        subcategories: ["Building Blocks", "Board Games", "Action Figures", "Puzzles"],
+        image: toysCategoryImage
     },
     {
         title: "Gifts",
@@ -33,7 +39,8 @@ export const categoriesList = [
         sectionIcon: <Gift size={56} />,
         theme: "bg-gradient-to-l from-[#ff6f61] to-[#ff4858]",
         buttonText: "Explore Gifts",
-        subcategories: ["Birthday Gifts", "Holiday Gifts", "Personalized Items", "Gift Sets"]
+        subcategories: ["Birthday Gifts", "Holiday Gifts", "Personalized Items", "Gift Sets"],
+        image: GiftsCategoryImage
     },
     {
         title: "Bundles",
@@ -42,7 +49,8 @@ export const categoriesList = [
         sectionIcon: <Group size={56} />,
         theme: "bg-gradient-to-l from-[#4D96FF] to-[#2563eb]",
         buttonText: "Explore Bundles",
-        subcategories: ["School Starter Packs", "Play & Learn Sets", "Gift Bundles", "Seasonal Packages"]
+        subcategories: ["School Starter Packs", "Play & Learn Sets", "Gift Bundles", "Seasonal Packages"],
+        image: bundlesCategoryImage
     }
 ]
 
@@ -72,7 +80,7 @@ const Categories = () => {
                     {`child's journey magical and educational.`}
                 </motion.p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full mt-8 max-w-[90rem] mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-2 gap-y-6 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full mt-4 md:mt-8 max-w-[60rem] mx-auto px-4 md:px-8">
                     {categoriesList.map((category, index) => (
                         <CategoryCard
                             key={index}
@@ -81,11 +89,12 @@ const Categories = () => {
                             subtitle={category.subtitle}
                             icon={category.icon}
                             theme={category.theme}
+                            image={category.image}
                         />
                     ))}
                 </div>
 
-                <div id={"startshopping"} className="pb-20 pt-20 md:pt-40 w-full flex flex-col items-center max-w-[90rem] mx-auto px-4 md:px-8">
+                <div id={"startshopping"} className="pb-20 pt-14 md:pt-20 w-full flex flex-col items-center max-w-[90rem] mx-auto px-4 md:px-8">
                     <motion.h1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -199,8 +208,8 @@ const Categories = () => {
 }
 
 
-const CategoryCard = ({ icon, theme, title, subtitle, delayIndex }:
-    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number }) => {
+const CategoryCard = ({ icon, theme, title, subtitle, delayIndex, image }:
+    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number, image?: any }) => {
     const router = useRouter();
     return (
         <motion.div
@@ -208,13 +217,22 @@ const CategoryCard = ({ icon, theme, title, subtitle, delayIndex }:
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 * (delayIndex + 1), duration: 0.2 }}
             viewport={{ once: true, amount: 0.2 }}
-            onClick={() => router.push(`/categories/${title.replace(/\s+/g, '_')}`)}>
-            <div className={`${theme} flex flex-col rounded-lg p-3 lg:px-4 lg:py-6 h-full border-2 relative hover:[&_span]:scale-120 md:hover:scale-105 hover:scale-[102%] hover:shadow-md cursor-pointer transition-all duration-100 ease-in`}>
-            <div className="absolute inset-0 border-b-4 border-neutral-500 rounded-lg pointer-events-none " />
-            {icon && <span className="text-4xl text-white bg-white/20 w-fit p-2 rounded-md">{icon}</span>}
-            <h3 className="text-white text-2xl font-bold mt-4">{title}</h3>
-            <p className="text-white text-sm lg:text-base">{subtitle}</p>
+            onClick={() => router.push(`/categories/${title.replace(/\s+/g, '_')}`)}
+            className="flex flex-col items-center group cursor-pointer">
+            <div className={`${theme} relative w-32 h-32 lg:w-40 lg:h-40 rounded-full flex items-center justify-center border-4 border-white shadow-lg overflow-hidden transition-all duration-300 ease-out group-hover:scale-110 group-hover:shadow-xl`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+                <Image src={image} alt={`${title}-category-image`} fill className="w-full h-full object-cover"/>
             </div>
+
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold mt-3 text-center text-gray-700 group-hover:text-gray-900 transition-colors duration-200">
+                {title}
+            </h3>
+            
+            {subtitle && (
+                <p className="text-xs hidden md:block lg:text-sm text-gray-500 text-center mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 max-w-[120px] lg:max-w-[150px]">
+                    {subtitle}
+                </p>
+            )}
         </motion.div>
     )
 }
