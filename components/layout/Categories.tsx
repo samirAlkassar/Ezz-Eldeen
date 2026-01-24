@@ -5,11 +5,12 @@ import { Car, Gift, GraduationCap, Group } from "lucide-react";
 import { motion } from "motion/react"
 import { useRouter } from "next/navigation";
 import ProductsByCategory from "../ProductsByCategory";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import toysCategoryImage from "../../public/images/97d10db78e9174ad0f2d62c705c6f051.jpg"
 import SchoolCategoryImage from "../../public/images/639b30f87da6fecd1044dc4ba17a3270.jpg"
 import GiftsCategoryImage from "../../public/images/1abdcf7f18364e53f0ef60ad5ba4370c.jpg"
 import bundlesCategoryImage from "../../public/images/deadfdfce64bf13e0a1aad8aabd6df4b.jpg"
+import { StaticImageData } from "next/dist/shared/lib/get-img-props";
 
 export const categoriesList = [
     {
@@ -209,7 +210,7 @@ const Categories = () => {
 
 
 const CategoryCard = ({ icon, theme, title, subtitle, delayIndex, image }:
-    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number, image?: StaticImageData }) => {
+    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number, image: StaticImageData }) => {
     const router = useRouter();
     return (
         <motion.div
