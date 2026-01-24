@@ -17,8 +17,8 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 
-const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories"}: {title?: string, section?: "categories" | "rating" | "new"}) => {
-    const [category, setCategory] = useState<CategoriesFilterType>("All Products");
+const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories"}: {title?: string, section?: "categories" | "rating" | "new" | "games" | "school"}) => {
+    const [category, setCategory] = useState<CategoriesFilterType>("Toys & Games");
     const [subcategory, setSubCategory] = useState("puzzles");
     const [isDragging, setIsDragging] = useState(false);
     const [isClient, setIsClient] = useState(false);
@@ -28,15 +28,15 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
     const wishlist = useSelector((state: RootState) => state.wishlist.items);
     const router = useRouter();
 
-    const fetchProducts = async (categories: CategoriesFilterType, subcategories: string) => {
+    const fetchProducts = async (category: CategoriesFilterType, subcategory: string) => {
         try {
             setLoading(true);
             setError(null);
 
             const data = await getProductsApi({
-                categories: category === "All Products" ? "" : category,
+                category: section === "games" ? "Toys & Games" : section === "school" ? "School Supplies" : "",
                 subcategory: section === "categories" ? subcategory : "",
-                sort: section === "new" ? "createdAt" : "rating",
+                sort: section === "rating" ? "rating" : "createdAt",
                 limit: 12
             });
 
@@ -86,7 +86,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
 
 
     return (
-        <div className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden mb-4 md:mb-12">
+        <section className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden mb-4 md:mb-12 max-w-[90rem] mx-auto px-4 md:px-8">
             <div className="flex w-full justify-between items-center">
                 <h1 className="text-2xl md:text-4xl text-gray-800 font-semibold">{title}</h1>
                 <button
@@ -123,21 +123,21 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                     onDragged={() => setIsDragging(false)}>
                     {products.map((product, index) => (
                         <SplideSlide key={product._id}>
-                        <div className="px-2 md:px-3 pt-2 pb-6 h-full">
-                            <Product
-                                product={product}
-                                index={index}
-                                wishlist={wishlist}
-                                isDragging={isDragging}
-                                />
-                        </div>
+                            <div className="px-1 md:px-3 pt-2 pb-6 h-full">
+                                <Product
+                                    product={product}
+                                    index={index}
+                                    wishlist={wishlist}
+                                    isDragging={isDragging}
+                                    />
+                            </div>
                         </SplideSlide>
                     ))}
                 </Splide>
 
                 )}
             </div>
-        </div>
+        </section>
     )
 }
 

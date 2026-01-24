@@ -4,9 +4,8 @@ const HeroBackground = () => {
     return (
         <div className="bg-orange-400/40 inset-0 absolute -z-10 overflow-clip">
             <div className="relative w-full h-full">
-                <div className="bg-linear-0 md:bg-linear-90 from-gray-500 md:from-white to-amber-900 md:to-amber-700 opacity-50 md:opacity-20 inset-0 absolute z-10"></div>
-                <Image src={"/images/splash-2.jpg"} alt={"splash image"} fill className="object-cover hidden md:block"/>
-                <Image src={"/images/splash-monster.jpg"} alt={"splash image"} fill className="object-cover block md:hidden"/>
+                <div className="bg-linear-90 from-white to-amber-700 opacity-20 inset-0 absolute z-10"></div>
+                <Image src={"/images/splash-orange.jpg"} alt={"splash image"} fill className="object-cover"/>
             </div>
             {/* <span className="h-[180px] w-[220px] bg-blue-400/20 absolute top-[15%] left-[10%] rounded-full blur-2xl animate-pulse"></span>
             <span className="h-[100px] w-[100px] bg-red-400/40 absolute top-[2%] left-[2%] rounded-full blur-2xl animate-pulse"></span>

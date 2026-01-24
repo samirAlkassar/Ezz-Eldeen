@@ -74,7 +74,7 @@ const Navbar = () => {
 
     return (
         <NavbarWrapper isScrolled={isScrolled}>
-            <div className="w-full max-w-7xl mx-auto px-4 py-4 md:px-8 flex justify-between text-white">
+            <div className="w-full max-w-7xl mx-auto px-4 py-3.5 md:py-4 md:px-8 flex justify-between text-white">
                 {
                 isScrolled ? 
                     <div className="flex items-center justify-start gap-4">
