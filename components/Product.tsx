@@ -116,7 +116,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
                 </div>
                 <button 
                     onClick={() => handleAddToCart(product?._id)} 
-                    className="py-2.5 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base bg-orange-400 hover:bg-orange-500 active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
+                    className="py-2.5 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base bg-[#F58137] hover:bg-[#FA8C47] active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
                     <ShoppingCart size={20} className="hidden sm:block"/>
                     <p>Add to cart</p>
                 </button>

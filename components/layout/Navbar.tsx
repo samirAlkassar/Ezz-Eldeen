@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useToast } from "@/components/Toast";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { isAsyncThunkAction } from "@reduxjs/toolkit";
 
 const Navbar = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -198,9 +199,9 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
-            <div className="bg-white w-full flex items-center justify-center shadow-sm">
+            {isScrolled && <div className="bg-white w-full flex items-center justify-center shadow-sm">
                 <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu}/>
-            </div>
+            </div>}
         </NavbarWrapper>
     );
 };
@@ -225,21 +226,18 @@ const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottom
         {showBottomMenu && 
             <motion.ul
                 initial={isScrolled && { opacity: 0, height: 0, y: -10, x: -40 }}
-                animate={{ opacity: 1, height: 60, y: 0, x:0 }}
+                animate={{ opacity: 1, height: undefined, y: 0, x:0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.15 }}
                 onMouseLeave={() => {
                     setPosition({ opacity: 0 });
                 }}
-                className={twMerge("flex items-center relative py-2 transition-al")}
+                className={twMerge("flex items-center relative py-1 md:py-2 min-h-[40px] md:min-h-[60px] transition-al")}
             >
                 <Tab onClick={()=>router.push('/')} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
                 <Tab onClick={()=>router.push('/categories/Toys_&_Games')} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
                 <Tab onClick={()=>router.push('/categories/School_Supplies')} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
                 <Tab onClick={()=>router.push('/categories/Gifts')}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
-                <Tab onClick={()=>router.push('/contact')}isScrolled={isScrolled}  setPosition={setPosition}>Contact</Tab>
-                <Tab onClick={()=>router.push('/about')}isScrolled={isScrolled}  setPosition={setPosition}>About</Tab>
-
                 <Cursor position={position} />
             </motion.ul>
         }
@@ -280,20 +278,12 @@ const Tab = ({
                             ? "#6eCe7e"
                             : ref.current?.outerText === "Gifts"
                             ? "#ff4858"
-                            : ref.current?.outerText === "Contact"
-                            ? "#4D96FF"
-                            : ref.current?.outerText === "About"
-                            ? "#Fab93d"
                             : "",
                 });
             }}
             className={twMerge("relative z-10 block cursor-pointer px-2 py-1.5 text-lg active:scale-95 transition-all duration-100 ease-in",
-                isScrolled ? "text-black" : "text-black"
-            )}
-        >
-            <a
-                className="text-lg px-2 py-2 transition-transform duration-200 hover:scale-105 hover:mix-blend-difference"
-            >
+                isScrolled ? "text-black" : "text-black")}>
+            <a className="text-base md:text-lg px-2 py-2 transition-transform duration-200 hover:scale-105 hover:mix-blend-difference">
                 {children}
             </a>
         </li>

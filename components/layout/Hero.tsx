@@ -22,7 +22,7 @@ const Hero = () => {
     return (
         <main className="py-12 md:py-6 relative px-4 sm:px-8 z-10">
         <HeroBackground />
-        <div className="flex items-center justify-center md:justify-start w-full max-w-[85rem] mx-auto">
+        <div className="flex items-center justify-center md:justify-start w-full max-w-[85rem] mx-auto pt-20">
           <div className="w-full max-w-xs md:max-w-4xl 2xl:mt-8 relative">
 
             {/* <motion.div 
