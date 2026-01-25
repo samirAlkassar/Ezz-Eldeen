@@ -11,6 +11,7 @@ import Pagination from "../Pagination";
 import debounce from "lodash/debounce";
 import ProductsSearchBar from "../ProductsSearchBar"
 import { usePathname } from "next/navigation";
+import LoadingProductSkeleton from "../LoadingProductSkeleton";
 
 export type CategoriesFilterType = "All Products" | "Toys & Games" | "School Supplies" | "Gifts";
 export type SortType = "createdAt" | "price" | "rating";
@@ -25,7 +26,7 @@ const Products = ({ category, search, subCategory = "" }: { category?: Categorie
   const [sort, setSort] = useState<SortType>("createdAt");
   const [order, setOrder] = useState<OrderType>("desc");
   const dispatch = useDispatch<AppDispatch>();
-  const { products, pagination, error } = useSelector(
+  const { products, pagination, error, loading } = useSelector(
     (state: RootState) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   const wishlist = useSelector((state: RootState) => state.wishlist.items);
@@ -83,7 +84,6 @@ const Products = ({ category, search, subCategory = "" }: { category?: Categorie
 
   return (
     <div className="mt-0 md:mt-12 w-full overflow-hidden">
-      {/* {loading && <p className="text-center text-gray-500">Loading products...</p>} */}
       {isProductsPage &&
         <ProductsSearchBar
         searchTerm={searchTerm}
@@ -101,13 +101,18 @@ const Products = ({ category, search, subCategory = "" }: { category?: Categorie
         setOrder={setOrder} />}
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
-        {products.map((product, index) => (
-          <Product
-            key={product._id}
-            product={product}
-            index={index}
-            wishlist={wishlist} />
-        ))}
+        {!loading ? 
+          products.map((product, index) => (
+            <Product
+              key={product._id}
+              product={product}
+              index={index}
+              wishlist={wishlist} />
+          )):
+          Array.from({length: 4}).map((_, i) => (
+            <LoadingProductSkeleton key={i}/>
+          )) 
+        }
       </div>
       
         <Pagination

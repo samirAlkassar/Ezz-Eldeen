@@ -15,6 +15,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import LoadingProductSkeleton from "./LoadingProductSkeleton";
 
 
 const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories"}: {title?: string, section?: "categories" | "rating" | "new" | "games" | "school"}) => {
@@ -54,7 +55,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
             debounce((category, subcategory) => {
             fetchProducts(category, subcategory);
             }, 400),
-        [fetchProducts]
+        []
         );
 
     useEffect(() => {
@@ -116,27 +117,36 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                 ))}
             </div>}
             <div className="slider-container mt-6 md:mt-6">
-                {isClient && (
+            {isClient && (
                 <Splide
-                    options={splideOptions}
-                    onDrag={() => setIsDragging(true)}
-                    onDragged={() => setIsDragging(false)}>
-                    {products.map((product, index) => (
+                options={splideOptions}
+                onDrag={() => setIsDragging(true)}
+                onDragged={() => setIsDragging(false)}
+                >
+                {loading
+                    ? Array.from({ length: 4 }).map((_, i) => (
+                        <SplideSlide key={`skeleton-${i}`}>
+                        <div className="px-1 md:px-3 pt-2 pb-6 h-full">
+                            <LoadingProductSkeleton />
+                        </div>
+                        </SplideSlide>
+                    ))
+                    : products.map((product, index) => (
                         <SplideSlide key={product._id}>
-                            <div className="px-1 md:px-3 pt-2 pb-6 h-full">
-                                <Product
-                                    product={product}
-                                    index={index}
-                                    wishlist={wishlist}
-                                    isDragging={isDragging}
-                                    />
-                            </div>
+                        <div className="px-1 md:px-3 pt-2 pb-6 h-full">
+                            <Product
+                            product={product}
+                            index={index}
+                            wishlist={wishlist}
+                            isDragging={isDragging}
+                            />
+                        </div>
                         </SplideSlide>
                     ))}
                 </Splide>
-
-                )}
+            )}
             </div>
+
         </section>
     )
 }
