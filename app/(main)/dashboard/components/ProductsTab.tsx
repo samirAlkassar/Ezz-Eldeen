@@ -145,30 +145,30 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                             ) : (
                                 products.map((product) => (
                                     <tr key={product._id} className="hover:bg-slate-50 transition-colors duration-150">
-                                        <td className="px-6 py-3.5">
+                                        <td className="px-3 py-2 md:px-6 md:py-3.5">
                                             <div className="flex items-center gap-3 relative">
                                                 <Image 
                                                     src={product.images?.[0]?.url ?? "/placeholder.jpg"} 
                                                     alt={product.name}
                                                     width={80}
                                                     height={80}
-                                                    className="w-12 h-12 rounded-lg object-contain border border-slate-200"
+                                                    className="w-10 md:w-12 h-10 md:h-12 rounded-lg object-contain border border-slate-200"
                                                 />
                                                 <div>
-                                                    <p className="text-sm font-medium text-slate-800">{product.name}</p>
-                                                    <p className="text-xs text-slate-500">{product.slug}</p>
+                                                    <p className="text-xs md:text-sm font-medium text-slate-800 max-w-[80px] md:max-w-fit overflow-ellipsis truncate">{product.name}</p>
+                                                    <p className="text-xs text-slate-500 hidden md:block">{product.slug}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                        <td className="px-3 md:px-6 py-0 md:py-4">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 truncate">
                                                 {product.category}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-slate-800 font-medium">{product.price} EGP</td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-3 md:px-6 py-0 md:py-4 text-sm text-slate-800 font-medium">{product.price} EGP</td>
+                                        <td className="px-3 md:px-6 py-0 md:py-4">
                                             <span className={twMerge(
-                                                "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium",
+                                                "inline-flex items-center px-1 md:px-2.5 py-0.5 rounded-full text-xs font-medium",
                                                 (product.stock ?? 0) > 10 ? "bg-green-50 text-green-700" :
                                                 (product.stock ?? 0) > 0 ? "bg-orange-50 text-orange-700" :
                                                 "bg-red-50 text-red-700"
@@ -176,10 +176,10 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                                 {product.stock ?? 0}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-slate-500">
+                                        <td className="px-3 md:px-6 py-0 md:py-4 text-sm text-slate-500">
                                             {product.createdAt ? new Date(product.createdAt).toLocaleDateString() : "-"}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-3 md:px-6 py-0 md:py-4">
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => onEdit(product)}

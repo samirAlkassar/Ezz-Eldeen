@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import setCookies from "../../actions/setCoockies";
+import setCookies from "../../../actions/setCoockies";
 import Image from 'next/image';
 
 export default function LoginPage() {

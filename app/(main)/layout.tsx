@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Fredoka } from "next/font/google";
-import { Providers } from "./Providers";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -13,7 +12,7 @@ const fredoka = Fredoka({
 
 
 export const metadata: Metadata = {
-  title: "Ezz-Eldeen | Premium Online Store",
+  title: "Ezz-Eldeen | Login to your account",
   description:
     "Shop high-quality products at Ezz-Eldeen. Premium selection, great prices, and fast delivery.",
 };
@@ -26,9 +25,9 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body suppressHydrationWarning className={fredoka.className}>
-        <Providers>
-          {children}
-        </Providers>
+        <Navbar />
+            {children}
+        <Footer />
       </body>
     </html>
   );

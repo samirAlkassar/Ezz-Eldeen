@@ -41,16 +41,17 @@ const CartPage = () => {
 
     return (
         <main className="bg-orange-50/50">
-            <div className="mx-auto max-w-7xl flex gap-8 py-4">
-                <section className="flex-3">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 18 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        className="text-4xl font-extrabold text-[#FF791A]">
-                        My Cart
-                    </motion.h1>
+            <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="text-2xl md:text-4xl font-extrabold text-[#FF791A] pt-2 md:pt-4 max-w-7xl mx-auto px-4">
+                My Cart
+            </motion.h1>
+            <div className="mx-auto max-w-7xl flex flex-col-reverse md:flex-row gap-4 md:gap-8 py-2 md:py-4 px-2 md:px-4">
+                <section className="flex-2">
+
                     <div className="my-4 space-y-5">
                         {loadingCart ?
                             Array.from({ length: cart?.items?.length || 3 }).map((_, index) => (
@@ -71,8 +72,8 @@ const CartPage = () => {
 
                     </div>
                 </section>
-                <section className="flex-2 w-full h-fit mt-13 bg-white rounded-xl shadow-sm p-5 border border-gray-100">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">Checkout Summary</h2>
+                <section className="flex-1 w-full h-fit mt-4 bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+                    <h2 className="text-lg md:text-xl font-semibold md:font-bold text-gray-800 mb-2 md:mb-4">Checkout Summary</h2>
                     <div className="space-y-3">
                         <div className="flex justify-between text-gray-700">
                             <span>Subtotal</span>
@@ -84,14 +85,9 @@ const CartPage = () => {
                             <span className="font-semibold">0 EGP</span>
                         </div>
 
-                        <div className="flex justify-between text-gray-700">
-                            <span>Taxes</span>
-                            <span className="font-semibold">0 EGP</span>
-                        </div>
-
-                        <div className="border-t pt-3 flex justify-between items-center">
+                        <div className="border-t border-gray-300 pt-3 flex justify-between items-center">
                             <span className="text-lg font-bold text-gray-800">Total</span>
-                            <span className="px-3 py-1 bg-purple-200 text-purple-700 font-bold rounded-xl shadow-inner text-base">
+                            <span className="px-3 py-1 bg-orange-100 text-gray-800 font-bold rounded-xl shadow-inner text-base">
                                 {cart?.totalPrice} EGP
                             </span>
                         </div>
@@ -104,7 +100,7 @@ const CartPage = () => {
                             <input
                                 type="text"
                                 placeholder="Enter code"
-                                className="flex-1 px-3 py-2 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-purple-300 text-sm"
+                                className="flex-1 px-3 py-2 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-300 text-sm"
                             />
                             <button className="px-4 py-2 bg-blue-100 text-blue-600 rounded-xl font-medium hover:bg-blue-200 transition shadow-sm">
                                 Apply
@@ -115,8 +111,8 @@ const CartPage = () => {
                     <div className="flex itmes-center justify-center">
                     <button 
                         onClick={()=>toast({title: "Order Placed", description: "Your order is on the way", icon: <Rocket />, variant: "success", position: "bottom-right"})}
-                        className="w-full mt-4 mb-2 py-3 active:w-[98%] mx-auto bg-sky-400 text-white font-medium rounded-full cursor-pointer transition-all duration-75 ease-in hover:bg-sky-500">
-                        Confirm Order ✨
+                        className="w-full mt-4 text-sm md:text-base mb-2 py-2 md:py-3 active:w-[98%] mx-auto bg-orange-400 text-white font-medium rounded-full cursor-pointer transition-all duration-75 ease-in hover:bg-orange-500">
+                        Confirm Order
                     </button>
                     </div>
 
