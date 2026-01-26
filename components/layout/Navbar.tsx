@@ -14,7 +14,6 @@ import Image from "next/image";
 import { useToast } from "@/components/Toast";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { isAsyncThunkAction } from "@reduxjs/toolkit";
 
 const Navbar = () => {
     const dispatch = useDispatch<AppDispatch>();

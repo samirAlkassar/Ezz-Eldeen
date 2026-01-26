@@ -23,12 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <body suppressHydrationWarning className={fredoka.className}>
-        <Navbar />
-            {children}
-        <Footer />
-      </body>
-    </html>
+    <div className={fredoka.className}>
+      <Navbar />
+          {children}
+      <Footer />
+    </div>
   );
 }

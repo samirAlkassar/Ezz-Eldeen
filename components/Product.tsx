@@ -10,6 +10,8 @@ import { fetchWishlist, addToWishlist, removeFromWishlist } from "@/features/wis
 import { addToCart } from "@/features/cart/cartSlice";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/Toast";
+import { useSelector } from "react-redux";
+import {selectUser } from "../features/auth/authSlice";
 
 export const Product = ({ product, index, wishlist, size = "medium", isDragging }: { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean }) => {
     const productIsInWishlist = wishlist.some(item => item._id === product._id);
@@ -18,13 +20,22 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
     const { toast } = useToast();
+    const user = useSelector(selectUser);
 
     const handleAddToCart = (productId: string) => {
+        if (!user) {
+            router.push("/register");
+            return
+        };
         dispatch(addToCart({ productId, quantity: 1 }));
         toast({ title: "Added to cart", description: "Item is added to your cart successfully",variant: "default", position: "bottom-right", icon: <ShoppingCart size={20}/> })
     };
 
     const toggleWishlist = () => {
+        if (!user) {
+            router.push("/register");
+            return
+        };
         const nextLiked = !isInWishList;
         setOptimisticUpdate(nextLiked);
         if (isInWishList) {
