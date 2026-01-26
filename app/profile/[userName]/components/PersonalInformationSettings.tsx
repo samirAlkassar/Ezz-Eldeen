@@ -139,15 +139,14 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
                 <button
                     type="button"
                     onClick={openNewAddressForm}
-                    className="bg-orange-400 text-white px-4 py-2 rounded-lg cursor-pointer"
-                >
-                    + Add New Address
+                    className="bg-orange-400 text-white px-4 py-3 rounded-lg cursor-pointer text-sm md:text-base">
+                    Add New Address
                 </button>
             </div>
 
             <div className="flex gap-4 mt-10 flex-row-reverse">
-                <button type="button" className="bg-gray-100 w-full md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-gray-800 hover:bg-gray-200 font-medium cursor-pointer active:scale-[97%]">Discard Changes</button>
-                <button type="submit" className="bg-green-500 w-full md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-white hover:bg-green-600 font-medium cursor-pointer active:scale-[97%]">Save Changes</button>
+                <button type="button" className="bg-gray-100 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-gray-800 hover:bg-gray-200 font-medium cursor-pointer active:scale-[97%]">Discard Changes</button>
+                <button type="submit" className="bg-green-500 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-white hover:bg-green-600 font-medium cursor-pointer active:scale-[97%]">Save Changes</button>
             </div>
         </form>
     )

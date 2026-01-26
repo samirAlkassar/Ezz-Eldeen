@@ -40,7 +40,7 @@ const FormField = ({
                 accept={accept}
                 placeholder={placeholder}
                 onChange={onChange}
-                className={twMerge("w-full px-5 py-2.5 border text-gray-700 border-gray-300 rounded-lg md:rounded-full mt-0.5 outline-none focus:ring-1 ring-gray-400", className)}
+                className={twMerge("w-full px-2 md:px-5 py-1.5 md:py-2.5 border text-gray-700 border-gray-300 rounded-lg md:rounded-full mt-0.5 outline-none focus:ring-1 ring-gray-400", className)}
                 required={required}
             /> :
             <textarea

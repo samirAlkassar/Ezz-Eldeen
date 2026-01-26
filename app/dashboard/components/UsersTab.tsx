@@ -9,10 +9,10 @@ const MOCK_USERS: User[] = [
 
 function UsersTab() {
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
             <div>
-                <h2 className="text-2xl font-bold text-slate-800">Users</h2>
-                <p className="text-sm text-slate-500 mt-1">Manage user accounts</p>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-800">Users</h2>
+                <p className="text-sm text-slate-500 md:mt-1">Manage user accounts</p>
             </div>
 
             <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
@@ -29,12 +29,12 @@ function UsersTab() {
                     <tbody className="divide-y divide-slate-200">
                         {MOCK_USERS.map((user) => (
                             <tr key={user._id} className="hover:bg-slate-50 transition-colors duration-150">
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">
+                                <td className="px-3 py-1 md:px-6 md:py-4">
+                                    <div className="flex items-center gap-2 md:gap-3">
+                                        <div className="min-w-6 md:min-w-10 min-h-6 md:min-h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">
                                             {user.name.charAt(0)}
                                         </div>
-                                        <p className="text-sm font-medium text-slate-800">{user.name}</p>
+                                        <p className="text-xs md:text-sm font-medium text-slate-800">{user.name}</p>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 text-sm text-slate-600">{user.email}</td>

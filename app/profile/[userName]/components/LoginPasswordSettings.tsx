@@ -7,8 +7,8 @@ const LoginPasswordSettings = () => {
             <FormField>New Password</FormField>
             <FormField>Confirm New Password</FormField>
             <div className="flex gap-6 mt-8">
-                <button className="bg-gray-200 rounded-xl py-3 w-full text-gray-800 font-medium cursor-pointer">Discard Changes</button>
-                <button className="bg-orange-400 rounded-xl py-3 w-full text-white font-medium cursor-pointer">Save Changes</button>
+                <button className="bg-gray-200 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-gray-800 hover:bg-gray-200 font-medium cursor-pointer active:scale-[97%]">Discard Changes</button>
+                <button className="bg-orange-400 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-gray-800 hover:bg-gray-200 font-medium cursor-pointer active:scale-[97%]">Save Changes</button>
             </div>
         </form>
     )

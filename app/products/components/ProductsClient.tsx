@@ -21,7 +21,12 @@ const ProductsClient = () => {
 
   const subCategory: string = searchParams.get("subCategory") ?? "";
 
-  return <Products search={search} category={category} subCategory={subCategory}/>;
+  return (
+    <section>
+      {search && <h1 className="text-xl md:text-3xl font-medium text-gray-700">Search results for {search}</h1>}
+      <Products search={search} category={category} subCategory={subCategory}/>
+    </section>
+  );
 };
 
 export default ProductsClient;

@@ -18,11 +18,11 @@ function StatsCard({ title, value, change, icon, color = "blue" }: StatsCardProp
     };
 
     return (
-        <div className="bg-white rounded-lg border border-slate-200 p-6 hover:shadow-md transition-shadow duration-200">
+        <div className="bg-white rounded-lg border border-slate-200 p-2 md:p-6 hover:shadow-md transition-shadow duration-200">
             <div className="flex items-start justify-between">
                 <div className="flex-1">
                     <p className="text-sm text-slate-500 font-medium">{title}</p>
-                    <p className="text-2xl font-bold text-slate-800 mt-2">{value}</p>
+                    <p className="text-xl md:text-2xl font-bold text-slate-800 mt-2">{value}</p>
                     {change !== undefined && (
                         <div className="flex items-center gap-1 mt-2">
                             {change >= 0 ? (
@@ -36,7 +36,7 @@ function StatsCard({ title, value, change, icon, color = "blue" }: StatsCardProp
                         </div>
                     )}
                 </div>
-                <div className={twMerge("p-3 rounded-lg", colors[color as keyof typeof colors])}>
+                <div className={twMerge("p-1 md:p-3 rounded-lg", colors[color as keyof typeof colors])}>
                     {icon}
                 </div>
             </div>

@@ -23,7 +23,7 @@ const Portfolio = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
     return (
         <main className="bg-orange-50/50">
-            <div className="mx-auto flex flex-col md:flex-row gap-6 p-4 md:p-6 lg:p-8">
+            <div className="mx-auto flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 lg:p-8">
                 <ProfileAside setImageFile={setImageFile} imageFile={imageFile} currentProfileSection={currentProfileSection} setCurrentProfileSection={setCurrentProfileSection}/>
                 <ProfilePersonalInfo imageFile={imageFile} currentProfileSection={currentProfileSection}/>
             </div>

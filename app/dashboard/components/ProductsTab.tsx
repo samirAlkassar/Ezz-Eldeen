@@ -1,6 +1,6 @@
 import { Product } from "../page";
 import { useState } from "react";
-import { Edit, Trash, Plus, Search } from "lucide-react";
+import { Edit, Trash, Plus, Search, Filter } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 
@@ -23,6 +23,7 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
     const [categoryFilter, setCategoryFilter] = useState("all");
     const [minPrice, setMinPrice] = useState<number | "">("");
     const [maxPrice, setMaxPrice] = useState<number | "">("");
+    const [toggleFilter, setToggleFilter] = useState<boolean>(false);
 
     const handleSearchChange = (value: string) => {
         setSearch(value);
@@ -55,65 +56,67 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-800">Products</h2>
-                    <p className="text-sm text-slate-500 mt-1">Manage your product inventory</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-800">Products</h2>
+                    <p className="text-sm text-slate-500 md:mt-1">Manage your product inventory</p>
                 </div>
                 <button
                     onClick={onAdd}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
-                >
+                    className="flex items-center gap-2 p-3 md:px-4 md:py-2 bg-blue-600 text-sm md:text-base text-white rounded-full hover:bg-blue-700 transition-colors duration-200 cursor-pointer">
                     <Plus size={20} />
-                    Add Product
+                    <p className="hidden md:block">Add Product</p>
                 </button>
             </div>
 
             {/* Filters */}
             <div className="bg-white rounded-lg border border-slate-200 p-3">
                 <div className="flex flex-col md:flex-row gap-3">
-                    <div className="flex-1 relative">
+                    <div className="flex-1 relative flex gap-1">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <input
                             value={search}
                             onChange={(e) => handleSearchChange(e.target.value)}
                             placeholder="Search products..."
-                            className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full pl-10 pr-4 py-1.5 md:py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
+                        <button onClick={()=>setToggleFilter((prev)=>!prev)} className="bg-gray-200 p-2 md:p-3 cursor-pointer rounded-lg text-gray-700 flex items-center justify-center"><Filter size={18}/></button>
                     </div>
 
+                    {toggleFilter && 
+                    <>
                     <select
                         value={categoryFilter}
                         onChange={(e) => handleCategoryChange(e.target.value)}
-                        className="px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
+                        className="px-2 md:px-4 py-1.5 md:py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <option value="all">All Categories</option>
                         <option value="School Supplies">School Supplies</option>
                         <option value="Toys & Games">Toys & Games</option>
                         <option value="Gifts">Gifts</option>
                     </select>
+                    <div className="flex gap-2">
+                        <input
+                            type="number"
+                            placeholder="Min price"
+                            value={minPrice === "" ? "" : String(minPrice)}
+                            onChange={(e) => handlePriceChange(e.target.value === "" ? "" : Number(e.target.value), maxPrice)}
+                            className="w-full md:w-32 px-2 md:px-4 py-1.5 md:py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
 
-                    <input
-                        type="number"
-                        placeholder="Min price"
-                        value={minPrice === "" ? "" : String(minPrice)}
-                        onChange={(e) => handlePriceChange(e.target.value === "" ? "" : Number(e.target.value), maxPrice)}
-                        className="w-32 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-
-                    <input
-                        type="number"
-                        placeholder="Max price"
-                        value={maxPrice === "" ? "" : String(maxPrice)}
-                        onChange={(e) => handlePriceChange(minPrice, e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-32 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-
+                        <input
+                            type="number"
+                            placeholder="Max price"
+                            value={maxPrice === "" ? "" : String(maxPrice)}
+                            onChange={(e) => handlePriceChange(minPrice, e.target.value === "" ? "" : Number(e.target.value))}
+                            className="w-full md:w-32 px-2 md:px-4 py-1.5 md:py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                    </div>
                     <button
                         onClick={resetFilters}
-                        className="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors duration-200"
-                    >
+                        className="px-3 md:px-4 py-1.5 md:py-2 text-sm md:text-base bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors duration-200">
                         Reset
                     </button>
+                </>}
                 </div>
+
             </div>
 
             {/* Table */}

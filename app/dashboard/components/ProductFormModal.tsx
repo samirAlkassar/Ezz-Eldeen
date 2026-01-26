@@ -128,15 +128,15 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                 transition={{duration: 0.2}}
                 className="bg-white rounded-xl w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-hidden flex flex-col">
                 {/* Header */}
-                <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-slate-800">{isEdit ? "Edit Product" : "Add New Product"}</h3>
+                <div className="px-4 md:px-6 py-2 md:py-4 border-b border-slate-200 flex items-center justify-between">
+                    <h3 className="text-lg md:text-xl font-medium md:font-bold text-slate-800">{isEdit ? "Edit Product" : "Add New Product"}</h3>
                     <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg transition-colors duration-150 cursor-pointer">
                         <X size={20} className="text-slate-600" />
                     </button>
                 </div>
 
                 {/* Steps Navigation */}
-                <div className="w-full px-6 py-4 pb-8 flex items-center justify-center border-b border-slate-100">
+                <div className="w-full px-4 md:px-6 py-4 md:py-4 pb-8 flex items-center justify-center border-b border-slate-100">
                     {[1, 2, 3].map((step) => (
                         <React.Fragment key={step}>
                             <div
@@ -147,7 +147,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                     }
                                 }}
                                 className={twMerge(
-                                    "relative rounded-full w-10 h-10 flex items-center border-2 justify-center font-semibold transition-all duration-200",
+                                    "relative rounded-full w-8 md:w-10 h-8 md:h-10 flex items-center border-2 justify-center font-semibold transition-all duration-200",
                                     currentStep === step
                                         ? "bg-blue-500 text-white border-blue-500 scale-110"
                                         : completedSteps[step]
@@ -173,7 +173,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                     step
                                 )}
                                 <span className={twMerge(
-                                    "absolute -bottom-6 text-base font-medium whitespace-nowrap",
+                                    "absolute -bottom-5 md:-bottom-6 text-xs md:text-base font-medium whitespace-nowrap",
                                     currentStep === step ? "text-blue-600" : "text-slate-400"
                                 )}>
                                     {step === 1 ? "Basic Info" : step === 2 ? "Pricing" : "Review"}
@@ -190,7 +190,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                 </div>
 
                 {/* Form Content */}
-                <div className="overflow-y-auto flex-1 p-6">
+                <div className="overflow-y-auto flex-1 p-4 md:p-6">
                     <form onSubmit={handleSubmit} className="space-y-4 h-full flex flex-col justify-between">
                         <div>
                             {/* Step 1: Basic Info */}
@@ -198,9 +198,9 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                 <motion.div
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className="space-y-4"
+                                    className="space-y-2 md:space-y-4"
                                 >
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-2 gap-2 md:gap-4">
                                         <div>
                                             <label className="block text-base font-medium text-slate-700 mb-2">
                                                 Product Name *
@@ -455,15 +455,14 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                             setRedAlert(false);
                                         }
                                     }}
-                                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-150 cursor-pointer"
-                                >
+                                    className="px-4 md:px-6 py-1.5 md:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-150 cursor-pointer">
                                     Next Step
                                 </div>
                             ) : (
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 cursor-pointer"
+                                    className="px-4 md:px-6 py-1.5 md:py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 cursor-pointer"
                                 >
                                     {saving ? "Saving..." : isEdit ? "Save Changes" : "Create Product"}
                                 </button>

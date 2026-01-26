@@ -6,6 +6,13 @@ import { useRouter } from "next/navigation";
 
 const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, currentPage?: string}) => {
     const router = useRouter();
+    const currentPageURL = (currentPage : string) => {
+        if (currentPage === "wishlist") {
+            router.push(`/${currentPage}`)
+        } else {
+            router.push(`/products/${currentPage}`)
+        }
+    }
     return (
         <div className="py-4">
             <nav className="flex items-center gap-2 text-sm text-gray-600 max-w-[85rem] mx-auto px-3">
@@ -25,7 +32,7 @@ const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, current
                 <>
                     <span>/</span>
                     <span
-                        onClick={() => router.push(`/products/${currentPage}`)}  
+                        onClick={() => currentPageURL(currentPage)}  
                         className="font-medium text-sm md:text-base text-gray-600 cursor-pointer hover:text-gray-800 line-clamp-1">{currentPage}</span>
                 </>
                 }

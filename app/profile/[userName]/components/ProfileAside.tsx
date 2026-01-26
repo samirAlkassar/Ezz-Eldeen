@@ -82,7 +82,7 @@ const ProfileAside = ({ setCurrentProfileSection, imageFile, setImageFile, curre
 
 
     return (
-        <aside className="bg-white py-6 px-4 md:py-8 md:px-6 rounded-lg w-full md:w-[15rem] lg:w-xs md:min-h-[calc(100vh-180px)] shadow-sm border border-gray-100">
+        <aside className="bg-white py-3 px-2 md:py-8 md:px-6 rounded-lg w-full md:w-[15rem] lg:w-xs md:min-h-[calc(100vh-180px)] shadow-sm border border-gray-100">
             <div className="flex flex-col items-center justify-center">
                 <div className="relative h-32 w-32 rounded-full">
                     <Image

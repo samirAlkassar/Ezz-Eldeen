@@ -195,7 +195,7 @@ export default function DashboardPage() {
             <div className="flex bg-slate-50">
                 <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
 
-                <div className="flex-1 px-8 pt-8 pb-4 max-h-[calc(100vh-76px)] overflow-y-scroll">
+                <div className="flex-1 px-3 md:px-8 pt-4 md:pt-8 pb-2 md:pb-4 max-h-[calc(100vh-76px)] overflow-y-scroll">
                     {activeTab === "products" && (
                         <ProductsTab
                             products={products}

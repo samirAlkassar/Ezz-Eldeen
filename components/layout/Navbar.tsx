@@ -140,8 +140,7 @@ const Navbar = () => {
                                 onClick={() => {setMenuOpen((prev) => !prev)}}
                                 className={twMerge("flex items-center gap-1 md:gap-2 p-1  active:scale-95 rounded-lg cursor-pointer",
                                     isScrolled? "hover:bg-gray-500/20" : "hover:bg-orange-300/20"
-                                )}
-                            >
+                                )}>
                                 {user?.picturePath ? 
                                  <div className="relative h-9 w-9 rounded-full">
                                     <Image 
@@ -159,8 +158,7 @@ const Navbar = () => {
                                
                                 <ChevronDown
                                     size={18}
-                                    className={`transition-transform hidden md:block ${menuOpen ? "rotate-180" : "rotate-0"} ${isScrolled && "text-black"}`}
-                                />
+                                    className={`transition-transform hidden md:block ${menuOpen ? "rotate-180" : "rotate-0"} ${isScrolled && "text-black"}`}/>
                             </button>
 
                             {/* Dropdown Menu */}
@@ -232,7 +230,7 @@ const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottom
                 onMouseLeave={() => {
                     setPosition({ opacity: 0 });
                 }}
-                className={twMerge("flex items-center relative py-1 md:py-2 min-h-[40px] md:min-h-[60px] transition-al")}
+                className={twMerge("flex items-center relative py-1 md:py-2 min-h-[50px] md:min-h-[60px] transition-al")}
             >
                 <Tab onClick={()=>router.push('/')} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
                 <Tab onClick={()=>router.push('/categories/Toys_&_Games')} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>

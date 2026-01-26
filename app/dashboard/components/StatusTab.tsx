@@ -15,12 +15,12 @@ function StatusTab() {
     return (
         <div className="space-y-6">
             <div>
-                <h2 className="text-2xl font-bold text-slate-800">System Status</h2>
-                <p className="text-sm text-slate-500 mt-1">Monitor orders and system health</p>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-800">System Status</h2>
+                <p className="text-sm text-slate-500 md:mt-1">Monitor orders and system health</p>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                 <StatsCard
                     title="Total Orders"
                     value={MOCK_ORDERS.length}
