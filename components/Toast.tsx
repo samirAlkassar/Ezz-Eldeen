@@ -1,6 +1,4 @@
 "use client"
-// Toast system inspired by shadcn/ui
-// Drop this into your project and wrap <ToastProvider /> once (usually in layout.tsx)
 
 import * as React from "react";
 import { createPortal } from "react-dom";
@@ -9,9 +7,6 @@ import { X } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion"
 
-/* -------------------------------------------------------------------------- */
-/* Types                                                                      */
-/* -------------------------------------------------------------------------- */
 
 type ToastPosition =
   | "top-right"
@@ -26,17 +21,13 @@ export type Toast = {
   title?: string;
   description?: string;
   variant?: "default" | "success" | "warning" | "error" | "info";
-  duration?: number; // ms
+  duration?: number;
   position?: ToastPosition;
   icon?: React.ReactNode
 };
 
-/* -------------------------------------------------------------------------- */
-/* Styles                                                                     */
-/* -------------------------------------------------------------------------- */
-
 const toastVariants = cva(
-  "pointer-events-auto relative flex w-full max-w-sm items-start gap-3 rounded-lg p-5 shadow-2xl transition-all font-medium backdrop-blur-sm",
+  "pointer-events-auto relative flex w-full max-w-sm items-start gap-3 rounded-lg p-2 md:p-5 shadow-2xl transition-all font-medium backdrop-blur-sm",
   {
     variants: {
       variant: {
@@ -62,9 +53,6 @@ const positionClasses: Record<ToastPosition, string> = {
   "bottom-center": "bottom-4 left-1/2 -translate-x-1/2 items-center",
 };
 
-/* -------------------------------------------------------------------------- */
-/* Store (shadcn-style, no context rerenders everywhere)                        */
-/* -------------------------------------------------------------------------- */
 
 let listeners: Array<(toasts: Toast[]) => void> = [];
 let memoryState: Toast[] = [];
@@ -101,9 +89,6 @@ export function useToast() {
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/* Provider / View                                                             */
-/* -------------------------------------------------------------------------- */
 
 export function ToastProvider() {
   const [toasts, setToasts] = React.useState<Toast[]>(memoryState);
@@ -130,10 +115,9 @@ export function ToastProvider() {
           <div
             key={position}
             className={twMerge(
-              "fixed z-[9999] flex w-full max-w-sm flex-col gap-2 pointer-events-none",
+              "fixed z-[9999] flex w-full max-w-[15rem] md:max-w-sm flex-col gap-2 pointer-events-none",
               positionClasses[position]
-            )}
-          >
+            )}>
             <AnimatePresence mode="popLayout">
               {positionToasts.map((toast) => (
                 <ToastItem key={toast.id} toast={toast} />
@@ -161,18 +145,17 @@ function ToastItem({ toast }: { toast: Toast }) {
           <div className="flex gap-2">
             {toast.icon}
             {toast.title && (
-              <p className="text-xl font-semibold leading-none">{toast.title}</p>
+              <p className="text-sm md:text-xl font-semibold leading-none">{toast.title}</p>
             )}
           </div>
 
           {toast.description && (
-            <p className="mt-1 text-base opacity-80 min-w-[19rem]">{toast.description}</p>
+            <p className="mt-1 text-base opacity-80 min-w-[19rem] hidden md:block">{toast.description}</p>
           )}
         </div>
         <button
           onClick={() => removeToast(toast.id)}
-          className="rounded-md p-2 opacity-80 transition hover:opacity-100 cursor-pointer"
-        >
+          className="rounded-md p-1 md:p-2 opacity-80 transition hover:opacity-100 cursor-pointer">
           <X size={18}/>
         </button>
       </div>

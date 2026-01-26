@@ -46,8 +46,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="py-12 md:py-0 md:min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
-            {/* Left side (orange theme with login card) */}
+        <div className="py-12 md:py-0 min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
             <div className="relative flex-1 flex justify-center items-center p-6">
                 <div className="bg-white shadow-md md:shadow-2xl rounded-xl md:rounded-3xl p-6 md:p-8 w-full max-w-md">
                     <h2 className="text-3xl font-extrabold text-center text-[#FF791A] mb-6">
@@ -112,18 +111,6 @@ export default function LoginPage() {
                         </a>
                     </p>
                 </div>
-
-                {/* Curved divider */}
-            </div>
-
-            {/* Right side (image) */}
-            <div className="relative hidden md:flex flex-1 items-center justify-center bg-orange-200 overflow-hidden -ml-26">
-                <Image
-                    src="/images/login-splash.jpg"
-                    alt="Kids, school and toys illustration"
-                    fill
-                    className="w-full h-full object-cover opacity-85"
-                />
             </div>
         </div>
     );
