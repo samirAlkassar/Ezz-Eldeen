@@ -9,6 +9,8 @@ const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, current
     const currentPageURL = (currentPage : string) => {
         if (currentPage === "wishlist") {
             router.push(`/${currentPage}`)
+        } else if (currentPage === "cart") {
+            router.push(`/${currentPage}`)
         } else {
             router.push(`/products/${currentPage}`)
         }

@@ -10,6 +10,7 @@ import { useToast } from "@/components/Toast";
 import { Plus, Rocket, Trash, TriangleAlert } from "lucide-react";
 import ProductCart from "./components/ProductCart";
 import CartItemSkeleton from "./components/CartItemSkeleton";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const CartPage = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -40,18 +41,18 @@ const CartPage = () => {
     };
 
     return (
-        <main className="bg-orange-50/50">
+        <main className="bg-orange-50/50 pb-15 md:pb-20">
             <motion.h1
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="text-2xl md:text-4xl font-extrabold text-[#FF791A] pt-2 md:pt-4 max-w-7xl mx-auto px-4">
+                className="text-2xl md:text-4xl font-extrabold text-[#FF791A] pt-2 md:pt-4 max-w-7xl mx-auto px-4 text-center">
                 My Cart
             </motion.h1>
-            <div className="mx-auto max-w-7xl flex flex-col-reverse md:flex-row gap-4 md:gap-8 py-2 md:py-4 px-2 md:px-4">
+            <div className="max-w-7xl mx-auto"><Breadcrumbs currentPage="cart"/></div>
+            <div className="mx-auto max-w-7xl flex flex-col-reverse md:flex-row gap-4 md:gap-8 px-2 md:px-4">
                 <section className="flex-2">
-
                     <div className="my-4 space-y-5">
                         {loadingCart ?
                             Array.from({ length: cart?.items?.length || 3 }).map((_, index) => (
