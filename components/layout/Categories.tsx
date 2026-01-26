@@ -119,7 +119,7 @@ const Categories = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="text-base lg:text-xl text-[#2B303B]/80 mt-0 md:mt-3 text-center">
+                        className="text-base lg:text-xl text-[#2B303B]/80 mt-0 md:mt-3 text-center mb-4">
                         Discover our most popular items <span className="hidden md:inline">that kids and parents love!</span>
                     </motion.p>
                     <Products />

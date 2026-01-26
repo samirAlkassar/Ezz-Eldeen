@@ -7,12 +7,12 @@ import { motion } from "framer-motion";
 
 const Testimonials = () => {
     return (
-        <div className="overflow-hidden relative h-220 md:h-140 flex items-center justify-center flex-col">
+        <div className="overflow-hidden relative h-200 md:h-140 flex items-center justify-center flex-col">
             <img src="./images/testimonials-splash.jpg" alt="testimonials-splash-screen" className="w-full h-full object-cover absolute -z-10"/>
-            <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 mt-4">
+            <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 mt-8 md:mt-4">
                 Testimonials <span className="text-gray-700">from our clients</span>
             </h1>
-            <div className="max-w-5xl mx-auto py-12 grid md:grid-cols-3 grid-cols-1 gap-12 md:gap-8 mt-2 md:mt-10 px-4 md:px-6">
+            <div className="max-w-5xl mx-auto py-12 grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-8 mt-0 md:mt-10 px-8 md:px-6">
                 {
                     testimonials.map((testimonial)=>(
                         <TestimonialsCard key={testimonial.id} id={testimonial.id} name={testimonial.name} testimonial={testimonial.text} rating={testimonial.rating} location={testimonial.location}/>
@@ -38,7 +38,7 @@ const TestimonialsCard = ({name, testimonial, rating, location, id}: {name: stri
             <img src="./images/login-splash.jpg" alt="user-image" className="h-12 w-12 md:h-18 md:w-18 rounded-full object-cover -mt-10 md:-mt-14 border-1 border-gray-800"/>
             <h1 className="font-medium text-lg md:text-xl mt-2">{name}</h1>
             <p className="text-gray-700 text-xs md:text-sm leading-tight">{location}</p>
-            <h3 className="md:mt-2 text-base">{testimonial}</h3>
+            <h3 className="md:mt-2 text-sm md:text-base text-gray-600">{testimonial}</h3>
             <div className="flex gap-1 mt-2">
             {[...Array(5)].map((_, i) => (
                 <Star

@@ -89,7 +89,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
     return (
         <section className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden mb-4 md:mb-12 max-w-[90rem] mx-auto px-4 md:px-8">
             <div className="flex w-full justify-between items-center">
-                <h1 className="text-2xl md:text-4xl text-gray-800 font-semibold">{title}</h1>
+                <h1 className="text-xl sm:text-2xl md:text-4xl text-gray-800 font-semibold">{title}</h1>
                 <button
                     onClick={()=> {
                         if (section === "categories") {
@@ -104,19 +104,26 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                     <p>Show All</p> <ChevronRight size={24} className="arrow transition-all duration-75 ease-in scale-80 md:scale-100"/>
                 </button>
             </div>
-            {section === "categories" && <div className="flex gap-1 gap-y-2 md:gap-2 mt-4 flex-wrap mb-4">
-                {subcategories.map((subcategoryItem)=>(
-                    <div 
-                        key={subcategoryItem} 
-                        onClick={()=>setSubCategory(subcategoryItem)}
-                        className={twMerge("border-1 border-gray-700 rounded-full py-1 md:py-1.5 px-2.5 md:px-4 text-sm md:text-base cursor-pointer", 
-                        subcategory === subcategoryItem ? "bg-gray-800 text-white" : "text-gray-800"
-                    )}>
-                        {subcategoryItem}
-                    </div> 
-                ))}
-            </div>}
-            <div className="slider-container mt-6 md:mt-6">
+            {section === "categories" && (
+                <div className="relative mt-4 md:mb-4">
+                    <div className="flex gap-1 md:gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 no-scrollbar">
+                        {subcategories.map((subcategoryItem)=>(
+                            <div 
+                                key={subcategoryItem} 
+                                onClick={()=>setSubCategory(subcategoryItem)}
+                                className={twMerge(
+                                    "flex-shrink-0 border border-gray-300 rounded-full py-1.5 md:py-2 px-3 md:px-5 text-sm font-medium cursor-pointer transition-all duration-200 whitespace-nowrap",
+                                    subcategory === subcategoryItem 
+                                        ? "bg-gray-900 text-white border-gray-900 shadow-sm" 
+                                        : "bg-white text-gray-700 hover:border-gray-400 hover:shadow-sm"
+                                )}>
+                                {subcategoryItem}
+                            </div> 
+                        ))}
+                    </div>
+                </div>
+            )}
+            <div className="slider-container mt-4 md:mt-6">
             {isClient && (
                 <Splide
                 options={splideOptions}
