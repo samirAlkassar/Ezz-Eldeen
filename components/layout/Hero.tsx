@@ -24,28 +24,7 @@ const Hero = () => {
         <HeroBackground />
         <div className="flex items-center justify-center md:justify-start w-full max-w-[85rem] mx-auto">
           <div className="w-full max-w-xs md:max-w-4xl 2xl:mt-8 relative">
-
-            {/* <motion.div 
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="absolute w-100 h-100 lg:flex items-center justify-center -right-40 -top-20 scale-105 hidden">
-              <img src="./images/cloud.png" alt="cloud" className="absolute bounceAnimation"/>
-              <img src="./images/bear.png" alt="cloud" className="absolute bounceAnimation mb-4"/>
-            </motion.div>
-            <motion.div 
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="absolute w-100 h-100 lg:flex items-center justify-center -left-35 scale-x-[-1] sclae-95 -rotate-10 hidden">
-              <img src="./images/cloud.png" alt="cloud" className="absolute bounceAnimation"/>
-              <img src="./images/colors.png" alt="cloud" className="absolute bounceAnimation mb-5"/>
-            </motion.div> */}
-
             <span className="text-white flex items-center gap-1 pl-8 md:pl-0"><Star size={16} className="text-amber-400 fill-current scale-90 lg:scale-100"/> <p className="text-xs lg:text-sm xl:text-base">Kids store in Egypt</p></span>
-
             <motion.h1  
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -122,23 +101,8 @@ const ImageSection = () => {
         animate={{ scale: 1 }}
         transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.2 }}
-        className="relative w-150 h-160 lg:block mt-0 hidden">
+        className="relative w-120 h-120 lg:w-150 lg:h-160 md:block mt-0 hidden">
         <Image src={"/images/woody.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain"/>
-        {/* <Image src={"/images/backpack.png"}
-          alt="school backpack" 
-          width={150}
-          height={45}
-          className="absolute object-cover -top-16 -left-12 bounceAnimation 2xl:scale-100 xl:scale-95 scale-75"/>
-        <Image src={"/images/train.png"}
-          alt="school backpack" 
-          width={220}
-          height={45}
-          className="absolute object-cover -bottom-22 -left-15 bounceAnimation xl:scale-95 scale-75"/>
-        <Image src={"/images/gift.png"}
-          alt="school backpack" 
-          width={200}
-          height={45}
-          className="absolute object-cover -top-15 -right-15 bounceAnimation xl:scale-95 scale-75"/> */}
       </motion.div>
   )
 }
