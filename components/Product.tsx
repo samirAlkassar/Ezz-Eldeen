@@ -13,7 +13,8 @@ import { useToast } from "@/components/Toast";
 import { useSelector } from "react-redux";
 import {selectUser } from "../features/auth/authSlice";
 
-export const Product = ({ product, index, wishlist, size = "medium", isDragging }: { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean }) => {
+export const Product = ({ product, index, wishlist, size = "medium", isDragging }: 
+    { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean }) => {
     const productIsInWishlist = wishlist.some(item => item._id === product._id);
     const [optimisticUpdate, setOptimisticUpdate] = useState<boolean | null>(null);
     const isInWishList = optimisticUpdate !== null ? optimisticUpdate : Boolean(productIsInWishlist);

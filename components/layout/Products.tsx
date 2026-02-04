@@ -13,11 +13,11 @@ import ProductsSearchBar from "../ProductsSearchBar"
 import { usePathname } from "next/navigation";
 import LoadingProductSkeleton from "../LoadingProductSkeleton";
 
-export type CategoriesFilterType = "All Products" | "Toys & Games" | "School Supplies" | "Gifts";
+export type CategoriesFilterType = "All Products" | "Toys & Games" | "School Supplies" | "Gifts" | "";
 export type SortType = "createdAt" | "price" | "rating";
 export type OrderType = "asc" | "desc";
 
-const Products = ({ category, search, subCategory = "" }: { category?: CategoriesFilterType, search? : string, subCategory?: string }) => {
+const Products = ({category, search, subCategory = "" }: { category?: CategoriesFilterType, search? : string, subCategory?: string}) => {
   const [searchTerm, setSearchTerm] = useState<string>(search || "");
   const [currentCategory, setCurrentCategory] = useState<CategoriesFilterType>("All Products");
   const [currentSubCategory, setCurrentSubCategory] = useState<string>("puzzles");
@@ -30,6 +30,7 @@ const Products = ({ category, search, subCategory = "" }: { category?: Categorie
     (state: RootState) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
   const wishlist = useSelector((state: RootState) => state.wishlist.items);
+  const [productsSlice, setProductsSlice] = useState({start:0, end:4})
 
   const pathname = usePathname();
   const isProductsPage = pathname.startsWith("/products") || pathname.startsWith("/categories");;
@@ -101,25 +102,28 @@ const Products = ({ category, search, subCategory = "" }: { category?: Categorie
         setOrder={setOrder} />}
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
-        {!loading ? 
+        {
+        !loading ? 
           products.map((product, index) => (
             <Product
               key={product._id}
               product={product}
               index={index}
               wishlist={wishlist} />
-          )):
+          ))
+          :
           Array.from({length: 4}).map((_, i) => (
             <LoadingProductSkeleton key={i}/>
           )) 
         }
       </div>
-      
         <Pagination
-        currentPage={currentPage}
-        totalPages={pagination?.totalPages || 1}
-        onPageChange={(page) => setCurrentPage(page)}
-        isProductsPage={isProductsPage}
+          currentPage={currentPage}
+          productsSlice={productsSlice}
+          setProductsSlice={setProductsSlice}
+          totalPages={pagination?.totalPages || 1}
+          onPageChange={(page) => setCurrentPage(page)}
+          isProductsPage={isProductsPage}
       />
     </div>
   );

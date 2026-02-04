@@ -1,6 +1,5 @@
 "use client";
 
-import Products from "./Products"
 import { Car, Gift, GraduationCap, Group } from "lucide-react";
 import { motion } from "motion/react"
 import { useRouter } from "next/navigation";
@@ -11,11 +10,13 @@ import SchoolCategoryImage from "../../public/images/639b30f87da6fecd1044dc4ba17
 import GiftsCategoryImage from "../../public/images/1abdcf7f18364e53f0ef60ad5ba4370c.jpg"
 import bundlesCategoryImage from "../../public/images/deadfdfce64bf13e0a1aad8aabd6df4b.jpg"
 import { StaticImageData } from "next/dist/shared/lib/get-img-props";
-
 import ToysCategorySectionImage from "../../public/images/twister-car.png";
 import SchoolCategorySectionImage from "../../public/images/school-supplies.png";
 import GiftsCategorySectionImage from "../../public/images/gift.png";
 import BundlesCategorySectionImage from "../../public/images/school-supplies.png";
+import { ProductsResponse } from "@/features/products/productsAPI";
+import HeroProducsts from "../HeroProducts";
+import { HomeSectionType } from "@/app/(main)/page";
 
 export const categoriesList = [
     {
@@ -66,8 +67,12 @@ export const categoriesList = [
 
 
 
-const Categories = () => {
-    const router = useRouter()
+const Categories = ({products, sections}:{products: ProductsResponse, sections: HomeSectionType[]}) => {
+    const router = useRouter();
+    const gamesSection = sections.find(section => section.id === "games");
+    const schoolSection = sections.find(section => section.id === "school");
+    const bestSellers = sections.find(section => section.id === "rating");
+
     return (
         <section className=" bg-gradient-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full">
@@ -122,7 +127,7 @@ const Categories = () => {
                         className="text-base lg:text-xl text-[#2B303B]/80 mt-0 md:mt-3 text-center mb-4">
                         Discover our most popular items <span className="hidden md:inline">that kids and parents love!</span>
                     </motion.p>
-                    <Products />
+                    <HeroProducsts serverProducts={products}/>
                     
                     <div className="w-full flex justify-center mt-6 md:mx-8">
                         <button
@@ -161,7 +166,13 @@ const Categories = () => {
                     </div>
                 </div>
                 
-                <ProductsByCategory title="Games & Toys" section="games"/>
+                {gamesSection && (
+                <ProductsByCategory
+                    title={gamesSection.title}
+                    section={gamesSection.id}
+                    initialProducts={gamesSection.products}
+                />
+                )}
 
                 <div className="bg-linear-30 from-orange-400/90 via-orange-500/90 to-orange-400/90 px-4 w-full mb-10 md:mb-20 mt-4 h-50 md:h-70">
                     <div className="mx-auto max-w-[90rem] md:px-8 flex justify-around items-start">
@@ -188,7 +199,14 @@ const Categories = () => {
                     </div>
                 </div>
 
-                <ProductsByCategory title="School Supplies" section="school"/>
+                {schoolSection && (
+                <ProductsByCategory
+                    title={schoolSection.title}
+                    section={schoolSection.id}
+                    initialProducts={schoolSection.products}
+                />
+                )}
+
 
                 <div className="py-8 mb-10 px-4 bg-linear-to-l from-[#ff773c]/80 to-amber-500/80 md:w-full rounded-2xl sm:mt-6 lg:my-12 text-center flex flex-col items-center max-w-[90rem] mx-5 md:mx-auto md:px-8">
                     <motion.h1
@@ -211,7 +229,13 @@ const Categories = () => {
                     <button className="bg-white text-amber-500 cursor-pointer w-full md:w-fit px-4 py-2 md:px-6 md:py-4 rounded-full text-base sm:text-lg md:text-xl mt-12">View Bundles</button>
                 </div>
 
-                <ProductsByCategory title="Best Sellers" section="rating"/>
+               {bestSellers && (
+                <ProductsByCategory
+                    title={bestSellers.title}
+                    section={bestSellers.id}
+                    initialProducts={bestSellers.products}
+                />
+                )}
             </div>
         </section>
     )

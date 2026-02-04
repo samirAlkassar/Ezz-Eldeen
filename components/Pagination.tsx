@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-const Pagination = ({ currentPage, totalPages, onPageChange, isProductsPage }: { currentPage: number; totalPages: number; onPageChange: (page: number) => void; isProductsPage?:boolean}) => {
+const Pagination = ({ currentPage, totalPages, onPageChange, isProductsPage, productsSlice, setProductsSlice }:
+    { currentPage: number; totalPages: number; onPageChange: (page: number) => void; isProductsPage?:boolean, productsSlice: {start: number, end: number}, setProductsSlice: (value:any)=>void}) => {
 
 
     return (

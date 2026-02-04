@@ -96,14 +96,10 @@ const Numbers = ({text, number}:{text: string, number: string}) => {
 
 const ImageSection = () => {
   return (
-      <motion.div 
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
-        viewport={{ once: true, amount: 0.2 }}
+      <div
         className="relative w-120 h-120 lg:w-150 lg:h-160 md:block mt-0 hidden">
         <Image src={"/images/woody.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain"/>
-      </motion.div>
+      </div>
   )
 }
 

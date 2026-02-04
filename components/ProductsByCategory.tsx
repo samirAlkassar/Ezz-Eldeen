@@ -18,16 +18,19 @@ import { useRouter } from "next/navigation";
 import LoadingProductSkeleton from "./LoadingProductSkeleton";
 
 
-const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories"}: {title?: string, section?: "categories" | "rating" | "new" | "games" | "school"}) => {
+const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories", initialProducts}:
+    {title?: string, section?: "categories" | "rating" | "new" | "games" | "school", initialProducts?: ProductType[]}) => {
     const [category, setCategory] = useState<CategoriesFilterType>("Toys & Games");
     const [subcategory, setSubCategory] = useState("puzzles");
     const [isDragging, setIsDragging] = useState(false);
     const [isClient, setIsClient] = useState(false);
-    const [products, setProducts] = useState<ProductType[]>([]);
+    const [products, setProducts] = useState<ProductType[]>(initialProducts || []);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const wishlist = useSelector((state: RootState) => state.wishlist.items);
     const router = useRouter();
+    const isCategoriesSection = section === "categories";
+    const subcategoriesList = isCategoriesSection ? subcategories : [];
 
     const fetchProducts = async (category: CategoriesFilterType, subcategory: string) => {
         try {
@@ -36,7 +39,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
 
             const data = await getProductsApi({
                 category: section === "games" ? "Toys & Games" : section === "school" ? "School Supplies" : "",
-                subcategory: section === "categories" ? subcategory : "",
+                subcategory: isCategoriesSection ? subcategory : "",
                 sort: section === "rating" ? "rating" : "createdAt",
                 limit: 12
             });
@@ -59,7 +62,9 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
         );
 
     useEffect(() => {
-        debouncedFetch(category, subcategory);
+        if (isCategoriesSection) {
+            debouncedFetch(category, subcategory);
+        }
         return () => debouncedFetch.cancel();
     }, [category, subcategory, debouncedFetch]);
 
@@ -92,7 +97,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                 <h1 className="text-xl sm:text-2xl md:text-4xl text-gray-800 font-semibold">{title}</h1>
                 <button
                     onClick={()=> {
-                        if (section === "categories") {
+                        if (isCategoriesSection) {
                             router.push(`/products?subCategory=${subcategory}`)
                         } else if (section === "new") {
                             router.push(`/products`)
@@ -104,12 +109,12 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                     <p>Show All</p> <ChevronRight size={24} className="arrow transition-all duration-75 ease-in scale-80 md:scale-100"/>
                 </button>
             </div>
-            {section === "categories" && (
+            {isCategoriesSection && (
                 <div className="relative mt-4 md:mb-4">
                     <div className="flex gap-1 md:gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 no-scrollbar">
-                        {subcategories.map((subcategoryItem)=>(
+                        {subcategoriesList?.map((subcategoryItem, index)=>(
                             <div 
-                                key={subcategoryItem} 
+                                key={index} 
                                 onClick={()=>setSubCategory(subcategoryItem)}
                                 className={twMerge(
                                     "flex-shrink-0 border border-gray-300 rounded-full py-1.5 md:py-2 px-3 md:px-5 text-sm font-medium cursor-pointer transition-all duration-200 whitespace-nowrap",
@@ -130,7 +135,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                 onDrag={() => setIsDragging(true)}
                 onDragged={() => setIsDragging(false)}
                 >
-                {loading
+                {isCategoriesSection && loading
                     ? Array.from({ length: 4 }).map((_, i) => (
                         <SplideSlide key={`skeleton-${i}`}>
                         <div className="px-1 md:px-3 pt-2 pb-6 h-full">
@@ -142,10 +147,10 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                         <SplideSlide key={product._id}>
                         <div className="px-1 md:px-3 pt-2 pb-6 h-full">
                             <Product
-                            product={product}
-                            index={index}
-                            wishlist={wishlist}
-                            isDragging={isDragging}
+                                product={product}
+                                index={index}
+                                wishlist={wishlist}
+                                isDragging={isDragging}
                             />
                         </div>
                         </SplideSlide>
