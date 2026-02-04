@@ -119,12 +119,10 @@ const Products = ({category, search, subCategory = "" }: { category?: Categories
       </div>
         <Pagination
           currentPage={currentPage}
-          productsSlice={productsSlice}
-          setProductsSlice={setProductsSlice}
           totalPages={pagination?.totalPages || 1}
           onPageChange={(page) => setCurrentPage(page)}
           isProductsPage={isProductsPage}
-      />
+        />
     </div>
   );
 };
