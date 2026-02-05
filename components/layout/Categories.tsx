@@ -16,7 +16,8 @@ import GiftsCategorySectionImage from "../../public/images/gift.png";
 import BundlesCategorySectionImage from "../../public/images/school-supplies.png";
 import { ProductsResponse } from "@/features/products/productsAPI";
 import HeroProducsts from "../HeroProducts";
-import { HomeSectionType } from "@/app/(main)/page";
+import { HomeSectionType } from "@/features/products/server/getProducts";
+import { ProductType } from "@/features/products/types";
 
 export const categoriesList = [
     {
@@ -67,7 +68,7 @@ export const categoriesList = [
 
 
 
-const Categories = ({products, sections}:{products: ProductsResponse, sections: HomeSectionType[]}) => {
+const Categories = ({products, sections}:{products: ProductType[], sections: HomeSectionType[]}) => {
     const router = useRouter();
     const gamesSection = sections.find(section => section.id === "games");
     const schoolSection = sections.find(section => section.id === "school");

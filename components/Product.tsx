@@ -13,8 +13,8 @@ import { useToast } from "@/components/Toast";
 import { useSelector } from "react-redux";
 import {selectUser } from "../features/auth/authSlice";
 
-export const Product = ({ product, index, wishlist, size = "medium", isDragging }: 
-    { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean }) => {
+export const Product = ({ product, index, wishlist, size = "medium", isDragging, showRatings = false, showDescription = false }: 
+    { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean, showRatings?: boolean, showDescription?: boolean }) => {
     const productIsInWishlist = wishlist.some(item => item._id === product._id);
     const [optimisticUpdate, setOptimisticUpdate] = useState<boolean | null>(null);
     const isInWishList = optimisticUpdate !== null ? optimisticUpdate : Boolean(productIsInWishlist);
@@ -65,16 +65,14 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
             whileInView={{ opacity: 1, y: 0 }}
             transition={{
                 duration: 0.2,
-                delay: (index % 4) * 0.1, // reset every 8 items
+                delay: (index % 4) * 0.1,
                 ease: [0.25, 0.1, 0.25, 1]
             }}
             viewport={{ once: true, amount: 0.2 }}
             className={twMerge("bg-white shadow-sm md:shadow-lg transition-shadow duration-300 flex flex-col relative justify-between flex-1 h-full",
                 size === "small" ? "rounded-xl px-3 py-4" : "rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-5"
-            )}
-        >
+            )}>
             <div>
-                {/* Product Image */}
                 <div
                     onClick={handleClick} 
                     className={twMerge("bg-white flex items-center justify-center relative",
@@ -92,18 +90,16 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging 
                         size === "small" ? "scale-[85%] -top-4 -right-4" : "scale-80 md:scale-90 -top-10 -right-10 md:-top-8 md:-right-8"
                     )}
                         style={{ transitionDuration: `${isInWishList ? "1s" : ""}`, backgroundPosition: `${isInWishList ? "-2800px 0" : ""}` }} />
-                    {/* <div className="absolute -top-1 -left-1 md:top-1 md:left-1 bg-orange-400 backdrop-blur-sm rounded-full py-1 px-2 md:py-1.5 md:px-3 flex items-center justify-center gap-1.5 shadow-md">
+                    {showRatings && <div className="absolute -top-1 -left-1 md:top-1 md:left-1 bg-orange-400 backdrop-blur-sm rounded-full py-1 px-2 md:py-1.5 md:px-3 flex items-center justify-center gap-1.5 shadow-md">
                         <Star size={14} className="text-white fill-current"/>
                         <p className="text-xs font-semibold text-white">{product?.averageRating}</p>
-                    </div> */}
+                    </div>}
                 </div>
 
-                {/* Product Info */}
                 <h3 className="text-base sm:text-lg md:text-xl font-medium line-clamp-2 md:line-clamp-1 text-gray-800">{product.name}</h3>
-                {/* <p className={twMerge("text-gray-500 mb-2", size === "small" ? "text-xs line-clamp-1" : "text-sm line-clamp-2")}>{product.description}</p> */}
+                {showDescription && <p className={twMerge("text-gray-500 mb-2", size === "small" ? "text-xs line-clamp-1" : "text-sm line-clamp-2")}>{product.description}</p>}
 
                 
-                {/* Categories */}
                 <div className="hidden md:flex items-center justify-start gap-1.5 mb-3 flex-wrap mt-2">
                     {product?.category && 
                         <span 

@@ -1,6 +1,5 @@
 "use client";
 
-import { ProductsResponse } from "@/features/products/productsAPI";
 import { Product } from "./Product";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
@@ -8,8 +7,9 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
+import { ProductType } from "@/features/products/types";
 
-const HeroProducsts = ({serverProducts}:{serverProducts: ProductsResponse}) => {
+const HeroProducsts = ({serverProducts}:{serverProducts: ProductType[]}) => {
     const wishlist = useSelector((state: RootState) => state.wishlist.items);
     const [productsSlice, setProductsSlice] = useState<{start: number, end: number}>({start: 0, end: 4});
 
@@ -17,12 +17,13 @@ const HeroProducsts = ({serverProducts}:{serverProducts: ProductsResponse}) => {
         <div className="mt-0 md:mt-12 w-full overflow-hidden">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
             {
-                serverProducts.products.slice(productsSlice.start, productsSlice.end).map((product, index) => (
+                serverProducts.slice(productsSlice.start, productsSlice.end).map((product, index) => (
                 <Product
                     key={product._id}
                     product={product}
                     index={index}
-                    wishlist={wishlist} />
+                    wishlist={wishlist}
+                    showRatings={true}/>
                 ))
             }
             </div>

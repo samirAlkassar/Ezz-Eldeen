@@ -151,6 +151,8 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                                 index={index}
                                 wishlist={wishlist}
                                 isDragging={isDragging}
+                                showRatings={section === "rating"}
+                                showDescription={section === "school" || section === "games"}
                             />
                         </div>
                         </SplideSlide>
