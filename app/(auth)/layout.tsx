@@ -1,13 +1,4 @@
 import type { Metadata } from "next";
-import "../globals.css";
-import { Fredoka } from "next/font/google";
-
-const fredoka = Fredoka({
-  subsets: ["latin"], // required
-  weight: ["400", "500", "600", "700"], // choose weights you want
-  variable: "--font-fredoka", // CSS variable (optional but useful)
-});
-
 
 export const metadata: Metadata = {
   title: "Ezz-Eldeen | Login to your account",
@@ -21,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={fredoka.className}>
+    <div>
       {children}
     </div>
   );

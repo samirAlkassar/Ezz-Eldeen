@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Fredoka } from "next/font/google";
 import { Providers } from "./Providers";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 const fredoka = Fredoka({
   subsets: ["latin"], // required
-  weight: ["400", "500", "600", "700"], // choose weights you want
-  variable: "--font-fredoka", // CSS variable (optional but useful)
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fredoka",
 });
 
 
