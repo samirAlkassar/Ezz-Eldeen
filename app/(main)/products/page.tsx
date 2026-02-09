@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductsClient from "./components/ProductsClient";
 import { Suspense } from "react";
@@ -40,6 +42,9 @@ const ProductsPage = async ({searchParams}: ProductsPageProps) => {
 
 
 export async function generateMetadata({ searchParams }: ProductsPageProps) {
+  const rawCategory = searchParams?.category ?? "All Products";
+  const category = decodeURIComponent(rawCategory).replace(/\+/g, " ");
+
   const categoryMeta: Record<string, { title: string; image: StaticImageData }> = {
     "All Products": {
       title: "All Products - My Store",
@@ -59,13 +64,10 @@ export async function generateMetadata({ searchParams }: ProductsPageProps) {
     },
   };
 
-  const defaultMeta = {
+  const metadata = categoryMeta[category] ?? {
     title: "Products - My Store",
     image: "/images/placeholder.jpg",
   };
-
-  const category = searchParams.category || "All Products";
-  const metadata = categoryMeta[category] || defaultMeta;
 
   return {
     title: metadata.title,
@@ -79,5 +81,6 @@ export async function generateMetadata({ searchParams }: ProductsPageProps) {
     },
   };
 }
+
 
 export default ProductsPage;
