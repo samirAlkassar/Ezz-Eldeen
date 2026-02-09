@@ -1,23 +1,27 @@
-import { getProductBySlug, getRelatedBySlug } from "@/features/products/server/getProductsBySlug";
+import { getProductBySlug, getProductsReviews, getRelatedBySlug } from "@/features/products/server/getProductsBySlug";
 import ProductsBySlugPage from "./components/ProductsBySlugPage";
 import type { Metadata } from "next"
 
 type PageProps = {
   params: {
     slug: string
-  }
-}
+  };
+};
 
 const ProductBySlug = async ({ params }: PageProps) => {
-    const product = await getProductBySlug(params.slug);
-    const relatedProducts = await getRelatedBySlug(params.slug, 4);
-    console.log("productsBySLug:", product)
-    return (
-        <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
-            <ProductsBySlugPage slug={params.slug} product={product} relatedProducts={relatedProducts}/>
-        </main>
-    )
+  const product = await getProductBySlug(params.slug);
+  if (!product) return;
+
+  const relatedProducts = await getRelatedBySlug(params.slug, 4);
+  console.log("productsBySLug:", product)
+  return (
+    <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
+        <ProductsBySlugPage slug={params.slug} product={product} relatedProducts={relatedProducts}/>
+    </main>
+  )
 };
+
+
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const product = await getProductBySlug(params.slug)

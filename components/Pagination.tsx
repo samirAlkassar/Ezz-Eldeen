@@ -63,7 +63,6 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
             <ChevronLeft size={20} />
         </motion.button>
 
-        {/* Page Numbers */}
         <div className="flex items-center gap-2">
             {getPageNumbers().map((page, index) => {
                 if (page === '...') {
@@ -91,7 +90,6 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
             })}
         </div>
 
-        {/* Next Button */}
         <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -134,7 +132,6 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
         </motion.button>
         
 
-        {/* Next Button */}
         <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

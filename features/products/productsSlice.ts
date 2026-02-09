@@ -100,6 +100,12 @@ const productsSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setInitialProducts: (state, action) => {
+      state.products = action.payload.products;
+      state.pagination = action.payload.pagination;
+      state.loading = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -162,7 +168,8 @@ const productsSlice = createSlice({
         state.error = action.payload as string;
       });
 },
+
 });
 
-export const { resetProducts } = productsSlice.actions;
+export const { resetProducts, setInitialProducts } = productsSlice.actions;
 export default productsSlice.reducer;

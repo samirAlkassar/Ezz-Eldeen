@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { CategoriesFilterType, SortType, OrderType } from "./layout/Products";
 
 interface ProductsSearchBarProps {
@@ -21,6 +21,7 @@ interface ProductsSearchBarProps {
   setSort: (value: SortType) => void;
   order: OrderType;
   setOrder: (value: OrderType) => void;
+  onFilterApply: (minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => void;
 }
 
 const ProductsSearchBar = ({
@@ -37,27 +38,46 @@ const ProductsSearchBar = ({
   setSort,
   order,
   setOrder,
+  onFilterApply
 }: ProductsSearchBarProps) => {
   const [showCategoriesMenu, setShowCategoriesMenu] = useState<boolean>(false);
   const [showFiltersMenu, setShowFiltersMenu] = useState<boolean>(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    
+    if (!pathname.startsWith("/products") && !pathname.startsWith("/categories")) {
+      return;
+    }
+    
     setCurrentPage(1);
-  }, [searchTerm, currentCategory, minPrice, maxPrice, sort, order, setCurrentPage]);
+    updateURL();
+  }, [searchTerm, currentCategory, minPrice, maxPrice, sort, order]);
+
+  const updateURL = () => {
+    const params = new URLSearchParams();
+    params.set("page", "1");
+    if (searchTerm.length !== 0) params.set("search", searchTerm);
+    if (currentCategory !== "All Products") params.set("category", currentCategory);
+    
+    const queryString = params.toString();
+    
+    if (pathname.startsWith("/categories") && currentCategory !== "All Products") {
+      const categoryPath = currentCategory.replace(/ & /g, "_&_").replace(/ /g, "_");
+      router.replace(`/categories/${categoryPath}${queryString ? `?${queryString}` : ""}`);
+    } else {
+      router.replace(`/products${queryString ? `?${queryString}` : ""}`);
+    }
+  };
 
   const handleSearch = () => {
-    if (searchTerm.length !== 0 && currentCategory === "All Products") {
-      router.push(`/products?search=${searchTerm}`);
-    } else if (searchTerm.length === 0 && currentCategory !== "All Products") {
-      router.push(`/products?category=${currentCategory}`);
-    } else if (searchTerm.length !== 0 && currentCategory !== "All Products") {
-      router.push(
-        `/products?search=${searchTerm}&category=${currentCategory}`
-      );
-    } else {
-      router.push(`/products`);
-    }
+    updateURL();
   };
 
   return (
@@ -222,7 +242,10 @@ const ProductsSearchBar = ({
                   Reset
                 </button>
                 <button
-                  onClick={() => setShowFiltersMenu(false)}
+                  onClick={() => {
+                    onFilterApply(minPrice, maxPrice, sort, order);
+                    setShowFiltersMenu(false);
+                  }}
                   className="flex-1 px-4 py-1.5 md:py-2 font-semibold bg-orange-400 rounded-lg hover:bg-orange-500 text-gray-800 cursor-pointer">
                   Apply
                 </button>
@@ -232,16 +255,7 @@ const ProductsSearchBar = ({
         </AnimatePresence>
 
         <button
-          onClick={()=>{
-            if (searchTerm.length !== 0 && currentCategory === "All Products") {
-              router.push(`/products?search=${searchTerm}`)
-            } else if (searchTerm.length === 0 && currentCategory !== "All Products") {
-              router.push(`/products?category=${currentCategory}`)
-            } else if (searchTerm.length !== 0 && currentCategory !== "All Products") {
-              router.push(`/products?search=${searchTerm}&category=${currentCategory}`)
-            }
-            else {router.push(`/products`)}
-          }} 
+          onClick={handleSearch} 
           className="bg-orange-400 rounded-full px-6 py-1.5 text-xl text-gray-800 cursor-pointer hidden md:block">
           search
         </button>

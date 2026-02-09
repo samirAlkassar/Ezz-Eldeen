@@ -132,7 +132,7 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                     
                     <div className="w-full flex justify-center mt-6 md:mx-8">
                         <button
-                            onClick={() => router.push("/products")}
+                            onClick={() => router.push("/products?page=1")}
                             className="bg-black text-white font-medium text-base md:text-lg rounded-full shadow-md px-4 py-2 md:px-6 md:py-3 cursor-pointer active:scale-95">
                             Show ALl Products
                         </button>

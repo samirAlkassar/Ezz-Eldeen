@@ -3,8 +3,22 @@
 import Products from "@/components/layout/Products";
 import { useSearchParams } from "next/navigation";
 import { CategoriesFilterType } from "@/components/layout/Products";
+import { ProductsResponse } from "@/features/products/productsAPI";
+import { ProductType } from "@/features/products/types";
 
-const ProductsClient = () => {
+type ProductsClientProps = {
+  initialProducts: ProductType[];
+  initialPagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
+  initialPage: number;
+};
+
+const ProductsClient = ({initialProducts, initialPagination, initialPage} : ProductsClientProps) => {
   const searchParams = useSearchParams();
 
   const categoryParam = searchParams.get("category");
@@ -24,7 +38,13 @@ const ProductsClient = () => {
   return (
     <section>
       {search && <h1 className="text-xl md:text-3xl font-medium text-gray-700">Search results for {search}</h1>}
-      <Products search={search} category={category} subCategory={subCategory}/>
+      <Products 
+        initialProducts={initialProducts} 
+        initialPagination={initialPagination} 
+        initialPage={initialPage}
+        search={search} 
+        category={category} 
+        subCategory={subCategory}/>
     </section>
   );
 };

@@ -4,6 +4,8 @@ type ProductQuery = {
   page?: number
   limit?: number
   category?: string
+  subCategory?: string
+  search?: string
   sort?: "rating" | "price" | "new"
 }
 
@@ -13,8 +15,10 @@ export async function getProducts(query: ProductQuery) {
   if (query.page) params.set("page", query.page.toString())
   if (query.limit) params.set("limit", query.limit.toString())
   if (query.category) params.set("category", query.category)
+  if (query.subCategory) params.set("subCategory", query.subCategory)
   if (query.sort) params.set("sort", query.sort)
-
+  if (query.search) params.set("search", query.search)
+    console.log("page:", params.toString())
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`, {
     next: { revalidate: 300 }
   })
@@ -51,4 +55,3 @@ export const HOME_SECTIONS = [
     query: { category: "School Supplies", limit: 12 },
   },
 ] as const
-

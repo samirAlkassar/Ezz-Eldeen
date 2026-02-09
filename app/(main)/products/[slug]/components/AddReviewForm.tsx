@@ -1,37 +1,42 @@
+"use client";
+
 import { CheckCircle, Star, TriangleAlert } from "lucide-react";
 import { addReview } from "@/features/products/productsSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/app/store";
-import { ProductType } from "@/features/products/types";
 import { useState } from "react";
 import { useToast } from "@/components/Toast";
+import { getProductsReviews } from "@/features/products/server/getProductsBySlug";
 
 type AddReviewFormProps = {
-    product:  ProductType | null;
+    productId:  string;
+    setReviews: (value: [])=>void;
 }
 
-const AddReviewForm = ({product}: AddReviewFormProps) => {
+const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
     const [comment, setComment] = useState<string>("");
     const [rating, setRating] = useState<number | null>(null);
     const dispatch = useDispatch<AppDispatch>();
     const {toast} = useToast();
-
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!product) return;
+        if (!productId) return;
         if (!rating) return toast({ title: "Error", description: "Need to add rawing", variant: "error", position: "bottom-right", icon: <TriangleAlert size={20} /> });
         try {
             await dispatch(
             addReview({
-                productId: product._id,
+                productId: productId,
                 reviewData: {rating, comment},
             })).unwrap();
-
+        const updated = await getProductsReviews(productId);
+        setReviews(updated.reviews);
             toast({ title: "Review added", description: "Your review is added successfully", variant: "default", position: "bottom-right", icon: <CheckCircle size={20} /> })
             setComment("");
             setRating(null);
-        } catch {
-            toast({ title: "Error", description: "Error adding your review", variant: "error", position: "bottom-right", icon: <TriangleAlert size={20} /> })
+        } catch (error) {
+            toast({ title: "Error", description: `${error}`, variant: "error", position: "bottom-right", icon: <TriangleAlert size={20} /> })
+        } finally {
+            console.log(productId, rating, comment)
         }
     };
 
@@ -71,7 +76,7 @@ const AddReviewForm = ({product}: AddReviewFormProps) => {
             <button
             type="submit"
             className="bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 md:px-6 md:py-3 text-base sm:text-lg md:text-xl rounded-lg md:rounded-full font-medium transition cursor-pointer">
-            Submit Review
+                Submit Review
             </button>
         </form>
     );

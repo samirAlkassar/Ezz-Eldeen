@@ -9,7 +9,12 @@ export interface ProductVariant {
 }
 
 export interface ProductReview {
-  user: string;
+  user: {
+    _id: string,
+    firstName: string,
+    lastName: string,
+    picturePath: string
+  };
   rating: number;
   _id: string;
   comment?: string;

@@ -19,6 +19,14 @@ const Hero = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter();
 
+    const handleFilterChange = (newMinPrice: number, newMaxPrice: number, newSort: SortType, newOrder: OrderType) => {
+      setMinPrice(newMinPrice);
+      setMaxPrice(newMaxPrice);
+      setSort(newSort);
+      setOrder(newOrder);
+      setCurrentPage(1);
+    };
+
     return (
         <main className="py-12 md:py-6 relative px-4 sm:px-8 z-10">
         <HeroBackground />
@@ -58,6 +66,7 @@ const Hero = () => {
                 setSort={setSort}
                 order={order}
                 setOrder={setOrder}
+                onFilterApply={handleFilterChange}
               />
             </div>
             <div className="flex gap-4 mt-6 justify-start mx-5 md:mx-0">
