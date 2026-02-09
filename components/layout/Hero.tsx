@@ -76,6 +76,7 @@ const Hero = () => {
                 Start Shopping
               </button>
               <button 
+                onClick={()=>{router.push("#bundles")}} 
                 className="bg-white hidden md:block text-gray-700 w-full font-semibold sm:w-fit px-4 md:px-6 py-3 md:py-4 text-sm sm:text-lg md:text-xl rounded-full sm:rounded-2xl md:rounded-full cursor-pointer shadow-sm active:scale-[97%] transition-all duration-75">
                 View Collections
               </button>

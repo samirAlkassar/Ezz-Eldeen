@@ -115,6 +115,16 @@ const Navbar = () => {
 
 
                 <div className="flex gap-2 items-center relative">
+                    <div className={twMerge("rounded-full flex p-1",
+                        isScrolled? "bg-gray-200" : "bg-white/20"
+                    )}>
+                        <button className={twMerge("w-10 h-8 rounded-full flex items-center justify-center bg-orange-500/40 cursor-pointer font-medium",
+                            isScrolled? "text-gray-800 hover:bg-gray-300" : "text-white hover:bg-orange-500/20"
+                        )}>En</button>
+                        <button className={twMerge("w-10 h-8 rounded-full flex items-center justify-center cursor-pointer font-medium",
+                            isScrolled? "text-gray-800 hover:bg-gray-300" : "text-white hover:bg-orange-500/20"
+                        )}>ع</button>
+                    </div>
                     <div onClick={() => {router.push( user ? '/wishlist' : '/register'); !user && 
                                 toast({ title: "Create account!", description: "You need to login before accessing your wishlist",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
                     }} className={twMerge("p-2 rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",

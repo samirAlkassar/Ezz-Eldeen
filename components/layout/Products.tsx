@@ -47,6 +47,7 @@ const Products = ({category, search, subCategory = "", initialProducts, initialP
   const [sort, setSort] = useState<SortType>("createdAt");
   const [order, setOrder] = useState<OrderType>("desc");
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const wishlist = useSelector((state: RootState) => state.wishlist.items);
@@ -62,22 +63,30 @@ const Products = ({category, search, subCategory = "", initialProducts, initialP
 
   // Client-side fetch for filter/page changes
   const fetchProductsClient = async (page: number, searchTerm: string, category: CategoriesFilterType, subCategory: string, minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => {
-    const params = new URLSearchParams();
-    params.set("page", page.toString());
-    params.set("limit", isProductsPage ? "12" : "4");
-    if (searchTerm) params.set("search", searchTerm);
-    if (category && category !== "All Products") params.set("category", category);
-    if (subCategory) params.set("subCategory", subCategory);
-    if (sort) params.set("sort", sort);
-    params.set("order", order);
-    params.set("minPrice", minPrice.toString());
-    params.set("maxPrice", maxPrice.toString());
+    try {
+      setLoading(true)
+      const params = new URLSearchParams();
+      params.set("page", page.toString());
+      params.set("limit", isProductsPage ? "12" : "4");
+      if (searchTerm) params.set("search", searchTerm);
+      if (category && category !== "All Products") params.set("category", category);
+      if (subCategory) params.set("subCategory", subCategory);
+      if (sort) params.set("sort", sort);
+      params.set("order", order);
+      params.set("minPrice", minPrice.toString());
+      params.set("maxPrice", maxPrice.toString());
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`);
-    if (!res.ok) return;
-    const data = await res.json();
-    setProductsData(data.products);
-    setPaginationData(data.pagination);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      setProductsData(data.products);
+      setPaginationData(data.pagination);
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+
   };
 
   const debouncedFetch = useMemo(
@@ -157,7 +166,11 @@ const buildUrl = (page: number, category: string, subCategory: string, search: s
         onFilterApply={handleFilterChange} />}
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
-        {
+        {loading ?
+         Array.from({ length: (12) }).map((_, i) => (
+          <LoadingProductSkeleton />
+         ))
+        :
           productsData.map((product, index) => (
             <Product
               key={product._id}

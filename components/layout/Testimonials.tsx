@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 const Testimonials = () => {
     return (
-        <div className="overflow-hidden relative h-200 md:h-140 flex items-center justify-center flex-col">
-            <img src="./images/testimonials-splash.jpg" alt="testimonials-splash-screen" className="w-full h-full object-cover absolute -z-10"/>
+        <div className="overflow-hidden relative h-200 md:h-140 flex items-center justify-center flex-col bg-orange-50">
+            {/* <img src="./images/testimonials-splash.jpg" alt="testimonials-splash-screen" className="w-full h-full object-cover absolute -z-10"/> */}
             <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 mt-8 md:mt-4">
                 Testimonials <span className="text-gray-700">from our clients</span>
             </h1>
