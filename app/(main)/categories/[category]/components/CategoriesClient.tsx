@@ -22,14 +22,14 @@ type ProductsClientProps = {
 };
 
 const CategoriesClient = ({initialProducts, initialPagination, initialPage} : ProductsClientProps) => {
-  const params = useParams();
+    const params = useParams();
 
-  const undoSlug = (slug: string | string[] | undefined) => {
-    return typeof slug === 'string' ? 
-    slug.replace(/_/g, ' ').replace(/%26/g, '&') : 
-    Array.isArray(slug) ? 
-    slug[0]?.replace(/_/g, ' ').replace(/%/g, '') : ''
-  };
+    const undoSlug = (slug: string | string[] | undefined) => {
+        return typeof slug === 'string' ? 
+        slug.replace(/_/g, ' ').replace(/%26/g, '&') : 
+        Array.isArray(slug) ? 
+        slug[0]?.replace(/_/g, ' ').replace(/%/g, '') : ''
+    };
 
   const category = categoriesList.filter(categroy => categroy.title.toLowerCase().includes(undoSlug(params.category).toLowerCase()))
   
