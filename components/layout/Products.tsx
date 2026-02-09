@@ -168,7 +168,7 @@ const buildUrl = (page: number, category: string, subCategory: string, search: s
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
         {loading ?
          Array.from({ length: (12) }).map((_, i) => (
-          <LoadingProductSkeleton />
+          <LoadingProductSkeleton key={i}/>
          ))
         :
           productsData.map((product, index) => (
