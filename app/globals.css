@@ -124,3 +124,11 @@ html {
 .custom-radious {
   border-radius: 23% 77% 29% 71% / 54% 52% 48% 46%;
 }
+
+.font-latin {
+  font-family: var(--font-latin), system-ui, sans-serif;
+}
+
+.font-arabic {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+}

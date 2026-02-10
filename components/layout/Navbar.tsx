@@ -14,8 +14,12 @@ import Image from "next/image";
 import { useToast } from "@/components/Toast";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useParams } from "next/navigation";
 
 const Navbar = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector(selectUser);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -27,7 +31,9 @@ const Navbar = () => {
     const cart = useSelector((state: RootState) => state.cart.cart);
     const router = useRouter();
     const pathname = usePathname();
-    const isHomePage = pathname.endsWith("/");
+    const isHomePage = pathname.endsWith("/en") || pathname.endsWith("/ar");
+    const params = useParams<{lang: typeLang}>();
+    const { i18n } = useTranslation();
 
     const handleScroll = useCallback(() => {
         const scrollThreshold = 420;
@@ -78,8 +84,8 @@ const Navbar = () => {
     }, []);
 
     return (
-        <NavbarWrapper isScrolled={isScrolled} isHomePage={isHomePage}>
-            <div className="w-full max-w-7xl mx-auto px-4 py-3.5 md:py-4 md:px-8 flex justify-between text-white">
+        <NavbarWrapper isScrolled={isScrolled}>
+            <div className="w-full max-w-7xl mx-auto px-4 py-3.5 md:py-4 md:min-h-[76px] md:px-8 flex justify-between text-white">
                 {
                 isScrolled ? 
                     <div className="flex items-center justify-start gap-2 md:gap-4">
@@ -95,8 +101,8 @@ const Navbar = () => {
                             initial={{x: -50 }}
                             whileInView={{x:0 }}
                             transition={{ delay: 0, duration: 0.3, ease: "easeIn" }}>
-                            <Link href="/" className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
-                                Ezz-Eldeen
+                            <Link href={`/${params.lang}`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                                {t("navbar.storeTitle")}
                             </Link>
                         </motion.div>
                     </div>: 
@@ -105,8 +111,8 @@ const Navbar = () => {
                         whileInView={{ scale: 1 }}
                         transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}
                         className="flex items-center justify-start gap-4">
-                        <Link href="/" className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
-                            Ezz-Eldeen
+                        <Link href={`/${params.lang}`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                            {t("navbar.storeTitle")}
                         </Link>
                     </motion.div>
                 }
@@ -115,31 +121,31 @@ const Navbar = () => {
 
 
                 <div className="flex gap-2 items-center relative">
-                    <div className={twMerge("rounded-full flex p-1",
-                        isScrolled? "bg-gray-200" : "bg-white/20"
-                    )}>
-                        <button className={twMerge("w-10 h-8 rounded-full flex items-center justify-center bg-orange-500/40 cursor-pointer font-medium",
-                            isScrolled? "text-gray-800 hover:bg-gray-300" : "text-white hover:bg-orange-500/20"
-                        )}>En</button>
-                        <button className={twMerge("w-10 h-8 rounded-full flex items-center justify-center cursor-pointer font-medium",
-                            isScrolled? "text-gray-800 hover:bg-gray-300" : "text-white hover:bg-orange-500/20"
-                        )}>ع</button>
-                    </div>
-                    <div onClick={() => {router.push( user ? '/wishlist' : '/register'); !user && 
+                    <LanguageSwitcher isScrolled={isScrolled}/>
+
+                    <button 
+                        title={t("navbar.wishlist")}  
+                        aria-label={t("navbar.wishlist")}  
+                        onClick={() => {router.push( user ? `/${params.lang}/wishlist` : `/${params.lang}/register`); !user && 
                                 toast({ title: "Create account!", description: "You need to login before accessing your wishlist",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
-                    }} className={twMerge("p-2 rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
+                        }} 
+                        className={twMerge("p-2 rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
                         isScrolled? "text-black hover:bg-gray-500/20" : "hover:bg-red-500/40"
                     )}>
                         <Heart />
-                    </div>
-                    <div onClick={() => {router.push(user ? '/cart' : '/register'); !user && 
+                    </button>
+                    <button 
+                        title={t("navbar.cart")} 
+                        aria-label={t("navbar.cart")} 
+                        onClick={() => {router.push(user ? `/${params.lang}/cart` : `/${params.lang}/register`); !user && 
                                 toast({ title: "Create account!", description: "You need to login before accessing your cart",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
-                    }} className={twMerge("p-2 relative rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
+                        }} 
+                        className={twMerge("p-2 relative rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
                         isScrolled? "text-black hover:bg-gray-500/20" : "hover:bg-orange-500/40"
                     )}>     
                         <ShoppingCart/>
                         {user && !(cart?.totalPrice === 0) && <span className="absolute bg-red-500 text-white text-xs w-5 h-5 top-5 right-0 rounded-full flex items-center justify-center">{cart?.totalQuantity}</span>}
-                    </div>
+                    </button>
                     
 
                     {user ? (
@@ -179,13 +185,13 @@ const Navbar = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
                                         transition={{ duration: 0.15 }}
-                                        className="absolute right-0 mt-2 w-40 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden px-2 py-4 space-y-3">
-                                        <li><Button onClick={()=>{setMenuOpen(false); router.push(`/profile/${user.firstName}_${user.lastName}`)}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><User size={18}/> <span>Profile</span></div></Button></li>
-                                        <li><Button onClick={()=>{setMenuOpen(false);}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><Settings size={18}/><span>Settings</span></div> </Button></li>
-                                        {user?.role === "admin" && <li><Button onClick={()=>{router.push("/dashboard"); setMenuOpen(false);}} variant={'game'} size={'small'} color={'orange'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LayoutDashboard size={18}/><span> Dashboard</span></div> </Button></li>}
+                                        className={twMerge("absolute mt-2 w-40 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden px-2 py-4 space-y-3", i18n.language === "ar" ? "left-0" : "right-0")}>
+                                        <li><Button onClick={()=>{setMenuOpen(false); router.push(`/${params.lang}/profile/${user.firstName}_${user.lastName}`)}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><User size={18}/> <span>{t("navbar.profileTabs.profile")}</span></div></Button></li>
+                                        <li><Button onClick={()=>{setMenuOpen(false);}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><Settings size={18}/><span>{t("navbar.profileTabs.settings")}</span></div> </Button></li>
+                                        {user?.role === "admin" && <li><Button onClick={()=>{router.push(`/${params.lang}/dashboard`); setMenuOpen(false);}} variant={'game'} size={'small'} color={'orange'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LayoutDashboard size={18}/><span> {t("navbar.profileTabs.dashboard")}</span></div> </Button></li>}
                                         <li><Button onClick={()=>{handleLogout(); setMenuOpen(false); 
                                             toast({ title: "Logged out", description: "You logged out of your account",variant: "default", position: "bottom-right", icon: <LogOutIcon size={20}/> })
-                                        }} variant={'game'} size={'small'} color={'red'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LogOut size={18}/><span>Logout</span></div></Button></li>
+                                        }} variant={'game'} size={'small'} color={'red'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LogOut size={18}/><span>{t("navbar.profileTabs.logout")}</span></div></Button></li>
 
                                     </motion.ul>
                                 )}
@@ -193,21 +199,21 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <div className="flex gap-4 text-lg font-medium">
-                            <a
+                            <Link
                                 href="/login"
                                 className="bg-white text-[#FF773C] text-base md:text-lg py-0.5 px-3 md:px-4 md:py-1 rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors"
                             >
                                 Login
-                            </a>
-                            <a href="/register" className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
+                            </Link>
+                            <Link href="/register" className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
                                 Register
-                            </a>
+                            </Link>
                         </div>
                     )}
                 </div>
             </div>
             {isScrolled && <div className="bg-white w-full flex items-center justify-center shadow-sm">
-                <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu}/>
+                <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu} lang={params.lang}/>
             </div>}
         </NavbarWrapper>
     );
@@ -220,7 +226,7 @@ type tabesPositionTypes = {
     color?: string;
 };
 
-const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottomMenu: boolean}) => {
+const SlideTabes = ({isScrolled, showBottomMenu, lang}:{isScrolled:boolean, showBottomMenu: boolean, lang?: typeLang}) => {
     const [position, setPosition] = useState<tabesPositionTypes>({
         left: 0,
         width: 0,
@@ -241,10 +247,10 @@ const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottom
                 }}
                 className={twMerge("flex items-center relative py-1 md:py-2 min-h-[50px] md:min-h-[60px] transition-al")}
             >
-                <Tab onClick={()=>router.push('/')} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
-                <Tab onClick={()=>router.push('/categories/Toys_&_Games')} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
-                <Tab onClick={()=>router.push('/categories/School_Supplies')} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
-                <Tab onClick={()=>router.push('/categories/Gifts')}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
+                <Tab onClick={()=>router.push(`/${lang}`)} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
+                <Tab onClick={()=>router.push(`/${lang}/categories/Toys_&_Games`)} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
+                <Tab onClick={()=>router.push(`/${lang}/categories/School_Supplies`)} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
+                <Tab onClick={()=>router.push(`/${lang}/categories/Gifts`)}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
                 <Cursor position={position} />
             </motion.ul>
         }
@@ -290,9 +296,9 @@ const Tab = ({
             }}
             className={twMerge("relative z-10 block cursor-pointer px-2 py-1.5 text-lg active:scale-95 transition-all duration-100 ease-in",
                 isScrolled ? "text-black" : "text-black")}>
-            <a className="text-base md:text-lg px-2 py-2 transition-transform duration-200 hover:scale-105 hover:mix-blend-difference">
+            <div className="text-base md:text-lg px-2 py-2 transition-transform duration-200 hover:scale-105 hover:mix-blend-difference">
                 {children}
-            </a>
+            </div>
         </li>
     );
 };
@@ -308,7 +314,7 @@ const Cursor = ({ position }: { position: tabesPositionTypes }) => {
     );
 };
 
-const NavbarWrapper = ({children, isScrolled, isHomePage}:{children: React.ReactNode, isScrolled:boolean, isHomePage: boolean}) => {
+const NavbarWrapper = ({children, isScrolled}:{children: React.ReactNode, isScrolled:boolean}) => {
     return (
     isScrolled ? 
         <motion.nav 

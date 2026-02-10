@@ -1,0 +1,37 @@
+{
+  "sectionTitle": "Explore Our Amazing Categories",
+  "sectionSubtitle": "From learning essentials to playful treasures, we have everything to make your child's journey magical and educational.",
+  "featuredProducts": "Featured Products",
+  "featuredProductsSubtitle": "Discover our most popular items that kids and parents love!",
+  "showAllProducts": "Show All Products",
+  
+  "categoryCards": {
+    "School Supplies": {
+      "title": "School Supplies",
+      "subtitle": "Everything your little scholar needs",
+      "buttonText": "Explore School Supplies"
+    },
+    "Toys & Games": {
+      "title": "Toys & Games",
+      "subtitle": "Fun games and educational toys for your kids",
+      "buttonText": "Explore Toys & Games"
+    },
+    "Gifts": {
+      "title": "Gifts",
+      "subtitle": "Perfect presents for special moments",
+      "buttonText": "Explore Gifts"
+    },
+    "Bundles": {
+      "title": "Bundles",
+      "subtitle": "Amazing deals and combo packages",
+      "buttonText": "Explore Bundles"
+    }
+  },
+
+  "exploreBestToysTitle": "Explore Best Toys",
+  "exploreBestToysSubtitle": "Featured Toys for your kids and action figures.",
+  "shopNow": "Shop Now",
+
+  "backToSchoolTitle": "Back to School Supplies",
+  "backToSchoolSubtitle": "Explore best school supplies for your kids."
+}

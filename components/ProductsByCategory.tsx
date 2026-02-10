@@ -40,7 +40,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
             const data = await getProductsApi({
                 category: section === "games" ? "Toys & Games" : section === "school" ? "School Supplies" : "",
                 subcategory: isCategoriesSection ? subcategory : "",
-                sort: section === "rating" ? "rating" : "createdAt",
+                sort: section === "rating" ? "rating" : "newest",
                 limit: 12
             });
 
@@ -66,7 +66,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
             debouncedFetch(category, subcategory);
         }
         return () => debouncedFetch.cancel();
-    }, [category, subcategory, debouncedFetch]);
+    }, [category, subcategory, debouncedFetch, isCategoriesSection]);
 
 
     useEffect(() => {
@@ -82,7 +82,8 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
         drag: true,
         speed: 700,
         snap: true,
-        flickPower: 9000 ,
+        direction: 'ltr',
+        flickPower: 900 ,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         breakpoints: {
             700: { perPage: 2 },
@@ -90,7 +91,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
         },
     };
 
-
+    if (error) return <p>{error}</p>
     return (
         <section className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden mb-4 md:mb-12 max-w-[90rem] mx-auto px-4 md:px-8">
             <div className="flex w-full justify-between items-center">

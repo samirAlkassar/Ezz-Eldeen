@@ -1,0 +1,1 @@
+type typeLang = "en" | "ar";

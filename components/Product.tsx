@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/Toast";
 import { useSelector } from "react-redux";
 import {selectUser } from "../features/auth/authSlice";
+import { useParams } from "next/navigation";
 
 export const Product = ({ product, index, wishlist, size = "medium", isDragging, showRatings = false, showDescription = false }: 
     { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean, showRatings?: boolean, showDescription?: boolean }) => {
@@ -22,10 +23,11 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
     const dispatch = useDispatch<AppDispatch>();
     const { toast } = useToast();
     const user = useSelector(selectUser);
+    const params = useParams<{lang: typeLang }>()
 
     const handleAddToCart = (productId: string) => {
         if (!user) {
-            router.push("/register");
+            router.push(`/${params.lang}/register`);
             return
         };
         dispatch(addToCart({ productId, quantity: 1 }));
@@ -34,7 +36,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
 
     const toggleWishlist = () => {
         if (!user) {
-            router.push("/register");
+            router.push(`/${params.lang}/register`);
             return
         };
         const nextLiked = !isInWishList;
@@ -55,7 +57,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             e.stopPropagation();
             return;
             }
-        router.push(`/products/${product?.slug}`)
+        router.push(`/${params.lang}/products/${product?.slug}`)
     };
 
     return (
@@ -103,7 +105,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                 <div className="hidden md:flex items-center justify-start gap-1.5 mb-3 flex-wrap mt-2">
                     {product?.category && 
                         <span 
-                            onClick={()=>router.push(`/categories/${product?.category.replace(/\s+/g, '_')}`)}
+                            onClick={()=>router.push(`/${params.lang}/categories/${product?.category.replace(/\s+/g, '_')}`)}
                             className="text-[10px] md:text-xs font-medium py-0.5 md:py-1 px-2 md:px-2.5 rounded-lg md:rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-100 cursor-pointer">
                             {product?.category}
                         </span>}

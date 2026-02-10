@@ -1,0 +1,19 @@
+{
+  "storeTitle": "Ezz-Eldeen",
+  "cart": "Cart",
+  "wishlist": "Wishlist",
+  "arabic": "Arabic",
+  "english": "English",
+
+  "langButton": {
+    "arabic": "Ar",
+    "english": "En"
+  },
+
+  "profileTabs": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "logout": "Log out"
+  }
+}

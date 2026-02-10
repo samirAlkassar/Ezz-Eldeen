@@ -9,7 +9,7 @@ type ProductQuery = {
   sort?: "rating" | "price" | "new"
 }
 
-export async function getProducts(query: ProductQuery) {
+export async function getProducts(query: ProductQuery, lang: typeLang) {
   const params = new URLSearchParams()
 
   if (query.page) params.set("page", query.page.toString())
@@ -18,11 +18,14 @@ export async function getProducts(query: ProductQuery) {
   if (query.subCategory) params.set("subCategory", query.subCategory)
   if (query.sort) params.set("sort", query.sort)
   if (query.search) params.set("search", query.search)
-    console.log("page:", params.toString())
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`, {
-    next: { revalidate: 300 }
-  })
-
+    headers: {
+      "Accept-Language": lang,
+      "Content-Type": "application/json",
+    },
+    cache: "no-cache"
+  });
+  
   if (!res.ok) {
     throw new Error("Failed to fetch products")
   }

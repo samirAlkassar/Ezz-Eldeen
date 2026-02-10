@@ -22,6 +22,7 @@ interface ProductsSearchBarProps {
   order: OrderType;
   setOrder: (value: OrderType) => void;
   onFilterApply: (minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => void;
+  lang: typeLang
 }
 
 const ProductsSearchBar = ({
@@ -38,7 +39,8 @@ const ProductsSearchBar = ({
   setSort,
   order,
   setOrder,
-  onFilterApply
+  onFilterApply,
+  lang
 }: ProductsSearchBarProps) => {
   const [showCategoriesMenu, setShowCategoriesMenu] = useState<boolean>(false);
   const [showFiltersMenu, setShowFiltersMenu] = useState<boolean>(false);
@@ -52,13 +54,13 @@ const ProductsSearchBar = ({
       return;
     }
     
-    if (!pathname.startsWith("/products") && !pathname.startsWith("/categories")) {
+    if (!pathname.startsWith(`/${lang}/products`) && !pathname.startsWith(`/${lang}/categories`)) {
       return;
     }
     
     setCurrentPage(1);
     updateURL();
-  }, [searchTerm, currentCategory, minPrice, maxPrice, sort, order]);
+  }, [searchTerm, currentCategory, minPrice, maxPrice, sort, order, pathname, setCurrentPage]);
 
   const updateURL = () => {
     const params = new URLSearchParams();
@@ -68,11 +70,11 @@ const ProductsSearchBar = ({
     
     const queryString = params.toString();
     
-    if (pathname.startsWith("/categories") && currentCategory !== "All Products") {
+    if (pathname.startsWith(`/${lang}/categories`) && currentCategory !== "All Products") {
       const categoryPath = currentCategory.replace(/ & /g, "_&_").replace(/ /g, "_");
-      router.replace(`/categories/${categoryPath}${queryString ? `?${queryString}` : ""}`);
+      router.replace(`/${lang}/categories/${categoryPath}${queryString ? `?${queryString}` : ""}`);
     } else {
-      router.replace(`/products${queryString ? `?${queryString}` : ""}`);
+      router.replace(`/${lang}/products${queryString ? `?${queryString}` : ""}`);
     }
   };
 
@@ -199,8 +201,8 @@ const ProductsSearchBar = ({
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   <FilterButton
-                    active={sort === "createdAt"}
-                    onClick={() => setSort("createdAt")}>
+                    active={sort === "newest"}
+                    onClick={() => setSort("newest")}>
                     Newest
                   </FilterButton>
                   <FilterButton
@@ -235,7 +237,7 @@ const ProductsSearchBar = ({
                   onClick={() => {
                     setMinPrice(0);
                     setMaxPrice(200000);
-                    setSort("createdAt");
+                    setSort("newest");
                     setOrder("desc");
                   }}
                   className="flex-1 px-4 py-1.5 md:py-2 font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer">

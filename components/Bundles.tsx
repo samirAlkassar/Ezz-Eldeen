@@ -1,4 +1,5 @@
 import { motion } from "motion/react"
+import Image from "next/image";
 import { useRouter } from "next/navigation"
 
 const bundles = [
@@ -82,7 +83,10 @@ const BundleCard = ({bundle, index}: BundleCardProps) => {
             className="bg-white rounded-2xl p-6 text-left shadow-lg flex flex-col justify-between">
             <div>
                 <span className="text-sm font-semibold text-amber-500">{bundle.tag}</span>
-                <img src={"./images/school-bundle.jpg"} alt="" />
+                <div className="relative h-100 w-80">
+                    <Image src={"/images/school-bundle.jpg"} alt="" fill className="absolute w-full h-full object-cover"/>
+                </div>
+
                 <h3 className="text-xl font-bold mt-4 text-gray-800">{bundle.title}</h3>
                 <p className="text-gray-600 mt-2">{bundle.desc}</p>
             </div>

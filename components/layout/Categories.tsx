@@ -14,11 +14,11 @@ import ToysCategorySectionImage from "../../public/images/twister-car.png";
 import SchoolCategorySectionImage from "../../public/images/school-supplies.png";
 import GiftsCategorySectionImage from "../../public/images/gift.png";
 import BundlesCategorySectionImage from "../../public/images/school-supplies.png";
-import { ProductsResponse } from "@/features/products/productsAPI";
 import HeroProducsts from "../HeroProducts";
 import { HomeSectionType } from "@/features/products/server/getProducts";
 import { ProductType } from "@/features/products/types";
 import Bundles from "../Bundles";
+import { useTranslation } from "react-i18next";
 
 export const categoriesList = [
     {
@@ -69,12 +69,13 @@ export const categoriesList = [
 
 
 
-const Categories = ({products, sections}:{products: ProductType[], sections: HomeSectionType[]}) => {
+const Categories = ({products, sections, lang}:{products: ProductType[], sections: HomeSectionType[], lang: typeLang}) => {
     const router = useRouter();
     const gamesSection = sections.find(section => section.id === "games");
     const schoolSection = sections.find(section => section.id === "school");
     const bestSellers = sections.find(section => section.id === "rating");
-
+    const { t } = useTranslation();
+    
     return (
         <section className=" bg-gradient-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full">
@@ -84,7 +85,8 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                     transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
                     className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-[#FF791A] max-w-[90rem] mx-auto px-4 md:px-8">
-                    <span className="text-[#2B303B]">Explore Our Amazing</span> Categories
+                    {/* <span className="text-[#2B303B]">Explore Our Amazing</span> Categories */}
+                    {t("categories.sectionTitle")}
                 </motion.h1>
 
                 <motion.p
@@ -93,21 +95,23 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                     transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
                     className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center hidden md:block max-w-[90rem] mx-auto px-4 md:px-8">
-                    From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" />
-                    {`child's journey magical and educational.`}
+                    {/* From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" />
+                    {`child's journey magical and educational.`} */}
+                    {t("categories.sectionSubtitle")}
                 </motion.p>
 
                 <div className="grid grid-cols-2 gap-y-6 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full mt-4 md:mt-8 max-w-[60rem] mx-auto px-4 md:px-8">
                     {categoriesList.map((category, index) => (
-                        <CategoryCard
-                            key={index}
-                            delayIndex={index}
-                            title={category.title}
-                            subtitle={category.subtitle}
-                            icon={category.icon}
-                            theme={category.theme}
-                            image={category.image}
-                        />
+                    <CategoryCard
+                        key={index}
+                        delayIndex={index}
+                        title={category.title}
+                        titleText={t(`categories.categoryCards.${category.title}.title`)}
+                        subtitle={t(`categories.categoryCards.${category.title}.subtitle`)}
+                        theme={category.theme}
+                        image={category.image}
+                        lang={lang}
+                    />
                     ))}
                 </div>
 
@@ -118,7 +122,8 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                         transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
                         className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#FF791A]">
-                        <span className="text-[#2B303B]">Featured</span> Products
+                        {/* <span className="text-[#2B303B]">Featured</span> Products */}
+                        {t("categories.featuredProducts")}
                     </motion.h1>
 
                     <motion.p
@@ -127,15 +132,16 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
                         className="text-base lg:text-xl text-[#2B303B]/80 mt-0 md:mt-3 text-center mb-4">
-                        Discover our most popular items <span className="hidden md:inline">that kids and parents love!</span>
+                        {/* Discover our most popular items <span className="hidden md:inline">that kids and parents love!</span> */}
+                        {t("categories.featuredProductsSubtitle")}
                     </motion.p>
                     <HeroProducsts serverProducts={products}/>
                     
                     <div className="w-full flex justify-center mt-6 md:mx-8">
                         <button
-                            onClick={() => router.push("/products?page=1")}
+                            onClick={() => router.push(`/${lang}/products?page=1`)}
                             className="bg-black text-white font-medium text-base md:text-lg rounded-full shadow-md px-4 py-2 md:px-6 md:py-3 cursor-pointer active:scale-95">
-                            Show ALl Products
+                            {t("categories.showAllProducts")}
                         </button>
                     </div>
                 </div>
@@ -152,10 +158,10 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
                             className="text-2xl md:text-3xl text-left lg:text-5xl font-bold text-gray-800 mt-8 md:mt-12">
-                            Explore Best Toys
+                            {t("categories.exploreBestToysTitle")}
                         </motion.h1>
-                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">Featured Toys for your kids and action figures.</p>
-                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">Shope Now</button>
+                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">{t("categories.exploreBestToysSubtitle")}</p>
+                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">{t("categories.shopNow")}</button>
                         </div>
                         <motion.div 
                             initial={{ scale: 0 }}
@@ -186,10 +192,10 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
                             className="text-2xl md:text-3xl text-left lg:text-5xl font-bold text-gray-800 mt-8 md:mt-12">
-                            Back to School Supplies
+                            {t("categories.backToSchoolTitle")}
                         </motion.h1>
-                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">Explore best school supplies for your kids.</p>
-                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">Shope Now</button>
+                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">{t("categories.backToSchoolSubtitle")}</p>
+                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">{t("categories.shopNow")}</button>
                         </div>
                         <motion.div 
                             initial={{ scale: 0 }}
@@ -227,8 +233,8 @@ const Categories = ({products, sections}:{products: ProductType[], sections: Hom
 }
 
 
-const CategoryCard = ({ icon, theme, title, subtitle, delayIndex, image }:
-    { icon?: React.ReactNode, theme?: string, title: string, subtitle: string, delayIndex: number, image: StaticImageData }) => {
+const CategoryCard = ({theme, title, titleText, subtitle, delayIndex, image, lang }:
+    {theme?: string, title: string, titleText: string, subtitle: string, delayIndex: number, image: StaticImageData, lang: typeLang }) => {
     const router = useRouter();
     return (
         <motion.div
@@ -236,15 +242,15 @@ const CategoryCard = ({ icon, theme, title, subtitle, delayIndex, image }:
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 * (delayIndex + 1), duration: 0.2 }}
             viewport={{ once: true, amount: 0.2 }}
-            onClick={() => router.push(`/categories/${title.replace(/\s+/g, '_')}`)}
+            onClick={() => router.push(`${lang}/categories/${title.replace(/\s+/g, '_')}`)}
             className="flex flex-col items-center group cursor-pointer">
             <div className={`${theme} relative w-32 h-32 lg:w-40 lg:h-40 rounded-full flex items-center justify-center border-4 border-white shadow-lg overflow-hidden transition-all duration-300 ease-out group-hover:scale-110 group-hover:shadow-xl`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                <Image src={image} alt={`${title}-category-image`} fill className="w-full h-full object-cover"/>
+                <Image src={image} alt={`${titleText}-category-image`} fill className="w-full h-full object-cover"/>
             </div>
 
             <h3 className="text-base sm:text-lg lg:text-xl font-bold mt-3 text-center text-gray-700 group-hover:text-gray-900 transition-colors duration-200">
-                {title}
+                {titleText}
             </h3>
             
             {subtitle && (

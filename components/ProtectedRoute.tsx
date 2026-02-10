@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { fetchCurrentUser } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/app/store";
+import i18n from "@/i18n/i18n";
 
 interface ProtectedRouteProps {
     children: ReactNode;
@@ -23,12 +24,12 @@ export default function ProtectedRoute({ children, role }: ProtectedRouteProps) 
     useEffect(() => {
         if (!loading) {
             if (!currentUser) {
-                router.replace("/login");
+                router.replace(`/${i18n.language}/login`);
                 return;
             }
 
             if (role && currentUser.role !== role) {
-                router.replace("/");
+                router.replace(`/${i18n.language}/`);
                 return;
             }
         }
