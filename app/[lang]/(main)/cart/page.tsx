@@ -41,7 +41,7 @@ const CartPage = () => {
     };
 
     return (
-        <main className="bg-orange-50/50 pb-15 md:pb-20">
+        <main className="bg-background pb-15 md:pb-20">
             <motion.h1
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}

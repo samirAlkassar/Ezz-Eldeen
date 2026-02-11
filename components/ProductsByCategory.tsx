@@ -84,7 +84,7 @@ const ProductsByCategory = ({title, section = "categories", initialProducts, lan
         drag: true,
         speed: 700,
         snap: true,
-        direction: 'ltr',
+        direction: lang === "en" ? 'ltr' : 'rtl',
         flickPower: 900 ,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         breakpoints: {

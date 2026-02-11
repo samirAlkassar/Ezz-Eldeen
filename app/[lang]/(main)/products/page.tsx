@@ -32,11 +32,13 @@ const ProductsPage = async ({searchParams, params}: ProductsPageProps) => {
   }, params.lang);
 
   return (
-    <div className="max-w-[85rem] mx-auto pb-12 md:pb-25 px-4">
-      <Breadcrumbs currentPage="products" />
-      <Suspense fallback={<>...</>}>
-        <ProductsClient initialProducts={data.products} initialPagination={data.pagination} initialPage={page} lang={params.lang}/>
-      </Suspense>
+    <div className="bg-background">
+      <div className="max-w-[85rem] mx-auto pb-12 md:pb-25 px-4">
+        <Breadcrumbs currentPage="products" />
+        <Suspense fallback={<>...</>}>
+          <ProductsClient initialProducts={data.products} initialPagination={data.pagination} initialPage={page} lang={params.lang}/>
+        </Suspense>
+      </div>
     </div>
   );
 };

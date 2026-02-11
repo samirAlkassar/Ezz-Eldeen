@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 const ProductSection = ({product} : {product:  ProductType | null}) => {
     const [quantity, setQuantity] = useState<number>(1);
     const [selectedImage, setSelectedImage] = useState<number>();
+    const [imageIndex, setImageIndex] = useState<number>(0);
     const router = useRouter();
 
     const features : string[] = [];
@@ -18,7 +19,7 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
             <div className="flex-1 flex flex-col space-y-6">
                 <div className="relative bg-gray-100 h-[340px] sm:h-[400px] md:h-[620px] aspect-square rounded-2xl overflow-hidden">
                     <Image
-                        src={product?.images[0]?.url || "/images/placeholder.jpg"}
+                        src={product?.images[imageIndex]?.url || "/images/placeholder.jpg"}
                         alt={""}
                         fill
                         className="absolute w-full h-full object-contain z-10"/>
@@ -30,7 +31,7 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
                     {product?.images.map((img, index) => (
                         <motion.button
                         key={index}
-                        onClick={() => setSelectedImage(index)}
+                        onClick={() => {setSelectedImage(index); setImageIndex(index)}}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className={`relative w-18 h-18 md:w-26 md:h-26 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${

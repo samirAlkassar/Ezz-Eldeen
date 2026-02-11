@@ -148,8 +148,8 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                         <td className="px-3 py-2 md:px-6 md:py-3.5">
                                             <div className="flex items-center gap-3 relative">
                                                 <Image 
-                                                    src={product.images?.[0]?.url ?? "/placeholder.jpg"} 
-                                                    alt={product.name}
+                                                    src={product?.images?.[0]?.url ?? "/placeholder.jpg"} 
+                                                    alt={product?.name}
                                                     width={80}
                                                     height={80}
                                                     className="w-10 md:w-12 h-10 md:h-12 rounded-lg object-contain border border-slate-200"

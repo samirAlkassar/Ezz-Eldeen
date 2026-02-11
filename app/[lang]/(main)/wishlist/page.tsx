@@ -21,7 +21,7 @@ const Wishlist = () => {
 
 
     return (
-        <main className="bg-orange-50/50">
+        <main className="bg-background">
             <div className="mx-auto max-w-7xl gap-8 py-4 px-4">
                 <motion.h1
                     initial={{ opacity: 0, y: 18 }}

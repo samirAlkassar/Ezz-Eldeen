@@ -245,8 +245,7 @@ const SlideTabes = ({isScrolled, showBottomMenu, lang}:{isScrolled:boolean, show
                 onMouseLeave={() => {
                     setPosition({ opacity: 0 });
                 }}
-                className={twMerge("flex items-center relative py-1 md:py-2 min-h-[50px] md:min-h-[60px] transition-al")}
-            >
+                className={twMerge("flex items-center relative py-1 md:py-2 min-h-[50px] md:min-h-[60px] transition-al")}>
                 <Tab onClick={()=>router.push(`/${lang}`)} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
                 <Tab onClick={()=>router.push(`/${lang}/categories/Toys_&_Games`)} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
                 <Tab onClick={()=>router.push(`/${lang}/categories/School_Supplies`)} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>

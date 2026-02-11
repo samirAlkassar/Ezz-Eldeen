@@ -11,7 +11,7 @@ const Footer = () => {
 
   if(isDashboardPage) {return}
   return (
-    <footer className="bg-gray-800 md:bg-gradient-to-r md:from-purple-600 md:via-pink-600 md:to-orange-500 text-white py-8 md:py-10">
+    <footer className="bg-gray-800 md:bg-gradient-to-br md:from-purple-900 md:via-indigo-900 md:to-slate-900 text-white py-8 md:py-10">
       <div className="container mx-auto px-5 sm:px-6 md:px-12">
         <div className="grid md:grid-cols-4 gap-4 md:gap-8 text-center md:text-left">
           {/* Brand */}
@@ -67,9 +67,9 @@ const Footer = () => {
         </div>
 
 
-        <div className="md:flex justify-center gap-6 w-full md:-mt-25 hidden">
+        {/* <div className="md:flex justify-center gap-6 w-full md:-mt-25 hidden">
           <Image src="/images/toys-footer.png" alt="" width={740} height={740} />
-        </div>
+        </div> */}
         {/* Bottom bar */}
         <div className="md:border-t border-white/20 pt-4 md:pt-6 text-sm text-gray-200 text-center mt-4">
           © 2025 Ezz-Eldeen. All rights reserved.

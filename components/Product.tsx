@@ -73,7 +73,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             }}
             viewport={{ once: true, amount: 0.2 }}
             className={twMerge("bg-white shadow-sm md:shadow-lg transition-shadow duration-300 flex flex-col relative justify-between flex-1 h-full",
-                size === "small" ? "rounded-xl px-3 py-4" : "rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-5"
+                "rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-5"
             )}>
             <div>
                 <div
@@ -99,8 +99,8 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                     </div>}
                 </div>
 
-                <h3 className="text-base sm:text-lg md:text-xl font-medium line-clamp-2 md:line-clamp-1 text-gray-800">{product.name}</h3>
-                {showDescription && <p className={twMerge("text-gray-500 mb-2", size === "small" ? "text-xs line-clamp-1" : "text-sm line-clamp-2")}>{product.description}</p>}
+                <h3 className="text-base sm:text-lg md:text-xl font-medium line-clamp-1 text-gray-800">{product.name}</h3>
+                {showDescription && <p className="text-gray-500 mb-2 text-sm line-clamp-1 md:line-clamp-2">{product.description}</p>}
 
                 
                 <div className="hidden md:flex items-center justify-start gap-1.5 mb-3 flex-wrap mt-2">
@@ -120,15 +120,19 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             </div>
 
 
-            <div className="flex justify-between items-center gap-1 md:gap-3 pt-3 md:border-t border-gray-100">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1 md:gap-3 pt-1 md:pt-3 md:border-t border-gray-100">
                 <div className="flex flex-col">
-                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5">{t("product.price")}</span>
-                    <p className="text-gray-900 text-lg md:leading-6 sm:text-xl md:text-2xl font-semibold md:font-bold truncate max-w-12 md:max-w-fit">${product?.price}</p>
+                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5 hidden md:block">{t("product.price")}</span>
+                    <div className="flex gap-2 items-center md:items-end">
+                        <p className="text-gray-900 md:leading-6 text-xl md:text-2xl font-semibold md:font-bold truncate max-w-12 md:max-w-fit">${product?.discountPrice ? product?.discountPrice : product?.price}</p>
+                        {product?.discountPrice && <p className="text-gray-600 md:leading-6 text-sm md:text-base truncate max-w-12 md:max-w-fit line-through">${product?.price}</p>}
+                    </div>
+
                 </div>
                 <button 
                     onClick={() => handleAddToCart(product?._id)} 
-                    className="py-2.5 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base bg-[#F58137] hover:bg-[#FA8C47] active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
-                    <ShoppingCart size={20} className="hidden sm:block"/>
+                    className="orange-button w-full md:w-fit py-2 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
+                    <ShoppingCart size={20}/>
                     <p>{t("product.addToCart")}</p>
                 </button>
             </div>

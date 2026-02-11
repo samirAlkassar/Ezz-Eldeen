@@ -49,17 +49,24 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
         ar: existing?.subcategory ?? "",
         en: existing?.subcategory ?? ""
     });
-    const [imageFile, setImageFile] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string | null>(existing?.images?.[0]?.url ?? null);
+    const [imageFiles, setImageFiles] = useState<File[]>([]);
+    const [previews, setPreviews] = useState<string[]>(
+    existing?.images?.map(img => img.url) ?? []
+    );
     const { toast } = useToast();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const file = e.target.files[0];
-            setImageFile(file);
-            setPreview(URL.createObjectURL(file));
-        }
+        if (!e.target.files) return;
+
+        const files = Array.from(e.target.files);
+
+        setImageFiles(prev => [...prev, ...files]);
+        setPreviews(prev => [
+            ...prev,
+            ...files.map(file => URL.createObjectURL(file))
+        ]);
     };
+
 
     const validateStep = (step: number) => {
         if (step === 1) {
@@ -78,7 +85,7 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
         setSaving(true);
         try {
             if (isEdit) {
-                if (imageFile) {
+                if (imageFiles) {
                     const formData = new FormData();
                     formData.append("name", JSON.stringify(name));
                     formData.append("slug", slug);
@@ -89,7 +96,9 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                     formData.append("tags", JSON.stringify(tags));
                     formData.append("category",  JSON.stringify(category))
                     formData.append("subcategory",  JSON.stringify(subcategory));
-                    formData.append("images", imageFile);
+                    imageFiles.forEach(file => {
+                        formData.append("images", file);
+                    });
                     await patchProduct(existing._id, formData);
                 } else {
                     const payload: ProductUpdatePayload = {
@@ -131,9 +140,9 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                 formData.append("category", JSON.stringify(category));
                 formData.append("subcategory", JSON.stringify(subcategory));
 
-                if (imageFile) {
-                    formData.append("images", imageFile);
-                }
+                imageFiles.forEach(file => {
+                    formData.append("images", file);
+                });
                 for (const [key, value] of formData.entries()) {
                     console.log(key, value);
                 }
@@ -453,14 +462,37 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                         <input
                                             type="file"
                                             accept="image/*"
+                                            multiple
                                             onChange={handleFileChange}
-                                            className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         />
-                                        {preview && (
-                                            <div className="relative">
-                                                <Image src={preview} width={50} height={50} alt="Preview" className="mt-3 w-32 h-32 object-cover rounded-lg border border-slate-200" />
+                                        {previews.length > 0 && (
+                                            <div className="flex gap-3 flex-wrap mt-3">
+                                                {previews.map((src, index) => (
+                                                <div key={index} className="relative">
+                                                    <Image
+                                                        key={index}
+                                                        src={src}
+                                                        alt={`Preview ${index}`}
+                                                        width={120}
+                                                        height={120}
+                                                        className="w-32 h-32 object-cover rounded-lg border border-slate-200"
+                                                    />
+
+                                                    <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setPreviews(prev => prev.filter((_, i) => i !== index));
+                                                        setImageFiles(prev => prev.filter((_, i) => i !== index));
+                                                    }}
+                                                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                                                    >
+                                                    <X size={14} />
+                                                    </button>
+                                                </div>
+                                                ))}
                                             </div>
                                         )}
+
                                     </div>
                                 </motion.div>
                             )}
@@ -518,10 +550,18 @@ function ProductFormModal({ onClose, onSaved, existing, createProduct, patchProd
                                                 <p className="text-base text-slate-800">{tags.ar || "No tags"}</p>
                                             </div>
                                         </div>
-                                        {preview && (
-                                            <div className="relative">
-                                                <p className="text-base text-slate-700 font-medium mb-2">Product Image</p>
-                                                <Image src={preview} alt="Product" width={40} height={40} className="w-40 h-40 object-cover rounded-lg border border-slate-200" />
+                                        {previews.length > 0 && (
+                                            <div className="flex gap-3 flex-wrap">
+                                                {previews.map((src, i) => (
+                                                <Image
+                                                    key={i}
+                                                    src={src}
+                                                    alt="Product"
+                                                    width={160}
+                                                    height={160}
+                                                    className="w-40 h-40 object-cover rounded-lg border border-slate-200"
+                                                />
+                                                ))}
                                             </div>
                                         )}
                                     </div>
