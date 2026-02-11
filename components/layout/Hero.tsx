@@ -52,7 +52,7 @@ const Hero = () => {
             {t("hero.magicAwaits")} <br className="hidden md:block"/> 
             <span className="text-yellow-300 text-[50px] md:text-6xl xl:text-7xl">{t("hero.ezzEldeen")}</span>
             <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className={twMerge("absolute -z-10 hidden md:block",
-              i18n.language === "ar" ? "-top-6 right-0 md:-right-8" : "-top-6 left-0 md:-left-8"
+              i18n.language === "ar" ? "-top-4 right-0 md:-right-8" : "-top-4 left-0 md:-left-8"
             )}/>
           </motion.h1>
 
@@ -61,7 +61,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}
-            className="text-base sm:text-base lg:text-2xl text-white mt-2 md:mt-4 text-center md:text-left max-w-xl"
+            className="text-base sm:text-base lg:text-2xl text-white mt-2 md:mt-4 text-center md:text-start max-w-xl"
           >
             {t("hero.subtitle")}
           </motion.p> 

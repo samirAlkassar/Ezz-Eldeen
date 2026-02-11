@@ -28,8 +28,7 @@ export default async function Home({params}:{params: {lang: typeLang}}) {
       <Categories
         products={mainProducts.products}
         sections={sections}
-        lang={currentLang}
-      />
+        lang={currentLang}/>
       <Testimonials />
     </>
   )

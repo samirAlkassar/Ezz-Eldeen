@@ -1,6 +1,7 @@
 import { motion } from "motion/react"
 import Image from "next/image";
 import { useRouter } from "next/navigation"
+import { useTranslation } from "react-i18next";
 
 const bundles = [
     {
@@ -26,6 +27,7 @@ const bundles = [
 
 const Bundles = () => {
     const router = useRouter();
+    const { t } = useTranslation();
 
     return (
         <div id="bundles" className="bg-linear-30 from-orange-400/5 via-orange-500/5 to-orange-400/5 px-4 w-full mb-10 md:mb-20 mt-4 flex flex-col items-center justify-center py-12">
@@ -35,7 +37,7 @@ const Bundles = () => {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 viewport={{ once: true }}
                 className="text-2xl md:text-4xl font-bold text-gray-800">
-                {`Can’t Decide? Try Our Bundles!`}
+                {t("hero.cantDecide")}
             </motion.h1>
 
             <motion.p
@@ -44,7 +46,7 @@ const Bundles = () => {
                 transition={{ delay: 0.15, duration: 0.4 }}
                 viewport={{ once: true }}
                 className="text-base md:text-lg text-gray-700 mt-2 max-w-2xl">
-                Save more with curated bundles designed for fun, learning, and growing minds.
+                {t("hero.cantDecideSubtitle")}
             </motion.p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 w-full mx-auto max-w-[75rem]">
@@ -56,7 +58,7 @@ const Bundles = () => {
             <button 
                 onClick={()=>{router.push("/categories/bundles")}}
                 className="bg-gray-900 text-white cursor-pointer px-6 py-3 rounded-full text-lg font-semibold mt-12 transition">
-                View All Bundles
+                {t("hero.viewAllBundles")}
             </button>
         </div>
     )

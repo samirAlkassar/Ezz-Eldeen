@@ -15,8 +15,9 @@ export interface UpdateCartRequest {
 export async function getCartApi(): Promise<CartResponse> {
     const token = await getCookies("token");
     if (!token) {
-        console.log("token not found")
-    }
+        return {} as CartResponse;
+    };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart`, {
         method: "GET",
         headers: {
@@ -33,8 +34,9 @@ export async function getCartApi(): Promise<CartResponse> {
 export async function addToCartApi(body: AddToCartRequest): Promise<CartResponse> {
     const token = await getCookies("token");
     if (!token) {
-        console.log("token not found")
-    }
+        return {} as CartResponse;
+    };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart/add`, {
         method: "POST",
         headers: {
@@ -51,8 +53,9 @@ export async function addToCartApi(body: AddToCartRequest): Promise<CartResponse
 export async function updateCartItemApi(body: UpdateCartRequest): Promise<CartResponse> {
     const token = await getCookies("token");
     if (!token) {
-        console.log("token not found")
-    }
+        return {} as CartResponse;
+    };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart/update`, {
         method: "PUT",
         headers: {
@@ -69,8 +72,9 @@ export async function updateCartItemApi(body: UpdateCartRequest): Promise<CartRe
 export async function removeFromCartApi(productId: string): Promise<CartResponse> {
     const token = await getCookies("token");
     if (!token) {
-        console.log("token not found")
-    }
+        return {} as CartResponse;
+    };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart/remove/${productId}`, {
         method: "DELETE",
         headers: {
@@ -86,8 +90,9 @@ export async function removeFromCartApi(productId: string): Promise<CartResponse
 export async function clearCartApi(): Promise<CartResponse> {
     const token = await getCookies("token");
     if (!token) {
-        console.log("token not found")
-    }
+        return {} as CartResponse;
+    };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart/clear`, {
         method: "DELETE",
         headers: {

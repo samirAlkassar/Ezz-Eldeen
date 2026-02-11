@@ -7,7 +7,9 @@
 
   "langButton": {
     "arabic": "ع",
-    "english": "En"
+    "english": "En",
+    "changeLangToArabic": "change language to arabic",
+    "changeLangToEnglish": "change language to English"
   },
 
   "profileTabs": {
@@ -15,5 +17,8 @@
     "settings": "الإعدادات",
     "dashboard": "لوحة التحكم",
     "logout": "تسجيل الخروج"
-  }
+  },
+  "login": "تسجيل الدخول",
+  "register": "إنشاء حساب"
+
 }

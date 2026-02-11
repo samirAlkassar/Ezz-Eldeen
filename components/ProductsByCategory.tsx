@@ -16,10 +16,12 @@ import "@splidejs/react-splide/css";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import LoadingProductSkeleton from "./LoadingProductSkeleton";
+import { useTranslation } from "react-i18next";
 
 
-const ProductsByCategory = ({title = "Shope By Cateogries", section = "categories", initialProducts}:
-    {title?: string, section?: "categories" | "rating" | "new" | "games" | "school", initialProducts?: ProductType[]}) => {
+const ProductsByCategory = ({title, section = "categories", initialProducts, lang}:
+    {title?: string, section?: "categories" | "rating" | "new" | "games" | "school", initialProducts?: ProductType[], lang: typeLang}) => {
+    const { t } = useTranslation();
     const [category, setCategory] = useState<CategoriesFilterType>("Toys & Games");
     const [subcategory, setSubCategory] = useState("puzzles");
     const [isDragging, setIsDragging] = useState(false);
@@ -31,7 +33,7 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
     const router = useRouter();
     const isCategoriesSection = section === "categories";
     const subcategoriesList = isCategoriesSection ? subcategories : [];
-
+    if (!title) {title = t("hero.productByCategory.shopeByCategories")}
     const fetchProducts = async (category: CategoriesFilterType, subcategory: string) => {
         try {
             setLoading(true);
@@ -106,8 +108,15 @@ const ProductsByCategory = ({title = "Shope By Cateogries", section = "categorie
                             router.push(`/products?sort=rating`)
                         }
                     }}
-                    className="rounded-full bg-gray-800 text-white text-sm md:text-xl px-3 md:px-5 py-1 md:py-1.5 flex items-center justify-center md:gap-1 cursor-pointer hover:[&_svg]:translate-x-1">
-                    <p>Show All</p> <ChevronRight size={24} className="arrow transition-all duration-75 ease-in scale-80 md:scale-100"/>
+                    className={twMerge("rounded-full bg-gray-800 text-white text-sm md:text-xl px-3 md:px-5 py-1 md:py-1.5",
+                                        "flex items-center justify-center md:gap-1 cursor-pointer hover:[&_svg]:translate-x-1",
+                                        lang === "ar" ? "hover:[&_svg]:-translate-x-1" : "hover:[&_svg]:translate-x-1")}>
+                    <p>{t("hero.productByCategory.showAll")}</p> 
+                    <ChevronRight 
+                        size={24} 
+                        className={twMerge("transition-all duration-75 ease-in scale-80 md:scale-100",
+                            lang === "ar" && "rotate-y-180"
+                        )}/>
                 </button>
             </div>
             {isCategoriesSection && (

@@ -147,7 +147,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                 </div>
 
 
-                <ProductsByCategory />
+                <ProductsByCategory lang={lang}/>
 
                 <div className="bg-linear-30r from-cyan-500/10 via-blue-500/10 to-indigo-500/10 px-4 w-full mb-10 md:mb-20 mt-4 h-55 md:h-70">
                     <div className="mx-auto max-w-[90rem] md:px-8 flex justify-around items-start">
@@ -180,6 +180,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     title={gamesSection.title}
                     section={gamesSection.id}
                     initialProducts={gamesSection.products}
+                    lang={lang}
                 />
                 )}
 
@@ -214,6 +215,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     title={schoolSection.title}
                     section={schoolSection.id}
                     initialProducts={schoolSection.products}
+                    lang={lang}
                 />
                 )}
 
@@ -225,6 +227,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     title={bestSellers.title}
                     section={bestSellers.id}
                     initialProducts={bestSellers.products}
+                    lang={lang}
                 />
                 )}
             </div>

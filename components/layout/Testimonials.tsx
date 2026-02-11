@@ -4,13 +4,15 @@ import { Star } from "lucide-react";
 import testimonials from "../../constants/testimonials.json"
 import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const Testimonials = () => {
+    const { t } = useTranslation();
     return (
         <div className="overflow-hidden relative h-200 md:h-140 flex items-center justify-center flex-col bg-orange-50">
             {/* <img src="./images/testimonials-splash.jpg" alt="testimonials-splash-screen" className="w-full h-full object-cover absolute -z-10"/> */}
             <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 mt-8 md:mt-4">
-                Testimonials <span className="text-gray-700">from our clients</span>
+                {t("hero.testimonials")}
             </h1>
             <div className="max-w-5xl mx-auto py-12 grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-8 mt-0 md:mt-10 px-8 md:px-6">
                 {

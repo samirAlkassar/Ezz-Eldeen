@@ -4,5 +4,13 @@
   "ezzEldeen": "عز الدين",
   "subtitle": "اكتشف مستلزمات مدرسية رائعة وألعاب وهدايا تُشعل الخيال والتعلم في كل طفل.",
   "startShopping": "ابدأ التسوق",
-  "viewCollections": "عرض المجموعات"
+  "viewCollections": "عرض المجموعات",
+  "productByCategory": {
+    "showAll": "عرض الكل",
+    "shopeByCategories": "تسوق حسب الفئات"
+  },
+  "cantDecide": "لم تحسم اختيارك؟ جرّب باقاتنا",
+  "cantDecideSubtitle": "وفّر أكثر مع باقات مختارة بعناية تجمع بين المتعة والتعلّم وتنمية العقول. مثالية للألعاب",
+  "viewAllBundles": "عرض جميع الباقات",
+  "testimonials": "آراء عملائنا"
 }

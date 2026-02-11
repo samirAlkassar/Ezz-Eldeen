@@ -12,7 +12,6 @@ import ProductsSearchBar from "../ProductsSearchBar";
 import { usePathname, useRouter } from "next/navigation";
 import LoadingProductSkeleton from "../LoadingProductSkeleton";
 import { ProductType } from "@/features/products/types";
-import i18n from "@/i18n/i18n";
 
 export type CategoriesFilterType =
   | "All Products"

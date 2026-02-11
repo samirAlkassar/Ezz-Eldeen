@@ -200,13 +200,13 @@ const Navbar = () => {
                     ) : (
                         <div className="flex gap-4 text-lg font-medium">
                             <Link
-                                href="/login"
-                                className="bg-white text-[#FF773C] text-base md:text-lg py-0.5 px-3 md:px-4 md:py-1 rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors"
-                            >
-                                Login
+                                href={`/${params.lang}/login`}
+                                className="bg-white text-[#FF773C] text-base md:text-lg sm:py-0.5 sm:px-3 md:px-4 md:py-1 h-10 w-10 sm:h-fit flex sm:block items-center justify-center sm:w-fit rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors">
+                                <span className="hidden md:block">{t("navbar.login")}</span>
+                                <User size={24} className="block sm:hidden"/>
                             </Link>
-                            <Link href="/register" className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
-                                Register
+                            <Link href={`/${params.lang}/register`} className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
+                                {t("navbar.register")}
                             </Link>
                         </div>
                     )}

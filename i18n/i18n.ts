@@ -8,6 +8,10 @@ import enCategories from "./en/categories.json";
 import arCategories from "./ar/categories.json";
 import enNavbar from "./en/navbar.json";
 import arNavbar from "./ar/navbar.json";
+import enAuth from "./en/auth.json";
+import arAuth from "./ar/auth.json";
+import enProduct from "./en/product.json";
+import arProduct from "./ar/product.json";
 
 
 i18n
@@ -24,6 +28,8 @@ i18n
             hero: enHero,
             categories: enCategories,
             navbar: enNavbar,
+            auth: enAuth,
+            product: enProduct,
         }
       },
       ar: {
@@ -31,6 +37,8 @@ i18n
             hero: arHero,
             categories: arCategories,
             navbar: arNavbar,
+            auth: arAuth,
+            product: arProduct,
           }
         }
       }

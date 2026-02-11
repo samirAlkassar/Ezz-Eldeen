@@ -13,6 +13,7 @@ import { useToast } from "@/components/Toast";
 import { useSelector } from "react-redux";
 import {selectUser } from "../features/auth/authSlice";
 import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export const Product = ({ product, index, wishlist, size = "medium", isDragging, showRatings = false, showDescription = false }: 
     { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean, showRatings?: boolean, showDescription?: boolean }) => {
@@ -24,7 +25,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
     const { toast } = useToast();
     const user = useSelector(selectUser);
     const params = useParams<{lang: typeLang }>()
-
+    const {t} = useTranslation();
     const handleAddToCart = (productId: string) => {
         if (!user) {
             router.push(`/${params.lang}/register`);
@@ -121,14 +122,14 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
 
             <div className="flex justify-between items-center gap-1 md:gap-3 pt-3 md:border-t border-gray-100">
                 <div className="flex flex-col">
-                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5">Price</span>
+                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5">{t("product.price")}</span>
                     <p className="text-gray-900 text-lg md:leading-6 sm:text-xl md:text-2xl font-semibold md:font-bold truncate max-w-12 md:max-w-fit">${product?.price}</p>
                 </div>
                 <button 
                     onClick={() => handleAddToCart(product?._id)} 
                     className="py-2.5 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base bg-[#F58137] hover:bg-[#FA8C47] active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
                     <ShoppingCart size={20} className="hidden sm:block"/>
-                    <p>Add to cart</p>
+                    <p>{t("product.addToCart")}</p>
                 </button>
             </div>
         </motion.div>

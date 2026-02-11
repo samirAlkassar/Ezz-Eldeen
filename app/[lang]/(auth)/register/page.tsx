@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useToast } from "@/components/Toast";
 import { CheckSquare, TriangleAlert } from 'lucide-react';
-
+import { useParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function RegisterPage() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +18,9 @@ export default function RegisterPage() {
         password: "",
         confirmPassword: "",
     });
-    
+    const params = useParams<{lang: typeLang}>();
+    const {t} = useTranslation();
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -59,13 +62,13 @@ export default function RegisterPage() {
             <div className="relative flex-1 flex justify-center items-center p-6">
                 <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-md">
                     <h2 className="text-3xl font-extrabold text-center text-[#FF791A] mb-6">
-                        Create an account
+                        {t("auth.registerPage.title")}
                     </h2>
                     <form className="space-y-3 md:space-y-5" onSubmit={handleSubmit}>
                         <div className='flex gap-4'>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 md:mb-1">
-                                First Name
+                                {t("auth.registerPage.firstName")}
                                 </label>
                                 <input
                                     type="text"
@@ -78,7 +81,7 @@ export default function RegisterPage() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 md:mb-1">
-                                Last Name
+                                {t("auth.registerPage.lastName")}
                                 </label>
                                 <input
                                     type="text"
@@ -93,7 +96,7 @@ export default function RegisterPage() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 md:mb-1">
-                                Email
+                                {t("auth.registerPage.email")}
                             </label>
                             <input
                                 type="email"
@@ -106,7 +109,7 @@ export default function RegisterPage() {
                         </div>
                         <div>
                             <label className={`block text-sm font-medium text-gray-700 md:mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
-                                Password
+                                {t("auth.registerPage.password")}
                             </label>
                             <input
                                 type="password"
@@ -119,7 +122,7 @@ export default function RegisterPage() {
                         </div>
                         <div>
                             <label className={`block text-sm font-medium text-gray-700 md:mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
-                                Confirm Password
+                                {t("auth.registerPage.confirmPassword")}
                             </label>
                             <input
                                 type="password"
@@ -146,14 +149,14 @@ export default function RegisterPage() {
                                 Creating account
                             </span>
                             ) : (
-                            "Create account"
+                            `${t("auth.registerPage.registerbutton")}`
                             )}
                         </button>
                     </form>
                     <p className="text-center text-sm text-gray-600 mt-4">
-                        Already have an account?{' '}
-                        <Link href="/login" className="text-[#FF791A] font-semibold hover:underline">
-                            Login
+                        {t("auth.registerPage.message")}{' '}
+                        <Link href={`/${params.lang}/login`} className="text-[#FF791A] font-semibold hover:underline">
+                            {t("auth.login")}
                         </Link>
                     </p>
                 </div>
