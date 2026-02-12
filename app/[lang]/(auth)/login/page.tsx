@@ -5,6 +5,7 @@ import setCookies from "@/actions/setCoockies";
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
     const [email, setEmail] = useState<string>("");
@@ -14,6 +15,7 @@ export default function LoginPage() {
     const [loading, setLoading] = useState<boolean>(false);
     const params = useParams<{ lang: typeLang }>();
     const { t } = useTranslation();
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -37,9 +39,10 @@ export default function LoginPage() {
             }
 
             setSuccess("Logged in successfully ✅");
-            await setCookies("token", data.token)
+            await setCookies("token", data.token);
 
-            window.location.href = "/"
+            router.push(`/${params.lang}/`);
+
         } catch (err) {
             console.error(err);
             setError("Something went wrong. Please try again.");

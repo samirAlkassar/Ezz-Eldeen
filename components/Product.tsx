@@ -32,7 +32,18 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             return
         };
         dispatch(addToCart({ productId, quantity: 1 }));
-        toast({ title: "Added to cart", description: "Item is added to your cart successfully",variant: "default", position: "bottom-right", icon: <ShoppingCart size={20}/> })
+        toast({ 
+            title: "Added to cart", 
+            description: `${product.name}`,
+            variant: "default",
+            position: "bottom-right", 
+            icon: <ShoppingCart size={20}/>,
+            image: `${product.images[0].url}`,
+            actionButton: {
+                text: "view cart",
+                onClick: ()=>{router.push(`/${params.lang}/cart`)}
+            }
+        })
     };
 
     const toggleWishlist = () => {
@@ -120,10 +131,14 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             </div>
 
 
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1 md:gap-3 pt-1 md:pt-3 md:border-t border-gray-100">
-                <div className="flex flex-col">
+            <div className={twMerge("flex flex-col justify-between items-start lg:items-end xl:items-center gap-1 lg:gap-1 pt-1 md:pt-3 lg:border-t border-gray-100",
+                params.lang === "ar" ? "lg:flex-row-reverse" : "lg:flex-row"
+            )}>
+                <div className="flex flex-col text-left">
                     <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5 hidden md:block">{t("product.price")}</span>
-                    <div className="flex gap-2 items-center md:items-end">
+                    <div className={twMerge("flex gap-2 items-center md:items-end", 
+                        params.lang === "ar" ? "flex-row-reverse" : "flex-row"
+                    )}>
                         <p className="text-gray-900 md:leading-6 text-xl md:text-2xl font-semibold md:font-bold truncate max-w-12 md:max-w-fit">${product?.discountPrice ? product?.discountPrice : product?.price}</p>
                         {product?.discountPrice && <p className="text-gray-600 md:leading-6 text-sm md:text-base truncate max-w-12 md:max-w-fit line-through">${product?.price}</p>}
                     </div>
@@ -131,8 +146,12 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                 </div>
                 <button 
                     onClick={() => handleAddToCart(product?._id)} 
-                    className="orange-button w-full md:w-fit py-2 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full text-xs sm:text-sm md:text-base active:scale-95 transition-all duration-75  ease-in text-white font-medium cursor-pointer flex items-center justify-center gap-1">
-                    <ShoppingCart size={20}/>
+                    className={twMerge("orange-button w-full lg:w-fit py-2 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full",
+                        "text-xs sm:text-sm md:text-base lg:text-sm xl:text-base active:scale-95 transition-all duration-75  ease-in text-white font-medium",
+                        "cursor-pointer flex items-center justify-center gap-1 lg:gap-2",
+                        params.lang === "ar" ? "flex-row-reverse" : "flex-row"
+                    )}>
+                    <ShoppingCart size={16} className="scale-100 lg:scale-120 block lg:hidden xl:block"/>
                     <p>{t("product.addToCart")}</p>
                 </button>
             </div>

@@ -21,7 +21,35 @@ const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!productId) return;
-        if (!rating) return toast({ title: "Error", description: "Need to add rawing", variant: "error", position: "bottom-right", icon: <TriangleAlert size={20} /> });
+
+        if (comment && !rating) {
+            return toast({ 
+                title: "Missing Ratting!", 
+                description: "you need to add rating before you submit your review", 
+                variant: "error", 
+                position: "bottom-right", 
+                icon: <TriangleAlert size={20} /> 
+            });
+
+        } else if (!comment && rating) {
+            return toast({ 
+                title: "Missing Comment!", 
+                description: "you need to add comment before you submit your review", 
+                variant: "error", 
+                position: "bottom-right", 
+                icon: <TriangleAlert size={20} /> 
+            });  
+
+        } else if (!comment && !rating) {
+            if (!rating) return toast({ 
+                title: "Error!", 
+                description: "rating and comment are missing", 
+                variant: "error", 
+                position: "bottom-right", 
+                icon: <TriangleAlert size={20} /> 
+            });
+        }
+
         try {
             await dispatch(
             addReview({

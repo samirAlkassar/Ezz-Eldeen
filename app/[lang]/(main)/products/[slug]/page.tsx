@@ -14,7 +14,6 @@ const ProductBySlug = async ({ params }: PageProps) => {
   if (!product) return;
 
   const relatedProducts = await getRelatedBySlug(params.slug, 4, params.lang);
-  console.log("productsBySLug:", product)
   return (
     <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
         <ProductsBySlugPage slug={params.slug} product={product} relatedProducts={relatedProducts}/>

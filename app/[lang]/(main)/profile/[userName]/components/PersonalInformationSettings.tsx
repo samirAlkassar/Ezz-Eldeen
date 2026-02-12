@@ -66,7 +66,14 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
                 phone: userData?.phone,
                 picturePath : imageFile ? undefined : userData.picturePath
             }));
-            toast({ title: "User profile updated", description: "Your profile information is updated successfully",variant: "success", position: "bottom-right", icon: <UserIcon size={20}/> })
+            toast({ 
+                title: "User profile updated", 
+                description: "Your profile information is updated successfully",
+                variant: "success", 
+                position: "bottom-right", 
+                icon: <UserIcon size={20}/>,
+                image: user?.picturePath
+            })
         } catch (error){
             toast({ title: "Error", description: `${error}`,variant: "error", position: "bottom-right", icon: <Map size={20}/> })
         }

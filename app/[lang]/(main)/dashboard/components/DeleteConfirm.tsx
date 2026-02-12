@@ -1,4 +1,4 @@
-import { Product } from "../page";
+import { Product } from "./Dashboard";
 
 type DeleteConfirmProps = {
     product: Product;

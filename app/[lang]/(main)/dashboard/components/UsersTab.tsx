@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { User } from "../page";
+import { User } from "./Dashboard";
 
 const MOCK_USERS: User[] = [
     { _id: "1", name: "Ahmed Hassan", email: "ahmed@example.com", role: "customer", status: "active", createdAt: "2024-01-15" },

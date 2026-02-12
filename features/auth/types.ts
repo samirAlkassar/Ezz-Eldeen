@@ -4,7 +4,7 @@ export interface User {
   lastName: string;
   email: string;
   isVerified: boolean;
-  role: 'customer' | 'admin'; // or more if needed
+  role: Role; // or more if needed
   picturePath: string;
   addresses: Address[]; // you can expand later
   cart: CartItem[];

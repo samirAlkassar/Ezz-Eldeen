@@ -137,7 +137,6 @@ html {
 
 .orange-button {
   display: flex;
-  flex-direction: row;
   align-items: center;
   background: var(--primary);
   box-shadow: 0px 4px 6px -1px rgba(242, 127, 13, 0.2), 0px 2px 4px -2px rgba(242, 127, 13, 0.2);
@@ -153,8 +152,9 @@ html {
     --color-primary: var(--primary);
     --color-text: var(--text);
     --color-text-muted: var(--text-muted);
-    /* --color-foreground: var(--foreground);
     --color-card: var(--card);
+    /* --color-foreground: var(--foreground);
+
     --color-card-foreground: var(--card-foreground);
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
@@ -190,7 +190,7 @@ html {
     --foreground: oklch(0.13 0.028 261.692);
     --text: oklch(27.95% 0.03688 260.049);
     --text-muted: oklch(55.439% 0.04078 257.446);
-    --card: oklch(1 0 0);
+    --card: oklch(95.459% 0.01237 75.236);
     --card-foreground: oklch(0.13 0.028 261.692);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.13 0.028 261.692);

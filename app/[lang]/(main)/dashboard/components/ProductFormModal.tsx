@@ -1,11 +1,11 @@
 import { ChevronLeft, Pencil, Rocket, X } from "lucide-react";
-import { Product, ProductUpdatePayload } from "../page";
 import { useState } from "react";
 import React from "react";
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 import { useToast } from "@/components/Toast";
 import Image from "next/image";
+import { Product, ProductUpdatePayload } from "./Dashboard";
 
 type ProductFormModalProps = {
     onClose: () => void;

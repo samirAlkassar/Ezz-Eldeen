@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import { Globe } from "lucide-react";
+import setCookies from "@/actions/setCoockies";
+import { useEffect } from "react";
 
 export default function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }) {
   const { t } = useTranslation();
@@ -15,10 +17,16 @@ export default function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }
 
   const changeLanguage = (lang: "ar" | "en") => {
     if (currentLang === lang) return;
-
     const newPath = pathname.replace(/^\/(en|ar)/, `/${lang}`);
     router.push(newPath, { scroll: false });
   };
+  
+  useEffect(()=>{
+    const storeLangInCookies = async (lang: typeLang) => {
+      await setCookies("lang", lang as typeLang);
+    };
+    storeLangInCookies(params.lang);
+  },[params.lang])
 
   const toggleLanguage = () => {
     changeLanguage(currentLang === "ar" ? "en" : "ar");
@@ -35,7 +43,7 @@ export default function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }
         aria-label="Change language to English"
         onClick={() => changeLanguage("en")}
         className={twMerge(
-          "w-10 h-8 rounded-full hidden md:flex items-center justify-center font-medium",
+          "w-10 h-8 rounded-full hidden md:flex items-center justify-center font-medium cursor-pointer",
           isScrolled
             ? "text-gray-800 hover:bg-gray-300"
             : "text-white hover:bg-orange-500/20",
@@ -49,7 +57,7 @@ export default function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }
         aria-label="Change language to Arabic"
         onClick={() => changeLanguage("ar")}
         className={twMerge(
-          "w-10 h-8 rounded-full hidden md:flex items-center justify-center font-medium",
+          "w-10 h-8 rounded-full hidden md:flex items-center justify-center font-medium cursor-pointer",
           isScrolled
             ? "text-gray-800 hover:bg-gray-300"
             : "text-white hover:bg-orange-500/20",

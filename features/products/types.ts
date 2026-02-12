@@ -50,5 +50,5 @@ export interface ProductType {
 
 export interface ReviewData {
   comment: string;
-  rating: number;
+  rating: number | null;
 }

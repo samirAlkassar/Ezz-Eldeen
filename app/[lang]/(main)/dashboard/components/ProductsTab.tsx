@@ -1,4 +1,4 @@
-import { Product } from "../page";
+import { Product } from "./Dashboard";
 import { useState } from "react";
 import { Edit, Trash, Plus, Search, Filter } from "lucide-react";
 import { twMerge } from "tailwind-merge";

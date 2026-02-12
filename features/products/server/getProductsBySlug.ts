@@ -6,7 +6,7 @@ export async function getProductBySlug(slug: string, lang: typeLang) {
       "Accept-Language": lang,
       "Content-Type": "application/json",
     },
-    cache: "no-cache" //next revalidate :300
+    next: {revalidate: 300}
   })
 
   if (!res.ok) {
@@ -22,7 +22,7 @@ export async function getProductsReviews(productId: string) {
       "Accept-Language": i18n.language,
       "Content-Type": "application/json",
     },
-    cache: "no-cache",
+    next: {revalidate: 300}
   })
 
   if (!res.ok) {
