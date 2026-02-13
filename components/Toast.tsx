@@ -148,7 +148,7 @@ function ToastItem({ toast }: { toast: Toast }) {
       <div className={twMerge(toastVariants({ variant: toast.variant }), toast.actionButton ? "cursor-pointer active:scale-95 duration-75 transition-all ease-in" : "")} onClick={toast?.actionButton?.onClick}>
         <div className="flex-1 flex gap-2">
           {toast.image ? <div className="relative min-h-20 min-w-20 max-w-20 max-h-20 border-1 border-gray-100 rounded-md">
-            <Image src={toast.image ?? "/images/placeholder.jpg"} alt={"product image"} fill className="absolute object-cover rounded-md"/>
+            <Image src={toast.image ?? "/images/placeholder.jpg"} placeholder="blur" blurDataURL={`/_next/image?url=${toast.image}&w=16&q=1`} alt={"product image"} fill quality={2} className="absolute object-cover rounded-md"/>
             <CheckMark toast={toast}/>
           </div>: 
           <div className={twMerge("min-h-20 min-w-20 max-w-20 flex items-center justify-center rounded-md text-text relative", 

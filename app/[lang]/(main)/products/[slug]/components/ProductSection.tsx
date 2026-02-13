@@ -7,7 +7,7 @@ import { Check, CloudLightning, Heart, Minus, Plus, ShoppingCart, Star } from "l
 import { ProductType } from "@/features/products/types";
 import { useRouter } from "next/navigation";
 
-const ProductSection = ({product} : {product:  ProductType | null}) => {
+const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, blurDataURL: string}) => {
     const [quantity, setQuantity] = useState<number>(1);
     const [selectedImage, setSelectedImage] = useState<number>();
     const [imageIndex, setImageIndex] = useState<number>(0);
@@ -22,6 +22,9 @@ const ProductSection = ({product} : {product:  ProductType | null}) => {
                         src={product?.images[imageIndex]?.url || "/images/placeholder.jpg"}
                         alt={""}
                         fill
+                        placeholder={blurDataURL ? "blur" : undefined}
+                        blurDataURL={blurDataURL ?? undefined}
+                        style={{ objectFit: 'contain', objectPosition: 'center' }}
                         className="absolute w-full h-full object-contain z-10"/>
                     <span className="absolute top-4 left-4 bg-orange-400 rounded-full text-white font-medium text-base md:text-lg px-2 py-1 md:px-3 md:py-1 z-20">
                         -30% OFF    

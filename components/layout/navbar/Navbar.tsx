@@ -3,8 +3,8 @@
 import { Heart, ShoppingCart, ChevronDown, Settings, User, LogOut, LayoutDashboard, LogIn, LogOutIcon, Menu } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchCurrentUser, selectUser, logout } from "../../features/auth/authSlice";
-import { Button } from "../ui/Button";
+import { fetchCurrentUser, selectUser, logout } from "../../../features/auth/authSlice";
+import { Button } from "../../ui/Button";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { fetchCart} from "@/features/cart/cartSlice";
@@ -17,11 +17,12 @@ import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useParams } from "next/navigation";
+import { User as UserType } from "@/features/auth/types";
 
-const Navbar = () => {
+const Navbar = ({user}:{user?: UserType}) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
-    const user = useSelector(selectUser);
+    // const user = useSelector(selectUser);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [showBottomMenu, setShowBottomMenu] = useState(true);
@@ -162,7 +163,7 @@ const Navbar = () => {
                                         src={user?.picturePath || "/images/placeholder.jpg"} 
                                         alt={`${2}`}
                                         fill
-                                        quality={40}
+                                        quality={20}
                                         className="absolute object-cover rounded-full"/>
                                 </div>:
                                 <span className={twMerge("text-lg font-medium rounded-full w-9 h-9 flex items-center justify-center",

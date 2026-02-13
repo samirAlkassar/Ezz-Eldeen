@@ -37,7 +37,7 @@ const TestimonialsCard = ({name, testimonial, rating, location, id}: {name: stri
             ease: "easeOut",
             }}
             className={twMerge("bg-white rounded-lg md:rounded-xl px-4 py-6 border-1 border-gray-200 shadow-md max-w-sm flex justify-center flex-col items-center text-center", id === 2 ? "z-20" : "z-10")}>
-            <img src="./images/placeholder.jpg" 
+            <img src="/images/placeholder.jpg" 
                 alt="user-image" 
                 className="h-12 w-12 md:h-18 md:w-18 rounded-full object-cover -mt-10 md:-mt-14 border-1 border-gray-800"/>
             <h1 className="font-medium text-lg md:text-xl mt-2">{name}</h1>

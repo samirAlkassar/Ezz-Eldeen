@@ -1,6 +1,7 @@
 import { getProductBySlug, getRelatedBySlug } from "@/features/products/server/getProductsBySlug";
 import ProductsBySlugPage from "./components/ProductsBySlugPage";
 import type { Metadata } from "next"
+import { getBlurDataURL } from "@/lib/getImage";
 
 type PageProps = {
   params: {
@@ -9,14 +10,24 @@ type PageProps = {
   };
 };
 
-const ProductBySlug = async ({ params }: PageProps) => {
-  const product = await getProductBySlug(params.slug, params.lang);
+const ProductBySlug = async (props: PageProps) => {
+  const { params } = props;
+  const { slug, lang } = params;
+
+  const product = await getProductBySlug(slug, lang);
   if (!product) return;
 
-  const relatedProducts = await getRelatedBySlug(params.slug, 4, params.lang);
+  const blurDataURL = await getBlurDataURL(product.images[0].url);
+  const relatedProducts = await getRelatedBySlug(slug, 4, lang);
+
   return (
     <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
-        <ProductsBySlugPage slug={params.slug} product={product} relatedProducts={relatedProducts}/>
+      <ProductsBySlugPage
+        slug={slug}
+        product={product}
+        blurDataURL={blurDataURL}
+        relatedProducts={relatedProducts}
+      />
     </main>
   )
 };

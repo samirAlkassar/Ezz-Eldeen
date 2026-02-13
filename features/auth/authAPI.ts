@@ -1,16 +1,39 @@
 import getCookies from "@/actions/getCookies";
+import { RegisterPayload } from "./types";
 
-// simple fetch-based API helper — replace URLs with your backend endpoints
 export async function loginApi({ email, password }: {email:string, password:string}) {
-  const res = await fetch('/api/auth/login', {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
+    });
+    if (!res.ok) throw new Error('Login failed');
+    return res.json(); 
+  } catch (error) {
+    console.log(error)
+  }
+
+};
+
+
+export async function registernApi(payload: RegisterPayload) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-    credentials: 'include'
+    body: JSON.stringify(payload),
+    cache: "no-store",
   });
-  if (!res.ok) throw new Error('Login failed');
-  return res.json(); 
+
+  if (!res.ok) {
+    throw new Error("Registration failed");
+  }
+
+  return res.json();
 }
+
+
 
 export async function fetchCurrentUserApi() {
   const token = await getCookies("token");
@@ -35,7 +58,9 @@ export async function fetchCurrentUserApi() {
       throw new Error("Failed to fetch user");
     }
   return res.json();
-}
+};
+
+
 
 export async function logoutApi() {
   const res = await fetch('/api/auth/logout', {
@@ -44,4 +69,4 @@ export async function logoutApi() {
   });
   if (!res.ok) throw new Error('Logout failed');
   return res.json();
-}
+};

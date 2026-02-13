@@ -1,123 +1,21 @@
-'use client';
-
-import React, { useState } from 'react';
+import { loginApi } from "@/features/auth/authAPI";
+import LoginClient from "./components/LoginClient";
 import setCookies from "@/actions/setCoockies";
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/navigation';
+
+async function loginAction({ email, password }: {email:string, password:string}) {
+    "use server";
+    const data = await loginApi({email, password});
+    if (!data?.token) {
+        throw new Error("Login failed");
+    };
+    await setCookies("token", data?.token);
+    return { user: data.user };
+}
 
 export default function LoginPage() {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
-    const params = useParams<{ lang: typeLang }>();
-    const { t } = useTranslation();
-    const router = useRouter();
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setError("");
-        setSuccess("");
-
-        try {
-            setLoading(true)
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-                credentials: "include"
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                setError(data.msg || "Invalid credentials");
-                return;
-            }
-
-            setSuccess("Logged in successfully ✅");
-            await setCookies("token", data.token);
-
-            router.push(`/${params.lang}/`);
-
-        } catch (err) {
-            console.error(err);
-            setError("Something went wrong. Please try again.");
-        } finally {
-            setLoading(false)
-        }
-    };
-
     return (
         <div className="py-12 md:py-0 min-h-screen flex flex-row-reverse bg-[#FFF4EC]">
-            <div className="relative flex-1 flex justify-center items-center p-6">
-                <div className="bg-white shadow-md md:shadow-2xl rounded-xl md:rounded-3xl p-6 md:p-8 w-full max-w-md">
-                    <h2 className="text-3xl font-extrabold text-center text-[#FF791A] mb-6">
-                        {t("auth.loginPage.title")}
-                    </h2>
-                    <form onSubmit={handleSubmit} className="space-y-3 md:space-y-5">
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 md:mb-1">
-                                {t("auth.loginPage.email")}
-                            </label>
-                            <input
-                                id="email"
-                                type="email"
-                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                autoComplete="email"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 md:mb-1">
-                                {t("auth.loginPage.password")}
-                            </label>
-                            <input
-                                id="password"
-                                type="password"
-                                className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-xl md:rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF791A]"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                autoComplete="current-password"
-                                required
-                            />
-                        </div>
-                        {error && <div className="text-red-500 text-sm">{error}</div>}
-                        <button
-                            type="submit"
-                            className="bg-[#FF791A] w-full mt-4 text-white py-1.5 px-4 md:py-2 text-lg rounded-xl md:rounded-full cursor-pointer shadow-sm md:shadow-md active:scale-95 transition-transform duration-150"
-                        >
-                            {loading ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z" />
-                                    </svg>
-                                    Login
-                                </span>
-                            ) : (
-                                `${t("auth.login")}`
-                            )}
-                        </button>
-                    </form>
-                    {success && (
-                        <div className="mt-4 p-3 rounded-xl bg-green-50 border border-green-200/60">
-                            <p className="text-accent text-sm">{success}</p>
-                        </div>
-                    )}
-                    <p className="mt-4 text-center text-sm text-gray-600">
-                        {t("auth.loginPage.message")}{' '}
-                        <Link href={`/${params.lang}/register`} className="text-[#FF791A] font-semibold hover:underline">
-                            {t("auth.register")}
-                        </Link>
-                    </p>
-                </div>
-            </div>
+            <LoginClient loginAction={loginAction}/>
         </div>
     );
 }

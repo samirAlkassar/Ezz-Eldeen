@@ -37,3 +37,10 @@ export interface Order {
   status: string;
   createdAt: string;
 }
+
+export type RegisterPayload = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};

@@ -10,15 +10,15 @@ export function middleware(request: NextRequest) {
 
   if (!lang) {setCookies("lang", "en")};
 
-  console.log('┌──────────────────────────────────────────────────────────────┐');
-  console.log('│ MIDDLEWARE REQUEST                                           │');
-  console.log('├──────────────────────────────────────────────────────────────┤');
-  console.log(`│ Path       : ${pathname.padEnd(50)}│`);
-  console.log(`│ Full URL   : ${href.padEnd(50)}│`);
-  console.log(`│ Method     : ${request.method.padEnd(50)}│`);
-  console.log(`│ Time       : ${new Date().toISOString()} │`);
-  console.log(`│ language   : ${lang.padEnd(50)}│`);
-  console.log('└──────────────────────────────────────────────────────────────┘');
+  // console.log('┌──────────────────────────────────────────────────────────────┐');
+  // console.log('│ MIDDLEWARE REQUEST                                           │');
+  // console.log('├──────────────────────────────────────────────────────────────┤');
+  // console.log(`│ Path       : ${pathname.padEnd(50)}│`);
+  // console.log(`│ Full URL   : ${href.padEnd(50)}│`);
+  // console.log(`│ Method     : ${request.method.padEnd(50)}│`);
+  // console.log(`│ Time       : ${new Date().toISOString()} │`);
+  // console.log(`│ language   : ${lang.padEnd(50)}│`);
+  // console.log('└──────────────────────────────────────────────────────────────┘');
 
 
   return NextResponse.next();

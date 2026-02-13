@@ -1,7 +1,9 @@
+import withPlaiceholder from "@plaiceholder/next";
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: import('next').NextConfig = {
   images: {
     domains: ["i.pinimg.com", "res.cloudinary.com"],
   },
 };
-export default nextConfig;
+export default withPlaiceholder(nextConfig);

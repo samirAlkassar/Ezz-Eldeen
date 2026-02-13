@@ -15,7 +15,7 @@ export default async function Home({params}:{params: {lang: typeLang}}) {
       return {
         id: section.id,
         title: section.title,
-        products: res.products,
+        products: res?.products,
       }
     })
   )
@@ -26,7 +26,7 @@ export default async function Home({params}:{params: {lang: typeLang}}) {
     <>
       <Hero />
       <Categories
-        products={mainProducts.products}
+        products={mainProducts?.products}
         sections={sections}
         lang={currentLang}/>
       <Testimonials />

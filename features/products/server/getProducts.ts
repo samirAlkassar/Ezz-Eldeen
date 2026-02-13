@@ -1,4 +1,4 @@
-import { ProductType } from "../types"
+import { ProductType } from "../types";
 
 type ProductQuery = {
   page?: number
@@ -10,27 +10,32 @@ type ProductQuery = {
 }
 
 export async function getProducts(query: ProductQuery, lang: typeLang) {
-  const params = new URLSearchParams()
+  try {
+    const params = new URLSearchParams()
 
-  if (query.page) params.set("page", query.page.toString())
-  if (query.limit) params.set("limit", query.limit.toString())
-  if (query.category) params.set("category", query.category)
-  if (query.subCategory) params.set("subCategory", query.subCategory)
-  if (query.sort) params.set("sort", query.sort)
-  if (query.search) params.set("search", query.search)
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`, {
-    headers: {
-      "Accept-Language": lang,
-      "Content-Type": "application/json",
-    },
-    cache: "no-cache"
-  });
-  
-  if (!res.ok) {
-    throw new Error("Failed to fetch products")
+    if (query.page) params.set("page", query.page.toString())
+    if (query.limit) params.set("limit", query.limit.toString())
+    if (query.category) params.set("category", query.category)
+    if (query.subCategory) params.set("subCategory", query.subCategory)
+    if (query.sort) params.set("sort", query.sort)
+    if (query.search) params.set("search", query.search)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`, {
+      headers: {
+        "Accept-Language": lang,
+        "Content-Type": "application/json",
+      },
+      cache: "no-cache"
+    });
+    
+    if (!res.ok) {
+      throw new Error("Failed to fetch products")
+    }
+
+    return res.json()
+  } catch (error){
+    console.log(error)
   }
 
-  return res.json()
 }
 
 
