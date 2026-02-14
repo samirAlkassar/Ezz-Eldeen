@@ -51,7 +51,7 @@ const Hero = () => {
             className="text-4xl sm:text-6xl xl:text-7xl font-bold text-white text-center md:text-start relative">
             {t("hero.magicAwaits")} <br className="hidden md:block"/> 
             <span className="text-yellow-300 text-[50px] md:text-6xl xl:text-7xl">{t("hero.ezzEldeen")}</span>
-            <Image src={"/images/brush-stroke.png"} alt="anything" width={260} height={220} className={twMerge("absolute -z-10 hidden md:block",
+            <Image src={"/images/brush-stroke.png"} priority alt="anything" width={260} height={220} className={twMerge("absolute -z-10 hidden md:block",
               i18n.language === "ar" ? "-top-4 right-0 md:-right-8" : "-top-4 left-0 md:-left-8"
             )}/>
           </motion.h1>
@@ -109,7 +109,7 @@ const Hero = () => {
 const ImageSection = () => {
   return (
     <div className="relative w-120 h-120 lg:w-150 lg:h-160 md:block mt-0 hidden">
-      <Image src={"/images/woody.png"} alt="Hero Image - Back-school-cartoon" fill className={twMerge("object-contain", i18n.language === "ar" && " rotate-y-180")}/>
+      <Image src={"/images/woody.png"} alt="Hero Image - Back-school-cartoon" fill priority className={twMerge("object-contain", i18n.language === "ar" && " rotate-y-180")}/>
     </div>
   )
 }

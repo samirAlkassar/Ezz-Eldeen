@@ -7,77 +7,15 @@ import ProductsTab from "../components/ProductsTab";
 import UsersTab from "../components/UsersTab";
 import StatusTab from "../components/StatusTab";
 import SettingsTab from "../components/SettingsTab";
-import ProductFormModal from "../components/ProductFormModal";
+import ProductFormModal from "./form/ProductFormModal";
 import DeleteConfirm from "../components/DeleteConfirm";
 import { AnimatePresence } from "framer-motion"
 import { useToast } from "@/components/Toast";
 import { AlertTriangle, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import handleResponse from "@/hooks/useProductActions";
-
-export interface ProductUpdatePayload {
-    name?: {
-        ar: string,
-        en: string
-    };
-    slug: string;
-    description?: {
-        ar: string,
-        en: string
-    };
-    price: number;
-    discountPrice?: number;
-    stock: number;
-    tags: {
-        ar: string[],
-        en: string[]
-    };
-    category: {
-        ar: string,
-        en: string
-    };
-    subcategory?: {
-        ar: string,
-        en: string
-    };
-}
-
-
-export type Product = {
-    _id: string;
-    name: string,
-    slug?: string;
-    description?: string,
-    price: number;
-    discountPrice?: number;
-    stock?: number;
-    category?: string,
-    subcategory?: string,
-    tags?: string[],
-    variants?: string[];
-    images?: { url: string; alt?: string }[];
-    createdAt?: string;
-    updatedAt?: string;
-};
-
-export type User = {
-    _id: string;
-    name: string;
-    email: string;
-    role: string;
-    status: string;
-    createdAt: string;
-};
-
-export type Order = {
-    _id: string;
-    orderNumber: string;
-    customer: string;
-    total: number;
-    status: 'pending' | 'processing' | 'completed' | 'cancelled';
-    date: string;
-};
-
+import { Product, ProductUpdatePayload } from "@/features/admin/types";
+import { getProductsAdminApi } from "@/features/admin/productsAPI";
 
 
 const API_BASE = typeof window !== "undefined" ? (process.env.NEXT_PUBLIC_API_URL ?? "") : "";
@@ -112,27 +50,9 @@ export default function Dashboard({lang}:{lang: typeLang}) {
             if (minPrice !== "") params.set("minPrice", String(minPrice));
             if (maxPrice !== "") params.set("maxPrice", String(maxPrice));
 
-            const url = `${API_BASE}/products?${params.toString()}`;
-            const token = await getCookies("token");
-
-            const res = await fetch(url, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token?.value}`,
-                    "Accept-Language": lang,
-                },
-            });
-
-            if (!res.ok) throw new Error(`Failed to fetch products: ${res.statusText}`);
-            const data = await res.json();
-
-            if (Array.isArray(data)) {
-                setProducts(data);
-                setTotal(data.length);
-            } else if (data.products) {
-                setProducts(data.products);
-                setTotal(data.pagination?.total ?? data.products.length);
-            }
+            const data = await getProductsAdminApi(params)
+            setProducts(data?.products);
+            setTotal(data?.pagination?.total);
         } catch (err: unknown) {
             console.error(err);
         } finally {
@@ -145,7 +65,6 @@ export default function Dashboard({lang}:{lang: typeLang}) {
             fetchProducts();
         }
     }, [page, activeTab, fetchProducts]);
-
 
 
     const createProduct = async (payload: FormData) => {
@@ -162,24 +81,26 @@ export default function Dashboard({lang}:{lang: typeLang}) {
             body: payload,
             });
 
-            const data = await handleResponse(res, "create product", lang=lang);
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Failed to create product");
+            // await handleResponse(res, "create product", lang);
 
             toast({
-            title: "Product created",
-            description: "Product created successfully",
-            variant: "default",
-            icon: <Trash />,
-            position: "bottom-right",
+                title: "Product created",
+                description: "Product created successfully",
+                variant: "default",
+                icon: <Trash />,
+                position: "bottom-right",
             });
 
             return data;
         } catch (error: unknown) {
             toast({
-            title: "Error",
-            description: error instanceof Error ? error.message : "Unknown error",
-            variant: "error",
-            icon: <AlertTriangle />,
-            position: "bottom-right",
+                title: "Error",
+                description: error instanceof Error ? error.message : "Unknown error",
+                variant: "error",
+                icon: <AlertTriangle />,
+                position: "bottom-right",
             });
             throw error;
         }
@@ -244,7 +165,7 @@ export default function Dashboard({lang}:{lang: typeLang}) {
                 variant: "default", 
                 icon: <Trash />, 
                 position: "bottom-right" });
-            return res.json();
+            return data;
 
         } catch (error: unknown) {
             const message = error instanceof Error ? error.message : "Unknown error";

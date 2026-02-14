@@ -12,7 +12,7 @@ type PageProps = {
 
 const ProductBySlug = async (props: PageProps) => {
   const { params } = props;
-  const { slug, lang } = params;
+  const { slug, lang } = await params;
 
   const product = await getProductBySlug(slug, lang);
   if (!product) return;
@@ -35,7 +35,8 @@ const ProductBySlug = async (props: PageProps) => {
 
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const product = await getProductBySlug(params.slug, params.lang)
+  const { slug, lang } = await params;
+  const product = await getProductBySlug(slug, lang);
 
   return {
     title: product.name,

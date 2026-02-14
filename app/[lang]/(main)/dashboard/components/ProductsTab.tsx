@@ -1,8 +1,8 @@
-import { Product } from "./Dashboard";
 import { useState } from "react";
 import { Edit, Trash, Plus, Search, Filter } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
+import { Product } from "@/features/admin/types";
 
 type ProductsTabProps = {
     products: Product[];
@@ -148,21 +148,21 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                         <td className="px-3 py-2 md:px-6 md:py-3.5">
                                             <div className="flex items-center gap-3 relative">
                                                 <Image 
-                                                    src={product?.images?.[0]?.url ?? "/placeholder.jpg"} 
-                                                    alt={product?.name}
+                                                    src={product?.images?.[0]?.url ?? "/images/placeholder.jpg"} 
+                                                    alt={product?.name.en}
                                                     width={80}
                                                     height={80}
                                                     className="w-10 md:w-12 h-10 md:h-12 rounded-lg object-contain border border-slate-200"
                                                 />
                                                 <div>
-                                                    <p className="text-xs md:text-sm font-medium text-slate-800 max-w-[80px] md:max-w-fit overflow-ellipsis truncate">{product.name}</p>
+                                                    <p className="text-xs md:text-sm font-medium text-slate-800 max-w-20 md:max-w-fit overflow-ellipsis truncate">{product.name.ar}</p>
                                                     <p className="text-xs text-slate-500 hidden md:block">{product.slug}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-3 md:px-6 py-0 md:py-4">
                                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 truncate">
-                                                {product.category}
+                                                {product?.category?.en}
                                             </span>
                                         </td>
                                         <td className="px-3 md:px-6 py-0 md:py-4 text-sm text-slate-800 font-medium">{product.price} EGP</td>
@@ -183,13 +183,13 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => onEdit(product)}
-                                                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-150"
+                                                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-150 cursor-pointer"
                                                 >
                                                     <Edit size={16} />
                                                 </button>
                                                 <button
                                                     onClick={() => onDelete(product)}
-                                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-150"
+                                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-150 cursor-pointer"
                                                 >
                                                     <Trash size={16} />
                                                 </button>

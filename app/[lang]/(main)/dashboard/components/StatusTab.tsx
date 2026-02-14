@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import StatsCard from "./StatsCard";
 import { AlertCircle, CheckCircle2, Clock, Package } from "lucide-react";
-import { Order } from "./Dashboard";
+import { Order } from "@/features/admin/types";
 
 const MOCK_ORDERS: Order[] = [
     { _id: "1", orderNumber: "#ORD-001", customer: "Ahmed Hassan", total: 450, status: "completed", date: "2024-12-10" },

@@ -120,7 +120,7 @@ export function ToastProvider() {
           <div
             key={position}
             className={twMerge(
-              "fixed z-[9999] flex w-full max-w-[15rem] md:max-w-sm flex-col gap-2 pointer-events-none",
+              "fixed z-9999 flex w-full max-w-60 md:max-w-sm flex-col gap-2 pointer-events-none",
               i18n.language === "ar" ? positionClasses["bottom-left"] : positionClasses[position]
             )}>
             <AnimatePresence mode="popLayout">
@@ -147,8 +147,8 @@ function ToastItem({ toast }: { toast: Toast }) {
       transition={{ duration: 0.2, ease: "easeOut" }}>
       <div className={twMerge(toastVariants({ variant: toast.variant }), toast.actionButton ? "cursor-pointer active:scale-95 duration-75 transition-all ease-in" : "")} onClick={toast?.actionButton?.onClick}>
         <div className="flex-1 flex gap-2">
-          {toast.image ? <div className="relative min-h-20 min-w-20 max-w-20 max-h-20 border-1 border-gray-100 rounded-md">
-            <Image src={toast.image ?? "/images/placeholder.jpg"} placeholder="blur" blurDataURL={`/_next/image?url=${toast.image}&w=16&q=1`} alt={"product image"} fill quality={2} className="absolute object-cover rounded-md"/>
+          {toast.image ? <div className="relative min-h-20 min-w-20 max-w-20 max-h-20 border border-gray-100 rounded-md">
+            <Image src={toast.image ?? "/images/placeholder.jpg"} alt={"product image"} fill quality={20} className="absolute object-cover rounded-md"/>
             <CheckMark toast={toast}/>
           </div>: 
           <div className={twMerge("min-h-20 min-w-20 max-w-20 flex items-center justify-center rounded-md text-text relative", 
@@ -193,7 +193,9 @@ const CheckMark = ({ toast }: { toast: Toast }) => {
     <>
       {toast.variant === "success" &&
       <span 
-        className="absolute -top-1 -left-1 bg-green-500 text-white rounded-full h-5 w-5 flex items-center justify-center border-1 border-white">
+        className={twMerge("absolute -top-1 bg-green-500 text-white",
+        "rounded-full h-5 w-5 flex items-center justify-center border border-white",
+        i18n.language === "ar" ? "-right-1" : "-left-1")}>
           {<Check size={16}/>}
       </span>
     }

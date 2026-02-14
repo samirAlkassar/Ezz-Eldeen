@@ -3,30 +3,34 @@
 import { Home } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
-const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, currentPage?: string}) => {
+const Breadcrumbs = ({previousPage, currentPage, lang}:{previousPage?: string, currentPage?: string, lang?: typeLang}) => {
     const router = useRouter();
+    const { t } = useTranslation();
+
     const currentPageURL = (currentPage : string) => {
-        if (currentPage === "wishlist") {
-            router.push(`/${currentPage}`)
-        } else if (currentPage === "cart") {
-            router.push(`/${currentPage}`)
+        if (currentPage === t("wishlist.title")) {
+            router.push(`/${lang}/wishlist`)
+        } else if (currentPage === t("cart.title")) {
+            router.push(`/${lang}/cart`)
         } else {
-            router.push(`/products/${currentPage}`)
+            router.push(`/${lang}/products/${currentPage}`)
         }
-    }
+    };
+    
     return (
         <div className="py-4">
-            <nav className="flex items-center gap-2 text-sm text-gray-600 max-w-[85rem] mx-auto px-3">
-                <Link href="/" className="hover:text-orange-400 text-orange-500 transition flex gap-2 items-center">
+            <nav className="flex items-center gap-2 text-sm text-gray-600 max-w-340 mx-auto px-3">
+                <Link href={`/${lang}/`} className="hover:text-orange-400 text-orange-500 transition flex gap-2 items-center">
                     <Home size={16}/>
-                    <p className="text-base">Home</p>
+                    <p className="text-base">{t("hero.home")}</p>
                 </Link>
                 { previousPage &&
                 <>
                     <span>/</span>
                     <span
-                        onClick={() => router.push(`/categories/${previousPage?.replace(/\s+/g, '_')}`)} 
+                        onClick={() => router.push(`/${lang}/categories/${previousPage?.replace(/\s+/g, '_')}`)} 
                         className="font-medium text-sm md:text-base text-gray-600 line-clamp-1 cursor-pointer hover:text-gray-800">{previousPage}</span>
                 </>
                 }

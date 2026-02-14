@@ -1,0 +1,11 @@
+{
+  "title": "Wishlist",
+  "empty": {
+    "title": "Your wishlist is empty",
+    "description": "You haven't added any products to your wishlist yet.",
+    "cta": "Browse Products"
+  },
+  "moveToCart": "Move to Cart",
+  "removeFromWishlist": "Remove from wishlist",
+  "addToCart": "Add to Cart"
+}

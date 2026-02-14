@@ -12,6 +12,10 @@ import enAuth from "./en/auth.json";
 import arAuth from "./ar/auth.json";
 import enProduct from "./en/product.json";
 import arProduct from "./ar/product.json";
+import enCart from "./en/cart.json";
+import arCart from "./ar/cart.json";
+import enWishlist from "./en/wishlist.json";
+import arWishlist from "./ar/wishlist.json";
 
 
 i18n
@@ -30,6 +34,8 @@ i18n
             navbar: enNavbar,
             auth: enAuth,
             product: enProduct,
+            cart: enCart,
+            wishlist: enWishlist,
         }
       },
       ar: {
@@ -39,6 +45,8 @@ i18n
             navbar: arNavbar,
             auth: arAuth,
             product: arProduct,
+            cart: arCart,
+            wishlist: arWishlist,
           }
         }
       }

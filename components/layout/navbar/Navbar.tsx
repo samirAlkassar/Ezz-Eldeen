@@ -163,7 +163,7 @@ const Navbar = ({user}:{user?: UserType}) => {
                                         src={user?.picturePath || "/images/placeholder.jpg"} 
                                         alt={`${2}`}
                                         fill
-                                        quality={20}
+                                        quality={40}
                                         className="absolute object-cover rounded-full"/>
                                 </div>:
                                 <span className={twMerge("text-lg font-medium rounded-full w-9 h-9 flex items-center justify-center",
@@ -291,7 +291,7 @@ const Tab = ({
                             ? "#6eCe7e"
                             : ref.current?.outerText === "Gifts"
                             ? "#ff4858"
-                            : "",
+                            : "#000000",
                 });
             }}
             className={twMerge("relative z-10 block cursor-pointer px-2 py-1.5 text-lg active:scale-95 transition-all duration-100 ease-in",

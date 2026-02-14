@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import { Globe } from "lucide-react";
-import setCookies from "@/actions/setCoockies";
-import { useEffect } from "react";
 
 export default function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }) {
   const { t } = useTranslation();
@@ -21,12 +19,6 @@ export default function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }
     router.push(newPath, { scroll: false });
   };
   
-  useEffect(()=>{
-    const storeLangInCookies = async (lang: typeLang) => {
-      await setCookies("lang", lang as typeLang);
-    };
-    storeLangInCookies(params.lang);
-  },[params.lang])
 
   const toggleLanguage = () => {
     changeLanguage(currentLang === "ar" ? "en" : "ar");
