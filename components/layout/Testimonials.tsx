@@ -35,7 +35,7 @@ const Testimonials = () => {
             <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 md:mt-2 tracking-[-0.9px] md:tracking-normal">
                 {t("hero.testimonials.title")}
             </h1>
-            <p className="text-text-muted-foreground text-center mt-4 md:mt-2 max-w-xl text-sm md:text-base leading-relaxed">
+            <p className="text-text-muted-foreground text-center mt-1 md:mt-2 max-w-xl text-base md:text-lg leading-relaxed">
                 {t("hero.testimonials.subTitle")}
             </p>
             <div className="testimonials-wrapper max-w-6xl mx-auto pt-6 md:py-12 grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 md:gap-y-0 px-8 md:px-6 hidden! md:grid!">
@@ -98,7 +98,7 @@ const TestimonialsCard = ({name, testimonial, rating, location, id}: {name: stri
                 <span className="text-xs text-primary font-medium bg-primary/8 px-2 py-0.5 rounded-full uppercase mt-3">{t("hero.testimonials.VerifiedPurchase")}</span>
                 <Quote size={24} className="text-primary mt-3 fill-current opacity-30" />
             </div>
-            <h3 className="md:mt-2 text-base md:text-[18px] text-text-brown font-medium leading-[27.5px] tracking-normal">{`"${testimonial}"`}</h3>
+            <h3 className="md:mt-2 text-base md:text-[18px] text-text font-medium leading-[27.5px] tracking-normal">{`"${testimonial}"`}</h3>
                 <h1 className="font-medium text-sm md:text-base mt-4">{name}</h1>
                 <p className="text-text-muted text-xs md:text-sm leading-tight">{location}</p>
                 <div className="flex gap-0.5 mt-2 justify-center">
