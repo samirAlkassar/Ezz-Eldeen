@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import test from "node:test";
 
 const Testimonials = () => {
     const { t } = useTranslation();
@@ -15,14 +14,14 @@ const Testimonials = () => {
     const splideOptions = {
         type: "slide",
         perPage: 1,
-        start: 2,
+        start: 1,
         perMove: 1,
         focus: "center",  
         pagination: true,
-        arrows: false,
+        arrows: true,
         drag: true,
-        gap: "0.2rem",        
-        padding: "3rem",    
+        gap: "0rem",        
+        padding: "0rem",    
         speed: 700,
         snap: true,
         flickPower: 900,
@@ -49,20 +48,20 @@ const Testimonials = () => {
 
             {/* cards slide */}
             <div className="slider-container mt-4 md:mt-6 block md:hidden relative">
-                <span className="absolute h-full w-10 z-10 bg-linear-90 from-[#F8F7F5] to-transparent"/>
+                <span className="absolute h-full w-15 z-10 bg-linear-90 from-[#F8F7F5] to-transparent"/>
                 <Splide
                 options={splideOptions}>
                 {
                     testimonials.map((testimonial)=>(
                         <SplideSlide key={testimonial.id}>
-                            <div className="pt-2 pb-6 scale-95">
+                            <div className="pt-2 pb-6 scale-95 max-w-xs mx-auto">
                                 <TestimonialsCard key={testimonial.id} id={testimonial.id} name={testimonial.name} testimonial={testimonial.text} rating={testimonial.rating} location={testimonial.location}/>
                             </div>
                         </SplideSlide>
                     ))
                 }
                 </Splide>
-                <span className="absolute h-full w-10 z-10 bg-linear-90 from-transparent to-[#F8F7F5] right-0 top-0"/>
+                <span className="absolute h-full w-15 z-10 bg-linear-90 from-transparent to-[#F8F7F5] right-0 top-0"/>
             </div>
 
             <button className="orange-button text-white px-5 py-3 mt-6 md:mt-0 text-xl cursor-pointer">{t("hero.testimonials.cta")}</button>
