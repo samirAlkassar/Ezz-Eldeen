@@ -13,6 +13,12 @@
   "cantDecide": "Can’t Decide? Try Our Bundles",
   "cantDecideSubtitle": "Save more with curated bundles designed for fun, learning, and growing minds. Best for Game",
   "viewAllBundles": "View All Bundles",
-  "testimonials": "Testimonials from our clients"
-
+  "testimonials" : {
+    "title": "Love from the community",
+    "subTitle": "Real stories from parents who choose the best for their little ones. Quality and comfort that speak for themselves.",
+    "communityStories": "Community Stories",
+    "cta": "Join Our Community",
+    "ctaDescribtion": "Join Our Community On Whatsapp",
+    "VerifiedPurchase": "Verified Purchase"
+  }
 }

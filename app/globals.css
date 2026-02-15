@@ -143,6 +143,18 @@ html {
   border-radius: 9999px;
 }
 
+/* Testimonials */
+.testimonials-wrapper {
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+}
+
+.testimonial-box {
+  grid-template-rows: subgrid;
+  grid-row: span 5;
+}
+
+
 @theme inline {
     /* --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
@@ -152,7 +164,9 @@ html {
     --color-primary: var(--primary);
     --color-text: var(--text);
     --color-text-muted: var(--text-muted);
+    --color-text-muted-foreground: var(--text-muted-foreground);
     --color-card: var(--card);
+    --color-text-brown: var(--text-brown);
     /* --color-foreground: var(--foreground);
 
     --color-card-foreground: var(--card-foreground);
@@ -190,6 +204,8 @@ html {
     --foreground: oklch(0.13 0.028 261.692);
     --text: oklch(27.95% 0.03688 260.049);
     --text-muted: oklch(55.439% 0.04078 257.446);
+    --text-muted-foreground: oklch(22.162% 0.02182 66.278 / 0.6);
+    --text-brown: oklch(22.162% 0.02182 66.278);
     --card: oklch(95.459% 0.01237 75.236);
     --card-foreground: oklch(0.13 0.028 261.692);
     --popover: oklch(1 0 0);

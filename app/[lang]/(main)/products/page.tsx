@@ -21,22 +21,24 @@ type ProductsPageProps = {
 }
 
 const ProductsPage = async ({searchParams, params}: ProductsPageProps) => {
-  const page = Number(searchParams.page ?? 1);
+  const { lang } = await params as { lang: typeLang };
+  const { category, subcategory, search, page } = await searchParams;
+  const pageNumber = Number(page ?? 1);
 
   const data = await getProducts({
-    page, 
+    page: pageNumber,
     limit: 12,
-    category: searchParams?.category === "All Products" ? "" : searchParams?.category,
-    subCategory: searchParams.subcategory,
-    search: searchParams.search
-  }, params.lang);
+    category: category === "All Products" ? "" : category,
+    subCategory: subcategory,
+    search: search
+  }, lang);
 
   return (
     <div className="bg-background">
-      <div className="max-w-[85rem] mx-auto pb-12 md:pb-25 px-4">
+      <div className="max-w-340 mx-auto pb-12 md:pb-25 px-4">
         <Breadcrumbs currentPage="products" />
         <Suspense fallback={<>...</>}>
-          <ProductsClient initialProducts={data.products} initialPagination={data.pagination} initialPage={page} lang={params.lang}/>
+          <ProductsClient initialProducts={data.products} initialPagination={data.pagination} initialPage={pageNumber} lang={lang}/>
         </Suspense>
       </div>
     </div>
@@ -45,8 +47,8 @@ const ProductsPage = async ({searchParams, params}: ProductsPageProps) => {
 
 
 export async function generateMetadata({ searchParams }: ProductsPageProps) {
-  const rawCategory = searchParams?.category ?? "All Products";
-  const category = decodeURIComponent(rawCategory).replace(/\+/g, " ");
+  const { category } = await searchParams as { category?: string };
+  const Category = decodeURIComponent(category ?? "All Products").replace(/\+/g, " ");
 
   const categoryMeta: Record<string, { title: string; image: StaticImageData }> = {
     "All Products": {
@@ -67,7 +69,7 @@ export async function generateMetadata({ searchParams }: ProductsPageProps) {
     },
   };
 
-  const metadata = categoryMeta[category] ?? {
+  const metadata = categoryMeta[Category] ?? {
     title: "Products - My Store",
     image: "/images/placeholder.jpg",
   };
