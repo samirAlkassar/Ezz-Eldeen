@@ -1,7 +1,20 @@
 "use client";
 
 import { Car, Gift, GraduationCap, Group } from "lucide-react";
-import { motion } from "motion/react"
+import dynamic from "next/dynamic";
+const MotionH1 = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.h1), {ssr: false,}
+);
+
+const MotionP = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.p), {ssr: false,}
+);
+
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
+
+
 import { useRouter } from "next/navigation";
 import ProductsByCategory from "../ProductsByCategory";
 import Image from "next/image";
@@ -18,7 +31,7 @@ import HeroProducsts from "../HeroProducts";
 import { HomeSectionType } from "@/features/products/server/getProducts";
 import { ProductType } from "@/features/products/types";
 import Bundles from "../Bundles";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export const categoriesList = [
     {
@@ -74,31 +87,31 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
     const gamesSection = sections.find(section => section.id === "games");
     const schoolSection = sections.find(section => section.id === "school");
     const bestSellers = sections.find(section => section.id === "rating");
-    const { t } = useTranslation();
+    const t = useTranslations("Categories");
     
     return (
-        <section className=" bg-gradient-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10">
+        <section className=" bg-linear-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full">
-                <motion.h1
+                <MotionH1
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
                     className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-[#FF791A] max-w-[90rem] mx-auto px-4 md:px-8">
                     {/* <span className="text-[#2B303B]">Explore Our Amazing</span> Categories */}
-                    {t("categories.sectionTitle")}
-                </motion.h1>
+                    {t("sectionTitle")}
+                </MotionH1>
 
-                <motion.p
+                <MotionP
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
                     className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center hidden md:block max-w-[90rem] mx-auto px-4 md:px-8">
-                    {/* From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" />
-                    {`child's journey magical and educational.`} */}
-                    {t("categories.sectionSubtitle")}
-                </motion.p>
+                    {/* From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" /> */}
+                    {/* {`child's journey magical and educational.`} */}
+                    {t("sectionSubtitle")}
+                </MotionP>
 
                 <div className="grid grid-cols-2 gap-y-6 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full mt-4 md:mt-8 max-w-[60rem] mx-auto px-4 md:px-8">
                     {categoriesList.map((category, index) => (
@@ -106,8 +119,8 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                         key={index}
                         delayIndex={index}
                         title={category.title}
-                        titleText={t(`categories.categoryCards.${category.title}.title`)}
-                        subtitle={t(`categories.categoryCards.${category.title}.subtitle`)}
+                        titleText={t(`cards.${category.title}.title`)}
+                        subtitle={t(`cards.${category.title}.subtitle`)}
                         theme={category.theme}
                         image={category.image}
                         lang={lang}
@@ -116,32 +129,32 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                 </div>
 
                 <div id={"startshopping"} className="pb-20 pt-14 md:pt-20 w-full flex flex-col items-center max-w-[90rem] mx-auto px-4 md:px-8">
-                    <motion.h1
+                    <MotionH1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
                         className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#FF791A]">
                         {/* <span className="text-[#2B303B]">Featured</span> Products */}
-                        {t("categories.featuredProducts")}
-                    </motion.h1>
+                        {t("featuredProducts")}
+                    </MotionH1>
 
-                    <motion.p
+                    <MotionP
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
                         className="text-base lg:text-xl text-[#2B303B]/80 mt-0 md:mt-3 text-center mb-4">
                         {/* Discover our most popular items <span className="hidden md:inline">that kids and parents love!</span> */}
-                        {t("categories.featuredProductsSubtitle")}
-                    </motion.p>
+                        {t("featuredProductsSubtitle")}
+                    </MotionP>
                     <HeroProducsts serverProducts={products}/>
                     
                     <div className="w-full flex justify-center mt-6 md:mx-8">
                         <button
                             onClick={() => router.push(`/${lang}/products?page=1`)}
                             className="bg-black text-white font-medium text-base md:text-lg rounded-full shadow-md px-4 py-2 md:px-6 md:py-3 cursor-pointer active:scale-95">
-                            {t("categories.showAllProducts")}
+                            {t("showAllProducts")}
                         </button>
                     </div>
                 </div>
@@ -152,18 +165,22 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                 <div className="bg-linear-30r from-cyan-500/10 via-blue-500/10 to-indigo-500/10 px-4 w-full mb-10 md:mb-20 mt-4 h-55 md:h-70">
                     <div className="mx-auto max-w-[90rem] md:px-8 flex justify-around items-start">
                         <div>
-                        <motion.h1
+                        <MotionH1
                             initial={{ opacity: 0, y: 18 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
                             className="text-2xl md:text-3xl text-left lg:text-5xl font-bold text-gray-800 mt-8 md:mt-12">
-                            {t("categories.exploreBestToysTitle")}
-                        </motion.h1>
-                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">{t("categories.exploreBestToysSubtitle")}</p>
-                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">{t("categories.shopNow")}</button>
+                            {t("exploreBestToysTitle")}
+                        </MotionH1>
+                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">
+                            {t("exploreBestToysSubtitle")}
+                        </p>
+                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">
+                            {t("shopNow")}
+                        </button>
                         </div>
-                        <motion.div 
+                        <MotionDiv
                             initial={{ scale: 0 }}
                             whileInView={{ scale: 1 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
@@ -171,7 +188,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             className="relative w-110 h-110 lg:block mt-0 hidden">
                             <Image src={"/images/twister-car.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-16 z-10"/>
                             <div className="bg-blue-300 absolute w-[480px] h-[300px] custom-radious"/>
-                        </motion.div>
+                        </MotionDiv>
                     </div>
                 </div>
                 
@@ -187,18 +204,22 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                 <div className="bg-linear-30r from-orange-400/10 via-orange-500/10 to-orange-400/10 px-4 w-full mb-10 md:mb-20 mt-4 h-50 md:h-70">
                     <div className="mx-auto max-w-[90rem] md:px-8 flex justify-around items-start">
                         <div>
-                        <motion.h1
+                        <MotionH1
                             initial={{ opacity: 0, y: 18 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
                             className="text-2xl md:text-3xl text-left lg:text-5xl font-bold text-gray-800 mt-8 md:mt-12">
-                            {t("categories.backToSchoolTitle")}
-                        </motion.h1>
-                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">{t("categories.backToSchoolSubtitle")}</p>
-                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">{t("categories.shopNow")}</button>
+                            {t("backToSchoolTitle")}
+                        </MotionH1>
+                        <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">
+                            {t("backToSchoolSubtitle")}
+                        </p>
+                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">
+                            {t("shopNow")}
+                        </button>
                         </div>
-                        <motion.div 
+                        <MotionDiv
                             initial={{ scale: 0 }}
                             whileInView={{ scale: 1 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
@@ -206,7 +227,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             className="relative w-120 h-120 lg:block mt-0 hidden">
                             <Image src={"/images/school-supplies.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-22 z-10"/>
                             <div className="bg-orange-400 absolute w-[580px] h-[300px] custom-radious"/>
-                        </motion.div>
+                        </MotionDiv>
                     </div>
                 </div>
 
@@ -237,10 +258,10 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
 
 
 const CategoryCard = ({theme, title, titleText, subtitle, delayIndex, image, lang }:
-    {theme?: string, title: string, titleText: string, subtitle: string, delayIndex: number, image: StaticImageData, lang: typeLang }) => {
+    {theme?: string, title: string, titleText?: string, subtitle?: string, delayIndex: number, image: StaticImageData, lang: typeLang }) => {
     const router = useRouter();
     return (
-        <motion.div
+        <MotionDiv
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 * (delayIndex + 1), duration: 0.2 }}
@@ -261,7 +282,7 @@ const CategoryCard = ({theme, title, titleText, subtitle, delayIndex, image, lan
                     {subtitle}
                 </p>
             )}
-        </motion.div>
+        </MotionDiv>
     )
 }
 

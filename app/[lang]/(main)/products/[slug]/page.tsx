@@ -14,11 +14,11 @@ const ProductBySlug = async (props: PageProps) => {
   const { params } = props;
   const { slug, lang } = await params;
 
-  const product = await getProductBySlug(slug, lang);
+  const product = await getProductBySlug(slug);
   if (!product) return;
 
   const blurDataURL = await getBlurDataURL(product.images[0].url);
-  const relatedProducts = await getRelatedBySlug(slug, 4, lang);
+  const relatedProducts = await getRelatedBySlug(slug, 4);
 
   return (
     <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
@@ -36,7 +36,7 @@ const ProductBySlug = async (props: PageProps) => {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, lang } = await params;
-  const product = await getProductBySlug(slug, lang);
+  const product = await getProductBySlug(slug);
 
   return {
     title: product.name,

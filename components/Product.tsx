@@ -1,4 +1,7 @@
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
 import {HeartCrack, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import { ProductType } from "@/features/products/types";
@@ -13,7 +16,8 @@ import { useToast } from "@/components/Toast";
 import { useSelector } from "react-redux";
 import {selectUser } from "../features/auth/authSlice";
 import { useParams } from "next/navigation";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export const Product = ({ product, index, wishlist, size = "medium", isDragging, showRatings = false, showDescription = false }: 
     { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean, showRatings?: boolean, showDescription?: boolean }) => {
@@ -25,7 +29,8 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
     const { toast } = useToast();
     const user = useSelector(selectUser);
     const params = useParams<{lang: typeLang }>()
-    const {t} = useTranslation();
+    const tCommon = useTranslations("Common");
+    const lang = useLocale();
     const handleAddToCart = (productId: string) => {
         if (!user) {
             router.push(`/${params.lang}/register`);
@@ -41,25 +46,26 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             image: `${product.images[0].url}`,
             actionButton: {
                 text: "view cart",
-                onClick: ()=>{router.push(`/${params.lang}/cart`)}
+                onClick: ()=>{router.push("/cart")}
             }
         })
     };
 
     const toggleWishlist = () => {
         if (!user) {
-            router.push(`/${params.lang}/register`);
+            router.push("/register");
             return
         };
+
         const nextLiked = !isInWishList;
         setOptimisticUpdate(nextLiked);
         if (isInWishList) {
             dispatch(removeFromWishlist(product?._id));
-            dispatch(fetchWishlist());
+            dispatch(fetchWishlist(lang as typeLang));
             toast({ title: "Item removed from wishlist", description: "Item  is removed from your wishlist",variant: "default", position: "bottom-right", icon: <HeartCrack size={20}/> })
         } else {
             dispatch(addToWishlist(product?._id));
-            dispatch(fetchWishlist());
+            dispatch(fetchWishlist(lang as typeLang));
         }
     };
 
@@ -73,7 +79,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
     };
 
     return (
-        <motion.div
+        <MotionDiv
             key={product?._id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +123,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                 <div className="hidden md:flex items-center justify-start gap-1.5 mb-3 flex-wrap mt-2">
                     {product?.category && 
                         <span 
-                            onClick={()=>router.push(`/${params.lang}/categories/${product?.category.replace(/\s+/g, '_')}`)}
+                            onClick={()=>router.push(`/categories/${product?.category.replace(/\s+/g, '_')}`)}
                             className="text-[10px] md:text-xs font-medium py-0.5 md:py-1 px-2 md:px-2.5 rounded-lg md:rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-100 cursor-pointer">
                             {product?.category}
                         </span>}
@@ -135,7 +141,9 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                 params.lang === "ar" ? "lg:flex-row-reverse" : "lg:flex-row"
             )}>
                 <div className="flex flex-col text-left">
-                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5 hidden md:block">{t("product.price")}</span>
+                    <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5 hidden md:block">
+                        {tCommon("price")}
+                    </span>
                     <div className={twMerge("flex gap-2 items-center md:items-end", 
                         params.lang === "ar" ? "flex-row-reverse" : "flex-row"
                     )}>
@@ -152,9 +160,11 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                         params.lang === "ar" ? "flex-row-reverse" : "flex-row"
                     )}>
                     <ShoppingCart size={16} className="scale-100 lg:scale-120 block lg:hidden xl:block"/>
-                    <p>{t("product.addToCart")}</p>
+                    <p>
+                       {tCommon("addToCart")}
+                    </p>
                 </button>
             </div>
-        </motion.div>
+        </MotionDiv>
     )
 }

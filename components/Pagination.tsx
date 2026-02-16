@@ -1,4 +1,10 @@
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
+const MotionButton = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.button), {ssr: false,}
+);
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
@@ -7,7 +13,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, isProductsPage }:
 
 
     return (
-        <motion.div 
+        <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -22,7 +28,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, isProductsPage }:
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={onPageChange}/>}
-        </motion.div>
+        </MotionDiv>
     );
 };
 
@@ -50,7 +56,7 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
     return pages;};
     return (
         <>
-        <motion.button
+        <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
@@ -61,7 +67,7 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
                     : "bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white shadow-lg hover:shadow-xl cursor-pointer"
             }`}>
             <ChevronLeft size={20} />
-        </motion.button>
+        </MotionButton>
 
         <div className="flex items-center gap-2">
             {getPageNumbers().map((page, index) => {
@@ -74,7 +80,7 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
                 }
 
                 return (
-                    <motion.button
+                    <MotionButton
                         key={page}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
@@ -85,12 +91,12 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
                                 : "bg-white text-gray-700 hover:bg-gradient-to-br hover:from-purple-100 hover:to-orange-100 border-2 border-gray-200 cursor-pointer"
                         }`}>
                         {page}
-                    </motion.button>
+                    </MotionButton>
                 );
             })}
         </div>
 
-        <motion.button
+        <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
@@ -101,7 +107,7 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
                     : "bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white shadow-lg hover:shadow-xl"
             }`}>
             <ChevronRight size={20} />
-        </motion.button>
+        </MotionButton>
         </>
     )
 }
@@ -110,16 +116,16 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
 const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPage: number; totalPages: number; onPageChange: (page: number) => void; isProductsPage?:boolean}) => {
     return (
         <>
-        <motion.button
+        <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage > 1 ? onPageChange(1) : onPageChange(2)}
             className={twMerge("flex items-center justify-center gap-2 w-10 h-10 rounded-md shadow-md" ,
             "font-semibold transition-all duration-300 bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer mr-4")}>
             <ChevronLeft size={24} />
-        </motion.button>
+        </MotionButton>
 
-        <motion.button
+        <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage > 1 && onPageChange(1)}
@@ -129,10 +135,10 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
                     "bg-gray-200 text-gray-400 h-3 w-8"
                     
             }`}>
-        </motion.button>
+        </MotionButton>
         
 
-        <motion.button
+        <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage < totalPages && onPageChange(2)}
@@ -141,15 +147,15 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
                     "bg-gradient-to-r from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg hover:shadow-xl h-3 w-3" :
                     "bg-gray-200 text-gray-400 h-3 w-8"
             }`}>
-        </motion.button>
-        <motion.button
+        </MotionButton>
+        <MotionButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage > 1 ? onPageChange(1) : onPageChange(2)}
             className={twMerge("flex items-center justify-center gap-2 w-10 h-10 rounded-md shadow-md" ,
             "font-semibold transition-all duration-300 bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer ml-4")}>
             <ChevronRight size={24} />
-        </motion.button>
+        </MotionButton>
         </>
     )
 }

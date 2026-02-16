@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useToast } from "@/components/Toast";
 import { CheckSquare, TriangleAlert } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { RegisterPayload } from '@/features/auth/types';
 
@@ -21,7 +21,8 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
         confirmPassword: "",
         });
     const params = useParams<{lang: typeLang}>();
-    const {t} = useTranslation();
+    const tRegister = useTranslations("Auth");
+    const tCommon = useTranslations("Common");
     const router = useRouter();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,13 +66,13 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
         <div className="relative flex-1 flex justify-center items-center p-6">
             <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-md">
                 <h2 className="text-3xl font-extrabold text-center text-[#FF791A] mb-6">
-                    {t("auth.registerPage.title")}
+                    {tRegister("registerPage.title")}
                 </h2>
                 <form className="space-y-3 md:space-y-5" onSubmit={handleSubmit}>
                     <div className='flex gap-4'>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 md:mb-1">
-                            {t("auth.registerPage.firstName")}
+                            {tRegister("registerPage.firstName")}
                             </label>
                             <input
                                 type="text"
@@ -84,7 +85,7 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 md:mb-1">
-                            {t("auth.registerPage.lastName")}
+                            {tRegister("registerPage.lastName")}
                             </label>
                             <input
                                 type="text"
@@ -99,7 +100,7 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 md:mb-1">
-                            {t("auth.registerPage.email")}
+                           {tRegister("registerPage.email")}
                         </label>
                         <input
                             type="email"
@@ -112,7 +113,7 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
                     </div>
                     <div>
                         <label className={`block text-sm font-medium text-gray-700 md:mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
-                            {t("auth.registerPage.password")}
+                            {tRegister("registerPage.password")}
                         </label>
                         <input
                             type="password"
@@ -125,7 +126,7 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
                     </div>
                     <div>
                         <label className={`block text-sm font-medium text-gray-700 md:mb-1 ${error === "Passwords do not match" ? 'text-red-500' : 'text-gray-700'}`}>
-                            {t("auth.registerPage.confirmPassword")}
+                            {tRegister("registerPage.confirmPassword")}
                         </label>
                         <input
                             type="password"
@@ -157,14 +158,14 @@ const RegisterClient = ({registerAction}:{registerAction: (payload: RegisterPayl
                             Creating account
                         </span>
                         ) : (
-                        `${t("auth.registerPage.registerbutton")}`
+                        `${tRegister("registerPage.registerButton")}`
                         )}
                     </button>
                 </form>
                 <p className="text-center text-sm text-gray-600 mt-4">
-                    {t("auth.registerPage.message")}{' '}
+                    {tRegister("registerPage.message")}{' '}
                     <Link href={`/${params.lang}/login`} className="text-[#FF791A] font-semibold hover:underline">
-                        {t("auth.login")}
+                        {tCommon("login")}
                     </Link>
                 </p>
             </div>

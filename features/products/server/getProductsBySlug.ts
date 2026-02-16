@@ -1,6 +1,7 @@
-import i18n from "@/i18n/i18n"
+import { getLocale } from "next-intl/server"
 
-export async function getProductBySlug(slug: string, lang: typeLang) {
+export async function getProductBySlug(slug: string) {
+  const lang = await getLocale();
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${slug}`, {
     headers: {
       "Accept-Language": lang,
@@ -17,9 +18,10 @@ export async function getProductBySlug(slug: string, lang: typeLang) {
 }
 
 export async function getProductsReviews(productId: string) {
+  const lang = await getLocale();
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/reviews/${productId}`, {
     headers: {
-      "Accept-Language": i18n.language,
+      "Accept-Language": lang,
       "Content-Type": "application/json",
     },
     next: {revalidate: 300}
@@ -32,7 +34,8 @@ export async function getProductsReviews(productId: string) {
   return res.json()
 }
 
-export async function  getRelatedBySlug(slug: string, limit: number, lang: typeLang) {
+export async function  getRelatedBySlug(slug: string, limit: number) {
+  const lang = await getLocale();
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/related?slug=${slug}&limit=${limit}`,{
     headers: {
       "Accept-Language": lang,

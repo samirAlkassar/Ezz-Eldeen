@@ -1,0 +1,155 @@
+{
+  "Common": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "price": "السعر",
+    "addToCart": "أضف إلى السلة"
+  },
+
+  "Navbar": {
+    "storeTitle": "عز الدين",
+    "cart": "السلة",
+    "wishlist": "المفضلة",
+    "arabic": "العربية",
+    "english": "الإنجليزية",
+    "langButton": {
+      "arabic": "ع",
+      "english": "En",
+      "changeLangToArabic": "تغيير اللغة إلى العربية",
+      "changeLangToEnglish": "تغيير اللغة إلى الإنجليزية"
+    },
+    "profileTabs": {
+      "profile": "الملف الشخصي",
+      "settings": "الإعدادات",
+      "dashboard": "لوحة التحكم",
+      "logout": "تسجيل الخروج"
+    }
+  },
+
+  "Home": {
+    "kidsStore": "متجر أطفال في مصر",
+    "home": "الرئيسية",
+    "magicAwaits": "السحر يبدأ في",
+    "ezzEldeen": "عز الدين",
+    "subtitle": "اكتشف أفضل الأدوات المدرسية والألعاب والهدايا التي تنمّي خيال وتعلم طفلك.",
+    "startShopping": "ابدأ التسوق",
+    "viewCollections": "عرض المجموعات",
+
+    "productByCategory": {
+      "showAll": "عرض الكل",
+      "shopByCategories": "تسوق حسب الفئات"
+    },
+
+    "cantDecide": "مش قادر تختار؟ جرّب الباقات",
+    "cantDecideSubtitle": "وفّر أكثر مع باقات مختارة للمرح والتعلم.",
+    "viewAllBundles": "عرض جميع الباقات",
+    "addBundle": "إضافة باقة",
+    "bestValue": "أفضل قيمة",
+    "save": "وفر",
+    "backToSChool": "العودة إلى المدرسة",
+
+    "testimonials": {
+      "title": "آراء عملائنا",
+      "subTitle": "قصص حقيقية من أولياء الأمور الذين يختارون الأفضل لأطفالهم.",
+      "communityStories": "قصص المجتمع",
+      "cta": "انضم إلى مجتمعنا",
+      "ctaDescription": "انضم إلى مجتمعنا على واتساب",
+      "verifiedPurchase": "عملية شراء مؤكدة"
+    }
+  },
+
+
+  "Categories": {
+    "sectionTitle": "استكشف فئاتنا المذهلة",
+    "sectionSubtitle": "من أساسيات التعلم إلى الكنوز الممتعة، لدينا كل شيء لجعل رحلة طفلك مليئة بالسحر والتعليم.",
+    "featuredProducts": "المنتجات المميزة",
+    "featuredProductsSubtitle": "اكتشف أكثر العناصر شعبية التي يحبها الأطفال والآباء!",
+    "showAllProducts": "عرض كل المنتجات",
+    
+    "cards": {
+      "School Supplies": {
+        "title": "المستلزمات المدرسية",
+        "subtitle": "كل ما يحتاجه الطالب الصغير",
+        "buttonText": "استكشف المستلزمات المدرسية"
+      },
+      "Toys & Games": {
+        "title": "الألعاب",
+        "subtitle": "ألعاب ممتعة وتعليمية لأطفالك",
+        "buttonText": "استكشف الألعاب"
+      },
+      "Gifts": {
+        "title": "الهدايا",
+        "subtitle": "هدايا مثالية للحظات الخاصة",
+        "buttonText": "استكشف الهدايا"
+      },
+      "Bundles": {
+        "title": "الباقات",
+        "subtitle": "صفقات مذهلة وحزم متنوعة",
+        "buttonText": "استكشف الباقات"
+      }
+    },
+
+    "exploreBestToysTitle": "استكشف أفضل الألعاب",
+    "exploreBestToysSubtitle": "ألعاب مميزة لأطفالك وشخصيات الأكشن.",
+    "shopNow": "تسوق الآن",
+
+    "backToSchoolTitle": "المستلزمات المدرسية",
+    "backToSchoolSubtitle": "استكشف أفضل المستلزمات المدرسية لأطفالك."
+  },
+
+  "Cart": {
+    "title": "السلة",
+    "removeFromCart": "إزالة المنتج من السلة",
+    "addToWishlist": "إضافة إلى المفضلة",
+
+    "empty": {
+      "title": "السلة فارغة",
+      "description": "لم تقم بإضافة أي منتجات إلى السلة بعد.",
+      "cta": "تصفح المنتجات"
+    },
+
+    "checkoutBox": {
+      "title": "ملخص الطلب",
+      "subTotal": "المجموع الفرعي",
+      "delivery": "التوصيل",
+      "total": "الإجمالي",
+      "haveCoupon": "لديك كوبون؟",
+      "enterCode": "أدخل الكود",
+      "apply": "تطبيق",
+      "confirmOrder": "تأكيد الطلب",
+      "terms": "بتأكيد الطلب أنت توافق على الشروط وسياسة الاسترجاع."
+    }
+  },
+
+  "Wishlist": {
+    "title": "المفضلة",
+    "moveToCart": "نقل إلى السلة",
+    "removeFromWishlist": "إزالة من المفضلة",
+    "addToCart": "أضف إلى السلة",
+
+    "empty": {
+      "title": "المفضلة فارغة",
+      "description": "لم تقم بإضافة أي منتجات إلى المفضلة بعد.",
+      "cta": "تصفح المنتجات"
+    }
+  },
+
+  "Auth": {
+    "loginPage": {
+      "title": "تسجيل الدخول إلى حسابك",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "message": "ليس لديك حساب؟"
+    },
+    "registerPage": {
+      "title": "إنشاء حساب جديد",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "message": "لديك حساب بالفعل؟",
+      "registerButton": "إنشاء الحساب"
+    }
+  }
+}

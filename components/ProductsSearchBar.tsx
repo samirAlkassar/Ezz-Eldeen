@@ -2,7 +2,17 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
+
+const AnimatePresence = dynamic(
+  () =>
+    import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 import { twMerge } from "tailwind-merge";
 import { useRouter, usePathname } from "next/navigation";
 import { CategoriesFilterType, SortType, OrderType } from "./layout/Products";
@@ -22,7 +32,7 @@ interface ProductsSearchBarProps {
   order: OrderType;
   setOrder: (value: OrderType) => void;
   onFilterApply: (minPrice: number, maxPrice: number, sort: SortType, order: OrderType) => void;
-  lang: typeLang
+  lang?: typeLang
 }
 
 const ProductsSearchBar = ({
@@ -115,7 +125,7 @@ const ProductsSearchBar = ({
 
         <AnimatePresence>
           {showCategoriesMenu && (
-            <motion.div
+            <MotionDiv
               key="categories-modal"
               initial={{ opacity: 0, x: 18 }}
               animate={{ opacity: 1, x: 0 }}
@@ -146,13 +156,13 @@ const ProductsSearchBar = ({
                 setShowCategoriesMenu={setShowCategoriesMenu}>
                 Gifts
               </SearchBarCategoriesButton>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
 
         <AnimatePresence>
           {showFiltersMenu && (
-            <motion.div
+            <MotionDiv
               key="filters-modal"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -252,7 +262,7 @@ const ProductsSearchBar = ({
                   Apply
                 </button>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
 

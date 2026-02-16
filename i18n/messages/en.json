@@ -1,0 +1,154 @@
+{
+  "Common": {
+    "login": "Login",
+    "register": "Register",
+    "price": "Price",
+    "addToCart": "Add to Cart"
+  },
+
+  "Navbar": {
+    "storeTitle": "Ezz-Eldeen",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "arabic": "Arabic",
+    "english": "English",
+    "langButton": {
+      "arabic": "Ar",
+      "english": "En",
+      "changeLangToArabic": "Change language to Arabic",
+      "changeLangToEnglish": "Change language to English"
+    },
+    "profileTabs": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "dashboard": "Dashboard",
+      "logout": "Log out"
+    }
+  },
+
+  "Home": {
+    "kidsStore": "Kids store in Egypt",
+    "home": "Home",
+    "magicAwaits": "Magic awaits at",
+    "ezzEldeen": "Ezz-Eldeen",
+    "subtitle": "Discover amazing school supplies, toys, and gifts that spark imagination and learning in every child.",
+    "startShopping": "Start Shopping",
+    "viewCollections": "View Collections",
+
+    "productByCategory": {
+      "showAll": "Show All",
+      "shopByCategories": "Shop By Categories"
+    },
+
+    "cantDecide": "Can’t Decide? Try Our Bundles",
+    "cantDecideSubtitle": "Save more with curated bundles designed for fun, learning, and growing minds.",
+    "viewAllBundles": "View All Bundles",
+    "addBundle": "Add Bundle",
+    "bestValue": "Best value",
+    "save": "Save",
+    "backToSChool": "Back to school",
+
+    "testimonials": {
+      "title": "Love from the community",
+      "subTitle": "Real stories from parents who choose the best for their little ones.",
+      "communityStories": "Community Stories",
+      "cta": "Join Our Community",
+      "ctaDescription": "Join Our Community On WhatsApp",
+      "verifiedPurchase": "Verified Purchase"
+    }
+  },
+
+  "Categories": {
+    "sectionTitle": "Explore Our Amazing Categories",
+    "sectionSubtitle": "From learning essentials to playful treasures, we have everything to make your child's journey magical and educational.",
+    "featuredProducts": "Featured Products",
+    "featuredProductsSubtitle": "Discover our most popular items that kids and parents love!",
+    "showAllProducts": "Show All Products",
+
+    "cards": {
+      "School Supplies": {
+        "title": "School Supplies",
+        "subtitle": "Everything your little scholar needs",
+        "buttonText": "Explore School Supplies"
+      },
+      "Toys & Games": {
+        "title": "Toys & Games",
+        "subtitle": "Fun games and educational toys for your kids",
+        "buttonText": "Explore Toys & Games"
+      },
+      "Gifts": {
+        "title": "Gifts",
+        "subtitle": "Perfect presents for special moments",
+        "buttonText": "Explore Gifts"
+      },
+      "Bundles": {
+        "title": "Bundles",
+        "subtitle": "Amazing deals and combo packages",
+        "buttonText": "Explore Bundles"
+      }
+    },
+
+    "exploreBestToysTitle": "Explore Best Toys",
+    "exploreBestToysSubtitle": "Featured toys and action figures.",
+    "shopNow": "Shop Now",
+
+    "backToSchoolTitle": "Back to School Supplies",
+    "backToSchoolSubtitle": "Explore the best school supplies for your kids."
+  },
+
+  "Cart": {
+    "title": "My Cart",
+    "removeFromCart": "Remove product from cart",
+    "addToWishlist": "Add product to your wishlist",
+
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Looks like you haven’t added anything to your cart yet.",
+      "cta": "Browse Products"
+    },
+
+    "checkoutBox": {
+      "title": "Checkout Summary",
+      "subTotal": "Subtotal",
+      "delivery": "Delivery",
+      "total": "Total",
+      "haveCoupon": "Have a coupon?",
+      "enterCode": "Enter Code",
+      "apply": "Apply",
+      "confirmOrder": "Confirm Order",
+      "terms": "By confirming you agree to our Terms & Refund Policy."
+    }
+  },
+
+  "Wishlist": {
+    "title": "Wishlist",
+    "moveToCart": "Move to Cart",
+    "removeFromWishlist": "Remove from wishlist",
+    "addToCart": "Add to Cart",
+
+    "empty": {
+      "title": "Your wishlist is empty",
+      "description": "You haven't added any products to your wishlist yet.",
+      "cta": "Browse Products"
+    }
+  },
+
+  "Auth": {
+    "loginPage": {
+      "title": "Login to Your Account",
+      "email": "Email",
+      "password": "Password",
+      "message": "Don’t have an account?"
+    },
+    "registerPage": {
+      "title": "Create an account",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "message": "Already have an account?",
+      "registerButton": "Create account"
+    }
+  }
+}

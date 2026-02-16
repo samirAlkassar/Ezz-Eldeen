@@ -44,8 +44,7 @@ const ProductsClient = ({initialProducts, initialPagination, initialPage, lang} 
         initialPage={initialPage}
         search={search} 
         category={category} 
-        subCategory={subCategory}
-        lang={lang}/>
+        subCategory={subCategory}/>
     </section>
   );
 };

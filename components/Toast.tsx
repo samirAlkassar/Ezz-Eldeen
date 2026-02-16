@@ -5,9 +5,19 @@ import { createPortal } from "react-dom";
 import { cva } from "class-variance-authority";
 import { Check, X } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { AnimatePresence, motion } from "framer-motion"
+import dynamic from "next/dynamic";
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
+
+
+const AnimatePresence = dynamic(
+  () =>
+    import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 import Image from "next/image";
-import i18n from "@/i18n/i18n";
+import { useLocale } from "next-intl";
 
 type ToastPosition =
   | "top-right"
@@ -98,6 +108,7 @@ export function useToast() {
 export function ToastProvider() {
   const [toasts, setToasts] = React.useState<Toast[]>(memoryState);
   const [mounted, setMounted] = React.useState(false);
+  const lang = useLocale();
 
   React.useEffect(() => {
     setMounted(true);
@@ -121,7 +132,8 @@ export function ToastProvider() {
             key={position}
             className={twMerge(
               "fixed z-9999 flex w-full max-w-60 md:max-w-sm flex-col gap-2 pointer-events-none",
-              i18n.language === "ar" ? positionClasses["bottom-left"] : positionClasses[position]
+              lang === "ar" ? positionClasses["bottom-left"] : 
+              positionClasses[position]
             )}>
             <AnimatePresence mode="popLayout">
               {positionToasts.map((toast) => (
@@ -139,7 +151,7 @@ export function ToastProvider() {
 
 function ToastItem({ toast }: { toast: Toast }) {
   return (
-    <motion.div
+    <MotionDiv
       layout
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
@@ -183,19 +195,21 @@ function ToastItem({ toast }: { toast: Toast }) {
         </div>
 
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 }
 
 
 const CheckMark = ({ toast }: { toast: Toast }) => {
+  const lang = useLocale();
   return (
     <>
       {toast.variant === "success" &&
       <span 
         className={twMerge("absolute -top-1 bg-green-500 text-white",
         "rounded-full h-5 w-5 flex items-center justify-center border border-white",
-        i18n.language === "ar" ? "-right-1" : "-left-1")}>
+        lang === "ar" ? "-right-1" : 
+        "-left-1")}>
           {<Check size={16}/>}
       </span>
     }

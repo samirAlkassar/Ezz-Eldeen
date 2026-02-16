@@ -15,9 +15,9 @@ const initialState: CartState = {
 };
 
 // Async thunks
-export const fetchCart = createAsyncThunk("cart/fetchCart", async (_, thunkAPI) => {
+export const fetchCart = createAsyncThunk("cart/fetchCart", async (lang: typeLang, thunkAPI) => {
     try {
-        return await cartService.getCartApi();
+        return await cartService.getCartApi(lang);
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
     }

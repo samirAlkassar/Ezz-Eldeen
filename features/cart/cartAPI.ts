@@ -1,6 +1,6 @@
 import getCookies from "@/actions/getCookies";
 import { CartItem, CartResponse } from "./types";
-import i18n from "@/i18n/i18n";
+// import i18n from "@/i18n/i18n";
 
 export interface AddToCartRequest {
     productId: string;
@@ -12,7 +12,7 @@ export interface UpdateCartRequest {
     quantity: number;
 }
 
-export async function getCartApi(): Promise<CartResponse> {
+export async function getCartApi(lang: typeLang): Promise<CartResponse> {
     const token = await getCookies("token");
     if (!token) {
         return {} as CartResponse;
@@ -23,7 +23,7 @@ export async function getCartApi(): Promise<CartResponse> {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token?.value}`,
-            "Accept-Language": i18n.language
+            "Accept-Language": lang
         },
     });
 

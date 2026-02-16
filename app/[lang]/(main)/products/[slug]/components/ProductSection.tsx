@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import {motion} from "motion/react"
+import dynamic from "next/dynamic";
+
+const MotionButton = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.button), {ssr: false,}
+);
+const MotionLi = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.li), {ssr: false,}
+);
 import { useState } from "react";
 import { Check, CloudLightning, Heart, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { ProductType } from "@/features/products/types";
@@ -32,7 +39,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, 
                 </div>
                 <div className="flex gap-3 justify-center">
                     {product?.images.map((img, index) => (
-                        <motion.button
+                        <MotionButton
                         key={index}
                         onClick={() => {setSelectedImage(index); setImageIndex(index)}}
                         whileHover={{ scale: 1.05 }}
@@ -44,7 +51,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, 
                         }`}
                         >
                         <Image src={img?.url} alt={`${img?.alt}`} fill className="w-full h-full object-cover" />
-                        </motion.button>
+                        </MotionButton>
                     ))}
                 </div>
             </div>
@@ -111,7 +118,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, 
                     <h3 className="font-medium text-gray-800 text-xl">Key Features:</h3>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {features.slice(0, 4).map((feature, index) => (
-                        <motion.li
+                        <MotionLi
                             key={index}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -120,7 +127,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, 
                         >
                             <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
                             <span>{feature}</span>
-                        </motion.li>
+                        </MotionLi>
                         ))}
                     </ul>
                     </>}

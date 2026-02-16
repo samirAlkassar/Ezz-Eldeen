@@ -1,6 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
+import dynamic from "next/dynamic";
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
 import { useParams } from "next/navigation";
 import { categoriesList } from "@/components/layout/Categories";
 import { twMerge } from "tailwind-merge";
@@ -50,7 +53,7 @@ const CategoriesClient = ({initialProducts, initialPagination, initialPage, lang
                   {category[0]?.sectionIcon ? category[0]?.sectionIcon : <EarthIcon size={50}/>}
                 </div>
               </motion.div> */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}>
@@ -58,38 +61,37 @@ const CategoriesClient = ({initialProducts, initialPagination, initialPage, lang
                 {/* <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto hidden md:block">
                   Discover our amazing collection of {undoSlug(params.category)} perfect for kids of all ages.
                 </p> */}
-              </motion.div>
+              </MotionDiv>
             </div>
             
             <div className="flex flex-col mt-2">
               <div className="flex gap-1 md:gap-2 flex-wrap">
               {category[0]?.subcategories.map((subcategory, index)=>(
-                <motion.div 
+                <MotionDiv
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{  stiffness: 100, delay: index * 0.1}}
                   key={index} 
                   className={twMerge("rounded-lg md:rounded-full py-1 px-3 md:py-1 md:px-4 shadow-xs cursor-pointer border-1 border-gray-100", index === 0 ? `bg-white text-gray-800` : "bg-white/60 text-gray-700")}>
                   <h1 className="text-sm md:text-base font-medium">{subcategory}</h1>
-                </motion.div>
+                </MotionDiv>
               ))}
               </div>
             </div>
           </div>
-          <motion.div 
+          <MotionDiv
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
               className="relative w-90 h-90 lg:block hidden">
               <Image src={category[0]?.sectionImage} alt="Hero Image - Back-school-cartoon" fill className="object-contain -ml-40"/>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
       <Breadcrumbs previousPage={undoSlug(params.category)}/>
       <div className="max-w-[85rem] mx-auto px-4">
         <Products 
-            lang={lang}
             initialProducts={initialProducts}
             initialPagination={initialPagination}
             initialPage={initialPage}

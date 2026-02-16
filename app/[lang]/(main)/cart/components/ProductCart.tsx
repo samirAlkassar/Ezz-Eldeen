@@ -7,7 +7,7 @@ import { fetchWishlist, addToWishlist, removeFromWishlist } from "@/features/wis
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/app/store";
 import { Trash } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type ProductCartProps = {
     cartItem: CartItem,
@@ -25,17 +25,17 @@ const ProductCart = ({ cartItem, handleRemoveItem, handleUpdateItem, wishlist, l
     const postIsLiked = wishlist.some(item => item._id === cartItem?.product?._id);
     const isLiked = optimisticUpdate !== null ? optimisticUpdate : Boolean(postIsLiked);
     const dispatch = useDispatch<AppDispatch>();
-    const { t } = useTranslation();
+    const t = useTranslations("Cart");
     
     const toggleWishlist = () => {
         const nextLiked = !isLiked;
         setOptimisticUpdate(nextLiked);
         if (isLiked) {
             dispatch(removeFromWishlist(cartItem?.product?._id));
-            dispatch(fetchWishlist());
+            dispatch(fetchWishlist(lang as typeLang));
         } else {
             dispatch(addToWishlist(cartItem?.product?._id));
-            dispatch(fetchWishlist());
+            dispatch(fetchWishlist(lang as typeLang));
         }
     };
 
@@ -113,16 +113,16 @@ const ProductCart = ({ cartItem, handleRemoveItem, handleUpdateItem, wishlist, l
                     </div>
                     <div className="flex gap-2 justify-end mt-2">
                         <button
-                            title={t("cart.removeFromCart")}
-                            aria-label={t("cart.removeFromCart")}
+                            title={t("removeFromCart")}
+                            aria-label={t("removeFromCart")}
                             className="bg-gray-500 md:bg-red-400 h-8 md:h-10 px-3 gap-1 flex items-center justify-center rounded-lg text-white font-medium cursor-pointer hover:bg-red-500 active:scale-[97%] transition-all duration-75 ease-in"
                             onClick={() => handleRemove(cartItem?.product?._id)}>
                             <p className="font-medium text-white text-sm hidden md:block">remove</p>
                             <Trash size={20}/>
                         </button>
                         <button
-                            title={t("cart.addToWishlist")}
-                            aria-label={t("cart.addToWishlist")}
+                            title={t("addToWishlist")}
+                            aria-label={t("addToWishlist")}
                             className="flex items-center justify-center relative bg-gray-200 w-8 md:w-10 h-8 md:h-10 rounded-lg text-white font-medium cursor-pointer hover:bg-gray-300 active:scale-[97%] transition-all duration-75 ease-in"
                             onClick={() => { setOptimisticUpdate((prev) => !prev); toggleWishlist(); }}>
                             <span className="scale-[70%] heart absolute"

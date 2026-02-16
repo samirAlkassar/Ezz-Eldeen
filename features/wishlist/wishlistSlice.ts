@@ -20,9 +20,9 @@ const initialState: WishlistState = {
 // ===============================
 export const fetchWishlist = createAsyncThunk(
   "wishlist/fetchWishlist",
-  async (_, thunkAPI) => {
+  async (lang: typeLang, thunkAPI) => {
     try {
-      const res = await wishlistService.getWishlist();
+      const res = await wishlistService.getWishlist(lang);
       return res.items;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,9 +1,9 @@
 // productsAPI.ts
 import getCookies from "@/actions/getCookies";
 import { WishlistType } from "./types";
-import i18n from "@/i18n/i18n";
 
-export async function getWishlist(): Promise<WishlistType> {
+
+export async function getWishlist(lang: typeLang): Promise<WishlistType> {
   const token = await getCookies("token");
   if (!token) {
     throw new Error("No token found");
@@ -13,7 +13,7 @@ export async function getWishlist(): Promise<WishlistType> {
     headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token?.value}`,
-        "Accept-Language": i18n.language,
+        "Accept-Language": lang,
       },
     });
 
@@ -35,7 +35,6 @@ export async function addToWishlist(productId: string): Promise<WishlistType> {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token?.value}`,
-      "Accept-Language": i18n.language,
     },
     body: JSON.stringify({ productId: productId }),
   });
@@ -58,7 +57,6 @@ export async function removeFromWishlist(productId: string): Promise<WishlistTyp
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token?.value}`,
-      "Accept-Language": i18n.language,
     },
     body: JSON.stringify({ productId: productId }),
     cache: "no-store",

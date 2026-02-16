@@ -2,7 +2,29 @@
 
 import { Heart, ShoppingCart, ChevronDown, Settings, User, LogOut, LayoutDashboard, LogIn, LogOutIcon, Menu } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const MotionButton = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.button), {ssr: false,}
+);
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
+const MotionUl = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.ul), {ssr: false,}
+);
+const MotionLi = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.li), {ssr: false,}
+);
+const MotionNav = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.nav), {ssr: false,}
+);
+
+const AnimatePresence = dynamic(
+  () =>
+    import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 import { fetchCurrentUser, selectUser, logout } from "../../../features/auth/authSlice";
 import { Button } from "../../ui/Button";
 import { useRouter } from "next/navigation";
@@ -14,15 +36,17 @@ import Image from "next/image";
 import { useToast } from "@/components/Toast";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useParams } from "next/navigation";
 import { User as UserType } from "@/features/auth/types";
+import LocalSwitcher from "@/components/LocalSwitcher";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 const Navbar = ({user}:{user?: UserType}) => {
-    const { t } = useTranslation();
+    const tNavbar = useTranslations("Navbar");
+    const tCommon = useTranslations("Common");
+    const lang = useLocale();
     const dispatch = useDispatch<AppDispatch>();
-    // const user = useSelector(selectUser);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [showBottomMenu, setShowBottomMenu] = useState(true);
@@ -33,8 +57,6 @@ const Navbar = ({user}:{user?: UserType}) => {
     const router = useRouter();
     const pathname = usePathname();
     const isHomePage = pathname.endsWith("/en") || pathname.endsWith("/ar");
-    const params = useParams<{lang: typeLang}>();
-    const { i18n } = useTranslation();
 
     const handleScroll = useCallback(() => {
         const scrollThreshold = 420;
@@ -57,7 +79,7 @@ const Navbar = ({user}:{user?: UserType}) => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchCart());
+        dispatch(fetchCart(lang as typeLang));
     }, [dispatch]);
 
     const handleLogout = () => {
@@ -90,44 +112,44 @@ const Navbar = ({user}:{user?: UserType}) => {
                 {
                 isScrolled ? 
                     <div className="flex items-center justify-start gap-2 md:gap-4">
-                        <motion.button 
+                        <MotionButton
                             initial={{ scale: 0.1, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.2, ease: "easeIn" }}
                             onClick={()=>setShowBottomMenu(prev => !prev)}
                             className="cursor-pointer">
                             <Menu size={28} className={twMerge("scale-90 md:scale-100",isScrolled? "text-gray-800" : "text-white")}/>
-                        </motion.button>
-                        <motion.div
+                        </MotionButton>
+                        <MotionDiv
                             initial={{x: -50 }}
                             whileInView={{x:0 }}
                             transition={{ delay: 0, duration: 0.3, ease: "easeIn" }}>
-                            <Link href={`/${params.lang}`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
-                                {t("navbar.storeTitle")}
+                            <Link href={`/`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                                {tNavbar("storeTitle")}
                             </Link>
-                        </motion.div>
+                        </MotionDiv>
                     </div>: 
-                    <motion.div 
+                    <MotionDiv
                         initial={{ scale: 0.9 }}
                         whileInView={{ scale: 1 }}
                         transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}
                         className="flex items-center justify-start gap-4">
-                        <Link href={`/${params.lang}`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
-                            {t("navbar.storeTitle")}
+                        <Link href={`/`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
+                            {tNavbar("storeTitle")}
                         </Link>
-                    </motion.div>
+                    </MotionDiv>
                 }
 
 
 
 
                 <div className="flex gap-2 items-center relative">
-                    <LanguageSwitcher isScrolled={isScrolled}/>
+                    <LocalSwitcher isScrolled={isScrolled}/>
 
                     <button 
-                        title={t("navbar.wishlist")}  
-                        aria-label={t("navbar.wishlist")}  
-                        onClick={() => {router.push( user ? `/${params.lang}/wishlist` : `/${params.lang}/register`); !user && 
+                        title={tNavbar("wishlist")}  
+                        aria-label={tNavbar("wishlist")}  
+                        onClick={() => {router.push( user ? `/wishlist` : `/register`); !user && 
                                 toast({ title: "Create account!", description: "You need to login before accessing your wishlist",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
                         }} 
                         className={twMerge("p-2 rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
@@ -136,9 +158,9 @@ const Navbar = ({user}:{user?: UserType}) => {
                         <Heart />
                     </button>
                     <button 
-                        title={t("navbar.cart")} 
-                        aria-label={t("navbar.cart")} 
-                        onClick={() => {router.push(user ? `/${params.lang}/cart` : `/${params.lang}/register`); !user && 
+                        title={tNavbar("cart")} 
+                        aria-label={tNavbar("cart")} 
+                        onClick={() => {router.push(user ? `/cart` : `/register`); !user && 
                                 toast({ title: "Create account!", description: "You need to login before accessing your cart",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
                         }} 
                         className={twMerge("p-2 relative rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
@@ -180,41 +202,63 @@ const Navbar = ({user}:{user?: UserType}) => {
                             {/* Dropdown Menu */}
                             <AnimatePresence>
                                 {menuOpen && (
-                                    <motion.ul
+                                    <MotionUl
                                         ref={menuRef}
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
                                         transition={{ duration: 0.15 }}
-                                        className={twMerge("absolute mt-2 w-40 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden px-2 py-4 space-y-3", i18n.language === "ar" ? "left-0" : "right-0")}>
-                                        <li><Button onClick={()=>{setMenuOpen(false); router.push(`/${params.lang}/profile/${user.firstName}_${user.lastName}`)}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><User size={18}/> <span>{t("navbar.profileTabs.profile")}</span></div></Button></li>
-                                        <li><Button onClick={()=>{setMenuOpen(false);}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><Settings size={18}/><span>{t("navbar.profileTabs.settings")}</span></div> </Button></li>
-                                        {user?.role === "admin" && <li><Button onClick={()=>{router.push(`/${params.lang}/dashboard`); setMenuOpen(false);}} variant={'game'} size={'small'} color={'orange'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LayoutDashboard size={18}/><span> {t("navbar.profileTabs.dashboard")}</span></div> </Button></li>}
+                                        className={twMerge("absolute mt-2 w-40 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden px-2 py-4 space-y-3", 
+                                           lang === "ar" ? "left-0" : "right-0"
+                                        )}>
+                                        <li>
+                                            <Button onClick={()=>{setMenuOpen(false); router.push(`/profile/${user.firstName}_${user.lastName}`)}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto">
+                                                <div className="flex gap-2 items-center justify-center">
+                                                    <User size={18}/>
+                                                    <span>
+                                                        {tNavbar("profileTabs.profile")}
+                                                    </span>
+                                                </div>
+                                            </Button>
+                                        </li>
+                                        <li><Button onClick={()=>{setMenuOpen(false);}} variant={'game'} size={'small'} color={'blue'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><Settings size={18}/><span>
+                                                            {tNavbar("profileTabs.settings")}
+                                                        </span>
+                                                    </div>
+                                                </Button>
+                                            </li>
+                                        {user?.role === "admin" && <li><Button onClick={()=>{router.push(`/dashboard`); setMenuOpen(false);}} variant={'game'} size={'small'} color={'orange'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LayoutDashboard size={18}/><span>
+                                            {tNavbar("profileTabs.dashboard")}
+                                            </span></div> </Button></li>}
                                         <li><Button onClick={()=>{handleLogout(); setMenuOpen(false); 
                                             toast({ title: "Logged out", description: "You logged out of your account",variant: "default", position: "bottom-right", icon: <LogOutIcon size={20}/> })
-                                        }} variant={'game'} size={'small'} color={'red'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LogOut size={18}/><span>{t("navbar.profileTabs.logout")}</span></div></Button></li>
+                                        }} variant={'game'} size={'small'} color={'red'} className="w-full active:w-[95%] mx-auto"><div className="flex gap-2 items-center justify-center"><LogOut size={18}/><span>
+                                            {tNavbar("profileTabs.logout")}
+                                        </span></div></Button></li>
 
-                                    </motion.ul>
+                                    </MotionUl>
                                 )}
                             </AnimatePresence>
                         </div>
                     ) : (
                         <div className="flex gap-4 text-lg font-medium">
                             <Link
-                                href={`/${params.lang}/login`}
+                                href={`/login`}
                                 className="bg-white text-[#FF773C] text-base md:text-lg sm:py-0.5 sm:px-3 md:px-4 md:py-1 h-10 w-10 sm:h-fit flex sm:block items-center justify-center sm:w-fit rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors">
-                                <span className="hidden md:block">{t("navbar.login")}</span>
+                                <span className="hidden md:block">
+                                    {tCommon("login")}
+                                </span>
                                 <User size={24} className="block sm:hidden"/>
                             </Link>
-                            <Link href={`/${params.lang}/register`} className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
-                                {t("navbar.register")}
+                            <Link href={`/register`} className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
+                                {tCommon("register")}
                             </Link>
                         </div>
                     )}
                 </div>
             </div>
             {isScrolled && <div className="bg-white w-full flex items-center justify-center shadow-sm">
-                <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu} lang={params.lang}/>
+                <SlideTabes isScrolled={isScrolled} showBottomMenu={showBottomMenu}/>
             </div>}
         </NavbarWrapper>
     );
@@ -227,7 +271,7 @@ type tabesPositionTypes = {
     color?: string;
 };
 
-const SlideTabes = ({isScrolled, showBottomMenu, lang}:{isScrolled:boolean, showBottomMenu: boolean, lang?: typeLang}) => {
+const SlideTabes = ({isScrolled, showBottomMenu}:{isScrolled:boolean, showBottomMenu: boolean}) => {
     const [position, setPosition] = useState<tabesPositionTypes>({
         left: 0,
         width: 0,
@@ -238,7 +282,7 @@ const SlideTabes = ({isScrolled, showBottomMenu, lang}:{isScrolled:boolean, show
     return (
         <AnimatePresence>
         {showBottomMenu && 
-            <motion.ul
+            <MotionUl
                 initial={isScrolled && { opacity: 0, height: 0, y: -10, x: -40 }}
                 animate={{ opacity: 1, height: undefined, y: 0, x:0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -247,12 +291,12 @@ const SlideTabes = ({isScrolled, showBottomMenu, lang}:{isScrolled:boolean, show
                     setPosition({ opacity: 0 });
                 }}
                 className={twMerge("flex items-center relative py-1 md:py-2 min-h-[50px] md:min-h-[60px] transition-al")}>
-                <Tab onClick={()=>router.push(`/${lang}`)} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
-                <Tab onClick={()=>router.push(`/${lang}/categories/Toys_&_Games`)} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
-                <Tab onClick={()=>router.push(`/${lang}/categories/School_Supplies`)} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
-                <Tab onClick={()=>router.push(`/${lang}/categories/Gifts`)}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
+                <Tab onClick={()=>router.push(`/`)} isScrolled={isScrolled} setPosition={setPosition}>Home</Tab>
+                <Tab onClick={()=>router.push(`/categories/Toys_&_Games`)} isScrolled={isScrolled}  setPosition={setPosition}>Toys</Tab>
+                <Tab onClick={()=>router.push(`/categories/School_Supplies`)} isScrolled={isScrolled}  setPosition={setPosition}>School</Tab>
+                <Tab onClick={()=>router.push(`/categories/Gifts`)}isScrolled={isScrolled}  setPosition={setPosition}>Gifts</Tab>
                 <Cursor position={position} />
-            </motion.ul>
+            </MotionUl>
         }
         </AnimatePresence>
 
@@ -305,7 +349,7 @@ const Tab = ({
 
 const Cursor = ({ position }: { position: tabesPositionTypes }) => {
     return (
-        <motion.li
+        <MotionLi
             style={{ backgroundColor: `${position.color}` }}
             animate={position}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -317,11 +361,11 @@ const Cursor = ({ position }: { position: tabesPositionTypes }) => {
 const NavbarWrapper = ({children, isScrolled}:{children: React.ReactNode, isScrolled:boolean}) => {
     return (
     isScrolled ? 
-        <motion.nav 
+        <MotionNav 
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="w-full z-50 bg-white sticky top-0 shadow-sm">{children}</motion.nav> :
+        className="w-full z-50 bg-white sticky top-0 shadow-sm">{children}</MotionNav> :
         <nav className="w-full z-50 relative bg-[#FF773C]">{children}</nav>
     )
 }

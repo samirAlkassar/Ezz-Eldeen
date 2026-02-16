@@ -1,7 +1,7 @@
 // productsAPI.ts
 import getCookies from "@/actions/getCookies";
-import i18n from "@/i18n/i18n";
 import { Product } from "./types";
+import { getLocale } from "next-intl/server";
 
 export interface ProductsResponse {
   products: Product[];
@@ -15,13 +15,14 @@ export interface ProductsResponse {
 }
 
 export async function getProductsAdminApi(filters: any): Promise<ProductsResponse> {
+  const lang = await getLocale();
   const token = await getCookies("token");
   if (!token) throw new Error("Token not found");
   const params = new URLSearchParams(filters).toString();
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/admin?${params}`, {
     method: "GET",
     headers: {
-      "Accept-Language": i18n.language,
+      "Accept-Language": lang,
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token?.value}`
     },
@@ -36,12 +37,13 @@ export async function getProductsAdminApi(filters: any): Promise<ProductsRespons
 
 
 export async function createProductsAdminApi(payload: FormData) {
+  const lang = await getLocale();
   const token = await getCookies("token");
   if (!token) throw new Error("Token not found");
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
     method: "POST",
     headers: {
-      "Accept-Language": i18n.language,
+      "Accept-Language": lang,
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token?.value}`
     },

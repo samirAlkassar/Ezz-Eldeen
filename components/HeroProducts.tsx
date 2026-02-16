@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+const MotionButton = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.button), {ssr: false,}
+);
 import { twMerge } from "tailwind-merge";
 import { ProductType } from "@/features/products/types";
 
@@ -28,16 +31,16 @@ const HeroProducsts = ({serverProducts}:{serverProducts: ProductType[]}) => {
             }
             </div>
                 <div className="flex items-center justify-center gap-2 mt-10 mb-4">
-            <motion.button
+            <MotionButton
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={()=>setProductsSlice(productsSlice.start === 0? {start: 4, end: 8} : {start:0, end: 4})}
                 className={twMerge("flex items-center justify-center gap-2 w-10 h-10 rounded-md shadow-md" ,
                 "font-semibold transition-all duration-300 bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer mr-4")}>
                 <ChevronLeft size={24} />
-            </motion.button>
+            </MotionButton>
 
-            <motion.button
+            <MotionButton
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={()=>setProductsSlice({start: 0, end: 4})}
@@ -47,9 +50,9 @@ const HeroProducsts = ({serverProducts}:{serverProducts: ProductType[]}) => {
                         "bg-gray-200 text-gray-400 h-3 w-8"
                         
                 }`}>
-            </motion.button>
+            </MotionButton>
             
-            <motion.button
+            <MotionButton
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={()=>setProductsSlice({start:4, end: 8})}
@@ -58,16 +61,16 @@ const HeroProducsts = ({serverProducts}:{serverProducts: ProductType[]}) => {
                         "bg-gradient-to-r from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg hover:shadow-xl h-3 w-3" :
                         "bg-gray-200 text-gray-400 h-3 w-8"
                 }`}>
-            </motion.button>
+            </MotionButton>
 
-            <motion.button
+            <MotionButton
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={()=>setProductsSlice(productsSlice.start === 4? {start: 0, end: 4} : {start:4, end: 8})}
                 className={twMerge("flex items-center justify-center gap-2 w-10 h-10 rounded-md shadow-md" ,
                 "font-semibold transition-all duration-300 bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer ml-4")}>
                 <ChevronRight size={24} />
-            </motion.button>
+            </MotionButton>
         </div>
     </div>
     )

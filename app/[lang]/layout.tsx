@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import LanguageProvider from "./languageProvider";
 import "../globals.css";
 import { Fredoka, Cairo } from "next/font/google"
 import { Providers } from "./Providers";
+import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
+import {setRequestLocale} from 'next-intl/server';
 
 const fredoka = Fredoka({
   subsets: ["latin"],
@@ -22,26 +25,34 @@ export const metadata: Metadata = {
     "Shop high-quality products at Ezz-Eldeen. Premium selection, great prices, and fast delivery.",
 };
 
-export default async function RootLayout({ children, params }: LayoutProps<'/[lang]'>) {
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{lang: string}>;
+};
+
+export default async function RootLayout({ children, params }: Props) {
   const { lang } = await params as { lang: typeLang };
   const isArabic = lang === "ar";
+    if (!hasLocale(routing.locales, lang)) {
+    notFound();
+  };
+
+  setRequestLocale(lang);
 
   return (
     <html
       lang={lang}
       dir={isArabic ? "rtl" : "ltr"}
       className={`${fredoka.variable} ${cairo.variable}`}
-      suppressHydrationWarning
-    >
+      suppressHydrationWarning>
       <body
         className={isArabic ? cairo.className : fredoka.className}
-        suppressHydrationWarning
-      >
-        <Providers>
-          <LanguageProvider lang={lang}>
+        suppressHydrationWarning>
+        <NextIntlClientProvider>
+          <Providers>
             {children}
-          </LanguageProvider>
-        </Providers>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -8,18 +8,20 @@ import { AppDispatch, RootState } from "@/app/store";
 import { useEffect } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LoadingProductSkeleton from "@/components/LoadingProductSkeleton";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 
-const WishlistClient = ({lang}: {lang: typeLang}) => {
+const WishlistClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const wishlist = useSelector((state:RootState)=> state.wishlist.items);
     const loadingWishlist = useSelector((state:RootState)=> state.wishlist.loading);
-    const { t } = useTranslation();
+    const t = useTranslations("Wishlist");
     const router = useRouter();
+    const lang = useLocale();
 
     useEffect(()=>{
-        dispatch(fetchWishlist());
+        dispatch(fetchWishlist(lang as typeLang));
     },[dispatch]);
 
     return (
@@ -30,9 +32,9 @@ const WishlistClient = ({lang}: {lang: typeLang}) => {
                 transition={{ delay: 0, duration: 0.2, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}
                 className="text-2xl md:text-4xl font-extrabold text-[#FF791A] text-center md:py-2 md:pb-4">
-                {t("wishlist.title")}
+                {t("title")}
             </motion.h1>
-            <Breadcrumbs currentPage={t("wishlist.title")} lang={lang}/>
+            <Breadcrumbs currentPage={t("title")}/>
             <div className="flex gap-4 mt-4">
                 <div className="w-full">
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4 xl:gap-x-4 xl:gap-y-6 mb-10 md:mt-4">
@@ -52,12 +54,16 @@ const WishlistClient = ({lang}: {lang: typeLang}) => {
                         </div>
                         {!loadingWishlist && wishlist?.length === 0 && 
                             <div className="w-full flex items-center flex-col h-[calc(100vh-570px)]">
-                                <h4 className="text-center text-xl text-text">{t("wishlist.empty.title")}</h4>
-                                <p className="text-center text-lg text-text-muted mt-1">{t("wishlist.empty.description")}</p>
+                                <h4 className="text-center text-xl text-text">
+                                    {t("empty.title")}
+                                </h4>
+                                <p className="text-center text-lg text-text-muted mt-1">
+                                    {t("empty.description")}
+                                </p>
                                 <button 
-                                    onClick={()=>router.push(`/${lang}/products`)}
+                                    onClick={()=>router.push(`/products`)}
                                     className="bg-black text-white px-5 py-3 rounded-full mt-6 cursor-pointer text-base active:scale-95 duration-75 transition-all">
-                                    {t("wishlist.empty.cta")}
+                                    {t("empty.cta")}
                                 </button>
                             </div>
                         }

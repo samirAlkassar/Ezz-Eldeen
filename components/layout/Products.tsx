@@ -12,6 +12,7 @@ import ProductsSearchBar from "../ProductsSearchBar";
 import { usePathname, useRouter } from "next/navigation";
 import LoadingProductSkeleton from "../LoadingProductSkeleton";
 import { ProductType } from "@/features/products/types";
+import { useLocale } from "next-intl";
 
 export type CategoriesFilterType =
   | "All Products"
@@ -35,7 +36,6 @@ type ProductsProps = {
     hasMore: boolean;
   };
   initialPage?: number;
-  lang: "en" | "ar";
 };
 
 const Products = ({
@@ -45,7 +45,6 @@ const Products = ({
   initialProducts,
   initialPagination,
   initialPage,
-  lang,
 }: ProductsProps) => {
   const [productsData, setProductsData] = useState<ProductType[]>(
     initialProducts || []
@@ -72,13 +71,15 @@ const Products = ({
   const dispatch = useDispatch<AppDispatch>();
   const wishlist = useSelector((state: RootState) => state.wishlist.items);
 
+  const lang = useLocale();
+
   const isProductsPage =
     pathname.startsWith(`/${lang}/products`) ||
     pathname.startsWith(`/${lang}/categories`);
 
   useEffect(() => {
-    dispatch(fetchCart());
-    dispatch(fetchWishlist());
+    dispatch(fetchCart(lang as typeLang));
+    dispatch(fetchWishlist(lang as typeLang));
   }, [dispatch]);
 
   const fetchProductsClient = async (
@@ -241,7 +242,7 @@ const Products = ({
           order={order}
           setOrder={setOrder}
           onFilterApply={handleFilterChange}
-          lang={lang}
+          lang={lang as typeLang}
         />
       )}
 

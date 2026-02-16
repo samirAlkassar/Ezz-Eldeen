@@ -3,7 +3,13 @@
 import Description from "./Description";
 import FeaturesTab from "./Features";
 import ReviewsTab from "./ReviewsTab";
-import {motion} from "motion/react"
+import dynamic from "next/dynamic";
+const MotionSpan = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.span), {ssr: false,}
+);
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
 import { Suspense, useState } from "react";
 import { ProductReview, ProductType } from "@/features/products/types";
 
@@ -36,7 +42,7 @@ const ReviewsCleint = ({product, reviews}: {product: ProductType, reviews: {
                     >
                         {tab.label}
                         {activeTab === tab.key && (
-                        <motion.span
+                        <MotionSpan
                             layoutId="tab-underline"
                             className="absolute left-0 bottom-0 h-[2px] w-full bg-orange-400"
                         />
@@ -45,7 +51,7 @@ const ReviewsCleint = ({product, reviews}: {product: ProductType, reviews: {
                     ))}
                 </div>
             </div>
-            <motion.div
+            <MotionDiv
                 key={activeTab}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -59,7 +65,7 @@ const ReviewsCleint = ({product, reviews}: {product: ProductType, reviews: {
                 </Suspense>
                 
 
-            </motion.div>
+            </MotionDiv>
         </div>
     )
 };

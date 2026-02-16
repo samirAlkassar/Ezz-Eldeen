@@ -1,8 +1,17 @@
 import { ShoppingCartIcon } from "lucide-react";
-import { motion } from "motion/react"
+import dynamic from "next/dynamic";
+const MotionH1 = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.h1), {ssr: false,}
+);
+const MotionP = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.p), {ssr: false,}
+);
+const MotionDiv = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
+);
 import Image from "next/image";
 import { useRouter } from "next/navigation"
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 const bundles = [
     {
@@ -31,27 +40,27 @@ const bundles = [
 
 const Bundles = () => {
     const router = useRouter();
-    const { t } = useTranslation();
+    const t = useTranslations("Home");
 
     return (
         <div id="bundles" className="bg-[#F8F7F5] px-4 w-full mb-10 md:mb-20 mt-4 flex flex-col items-center justify-center py-12">
-            <motion.h1
+            <MotionH1
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 viewport={{ once: true }}
                 className="text-2xl md:text-3xl font-semibold text-gray-800 md:mt-2 tracking-[-0.9px] md:tracking-normal">
-                {t("hero.cantDecide")}
-            </motion.h1>
+                {t("cantDecide")}
+            </MotionH1>
 
-            <motion.p
+            <MotionP
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.4 }}
                 viewport={{ once: true }}
                 className="text-text-muted-foreground text-center mt-1 md:mt-2 max-w-xl text-base md:text-lg leading-relaxed">
-                {t("hero.cantDecideSubtitle")}
-            </motion.p>
+                {t("cantDecideSubtitle")}
+            </MotionP>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-6 mt-12 mx-auto max-w-300">
                 {bundles.map((bundle, i) => (
@@ -62,7 +71,7 @@ const Bundles = () => {
             <button
                 onClick={() => { router.push("/categories/bundles") }}
                 className="bg-gray-900 text-white cursor-pointer px-4 md:px-6 py-2.5 md:py-3 rounded-full text-base md:text-lg font-medium md:font-semibold mt-8 md:mt-12 transition">
-                {t("hero.viewAllBundles")}
+                {t("viewAllBundles")}
             </button>
         </div>
     )
@@ -81,8 +90,9 @@ type BundleCardProps = {
 };
 
 const BundleCard = ({ bundle, index }: BundleCardProps) => {
+    const t = useTranslations("Home");
     return (
-        <motion.div
+        <MotionDiv
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.4 }}
@@ -112,11 +122,11 @@ const BundleCard = ({ bundle, index }: BundleCardProps) => {
                         </span>
                         <button className="flex items-center justify-center gap-2 text-base cursor-pointer font-medium bg-primary hover:bg-amber-600 transition text-white rounded-xl py-2 px-3">
                             <ShoppingCartIcon size={20} />
-                            <p>Add Bundle</p>
+                            <p>{t("addBundle")}</p>
                         </button>
                     </div>
                 </div>
-        </motion.div>
+        </MotionDiv>
     )
 };
 
