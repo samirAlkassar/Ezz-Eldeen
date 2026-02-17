@@ -12,7 +12,7 @@ type PageProps = {
 
 const ProductBySlug = async (props: PageProps) => {
   const { params } = props;
-  const { slug } = await params;
+  const { slug } = params;
 
   const product = await getProductBySlug(slug);
   if (!product) return;
@@ -35,8 +35,15 @@ const ProductBySlug = async (props: PageProps) => {
 
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
+
   const product = await getProductBySlug(slug);
+
+  if (!product) {
+    return {
+      title: "Product not found",
+    };
+  }
 
   return {
     title: product.name,
@@ -46,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: product.description,
       images: [
         {
-          url: product?.images?.[0]?.url,
+          url: product.images?.[0]?.url ?? "",
           width: 1200,
           height: 630,
           alt: product.name,
@@ -57,10 +64,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: product.name,
       description: product.description,
-      images: [product?.images?.[0]?.url],
+      images: [product.images?.[0]?.url ?? ""],
     },
-  }
-};
+  };
+}
+
 
 
 export default ProductBySlug;
