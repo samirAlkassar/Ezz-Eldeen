@@ -28,7 +28,7 @@ const Portfolio = () => {
     return (
         <main className="bg-background">
             <Breadcrumbs  currentPage="profile"/>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-2 md:p-6 lg:p-8">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-2 md:p-6 md:pt-2! lg:p-8">
                 <ProfileAside setCurrentTitle={setCurrentTitle} setImageFile={setImageFile} imageFile={imageFile} currentProfileSection={currentProfileSection} setCurrentProfileSection={setCurrentProfileSection}/>
                 <ProfilePersonalInfo currentTitle={currentTitle} imageFile={imageFile} currentProfileSection={currentProfileSection}/>
             </div>

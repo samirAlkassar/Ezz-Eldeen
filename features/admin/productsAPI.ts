@@ -1,7 +1,6 @@
 // productsAPI.ts
 import getCookies from "@/actions/getCookies";
 import { Product } from "./types";
-import { getLocale } from "next-intl/server";
 
 export interface ProductsResponse {
   products: Product[];
@@ -14,8 +13,7 @@ export interface ProductsResponse {
   };
 }
 
-export async function getProductsAdminApi(filters: any): Promise<ProductsResponse> {
-  const lang = await getLocale();
+export async function getProductsAdminApi(filters: any, lang: typeLang): Promise<ProductsResponse> {
   const token = await getCookies("token");
   if (!token) throw new Error("Token not found");
   const params = new URLSearchParams(filters).toString();
@@ -37,13 +35,11 @@ export async function getProductsAdminApi(filters: any): Promise<ProductsRespons
 
 
 export async function createProductsAdminApi(payload: FormData) {
-  const lang = await getLocale();
   const token = await getCookies("token");
   if (!token) throw new Error("Token not found");
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
     method: "POST",
     headers: {
-      "Accept-Language": lang,
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token?.value}`
     },

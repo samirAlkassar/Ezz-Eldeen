@@ -3,6 +3,7 @@ import { Edit, Trash, Plus, Search, Filter } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import { Product } from "@/features/admin/types";
+import { useLocale } from "next-intl";
 
 type ProductsTabProps = {
     products: Product[];
@@ -24,6 +25,7 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
     const [minPrice, setMinPrice] = useState<number | "">("");
     const [maxPrice, setMaxPrice] = useState<number | "">("");
     const [toggleFilter, setToggleFilter] = useState<boolean>(false);
+    const lang = useLocale();
 
     const handleSearchChange = (value: string) => {
         setSearch(value);
@@ -155,7 +157,9 @@ function ProductsTab({ products, loading, page, totalPages, onPageChange, onEdit
                                                     className="w-10 md:w-12 h-10 md:h-12 rounded-lg object-contain border border-slate-200"
                                                 />
                                                 <div>
-                                                    <p className="text-xs md:text-sm font-medium text-slate-800 max-w-20 md:max-w-fit overflow-ellipsis truncate">{product.name.ar}</p>
+                                                    <p className="text-xs md:text-sm font-medium text-slate-800 max-w-20 md:max-w-fit overflow-ellipsis truncate">{
+                                                        lang === "en" ? product?.name.en : product?.name.ar
+                                                        }</p>
                                                     <p className="text-xs text-slate-500 hidden md:block">{product.slug}</p>
                                                 </div>
                                             </div>

@@ -23,6 +23,12 @@
       "settings": "Settings",
       "dashboard": "Dashboard",
       "logout": "Log out"
+    },
+    "categories": {
+      "toys": "Toys",
+      "school": "School",
+      "gifts": "Gifts",
+      "bundles": "Bundles"
     }
   },
 

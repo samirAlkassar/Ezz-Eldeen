@@ -195,7 +195,7 @@ const Products = ({
 
     const queryString = params.toString();
 
-    if (pathname.includes("/categories")) {
+    if (pathname.includes(`/${lang}/categories`)) {
       if (!category || category === "All Products") {
         return `/${lang}/products${queryString ? `?${queryString}` : ""}`;
       }

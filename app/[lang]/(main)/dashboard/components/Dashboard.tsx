@@ -49,7 +49,7 @@ export default function Dashboard({lang}:{lang: typeLang}) {
             if (minPrice !== "") params.set("minPrice", String(minPrice));
             if (maxPrice !== "") params.set("maxPrice", String(maxPrice));
 
-            const data = await getProductsAdminApi(params)
+            const data = await getProductsAdminApi(params, lang)
             setProducts(data?.products);
             setTotal(data?.pagination?.total);
         } catch (err: unknown) {

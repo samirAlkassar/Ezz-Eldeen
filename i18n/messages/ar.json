@@ -23,7 +23,14 @@
       "settings": "الإعدادات",
       "dashboard": "لوحة التحكم",
       "logout": "تسجيل الخروج"
-    }
+    },
+    "categories": {
+      "toys": "ألعاب",
+      "school": "مدرسة",
+      "gifts": "هدايا",
+      "bundles": "باقات"
+}
+
   },
 
   "Home": {

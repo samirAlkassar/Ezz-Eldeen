@@ -50,6 +50,7 @@ const ProductsSearchBar = ({
   order,
   setOrder,
   onFilterApply,
+  lang
 }: ProductsSearchBarProps) => {
   const [showCategoriesMenu, setShowCategoriesMenu] = useState<boolean>(false);
   const [showFiltersMenu, setShowFiltersMenu] = useState<boolean>(false);
@@ -63,7 +64,7 @@ const ProductsSearchBar = ({
       return;
     }
     
-    if (!pathname.startsWith("/products") && !pathname.startsWith("/categories")) {
+    if (!pathname.startsWith(`/${lang}/products`) && !pathname.startsWith(`/${lang}/categories`)) {
       return;
     }
     
@@ -79,11 +80,11 @@ const ProductsSearchBar = ({
     
     const queryString = params.toString();
     
-    if (pathname.startsWith(`/categories`) && currentCategory !== "All Products") {
+    if (pathname.startsWith(`/${lang}/categories`) && currentCategory !== "All Products") {
       const categoryPath = currentCategory.replace(/ & /g, "_&_").replace(/ /g, "_");
-      router.replace(`/categories/${categoryPath}${queryString ? `?${queryString}` : ""}`);
+      router.replace(`/${lang}/categories/${categoryPath}${queryString ? `?${queryString}` : ""}`);
     } else {
-      router.replace(`/products${queryString ? `?${queryString}` : ""}`);
+      router.replace(`/${lang}/products${queryString ? `?${queryString}` : ""}`);
     }
   };
 

@@ -6,6 +6,8 @@ import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import {setRequestLocale} from 'next-intl/server';
+import MobileBottomNav from "@/components/layout/navbar/MobileBottomNav";
+import MobileBottomNavServer from "@/components/layout/navbar/MobileBottomNavServer";
 
 const fredoka = Fredoka({
   subsets: ["latin"],
@@ -51,6 +53,7 @@ export default async function RootLayout({ children, params }: Props) {
         <NextIntlClientProvider>
           <Providers>
             {children}
+            <MobileBottomNavServer />
           </Providers>
         </NextIntlClientProvider>
       </body>
