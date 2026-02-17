@@ -27,7 +27,7 @@ export async function getCartApi(lang: typeLang): Promise<CartResponse> {
         },
     });
 
-    if (!res.ok) throw new Error("Failed to fetch cart");
+    // if (!res.ok) throw new Error("Failed to fetch cart");
     return res.json();
 }
 

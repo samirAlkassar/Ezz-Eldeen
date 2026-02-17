@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, ShoppingCart, ChevronDown, Settings, User, LogOut, LayoutDashboard, LogIn, LogOutIcon, Menu } from "lucide-react";
+import { Heart, ShoppingCart, ChevronDown, Settings, User, LogOut, LayoutDashboard, LogIn, LogOutIcon } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 
@@ -230,7 +230,7 @@ const Navbar = ({user}:{user?: UserType}) => {
                                 <span className="hidden md:block">
                                     {tCommon("login")}
                                 </span>
-                                <User size={24} className="block sm:hidden"/>
+                                <User size={24} className="block md:hidden"/>
                             </Link>
                             <Link href={`/register`} className={twMerge("py-1 hidden md:block", isScrolled ? "text-gray-800" : "text-white")}>
                                 {tCommon("register")}
