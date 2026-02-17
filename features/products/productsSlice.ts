@@ -31,9 +31,9 @@ const initialState: ProductsState = {
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (params: any, thunkAPI) => {
+  async ({ params, lang }: { params: any; lang: typeLang }, thunkAPI) => {
     try {
-      const res = await productsService.getProductsApi(params);
+      const res = await productsService.getProductsApi(params, lang);
       return res;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
@@ -61,13 +61,13 @@ export const fetchRelatedProducts = createAsyncThunk<
 
 export const fetchProductBySlug = createAsyncThunk<
   ProductType,
-  string,
+  { slug: string; lang: typeLang },
   { rejectValue: string }
 >(
   "products/fetchProductBySlug",
-  async (slug, thunkAPI) => {
+  async ({slug, lang}:{slug: string; lang: typeLang}, thunkAPI) => {
     try {
-      return await productsService.getProductBySlugApi(slug);
+      return await productsService.getProductBySlugApi(slug, lang);
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -76,13 +76,13 @@ export const fetchProductBySlug = createAsyncThunk<
 
 export const addReview = createAsyncThunk<
   ProductType,
-  { productId: string; reviewData: ReviewData },
+  { productId: string; reviewData: ReviewData, lang: typeLang },
   { rejectValue: string }
 >(
   "products/addReview",
-  async ({ productId, reviewData }, thunkAPI) => {
+  async ({ productId, reviewData, lang }, thunkAPI) => {
     try {
-      return await productsService.addReviewApi(productId, reviewData);
+      return await productsService.addReviewApi(productId, reviewData, lang);
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -1,7 +1,6 @@
 import WishlistClient from "./components/WishlistClient";
 
-export default async function WihslistPage({params}:{params: {lang:  typeLang}}) {
-    const { lang } = await params;
+export default async function WihslistPage() {
     return (
         <main className="bg-background">
             <WishlistClient/>

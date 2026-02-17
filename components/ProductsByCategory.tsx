@@ -45,7 +45,7 @@ const ProductsByCategory = ({title, section = "categories", initialProducts, lan
                 subcategory: isCategoriesSection ? subcategory : "",
                 sort: section === "rating" ? "rating" : "newest",
                 limit: 12
-            });
+            }, lang);
 
             setProducts(data.products);
             } catch (err: unknown) {

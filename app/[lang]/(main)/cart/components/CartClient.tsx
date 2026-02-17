@@ -29,7 +29,7 @@ const CartClient = () => {
     useEffect(() => {
         dispatch(fetchCart(lang as typeLang));
         dispatch(fetchWishlist(lang as typeLang));
-    }, [dispatch]);
+    }, [dispatch, lang]);
 
     const handleRemoveItem = async (productId: string) => {
         try {

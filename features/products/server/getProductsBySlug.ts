@@ -18,10 +18,10 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function getProductsReviews(productId: string) {
-  const lang = await getLocale();
+  // const lang = await getLocale();
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/reviews/${productId}`, {
     headers: {
-      "Accept-Language": lang,
+      "Accept-Language": "en",
       "Content-Type": "application/json",
     },
     next: {revalidate: 300}

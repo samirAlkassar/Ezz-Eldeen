@@ -6,13 +6,13 @@ import { getBlurDataURL } from "@/lib/getImage";
 type PageProps = {
   params: {
     slug: string,
-    lang: typeLang
+    lang?: typeLang
   };
 };
 
 const ProductBySlug = async (props: PageProps) => {
   const { params } = props;
-  const { slug, lang } = await params;
+  const { slug } = await params;
 
   const product = await getProductBySlug(slug);
   if (!product) return;
@@ -21,7 +21,7 @@ const ProductBySlug = async (props: PageProps) => {
   const relatedProducts = await getRelatedBySlug(slug, 4);
 
   return (
-    <main className="bg-ornge-50/50 px-2 lg:px-3 xl:px-0">
+    <main className="bg-background px-2 lg:px-3 xl:px-0">
       <ProductsBySlugPage
         slug={slug}
         product={product}
@@ -35,7 +35,7 @@ const ProductBySlug = async (props: PageProps) => {
 
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug, lang } = await params;
+  const { slug } = await params;
   const product = await getProductBySlug(slug);
 
   return {

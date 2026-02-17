@@ -56,7 +56,7 @@ const Products = ({
   const [currentCategory, setCurrentCategory] = useState<CategoriesFilterType>(
     category || "All Products"
   );
-  const [currentSubCategory, setCurrentSubCategory] = useState<string>(
+  const [currentSubCategory] = useState<string>(
     subCategory || ""
   );
   const [minPrice, setMinPrice] = useState<number>(0);
@@ -80,7 +80,7 @@ const Products = ({
   useEffect(() => {
     dispatch(fetchCart(lang as typeLang));
     dispatch(fetchWishlist(lang as typeLang));
-  }, [dispatch]);
+  }, [dispatch, lang]);
 
   const fetchProductsClient = async (
     page: number,
@@ -125,9 +125,8 @@ const Products = ({
     }
   };
 
-  const debouncedFetch = useMemo(() => debounce(fetchProductsClient, 400), [
-    lang,
-  ]);
+  const debouncedFetch = useMemo(() => debounce(fetchProductsClient, 400), 
+  [lang, fetchProductsClient]);
 
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);

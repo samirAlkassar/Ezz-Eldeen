@@ -22,10 +22,10 @@ type ProductsClientProps = {
     hasMore: boolean;
   };
   initialPage: number;
-  lang: typeLang
+  lang?: typeLang
 };
 
-const CategoriesClient = ({initialProducts, initialPagination, initialPage, lang} : ProductsClientProps) => {
+const CategoriesClient = ({initialProducts, initialPagination, initialPage} : ProductsClientProps) => {
     const params = useParams();
 
     const undoSlug = (slug: string | string[] | undefined) => {

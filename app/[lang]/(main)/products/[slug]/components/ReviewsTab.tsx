@@ -28,9 +28,9 @@ const ReviewsTab = ({ reviews, activeTab, productId}: ReviewsProps) => {
                         {reviewsList.map((review) => (
                             <div
                                 key={review._id}
-                                className="bg-white rounded-lg p-3 md:p-6 shadow-xs md:shadow-sm border border-gray-200">
+                                className="bg-white rounded-2xl p-3 md:p-6 shadow-xs md:shadow-sm border border-gray-100">
                                 <ReviewHeaderSection review={review} user={review.user}/>
-                                <p className="text-gray-700 text-base sm:text-lg md:text-xl">{review.comment}</p>
+                                <p className="text-gray-700 text-sm sm:text-base md:text-lg">{review.comment}</p>
                             </div>
                         ))}
                     </div> :
@@ -80,7 +80,7 @@ const ReviewHeaderSection = ({ review, user }: ReviewSectionProps) => {
                 </div>
 
             </div>
-            <span className="text-sm md:text-base text-gray-400">
+            <span className="text-sm text-gray-400">
                 {formatTimeAgo(review.createdAt)}
             </span>
         </div>

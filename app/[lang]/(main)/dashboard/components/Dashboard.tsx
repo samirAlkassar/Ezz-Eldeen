@@ -13,7 +13,6 @@ import { AnimatePresence } from "framer-motion"
 import { useToast } from "@/components/Toast";
 import { AlertTriangle, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
-import handleResponse from "@/hooks/useProductActions";
 import { Product, ProductUpdatePayload } from "@/features/admin/types";
 import { getProductsAdminApi } from "@/features/admin/productsAPI";
 

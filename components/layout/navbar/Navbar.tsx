@@ -25,7 +25,7 @@ const AnimatePresence = dynamic(
     import("framer-motion").then((mod) => mod.AnimatePresence),
   { ssr: false }
 );
-import { fetchCurrentUser, selectUser, logout } from "../../../features/auth/authSlice";
+import { fetchCurrentUser, logout } from "../../../features/auth/authSlice";
 import { Button } from "../../ui/Button";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
@@ -36,7 +36,6 @@ import Image from "next/image";
 import { useToast } from "@/components/Toast";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useParams } from "next/navigation";
 import { User as UserType } from "@/features/auth/types";
 import LocalSwitcher from "@/components/LocalSwitcher";
 import { useTranslations } from "next-intl";
@@ -80,7 +79,7 @@ const Navbar = ({user}:{user?: UserType}) => {
 
     useEffect(() => {
         dispatch(fetchCart(lang as typeLang));
-    }, [dispatch]);
+    }, [dispatch, lang]);
 
     const handleLogout = () => {
         dispatch(logout());
@@ -150,7 +149,7 @@ const Navbar = ({user}:{user?: UserType}) => {
                         title={tNavbar("wishlist")}  
                         aria-label={tNavbar("wishlist")}  
                         onClick={() => {router.push( user ? `/wishlist` : `/register`); !user && 
-                                toast({ title: "Create account!", description: "You need to login before accessing your wishlist",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
+                                toast({ title: "Create account!", description: "You need to login before accessing your wishlist" ,variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
                         }} 
                         className={twMerge("p-2 rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
                         isScrolled? "text-black hover:bg-gray-500/20" : "hover:bg-red-500/40"
@@ -161,7 +160,7 @@ const Navbar = ({user}:{user?: UserType}) => {
                         title={tNavbar("cart")} 
                         aria-label={tNavbar("cart")} 
                         onClick={() => {router.push(user ? `/cart` : `/register`); !user && 
-                                toast({ title: "Create account!", description: "You need to login before accessing your cart",variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
+                                toast({ title: "Create account!", description: "You need to login before accessing your cart", variant: "default", position: "bottom-right", icon: <LogIn size={20}/> })
                         }} 
                         className={twMerge("p-2 relative rounded-full transition-all duration-100 ease-in cursor-pointer active:scale-[97%]",
                         isScrolled? "text-black hover:bg-gray-500/20" : "hover:bg-orange-500/40"

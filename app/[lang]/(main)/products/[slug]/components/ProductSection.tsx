@@ -2,10 +2,6 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
-
-const MotionButton = dynamic(() =>
-  import("framer-motion").then((mod) => mod.motion.button), {ssr: false,}
-);
 const MotionLi = dynamic(() =>
   import("framer-motion").then((mod) => mod.motion.li), {ssr: false,}
 );
@@ -13,10 +9,11 @@ import { useState } from "react";
 import { Check, CloudLightning, Heart, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { ProductType } from "@/features/products/types";
 import { useRouter } from "next/navigation";
+import Thumbnails from "./Thumbnails";
 
-const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, blurDataURL: string}) => {
+const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDataURL: string}) => {
     const [quantity, setQuantity] = useState<number>(1);
-    const [selectedImage, setSelectedImage] = useState<number>();
+
     const [imageIndex, setImageIndex] = useState<number>(0);
     const router = useRouter();
 
@@ -24,7 +21,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, 
     return (
         <div className="flex gap-8 md:gap-10 lg:gap-15 flex-col xl:flex-row">
             <div className="flex-1 flex flex-col space-y-6">
-                <div className="relative bg-gray-100 h-[340px] sm:h-[400px] md:h-[620px] aspect-square rounded-2xl overflow-hidden">
+                <div className="relative bg-white h-85 sm:h-100 md:h-155 aspect-square rounded-2xl overflow-hidden">
                     <Image
                         src={product?.images[imageIndex]?.url || "/images/placeholder.jpg"}
                         alt={""}
@@ -37,23 +34,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType | null, 
                         -30% OFF    
                     </span>
                 </div>
-                <div className="flex gap-3 justify-center">
-                    {product?.images.map((img, index) => (
-                        <MotionButton
-                        key={index}
-                        onClick={() => {setSelectedImage(index); setImageIndex(index)}}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`relative w-18 h-18 md:w-26 md:h-26 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                            selectedImage === index 
-                            ? "border-orange-400 shadow-lg" 
-                            : "border-gray-200/50 hover:border-gray-200/50"
-                        }`}
-                        >
-                        <Image src={img?.url} alt={`${img?.alt}`} fill className="w-full h-full object-cover" />
-                        </MotionButton>
-                    ))}
-                </div>
+                <Thumbnails product={product} setImageIndex={setImageIndex}/>
             </div>
 
             <div className="flex-1 space-y-4">

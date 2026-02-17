@@ -7,6 +7,7 @@ import { AppDispatch } from "@/app/store";
 import { useState } from "react";
 import { useToast } from "@/components/Toast";
 import { getProductsReviews } from "@/features/products/server/getProductsBySlug";
+import { useLocale } from "next-intl";
 
 type AddReviewFormProps = {
     productId:  string;
@@ -18,6 +19,7 @@ const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
     const [rating, setRating] = useState<number | null>(null);
     const dispatch = useDispatch<AppDispatch>();
     const {toast} = useToast();
+    const lang = useLocale();
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!productId) return;
@@ -55,6 +57,7 @@ const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
             addReview({
                 productId: productId,
                 reviewData: {rating, comment},
+                lang: lang as typeLang
             })).unwrap();
         const updated = await getProductsReviews(productId);
         setReviews(updated.reviews);
@@ -71,9 +74,9 @@ const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
 
     
     return (
-        <form onSubmit={onSubmit} className="max-w-3xl space-y-6 mt-10 bg-white rounded-lg p-3 md:p-6 shadow-xs md:shadow-sm border border-gray-200">
+        <form onSubmit={onSubmit} className="max-w-3xl space-y-6 mt-10 bg-white rounded-2xl p-3 md:p-6 shadow-xs md:shadow-xs border border-gray-200">
             <div>
-                <label className="block mb-2 font-medium text-lg sm:text-xl md:text-2xl text-gray-700">Your Rating</label>
+                <label className="block mb-2 font-medium text-base sm:text-lg md:text-xl text-gray-700">Your Rating</label>
                 <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                     <Star
@@ -91,7 +94,7 @@ const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
                 </div>
 
                 <div>
-                <label className="block mb-2 font-medium text-lg sm:text-xl md:text-2xl text-gray-700">Your Review</label>
+                <label className="block mb-2 font-medium text-base sm:text-lg md:text-xl text-gray-700">Your Review</label>
                 <textarea
                     value={comment}
                     onChange={(e)=>setComment(e.target.value)}
@@ -103,7 +106,7 @@ const AddReviewForm = ({productId, setReviews}: AddReviewFormProps) => {
 
             <button
             type="submit"
-            className="bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 md:px-6 md:py-3 text-base sm:text-lg md:text-xl rounded-lg md:rounded-full font-medium transition cursor-pointer">
+            className="bg-primary hover:bg-orange-500 text-white px-4 py-2 md:px-6 md:py-3 text-base sm:text-lg md:text-lg rounded-base md:rounded-full font-medium transition cursor-pointer">
                 Submit Review
             </button>
         </form>
