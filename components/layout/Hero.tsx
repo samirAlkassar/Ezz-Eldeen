@@ -2,16 +2,6 @@
 
 import { Star } from "lucide-react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const MotionH1 = dynamic(() =>
-  import("framer-motion").then((mod) => mod.motion.h1), {ssr: false,}
-);
-
-const MotionP = dynamic(() =>
-  import("framer-motion").then((mod) => mod.motion.p), {ssr: false,}
-);
-
 import HeroBackground from "@/components/HeroBackground";
 import ProductsSearchBar from "../ProductsSearchBar";
 import { useState } from "react";
@@ -53,12 +43,7 @@ const Hero = () => {
           </span>
 
 
-          <MotionH1 
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="text-4xl sm:text-6xl xl:text-7xl font-bold text-white text-center md:text-start relative">
+          <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold text-white text-center md:text-start relative">
             {t("magicAwaits")} <br className="hidden md:block"/> 
             <span className="text-yellow-300 text-[50px] md:text-6xl xl:text-7xl">
               {t("ezzEldeen")}  
@@ -66,17 +51,11 @@ const Hero = () => {
             <Image src={"/images/brush-stroke.png"} priority alt="anything" width={260} height={220} className={twMerge("absolute -z-10 hidden md:block",
               lang === "ar" ? "-top-4 right-0 md:-right-8" : "-top-4 left-0 md:-left-8"
             )}/>
-          </MotionH1>
+          </h1>
 
-          <MotionP
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="text-base sm:text-base lg:text-2xl text-white mt-2 md:mt-4 text-center md:text-start max-w-xl"
-          >
+          <p className="text-base sm:text-base lg:text-2xl text-white mt-2 md:mt-4 text-center md:text-start max-w-xl">
             {t('subtitle')}
-          </MotionP> 
+          </p> 
 
           <div className="mt-22 md:mt-18 max-w-3xl mx-4 md:mx-0">
             <ProductsSearchBar 

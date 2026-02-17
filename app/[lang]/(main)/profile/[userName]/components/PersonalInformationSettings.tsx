@@ -9,7 +9,7 @@ import AddressItem from "./AddressItem";
 import AddressForm from "./AddressForm";
 import { AnimatePresence } from "framer-motion"
 import { Address } from "@/features/user/types";
-
+import { useTranslations } from "next-intl";
 
 
 const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
@@ -18,6 +18,7 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
     const [editingAddress, setEditingAddress] = useState<Address | null>(null);
     const [showAddressForm, setShowAddressForm] = useState(false);
     const { toast } = useToast();
+    const t = useTranslations("profile");
     const [userData, setUserData] = useState({
         picturePath : "",
         firstName : "",
@@ -95,35 +96,42 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
 
 
     return (
-        <form action="" onSubmit={handleSubmit} className="space-y-4 mt-6">
-            <h3 className="text-lg md:text-xl font-medium text-gray-800 flex items-center justify-start gap-1"><User size={20}/><p>Personal Information</p></h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                <FormField 
-                    name="firstName"
-                    value={userData?.firstName}
-                    onChange={(e)=>setUserData({...userData, firstName: e.target.value})}>
-                    First Name
-                </FormField>
+        <form action="" onSubmit={handleSubmit} className="bg-white p-6 rounded-xl mt-6">
+            <div className="max-w-2xl space-y-4">
+                <h3 className="text-base md:text-lg text-text flex items-center justify-start gap-1">
+                    <User size={18}/>
+                    <p>{t("sections.personalInformation")}</p>
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mt-2">
+                    <FormField 
+                        name="firstName"
+                        value={userData?.firstName}
+                        onChange={(e)=>setUserData({...userData, firstName: e.target.value})}>
+                        {t("fields.firstName")}
+                    </FormField>
+                    <FormField
+                        name="secondName"
+                        value={userData?.secondName}
+                        onChange={(e)=>setUserData({...userData, secondName: e.target.value})}>
+                        {t("fields.lastName")}
+                    </FormField>
+                </div>
                 <FormField
-                    name="secondName"
-                    value={userData?.secondName}
-                    onChange={(e)=>setUserData({...userData, secondName: e.target.value})}>
-                    Last Name
+                    name="email"
+                    value={userData?.email}
+                    onChange={(e)=>setUserData({...userData, email: e.target.value})}>
+                    {t("fields.email")}
                 </FormField>
             </div>
-            <FormField
-                name="email"
-                value={userData?.email}
-                onChange={(e)=>setUserData({...userData, email: e.target.value})}>
-                Email
-            </FormField>
-
             {/* Addresses Manager */}
-            <div className="mt-10 space-y-4">
-                <h3 className="text-lg md:text-xl font-medium text-gray-800 flex items-center justify-start gap-1"><MapIcon size={20}/><p>Address</p></h3>
+            <div className="mt-10 space-y-4 max-w-2xl">
+                <h3 className="text-base md:text-lg text-text flex items-center justify-start gap-1">
+                    <MapIcon size={18}/>
+                    <p>{t("sections.address")}</p>
+                </h3>
 
                 {userData.addresses.length === 0 && (
-                    <p className="text-gray-500">No addresses found.</p>
+                    <p className="text-gray-500">{t("messages.noAddresses")}</p>
                 )}
 
                 {userData.addresses.map((addr) => (
@@ -146,14 +154,14 @@ const PersonalInformationSettings = ({imageFile}:{imageFile: File | null}) => {
                 <button
                     type="button"
                     onClick={openNewAddressForm}
-                    className="bg-orange-400 text-white px-4 py-3 rounded-lg cursor-pointer text-sm md:text-base">
-                    Add New Address
+                    className="orange-button text-white px-4 py-3 cursor-pointer text-sm">
+                    {t("buttons.addNewAddress")}
                 </button>
             </div>
 
             <div className="flex gap-4 mt-10 flex-row-reverse">
-                <button type="button" className="bg-gray-100 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-gray-800 hover:bg-gray-200 font-medium cursor-pointer active:scale-[97%]">Discard Changes</button>
-                <button type="submit" className="bg-green-500 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-white hover:bg-green-600 font-medium cursor-pointer active:scale-[97%]">Save Changes</button>
+                <button type="button" className="bg-gray-100 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-gray-800 hover:bg-gray-200 font-medium cursor-pointer active:scale-[97%]">{t("buttons.discardChanges")}</button>
+                <button type="submit" className="bg-green-500 w-full text-sm md:text-base md:w-fit rounded-lg md:rounded-xl py-3 px-4 md:py-2 md:px-4 text-white hover:bg-green-600 font-medium cursor-pointer active:scale-[97%]">{t("buttons.save")}</button>
             </div>
         </form>
     )

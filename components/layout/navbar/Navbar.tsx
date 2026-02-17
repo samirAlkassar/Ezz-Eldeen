@@ -111,32 +111,23 @@ const Navbar = ({user}:{user?: UserType}) => {
                 {
                 isScrolled ? 
                     <div className="flex items-center justify-start gap-2 md:gap-4">
-                        <MotionButton
-                            initial={{ scale: 0.1, opacity: 0 }}
-                            whileInView={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: 0.2, duration: 0.2, ease: "easeIn" }}
+                        <button
                             onClick={()=>setShowBottomMenu(prev => !prev)}
                             className="cursor-pointer">
                             <Menu size={28} className={twMerge("scale-90 md:scale-100",isScrolled? "text-gray-800" : "text-white")}/>
-                        </MotionButton>
-                        <MotionDiv
-                            initial={{x: -50 }}
-                            whileInView={{x:0 }}
-                            transition={{ delay: 0, duration: 0.3, ease: "easeIn" }}>
+                        </button>
+                        <div>
                             <Link href={`/`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
                                 {tNavbar("storeTitle")}
                             </Link>
-                        </MotionDiv>
+                        </div>
                     </div>: 
-                    <MotionDiv
-                        initial={{ scale: 0.9 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: 0, duration: 0.2, ease: "easeIn" }}
+                    <div
                         className="flex items-center justify-start gap-4">
                         <Link href={`/`} className={twMerge("text-2xl md:text-3xl text-yellow-200 font-bold", isScrolled? "text-orange-400" : "text-yellow-200")}>
                             {tNavbar("storeTitle")}
                         </Link>
-                    </MotionDiv>
+                    </div>
                 }
 
 

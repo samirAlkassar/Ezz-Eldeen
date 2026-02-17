@@ -30,7 +30,7 @@ const FormField = ({
     name}:FormFieldType) => {
     return (
         <div>
-            <label htmlFor={name} className={twMerge("text-sm md:text-base font-medium", alert ? "text-red-400" : "text-gray-700")}>{children}{required && <span className="text-red-400 border-red-300 px-1">*</span> }</label>
+            <label htmlFor={name} className={twMerge("text-xs md:text-sm font-medium", alert ? "text-red-400" : "text-text-muted")}>{children}{required && <span className="text-red-400 border-red-300 px-1">*</span> }</label>
             {inputType === "input" ? 
             <input
                 value={value}
@@ -40,7 +40,7 @@ const FormField = ({
                 accept={accept}
                 placeholder={placeholder}
                 onChange={onChange}
-                className={twMerge("w-full px-2 md:px-5 py-1.5 md:py-2.5 border text-gray-700 border-gray-300 rounded-lg md:rounded-full mt-0.5 outline-none focus:ring-1 ring-gray-400", className)}
+                className={twMerge("w-full px-2 md:px-5 py-1.5 md:py-2.5 border text-gray-700 border-gray-300 rounded-lg md:rounded-2xl mt-0.5 outline-none focus:ring-1 ring-gray-400", className)}
                 required={required}
             /> :
             <textarea

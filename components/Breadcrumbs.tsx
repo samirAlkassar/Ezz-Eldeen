@@ -8,23 +8,27 @@ import { useTranslations } from "next-intl";
 const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, currentPage?: string}) => {
     const router = useRouter();
     const t = useTranslations("Wishlist");
+    const tHome = useTranslations("Home")
 
     const currentPageURL = (currentPage : string) => {
         if (currentPage === t("title")) {
             router.push('/wishlist')
         } else if (currentPage === t("title")) {
             router.push('/cart')
-        } else {
+        } else if (currentPage === ("profile")) {
+            router.push('/')
+        }
+            else {
             router.push(`/products/${currentPage}`)
         }
     };
     
     return (
-        <div className="py-4">
+        <div className="pt-2 md:pt-4">
             <nav className="flex items-center gap-2 text-sm text-gray-600 max-w-340 mx-auto px-3">
                 <Link href="/" className="hover:text-orange-400 text-orange-500 transition flex gap-2 items-center">
                     <Home size={16}/>
-                    {/* <p className="text-base">{t("hero.home")}</p> */}
+                    <p className="text-base">{tHome("home")}</p>
                 </Link>
                 { previousPage &&
                 <>

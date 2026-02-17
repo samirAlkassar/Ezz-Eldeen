@@ -7,9 +7,13 @@ import { fetchProfile } from "@/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import ProfileAside from "./components/ProfileAside";
 import ProfilePersonalInfo from "./components/ProfilePersonalInfo";
+import { useTranslations } from "next-intl";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const Portfolio = () => {
-    const [currentProfileSection, setCurrentProfileSection] = useState("Personal Information");
+    const  t = useTranslations("profile");
+    const [currentProfileSection, setCurrentProfileSection] = useState("pr-401");
+    const [currentTitle, setCurrentTitle] = useState<string>(t("sidebar.profileDetails"))
     const dispatch = useDispatch<AppDispatch>();
 
     const user = useSelector((state: RootState) => state.currentUser.user);
@@ -22,10 +26,11 @@ const Portfolio = () => {
 
     const [imageFile, setImageFile] = useState<File | null>(null);
     return (
-        <main className="bg-orange-200/5">
-            <div className="mx-auto max-w-[90rem] flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 lg:p-8">
-                <ProfileAside setImageFile={setImageFile} imageFile={imageFile} currentProfileSection={currentProfileSection} setCurrentProfileSection={setCurrentProfileSection}/>
-                <ProfilePersonalInfo imageFile={imageFile} currentProfileSection={currentProfileSection}/>
+        <main className="bg-background">
+            <Breadcrumbs  currentPage="profile"/>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-2 md:p-6 lg:p-8">
+                <ProfileAside setCurrentTitle={setCurrentTitle} setImageFile={setImageFile} imageFile={imageFile} currentProfileSection={currentProfileSection} setCurrentProfileSection={setCurrentProfileSection}/>
+                <ProfilePersonalInfo currentTitle={currentTitle} imageFile={imageFile} currentProfileSection={currentProfileSection}/>
             </div>
         </main>
     )

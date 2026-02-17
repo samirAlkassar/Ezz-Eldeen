@@ -150,5 +150,61 @@
       "message": "Already have an account?",
       "registerButton": "Create account"
     }
+  },
+  "profile": {
+    "title": "Profile Details Settings",
+    "settings": "Settings",
+
+    "sections": {
+      "personalInformation": "Personal Information",
+      "address": "Address"
+    },
+
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "fullName": "Full Name",
+      "phone": "Phone",
+      "street": "Street",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmNewPassword": "Confirm New Password"
+    },
+
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes",
+      "discardChanges": "Discard Changes",
+      "addNewAddress": "Add New Address"
+    },
+
+    "messages": {
+      "noAddresses": "No addresses found."
+    },
+
+    "sidebar": {
+      "profileDetails": "Profile Details",
+      "orderHistory": "Order History",
+      "security": "Security",
+      "helpCenter": "Help Center",
+      "logout": "Log Out"
+    },
+
+    "badges": {
+      "admin": "Admin",
+      "customer": "Customer"
+    },
+
+    "privacyCard": {
+      "padge": "Kid Safe Protection",
+      "title": "Your data is always private",
+      "description": "Your data is always private. We never share your purchase data with third parties."
+    }
   }
 }

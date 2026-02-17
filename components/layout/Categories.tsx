@@ -90,7 +90,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
     const t = useTranslations("Categories");
     
     return (
-        <section className=" bg-linear-to-b from-[#FFF4EC]/20 via-[#fcf8d979]/80 to-[#dff3ef4f] py-10">
+        <section className=" bg-background py-10">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full">
                 <MotionH1
                     initial={{ opacity: 0, y: 18 }}

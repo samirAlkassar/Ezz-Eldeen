@@ -151,5 +151,61 @@
       "message": "لديك حساب بالفعل؟",
       "registerButton": "إنشاء الحساب"
     }
+  },
+  "profile": {
+    "title": "إعدادات تفاصيل الحساب",
+    "settings": "اعدادات",
+
+    "sections": {
+      "personalInformation": "المعلومات الشخصية",
+      "address": "العنوان"
+    },
+
+    "fields": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "fullName": "الاسم بالكامل",
+      "phone": "رقم الهاتف",
+      "street": "الشارع",
+      "city": "المدينة",
+      "state": "المحافظة",
+      "country": "الدولة",
+      "postalCode": "الرمز البريدي",
+      "oldPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmNewPassword": "تأكيد كلمة المرور الجديدة"
+    },
+
+    "buttons": {
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "saveChanges": "حفظ التغييرات",
+      "discardChanges": "تجاهل التغييرات",
+      "addNewAddress": "إضافة عنوان جديد"
+    },
+
+    "messages": {
+      "noAddresses": "لا توجد عناوين."
+    },
+
+    "sidebar": {
+      "profileDetails": "تفاصيل الحساب",
+      "orderHistory": "سجل الطلبات",
+      "security": "الأمان",
+      "helpCenter": "مركز المساعدة",
+      "logout": "تسجيل الخروج"
+    },
+
+    "badges": {
+      "admin": "مسؤول",
+      "customer": "عميل"
+    },
+
+    "privacyCard": {
+      "padge": "حماية آمنة للأطفال",
+      "title": "بياناتك خاصة دائماً",
+      "description": "بياناتك خاصة دائماً. نحن لا نشارك بيانات مشترياتك مع أي طرف ثالث."
+    }
   }
 }
