@@ -26,7 +26,7 @@ export async function getProducts(query: ProductQuery, lang: string) {
         "Accept-Language": lang,
         "Content-Type": "application/json",
       },
-      cache: "no-cache",
+      next: {revalidate: 3000}
     });
 
     if (!res.ok) {
