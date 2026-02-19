@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const MotionDiv = dynamic(() =>
   import("framer-motion").then((mod) => mod.motion.div), {ssr: false,}
@@ -57,6 +58,7 @@ const ProductsSearchBar = ({
   const router = useRouter();
   const pathname = usePathname();
   const isFirstRender = useRef(true);
+  const t = useTranslations("SearchBar")
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -94,8 +96,8 @@ const ProductsSearchBar = ({
 
   return (
     <div className="w-full mx-auto space-y-4">
-      <div className="relative mt-4 mb-6 px-2.5 py-0.5 sm:px-2 md:px-2 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
-        <div className="md:pl-2">
+      <div className="relative mt-4 mb-6 py-1 px-2 sm:py-1.5 sm:px-2.5 md:py-2 md:px-3 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
+        <div className="px-1">
           <Search className="text-orange-400 md:w-7 md:h-7" />
         </div>
         <input
@@ -104,14 +106,21 @@ const ProductsSearchBar = ({
           onChange={(e) => {setSearchTerm(e.target.value)}}
            onKeyDown={(e) => {if (e.key === "Enter") {handleSearch()}}}
           placeholder="Search products"
-          className="bg-white w-full py-2 sm:py-3 md:py-4 px-1 sm:px-2 md:px-6 rounded-full text-base sm:text-lg lg:text-xl outline-none"/>
+          className="bg-white w-full py-2 sm:py-3 md:py-1 px-1 sm:px-2 md:px-6 rounded-full text-base sm:text-lg lg:text-xl outline-none"/>
 
         <button
           onClick={() => {
             setShowCategoriesMenu((prev) => !prev);
           }}
           className="text-lg p-1 md:px-4 rounded-lg hover:bg-gray-50 cursor-pointer flex gap-1 items-center justify-between md:min-w-46">
-          <p className="truncate hidden md:block">{currentCategory}</p>
+          <p className="truncate hidden md:block">
+            {
+            currentCategory === "All Products" ? t("categories.allProducts") : 
+            currentCategory === "Toys & Games" ? t("categories.toysAndGames") : 
+            currentCategory === "School Supplies" ? t("categories.schoolSupplies") : 
+            "Gifts"
+            }
+          </p>
           <ChevronDown size={22}/>
         </button>
 
@@ -136,25 +145,25 @@ const ProductsSearchBar = ({
                 currentCategory={currentCategory}
                 setCurrentCategory={setCurrentCategory}
                 setShowCategoriesMenu={setShowCategoriesMenu}>
-                All Products
+                {t("categories.allProducts")}
               </SearchBarCategoriesButton>
               <SearchBarCategoriesButton
                 currentCategory={currentCategory}
                 setCurrentCategory={setCurrentCategory}
                 setShowCategoriesMenu={setShowCategoriesMenu}>
-                School Supplies
+                {t("categories.schoolSupplies")}
               </SearchBarCategoriesButton>
               <SearchBarCategoriesButton
                 currentCategory={currentCategory}
                 setCurrentCategory={setCurrentCategory}
                 setShowCategoriesMenu={setShowCategoriesMenu}>
-                Toys & Games
+                {t("categories.toysAndGames")}
               </SearchBarCategoriesButton>
               <SearchBarCategoriesButton
                 currentCategory={currentCategory}
                 setCurrentCategory={setCurrentCategory}
                 setShowCategoriesMenu={setShowCategoriesMenu}>
-                Gifts
+                {t("categories.gifts")}
               </SearchBarCategoriesButton>
             </MotionDiv>
           )}
@@ -170,7 +179,7 @@ const ProductsSearchBar = ({
               transition={{ delay: 0, duration: 0.15, ease: "easeOut" }}
               className="absolute p-4 md:p-6 bg-white top-13 md:top-20 right-4 z-20 rounded-lg shadow-xl border-gray-50 border lg:w-96">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold text-gray-800">Filters</h3>
+                <h3 className="text-xl font-semibold text-gray-800">{t("filters.title")}</h3>
                 <button
                   onClick={() => setShowFiltersMenu(false)}
                   className="hover:bg-gray-100 rounded-full p-1 cursor-pointer">
@@ -180,11 +189,11 @@ const ProductsSearchBar = ({
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Price Range
+                   {t("filters.priceRange")}
                 </label>
                 <div className="flex gap-4 items-center">
                   <div className="flex-1">
-                    <label className="text-xs text-gray-500">Min</label>
+                    <label className="text-xs text-gray-500">{t("filters.min")}</label>
                     <input
                       type="number"
                       value={minPrice}
@@ -194,7 +203,7 @@ const ProductsSearchBar = ({
                   </div>
                   <span className="text-gray-400 mt-5">-</span>
                   <div className="flex-1">
-                    <label className="text-xs text-gray-500">Max</label>
+                    <label className="text-xs text-gray-500">{t("filters.max")}</label>
                     <input
                       type="number"
                       value={maxPrice}
@@ -207,18 +216,18 @@ const ProductsSearchBar = ({
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Sort By
+                  {t("sorting.sortBy")}
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   <FilterButton
                     active={sort === "newest"}
                     onClick={() => setSort("newest")}>
-                    Newest
+                    {t("sorting.newest")}
                   </FilterButton>
                   <FilterButton
                     active={sort === "price"}
                     onClick={() => setSort("price")}>
-                    Price
+                    {t("sorting.price")}
                   </FilterButton>
                 </div>
               </div>
@@ -226,18 +235,18 @@ const ProductsSearchBar = ({
               {/* Order */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Order
+                  {t("sorting.order")}
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <FilterButton
                     active={order === "asc"}
                     onClick={() => setOrder("asc")}>
-                    Ascending
+                    {t("sorting.ascending")}
                   </FilterButton>
                   <FilterButton
                     active={order === "desc"}
                     onClick={() => setOrder("desc")}>
-                    Descending
+                    {t("sorting.descending")}
                   </FilterButton>
                 </div>
               </div>
@@ -251,7 +260,7 @@ const ProductsSearchBar = ({
                     setOrder("desc");
                   }}
                   className="flex-1 px-4 py-1.5 md:py-2 font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer">
-                  Reset
+                  {t("actions.reset")}
                 </button>
                 <button
                   onClick={() => {
@@ -259,7 +268,7 @@ const ProductsSearchBar = ({
                     setShowFiltersMenu(false);
                   }}
                   className="flex-1 px-4 py-1.5 md:py-2 font-semibold bg-orange-400 rounded-lg hover:bg-orange-500 text-gray-800 cursor-pointer">
-                  Apply
+                  {t("actions.apply")}
                 </button>
               </div>
             </MotionDiv>
@@ -268,8 +277,8 @@ const ProductsSearchBar = ({
 
         <button
           onClick={handleSearch} 
-          className="bg-orange-400 rounded-full px-6 py-1.5 text-xl text-gray-800 cursor-pointer hidden md:block">
-          search
+          className="bg-primary rounded-full px-6 py-1.5 text-xl text-white cursor-pointer hidden md:block">
+          {t("search")}
         </button>
       </div>
     </div>
@@ -289,10 +298,16 @@ const SearchBarCategoriesButton = ({
   setCurrentCategory: (value: CategoriesFilterType) => void;
   setShowCategoriesMenu: (value: boolean) => void;
 }) => {
+  const t = useTranslations("SearchBar")
   return (
     <button
       onClick={() => {
-        setCurrentCategory(children as CategoriesFilterType);
+        setCurrentCategory(
+          children === t("categories.allProducts") ? "All Products" : 
+          children === t("categories.toysAndGames") ? "Toys & Games" : 
+          children === t("categories.schoolSupplies") ? "School Supplies" : 
+          "Gifts"
+        );
         setShowCategoriesMenu(false);
       }}
       className={twMerge(

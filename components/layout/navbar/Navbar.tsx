@@ -226,7 +226,9 @@ const Navbar = ({user}:{user?: UserType}) => {
                         <div className="flex gap-4 text-lg font-medium">
                             <Link
                                 href={`/login`}
-                                className="bg-white text-[#FF773C] text-base md:text-lg sm:py-0.5 sm:px-3 md:px-4 md:py-1 h-10 w-10 sm:h-fit flex sm:block items-center justify-center sm:w-fit rounded-full font-semibold shadow hover:bg-yellow-100 transition-colors">
+                                className={twMerge("text-base md:text-lg sm:py-0.5 sm:px-3 md:px-4 md:py-1 h-10 w-10 sm:h-fit flex sm:block items-center justify-center sm:w-fit rounded-full font-semibold shadow transition-colors",
+                                    isScrolled ? "bg-primary text-white hover:bg-primary/80" : "bg-white text-primary hover:bg-yellow-100/80"
+                                )}>
                                 <span className="hidden md:block">
                                     {tCommon("login")}
                                 </span>
@@ -265,7 +267,7 @@ const SlideTabes = ({isScrolled}:{isScrolled:boolean}) => {
                 onMouseLeave={() => {
                     setPosition({ opacity: 0 });
                 }}
-                className="items-center relative transition-al hidden md:flex">
+                className="items-center relative transition-al hidden lg:flex">
                 <Tab onClick={()=>router.push(`/categories/Toys_&_Games`)} isScrolled={isScrolled} setPosition={setPosition}>{t("categories.toys")}</Tab>
                 <Tab onClick={()=>router.push(`/categories/School_Supplies`)} isScrolled={isScrolled}  setPosition={setPosition}>{t("categories.school")}</Tab>
                 <Tab onClick={()=>router.push(`/categories/Gifts`)} isScrolled={isScrolled}  setPosition={setPosition}>{t("categories.gifts")}</Tab>

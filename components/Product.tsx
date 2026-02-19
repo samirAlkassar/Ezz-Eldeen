@@ -90,7 +90,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             }}
             viewport={{ once: true, amount: 0.2 }}
             className={twMerge("bg-white shadow-sm md:shadow-lg transition-shadow duration-300 flex flex-col relative justify-between flex-1 h-full",
-                "rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-5"
+                "rounded-xl md:rounded-3xl px-3 py-3 md:px-4 md:py-5"
             )}>
             <div>
                 <div
@@ -137,8 +137,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
             </div>
 
 
-            <div className={twMerge("flex flex-col justify-between items-start lg:items-end xl:items-center gap-1 lg:gap-1 pt-1 md:pt-3 lg:border-t border-gray-100",
-                params.lang === "ar" ? "lg:flex-row-reverse" : "lg:flex-row"
+            <div className={twMerge("flex flex-col justify-between items-start lg:items-end xl:items-center gap-1 lg:gap-1 pt-1 md:pt-3 lg:border-t border-gray-100 lg:flex-row"
             )}>
                 <div className="flex flex-col text-left">
                     <span className="text-xs text-gray-500 font-medium -mb-1 md:mb-0.5 hidden md:block">
@@ -156,8 +155,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
                     onClick={() => handleAddToCart(product?._id)} 
                     className={twMerge("orange-button w-full lg:w-fit py-2 px-2.5 sm:py-3 sm:px-2 md:py-2 md:px-4 rounded-lg sm:rounded-xl md:rounded-full",
                         "text-xs sm:text-sm md:text-base lg:text-sm xl:text-base active:scale-95 transition-all duration-75  ease-in text-white font-medium",
-                        "cursor-pointer flex items-center justify-center gap-1 lg:gap-2",
-                        params.lang === "ar" ? "flex-row-reverse" : "flex-row"
+                        "cursor-pointer flex items-center justify-center gap-1 lg:gap-2 flex-row"
                     )}>
                     <ShoppingCart size={16} className="scale-100 lg:scale-120 block lg:hidden xl:block"/>
                     <p>

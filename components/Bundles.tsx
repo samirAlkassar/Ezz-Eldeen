@@ -62,7 +62,7 @@ const Bundles = () => {
                 {t("cantDecideSubtitle")}
             </MotionP>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-6 mt-12 mx-auto max-w-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-6 mt-12 mx-auto max-w-300">
                 {bundles.map((bundle, i) => (
                     <BundleCard key={bundle.title} index={i} bundle={bundle} />
                 ))}

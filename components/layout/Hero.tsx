@@ -11,6 +11,7 @@ import { twMerge } from "tailwind-merge";
 import {useTranslations} from 'next-intl';
 import { useLocale } from "next-intl";
 
+
 const Hero = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentCategory, setCurrentCategory] = useState<CategoriesFilterType>("All Products");

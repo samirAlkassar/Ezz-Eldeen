@@ -3,7 +3,8 @@
     "login": "Login",
     "register": "Register",
     "price": "Price",
-    "addToCart": "Add to Cart"
+    "addToCart": "Add to Cart",
+    "search": "search"
   },
 
   "Navbar": {
@@ -31,6 +32,36 @@
       "bundles": "Bundles"
     }
   },
+
+
+  "SearchBar": {
+    "search": "Search",
+    "categories": {
+      "allProducts": "All Products",
+      "schoolSupplies": "School Supplies",
+      "gifts": "Gifts",
+      "toysAndGames": "Toys & Games"
+    },
+    "filters": {
+      "title": "Filters",
+      "priceRange": "Price Range",
+      "min": "Min",
+      "max": "Max"
+    },
+    "sorting": {
+      "sortBy": "Sort By",
+      "newest": "Newest",
+      "price": "Price",
+      "order": "Order",
+      "ascending": "Ascending",
+      "descending": "Descending"
+    },
+    "actions": {
+      "apply": "Apply",
+      "reset": "Reset"
+    }
+  },
+
 
   "Home": {
     "kidsStore": "Kids store in Egypt",
@@ -70,6 +101,7 @@
     "featuredProducts": "Featured Products",
     "featuredProductsSubtitle": "Discover our most popular items that kids and parents love!",
     "showAllProducts": "Show All Products",
+    "bestSellers": "Best Sellers",
 
     "cards": {
       "School Supplies": {

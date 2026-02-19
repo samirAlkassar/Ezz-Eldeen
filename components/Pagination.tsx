@@ -64,7 +64,7 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
             className={`flex items-center justify-center gap-2 w-10 h-10 rounded-md font-semibold transition-all duration-300 cursor-pointer ${
                 currentPage === 1
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white shadow-lg hover:shadow-xl cursor-pointer"
+                    : "bg-linear-to-r from-orange-300 via-ornage-300 to-orange-300 text-white shadow-lg hover:shadow-xl cursor-pointer"
             }`}>
             <ChevronLeft size={20} />
         </MotionButton>
@@ -87,8 +87,8 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
                         onClick={() => onPageChange(page as number)}
                         className={`w-10 h-10 rounded-md font-bold transition-all duration-300 ${
                             currentPage === page
-                                ? "bg-gradient-to-br from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg scale-110"
-                                : "bg-white text-gray-700 hover:bg-gradient-to-br hover:from-purple-100 hover:to-orange-100 border-2 border-gray-200 cursor-pointer"
+                                ? "bg-linear-to-br from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg scale-110"
+                                : "bg-white text-gray-700 hover:bg-linear-to-br hover:from-purple-100 hover:to-orange-100 border-2 border-gray-200 cursor-pointer"
                         }`}>
                         {page}
                     </MotionButton>
@@ -104,7 +104,7 @@ const NumberedPagination = ({ currentPage, totalPages, onPageChange }: { current
             className={`flex items-center justify-center gap-2 w-10 h-10 rounded-md font-semibold transition-all duration-300 cursor-pointer ${
                 currentPage === totalPages
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white shadow-lg hover:shadow-xl"
+                    : "bg-linear-to-r from-orange-300 via-ornage-300 to-orange-300 text-white shadow-lg hover:shadow-xl"
             }`}>
             <ChevronRight size={20} />
         </MotionButton>
@@ -121,7 +121,7 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage > 1 ? onPageChange(1) : onPageChange(2)}
             className={twMerge("flex items-center justify-center gap-2 w-10 h-10 rounded-md shadow-md" ,
-            "font-semibold transition-all duration-300 bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer mr-4")}>
+            "font-semibold transition-all duration-300 bg-linear-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer mr-4")}>
             <ChevronLeft size={24} />
         </MotionButton>
 
@@ -131,7 +131,7 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
             onClick={() => currentPage > 1 && onPageChange(1)}
             className={`flex items-center gap-2 rounded-xl font-semibold transition-all duration-300 ${
                 currentPage === 1 ?
-                    "bg-gradient-to-r from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg hover:shadow-xl cursor-pointer h-3 w-3" :
+                    "bg-linear-to-r from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg hover:shadow-xl cursor-pointer h-3 w-3" :
                     "bg-gray-200 text-gray-400 h-3 w-8"
                     
             }`}>
@@ -144,7 +144,7 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
             onClick={() => currentPage < totalPages && onPageChange(2)}
             className={`flex items-center gap-2 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                 currentPage === 2 ?
-                    "bg-gradient-to-r from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg hover:shadow-xl h-3 w-3" :
+                    "bg-linear-to-r from-orange-400 via-ornage-500 to-orange-500 text-white shadow-lg hover:shadow-xl h-3 w-3" :
                     "bg-gray-200 text-gray-400 h-3 w-8"
             }`}>
         </MotionButton>
@@ -153,8 +153,8 @@ const DotedPagination = ({ currentPage, totalPages, onPageChange }: { currentPag
             whileTap={{ scale: 0.95 }}
             onClick={() => currentPage > 1 ? onPageChange(1) : onPageChange(2)}
             className={twMerge("flex items-center justify-center gap-2 w-10 h-10 rounded-md shadow-md" ,
-            "font-semibold transition-all duration-300 bg-gradient-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer ml-4")}>
-            <ChevronRight size={24} />
+            "font-semibold transition-all duration-300 bg-linear-to-r from-orange-300 via-ornage-300 to-orange-300 text-white cursor-pointer ml-4")}>
+            <ChevronRight size={24}/>
         </MotionButton>
         </>
     )

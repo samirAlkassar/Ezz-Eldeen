@@ -97,7 +97,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-[#FF791A] max-w-[90rem] mx-auto px-4 md:px-8">
+                    className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-[#FF791A] max-w-360 mx-auto px-4 md:px-8">
                     {/* <span className="text-[#2B303B]">Explore Our Amazing</span> Categories */}
                     {t("sectionTitle")}
                 </MotionH1>
@@ -107,28 +107,28 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center hidden md:block max-w-[90rem] mx-auto px-4 md:px-8">
+                    className="text-base md:text-lg lg:text-xl text-[#2B303B]/80 mt-3 text-center hidden md:block max-w-360 mx-auto px-4 md:px-8">
                     {/* From learning essentials to playful treasures, we have everything to make your<br className="hidden lg:block" /> */}
                     {/* {`child's journey magical and educational.`} */}
                     {t("sectionSubtitle")}
                 </MotionP>
 
-                <div className="grid grid-cols-2 gap-y-6 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full mt-4 md:mt-8 max-w-[60rem] mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full mt-4 md:mt-8 max-w-240 mx-auto px-4 md:px-8">
                     {categoriesList.map((category, index) => (
-                    <CategoryCard
-                        key={index}
-                        delayIndex={index}
-                        title={category.title}
-                        titleText={t(`cards.${category.title}.title`)}
-                        subtitle={t(`cards.${category.title}.subtitle`)}
-                        theme={category.theme}
-                        image={category.image}
-                        lang={lang}
-                    />
+                        <CategoryCard
+                            key={index}
+                            delayIndex={index}
+                            title={category.title}
+                            titleText={t(`cards.${category.title}.title`)}
+                            subtitle={t(`cards.${category.title}.subtitle`)}
+                            theme={category.theme}
+                            image={category.image}
+                            lang={lang}
+                        />
                     ))}
                 </div>
 
-                <div id={"startshopping"} className="pb-20 pt-14 md:pt-20 w-full flex flex-col items-center max-w-[90rem] mx-auto px-4 md:px-8">
+                <div id={"startshopping"} className="pb-20 pt-14 md:pt-20 w-full flex flex-col items-center max-w-360 mx-auto px-4 md:px-8">
                     <MotionH1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -163,7 +163,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                 <ProductsByCategory lang={lang}/>
 
                 <div className="bg-linear-30r from-cyan-500/10 via-blue-500/10 to-indigo-500/10 px-4 w-full mb-10 md:mb-20 mt-4 h-55 md:h-70">
-                    <div className="mx-auto max-w-[90rem] md:px-8 flex justify-around items-start">
+                    <div className="mx-auto max-w-360 md:px-8 flex justify-around items-start">
                         <div>
                         <MotionH1
                             initial={{ opacity: 0, y: 18 }}
@@ -185,7 +185,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             whileInView={{ scale: 1 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
-                            className="relative w-110 h-110 lg:block mt-0 hidden">
+                            className="relative w-110 h-110 lg:block mt-0 hidden overflow-hidden">
                             <Image src={"/images/twister-car.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-16 z-10"/>
                             <div className="bg-blue-300 absolute w-[480px] h-[300px] custom-radious"/>
                         </MotionDiv>
@@ -224,7 +224,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             whileInView={{ scale: 1 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
-                            className="relative w-120 h-120 lg:block mt-0 hidden">
+                            className="relative w-120 h-120 lg:block mt-0 hidden overflow-hidden">
                             <Image src={"/images/school-supplies.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-22 z-10"/>
                             <div className="bg-orange-400 absolute w-[580px] h-[300px] custom-radious"/>
                         </MotionDiv>

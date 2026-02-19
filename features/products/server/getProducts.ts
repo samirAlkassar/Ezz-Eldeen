@@ -54,7 +54,7 @@ export async function getHomeSections(lang: string) {
   return [
     {
       id: "rating",
-      title: t("cards.School Supplies.title"),
+      title: t("bestSellers"),
       query: { sort: "rating", limit: 12 },
       products: [],
     },

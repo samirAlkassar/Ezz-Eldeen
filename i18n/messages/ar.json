@@ -3,7 +3,8 @@
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
     "price": "السعر",
-    "addToCart": "أضف إلى السلة"
+    "addToCart": "أضف إلى السلة",
+    "search": "ابحث"
   },
 
   "Navbar": {
@@ -29,9 +30,40 @@
       "school": "مدرسة",
       "gifts": "هدايا",
       "bundles": "باقات"
-}
+  }
 
   },
+
+  
+  "SearchBar": {
+    "search": "بحث",
+    "categories": {
+      "allProducts": "جميع المنتجات",
+      "schoolSupplies": "مستلزمات مدرسية",
+      "gifts": "هدايا",
+      "toysAndGames": "ألعاب ووسائل ترفيه"
+    },
+    "filters": {
+      "title": "الفلاتر",
+      "priceRange": "نطاق السعر",
+      "min": "الحد الأدنى",
+      "max": "الحد الأقصى"
+    },
+    "sorting": {
+      "sortBy": "ترتيب حسب",
+      "newest": "الأحدث",
+      "price": "السعر",
+      "order": "الترتيب",
+      "ascending": "تصاعدي",
+      "descending": "تنازلي"
+    },
+    "actions": {
+      "apply": "تطبيق",
+      "reset": "إعادة تعيين"
+    }
+  },
+
+
 
   "Home": {
     "kidsStore": "متجر أطفال في مصر",
@@ -72,6 +104,7 @@
     "featuredProducts": "المنتجات المميزة",
     "featuredProductsSubtitle": "اكتشف أكثر العناصر شعبية التي يحبها الأطفال والآباء!",
     "showAllProducts": "عرض كل المنتجات",
+    "bestSellers": "الأكثر مبيعا",
     
     "cards": {
       "School Supplies": {

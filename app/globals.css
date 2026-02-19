@@ -239,3 +239,18 @@ html {
     --sidebar-border: oklch(0.928 0.006 264.531);
     --sidebar-ring: oklch(0.707 0.022 261.325);
 }
+
+
+@keyframes floatFade {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-40px) scale(0.8);
+    opacity: 0;
+  }
+}
