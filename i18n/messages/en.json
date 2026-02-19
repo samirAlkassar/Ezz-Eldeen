@@ -244,5 +244,51 @@
       "title": "Your data is always private",
       "description": "Your data is always private. We never share your purchase data with third parties."
     }
+  },
+
+  "ProductDetails": {
+    "breadcrumb": {
+      "home": "Home",
+      "category": "School Supplies"
+    },
+    "badge": {
+      "discount": "-30% OFF"
+    },
+    "product": {
+      "title": "Plastic Ruler 30cm",
+      "category": "School Supplies",
+      "subCategory": "Rulers",
+      "priceCurrency": "EGP",
+      "descriptionTitle": "Description",
+      "description": "Lightweight ruler for school use."
+    },
+    "rating": {
+      "reviewsCount": "Reviews ({{count}})",
+      "yourRating": "Your Rating",
+      "yourReview": "Your Review",
+      "reviewPlaceholder": "Write your honest review...",
+      "submit": "Submit Review"
+    },
+    "quantity": {
+      "label": "Quantity"
+    },
+    "actions": {
+      "addToCart": "Add To Cart",
+      "buyNow": "Buy Now"
+    },
+    "tabs": {
+      "reviews": "Reviews ({count})",
+      "description": "Description",
+      "features": "Features"
+    },
+    "similarProducts": {
+      "title": "Similar Products",
+      "subtitle": "List of products similar to this product",
+      "showMore": "Show More"
+    },
+    "reviewCard": {
+      "timeAgo": "{{time}}",
+      "exampleReview": "Good ruler, I advise buying it."
+    }
   }
 }

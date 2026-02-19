@@ -247,5 +247,51 @@
       "title": "بياناتك خاصة دائماً",
       "description": "بياناتك خاصة دائماً. نحن لا نشارك بيانات مشترياتك مع أي طرف ثالث."
     }
+  },
+  
+  "ProductDetails": {
+    "breadcrumb": {
+      "home": "الرئيسية",
+      "category": "مستلزمات مدرسية"
+    },
+    "badge": {
+      "discount": "خصم 30٪"
+    },
+    "product": {
+      "title": "مسطرة بلاستيك 30 سم",
+      "category": "مستلزمات مدرسية",
+      "subCategory": "مساطر",
+      "priceCurrency": "جنيه",
+      "descriptionTitle": "الوصف",
+      "description": "مسطرة خفيفة الوزن للاستخدام المدرسي."
+    },
+    "rating": {
+      "reviewsCount": "التقييمات ({{count}})",
+      "yourRating": "تقييمك",
+      "yourReview": "مراجعتك",
+      "reviewPlaceholder": "اكتب رأيك بصراحة...",
+      "submit": "إرسال المراجعة"
+    },
+    "quantity": {
+      "label": "الكمية"
+    },
+    "actions": {
+      "addToCart": "أضف إلى السلة",
+      "buyNow": "اشترِ الآن"
+    },
+    "tabs": {
+      "reviews": "التقييمات ({count})",
+      "description": "الوصف",
+      "features": "المميزات"
+    },
+    "similarProducts": {
+      "title": "منتجات مشابهة",
+      "subtitle": "قائمة منتجات مشابهة لهذا المنتج",
+      "showMore": "عرض المزيد"
+    },
+    "reviewCard": {
+      "timeAgo": "منذ {{time}}",
+      "exampleReview": "مسطرة جيدة، أنصح بشرائها."
+    }
   }
 }

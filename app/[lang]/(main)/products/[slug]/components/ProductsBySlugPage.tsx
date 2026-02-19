@@ -17,7 +17,7 @@ type PageProps = {
 const ProductsBySlugPage = ({ product, relatedProducts, slug, blurDataURL }: PageProps) => {
   return (
     <>
-      <Breadcrumbs previousPage={product?.category}/>
+      <Breadcrumbs previousPage={product?.category} currentPage={slug}/>
       <div className="max-w-[85rem] mx-auto px-4 py-6">
         <ProductSection product={product} blurDataURL={blurDataURL}/>
 

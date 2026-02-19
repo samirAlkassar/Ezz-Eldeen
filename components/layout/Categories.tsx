@@ -90,7 +90,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
     const t = useTranslations("Categories");
     
     return (
-        <section className=" bg-background py-10">
+        <section className=" bg-background py-10 overflow-x-hidden">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full">
                 <MotionH1
                     initial={{ opacity: 0, y: 18 }}
@@ -185,7 +185,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             whileInView={{ scale: 1 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
-                            className="relative w-110 h-110 lg:block mt-0 hidden overflow-hidden">
+                            className="relative w-110 h-110 lg:block mt-0 hidden">
                             <Image src={"/images/twister-car.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-16 z-10"/>
                             <div className="bg-blue-300 absolute w-[480px] h-[300px] custom-radious"/>
                         </MotionDiv>
@@ -224,7 +224,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             whileInView={{ scale: 1 }}
                             transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.2 }}
-                            className="relative w-120 h-120 lg:block mt-0 hidden overflow-hidden">
+                            className="relative w-120 h-120 lg:block mt-0 hidden">
                             <Image src={"/images/school-supplies.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-22 z-10"/>
                             <div className="bg-orange-400 absolute w-[580px] h-[300px] custom-radious"/>
                         </MotionDiv>

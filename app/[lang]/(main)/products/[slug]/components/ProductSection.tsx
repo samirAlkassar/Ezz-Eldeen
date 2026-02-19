@@ -10,14 +10,15 @@ import { Check, CloudLightning, Heart, Minus, Plus, ShoppingCart, Star } from "l
 import { ProductType } from "@/features/products/types";
 import { useRouter } from "next/navigation";
 import Thumbnails from "./Thumbnails";
+import { useTranslations } from "next-intl";
 
 const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDataURL: string}) => {
     const [quantity, setQuantity] = useState<number>(1);
-
     const [imageIndex, setImageIndex] = useState<number>(0);
     const router = useRouter();
-
     const features : string[] = [];
+    const t = useTranslations("ProductDetails");
+
     return (
         <div className="flex gap-8 md:gap-10 lg:gap-15 flex-col xl:flex-row">
             <div className="flex-1 flex flex-col space-y-6">
@@ -31,7 +32,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
                         style={{ objectFit: 'contain', objectPosition: 'center' }}
                         className="absolute w-full h-full object-contain z-10"/>
                     <span className="absolute top-4 left-4 bg-orange-400 rounded-full text-white font-medium text-base md:text-lg px-2 py-1 md:px-3 md:py-1 z-20">
-                        -30% OFF    
+                        {t("badge.discount")}   
                     </span>
                 </div>
                 <Thumbnails product={product} setImageIndex={setImageIndex}/>
@@ -78,17 +79,17 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
                 <div className="flex items-baseline gap-4 mt-4 md:mt-6">
                     {product?.discountPrice ? 
                     <>
-                    <span className="text-3xl md:text-5xl font-semibold text-orange-400">{product?.discountPrice} <span className="text-xl md:text-2xl font-medium">EGP</span></span>
-                    <span className="text-lg md:text-xl text-muted-foreground line-through">${product?.price} <span className="text-sm md:text-base">EGP</span></span>
-                    <span className="text-white font-medium text-sm md:text-base md:font-semibold bg-green-500 rounded-full px-3 py-0.5">Save ${((product?.price ?? 0)- (product?.discountPrice ?? 0)).toFixed(2)} EGP</span>
+                    <span className="text-3xl md:text-5xl font-semibold text-orange-400">{product?.discountPrice} <span className="text-xl md:text-2xl font-medium">{t("product.priceCurrency")}</span></span>
+                    <span className="text-lg md:text-xl text-muted-foreground line-through">${product?.price} <span className="text-sm md:text-base">{t("product.priceCurrency")}</span></span>
+                    <span className="text-white font-medium text-sm md:text-base md:font-semibold bg-green-500 rounded-full px-3 py-0.5">Save ${((product?.price ?? 0)- (product?.discountPrice ?? 0)).toFixed(2)} {t("product.priceCurrency")}</span>
                     </>:
-                    <span className="text-3xl md:text-5xl font-semibold text-orange-400">{product?.price} <span className="text-2xl font-medium">EGP</span></span>
+                    <span className="text-3xl md:text-5xl font-semibold text-orange-400">{product?.price} <span className="text-2xl font-medium">{t("product.priceCurrency")}</span></span>
                     }
 
                 </div>
 
                 <div>
-                    <span className="text-lg md:text-xl font-medium text-gray-800">Description</span>
+                    <span className="text-lg md:text-xl font-medium text-gray-800">{t("product.descriptionTitle")}</span>
                     <p className="text-gray-700 text-sm md:text-lg leading-relaxed max-w-3xl">{product?.description}</p>
                 </div>
                 
@@ -96,7 +97,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
                 <div className="space-y-2 mt-6 md:mt-8">
                     {features.length < 0 && 
                     <>
-                    <h3 className="font-medium text-gray-800 text-xl">Key Features:</h3>
+                    <h3 className="font-medium text-gray-800 text-xl">{t("tabs.features")}:</h3>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {features.slice(0, 4).map((feature, index) => (
                         <MotionLi
@@ -118,18 +119,18 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
                 <span className="w-full h-2 border-t-1 block border-gray-300 my-6"/>
 
                 <div className="flex items-center gap-3">
-                    <span className="text-gray-700 font-medium">Quantity:</span>
+                    <span className="text-gray-700 font-medium">{t("quantity.label")}:</span>
                         <div className="flex items-center rounded-lg bg-orange-50 p-1">
                         <button
                             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                            className="hover:bg-primary/10 cursor-pointer hover:bg-orange-100 rounded-full p-3"
+                            className="cursor-pointer hover:bg-primary/10 rounded-full p-3"
                         >
                             <Minus className="h-4 w-4" />
                         </button>
                         <span className="w-12 text-center font-semibold text-foreground">{quantity}</span>
                         <button
                             onClick={() => setQuantity(Math.min(product?.stock as number, quantity + 1))}
-                            className="hover:bg-primary/10 cursor-pointer hover:bg-orange-100 rounded-full p-3">
+                            className="cursor-pointer hover:bg-primary/10 rounded-full p-3">
                             <Plus className="h-4 w-4" />
                         </button>
                     </div>
@@ -138,11 +139,11 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
                 <div className="flex gap-3 md:gap-4">
                     <button className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-sm md:text-lg rounded-xl md:rounded-full bg-orange-400 cursor-pointer hover:bg-orange-500 active:scale-95 transition-all duration-100 ease-in">
                         <ShoppingCart />
-                        <p>Add To Cart</p>
+                        <p>{t("actions.addToCart")}</p>
                     </button>
                     <button className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-base md:text-lg rounded-xl md:rounded-full bg-green-400 cursor-pointer hover:bg-green-500 active:scale-95 transition-all duration-100 ease-in">
                         <CloudLightning />
-                        <p>By Now</p>
+                        <p>{t("actions.buyNow")}</p>
                     </button>
                     <div>
                         <button className="p-4 border-gray-200 hover:border-8 hover:p-2 shadow-sm rounded-full cursor-pointer hidden md:block">
