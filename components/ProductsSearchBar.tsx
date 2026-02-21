@@ -96,7 +96,7 @@ const ProductsSearchBar = ({
 
   return (
     <div className="w-full mx-auto space-y-4">
-      <div className="relative mt-4 mb-6 py-1 px-2 sm:py-1.5 sm:px-2.5 md:py-2 md:px-3 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
+      <div className="relative mt-4 mb-6 py-1 px-2 sm:py-1.5 sm:px-2.5 md:py-3 md:px-3 flex gap-2 bg-white rounded-full items-center justify-center border border-gray-100">
         <div className="px-1">
           <Search className="text-orange-400 md:w-7 md:h-7" />
         </div>

@@ -96,7 +96,7 @@ const ProductsByCategory = ({title, section = "categories", initialProducts, lan
 
     if (error) return <p>{error}</p>
     return (
-        <section className="w-full pt-4 pb-16 md:pb-14 overflow-x-hidden mb-4 md:mb-12 max-w-360 mx-auto px-4 md:px-8">
+        <section className="w-full pt-4 pb-16 md:pb-8 overflow-x-hidden mb-4 md:mb-12 max-w-360 mx-auto px-4 md:px-8 mt-8">
             <div className="flex w-full justify-between items-center">
                 <h1 className="text-xl sm:text-2xl md:text-4xl text-gray-800 font-semibold">{title}</h1>
                 <button

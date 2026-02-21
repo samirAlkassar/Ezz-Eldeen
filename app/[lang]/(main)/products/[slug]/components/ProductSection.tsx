@@ -6,18 +6,72 @@ const MotionLi = dynamic(() =>
   import("framer-motion").then((mod) => mod.motion.li), {ssr: false,}
 );
 import { useState } from "react";
-import { Check, CloudLightning, Heart, Minus, Plus, ShoppingCart, Star } from "lucide-react";
+import { Check, CloudLightning, Heart, HeartCrack, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { ProductType } from "@/features/products/types";
 import { useRouter } from "next/navigation";
 import Thumbnails from "./Thumbnails";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { addToCart } from "@/features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "@/app/store";
+import { useSelector } from "react-redux";
+import {selectUser } from "@/features/auth/authSlice";
+import { useToast } from "@/components/Toast";
+import { fetchWishlist, addToWishlist, removeFromWishlist } from "@/features/wishlist/wishlistSlice";
+import { twMerge } from "tailwind-merge";
 
 const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDataURL: string}) => {
+    const wishlist = useSelector((state: RootState) => state.wishlist.items);
+    const productIsInWishlist = wishlist.some(item => item._id === product._id);
     const [quantity, setQuantity] = useState<number>(1);
     const [imageIndex, setImageIndex] = useState<number>(0);
+    const [optimisticUpdate, setOptimisticUpdate] = useState<boolean | null>(null);
+    const isInWishList = optimisticUpdate !== null ? optimisticUpdate : Boolean(productIsInWishlist);
     const router = useRouter();
     const features : string[] = [];
     const t = useTranslations("ProductDetails");
+    const dispatch = useDispatch<AppDispatch>();
+    const user = useSelector(selectUser);
+    const { toast } = useToast();
+    const lang = useLocale();
+
+    const handleAddToCart = (productId: string) => {
+        if (!user) {
+            router.push("/register");
+            return
+        };
+        dispatch(addToCart({ productId, quantity: 1 }));
+        toast({ 
+            title: "Added to cart", 
+            description: `${product.name}`,
+            variant: "default",
+            position: "bottom-right", 
+            icon: <ShoppingCart size={20}/>,
+            image: `${product.images[0].url}`,
+            actionButton: {
+                text: "view cart",
+                onClick: ()=>{router.push("/cart")}
+            }
+        })
+    };
+
+    const toggleWishlist = () => {
+        if (!user) {
+            router.push("/register");
+            return
+        };
+
+        const nextLiked = !isInWishList;
+        setOptimisticUpdate(nextLiked);
+        if (isInWishList) {
+            dispatch(removeFromWishlist(product?._id));
+            dispatch(fetchWishlist(lang as typeLang));
+            toast({ title: "Item removed from wishlist", description: "Item  is removed from your wishlist",variant: "default", position: "bottom-right", icon: <HeartCrack size={20}/> })
+        } else {
+            dispatch(addToWishlist(product?._id));
+            dispatch(fetchWishlist(lang as typeLang));
+        }
+    };
 
     return (
         <div className="flex gap-8 md:gap-10 lg:gap-15 flex-col xl:flex-row">
@@ -137,17 +191,25 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
                 </div>
 
                 <div className="flex gap-3 md:gap-4">
-                    <button className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-sm md:text-lg rounded-xl md:rounded-full bg-orange-400 cursor-pointer hover:bg-orange-500 active:scale-95 transition-all duration-100 ease-in">
+                    <button
+                        onClick={() => handleAddToCart(product?._id)}  
+                        className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-sm md:text-lg rounded-xl md:rounded-full bg-orange-400 cursor-pointer hover:bg-orange-500 active:scale-95 transition-all duration-100 ease-in">
                         <ShoppingCart />
                         <p>{t("actions.addToCart")}</p>
                     </button>
-                    <button className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-base md:text-lg rounded-xl md:rounded-full bg-green-400 cursor-pointer hover:bg-green-500 active:scale-95 transition-all duration-100 ease-in">
+                    <button
+                        onClick={()=>{router.push("/cart"); handleAddToCart(product?._id)}} 
+                        className="flex gap-2 items-center justify-center w-full px-4 py-4 text-white font-medium text-base md:text-lg rounded-xl md:rounded-full bg-green-400 cursor-pointer hover:bg-green-500 active:scale-95 transition-all duration-100 ease-in">
                         <CloudLightning />
                         <p>{t("actions.buyNow")}</p>
                     </button>
                     <div>
-                        <button className="p-4 border-gray-200 hover:border-8 hover:p-2 shadow-sm rounded-full cursor-pointer hidden md:block">
-                            <Heart size={26} className="text-gray-700"/>
+                        <button
+                            onClick={toggleWishlist} 
+                            className={twMerge("p-4 border-gray-200 shadow-sm rounded-full cursor-pointer hidden md:block",
+                                isInWishList? "hover:border-red-400 bg-red-300 hover:p-2 hover:border-8 text-white" : "hover:border-8 hover:p-2 text-text"
+                            )}>
+                            <Heart size={26}/>
                         </button>
                     </div>
                 </div>

@@ -31,6 +31,19 @@ const Breadcrumbs = ({previousPage, currentPage}:{previousPage?: string, current
                     <p className="text-base">{tHome("home")}</p>
                 </Link>
                 { previousPage &&
+                previousPage === "related" ? 
+                <>
+                    <span>/</span>
+                    <span
+                        onClick={() => router.push(`/products`)} 
+                        className="font-medium text-sm md:text-base text-gray-600 line-clamp-1 cursor-pointer hover:text-gray-800">{"products"}</span>
+
+                    <span>/</span>
+                    <span
+                        onClick={() => router.push(`/products/related/${currentPage}`)} 
+                        className="font-medium text-sm md:text-base text-gray-600 line-clamp-1 cursor-pointer hover:text-gray-800">{previousPage}</span>
+                </>
+                :
                 <>
                     <span>/</span>
                     <span

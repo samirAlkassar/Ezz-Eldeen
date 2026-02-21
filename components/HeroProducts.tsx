@@ -18,8 +18,8 @@ const HeroProducsts = ({serverProducts}:{serverProducts: ProductType[]}) => {
     const [productsSlice, setProductsSlice] = useState<{start: number, end: number}>({start: 0, end: 4});
     const lang = useLocale();
     return (
-        <div className="mt-0 md:mt-12 w-full overflow-hidden">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
+        <div className="mt-0 md:mt-12 w-full overflow-hidden max-w-360 mx-auto">
+            <div className="grid md:mx-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 md:gap-x-6 xl:gap-x-8 gap-y-8 xl:gap-y-14">
             {
                 serverProducts?.slice(productsSlice.start, productsSlice.end).map((product, index) => (
                 <Product

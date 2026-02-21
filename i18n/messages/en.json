@@ -284,11 +284,45 @@
     "similarProducts": {
       "title": "Similar Products",
       "subtitle": "List of products similar to this product",
-      "showMore": "Show More"
+      "showMore": "Show More",
+      "similarProductsPage": {
+        "button": "Back to product",
+        "title": "Related products to:",
+        "related": "related",
+        "tags": "tags"
+      }
     },
     "reviewCard": {
       "timeAgo": "{{time}}",
       "exampleReview": "Good ruler, I advise buying it."
     }
+  },
+  
+  "footer": {
+    "brand": {
+      "name": "Ezz Eldeen",
+      "description": "Premium toys and school supplies designed to spark creativity and learning in every child."
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "projects": "Projects",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "social": {
+      "title": "Follow Us"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "phone": "+20 1001347513"
+    },
+    "newsletter": {
+      "title": "Join our community",
+      "description": "Get 10% off your first order and stay updated on new drops.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "copyright": "© 2025 Ezz-Eldeen. All rights reserved."
   }
 }

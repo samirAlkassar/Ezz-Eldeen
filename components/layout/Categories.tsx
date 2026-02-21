@@ -90,14 +90,14 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
     const t = useTranslations("Categories");
     
     return (
-        <section className=" bg-background py-10 overflow-x-hidden">
+        <section className="bg-background py-10 overflow-x-hidden">
             <div className="flex flex-col items-center mt-8 sm:mt-12 md:mt-20 w-full">
                 <MotionH1
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}
-                    className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-[#FF791A] max-w-360 mx-auto px-4 md:px-8">
+                    className="text-2xl md:text-3xl text-center lg:text-5xl font-bold text-text max-w-360 mx-auto px-4 md:px-8">
                     {/* <span className="text-[#2B303B]">Explore Our Amazing</span> Categories */}
                     {t("sectionTitle")}
                 </MotionH1>
@@ -113,7 +113,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     {t("sectionSubtitle")}
                 </MotionP>
 
-                <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full mt-4 md:mt-8 max-w-240 mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 gap-2 md:gap-4 lg:gap-6 w-full my-4 md:my-8 max-w-240 mx-auto px-4 md:px-8">
                     {categoriesList.map((category, index) => (
                         <CategoryCard
                             key={index}
@@ -128,17 +128,17 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     ))}
                 </div>
 
-                <div id={"startshopping"} className="pb-20 pt-14 md:pt-20 w-full flex flex-col items-center max-w-360 mx-auto px-4 md:px-8">
+                <div id={"startshopping"} className="bg-primary/3 pb-14 pt-10 md:pt-14 w-full flex flex-col items-center px-4 md:px-8">
                     <MotionH1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0, duration: 0.4, ease: "easeOut" }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#FF791A]">
+                        className="text-2xl sm:text-3xl lg:text-5xl font-bold text-text">
                         {/* <span className="text-[#2B303B]">Featured</span> Products */}
                         {t("featuredProducts")}
                     </MotionH1>
-
+                    
                     <MotionP
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
 
                 <ProductsByCategory lang={lang}/>
 
-                <div className="bg-linear-30r from-cyan-500/10 via-blue-500/10 to-indigo-500/10 px-4 w-full mb-10 md:mb-20 mt-4 h-55 md:h-70">
+                <div className="bg-primary/3 px-4 w-full mb-10 md:mb-20 mt-10 h-55 md:h-70">
                     <div className="mx-auto max-w-360 md:px-8 flex justify-around items-start">
                         <div>
                         <MotionH1
@@ -201,8 +201,8 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                 />
                 )}
 
-                <div className="bg-linear-30r from-orange-400/10 via-orange-500/10 to-orange-400/10 px-4 w-full mb-10 md:mb-20 mt-4 h-50 md:h-70">
-                    <div className="mx-auto max-w-[90rem] md:px-8 flex justify-around items-start">
+                <div className="bg-primary/3 px-4 w-full mb-10 md:mb-20 mt-10 h-50 md:h-70">
+                    <div className="mx-auto max-w-360 md:px-8 flex justify-around items-start">
                         <div>
                         <MotionH1
                             initial={{ opacity: 0, y: 18 }}
@@ -226,7 +226,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                             viewport={{ once: true, amount: 0.2 }}
                             className="relative w-120 h-120 lg:block mt-0 hidden">
                             <Image src={"/images/school-supplies.png"} alt="Hero Image - Back-school-cartoon" fill className="object-contain -mt-22 z-10"/>
-                            <div className="bg-orange-400 absolute w-[580px] h-[300px] custom-radious"/>
+                            <div className="bg-orange-400 absolute w-145 h-75 custom-radious"/>
                         </MotionDiv>
                     </div>
                 </div>

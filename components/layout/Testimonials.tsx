@@ -34,8 +34,8 @@ const Testimonials = () => {
 
 
     return (
-        <div className="overflow-hidden relative py-12 px-4 flex items-center justify-center flex-col bg-[#F8F7F5]">
-            <p className="text-primary uppercase text-sm md:text-base tracking-[1.4px] leading-5 font-bold">
+        <div className="overflow-hidden relative py-12 md:py-16 px-4 flex items-center justify-center flex-col bg-primary/3">
+            <p className="text-primary uppercase text-sm md:text-base tracking-[1.4px] leading-5 font-bold bg-primary/5 py-0.5 px-2 rounded-full">
                 {t("communityStories")}
             </p>
             <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 md:mt-2 tracking-[-0.9px] md:tracking-normal">

@@ -43,7 +43,7 @@ const Bundles = () => {
     const t = useTranslations("Home");
 
     return (
-        <div id="bundles" className="bg-[#F8F7F5] px-4 w-full mb-10 md:mb-20 mt-4 flex flex-col items-center justify-center py-12">
+        <div id="bundles" className="bg-primary/3 px-4 w-full mb-10 md:mb-20 mt-4 flex flex-col items-center justify-center py-12">
             <MotionH1
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}

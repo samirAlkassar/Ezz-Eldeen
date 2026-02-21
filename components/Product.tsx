@@ -20,8 +20,8 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 
 export const Product = ({ product, index, wishlist, size = "medium", isDragging, showRatings = false, showDescription = false }: 
-    { product: ProductType, index: number, wishlist: ProductType[], size?: "small" | "medium", isDragging?: boolean, showRatings?: boolean, showDescription?: boolean }) => {
-    const productIsInWishlist = wishlist.some(item => item._id === product._id);
+    { product: ProductType, index: number, wishlist?: ProductType[], size?: "small" | "medium", isDragging?: boolean, showRatings?: boolean, showDescription?: boolean }) => {
+    const productIsInWishlist = wishlist?.some(item => item._id === product._id);
     const [optimisticUpdate, setOptimisticUpdate] = useState<boolean | null>(null);
     const isInWishList = optimisticUpdate !== null ? optimisticUpdate : Boolean(productIsInWishlist);
     const router = useRouter();
@@ -33,7 +33,7 @@ export const Product = ({ product, index, wishlist, size = "medium", isDragging,
     const lang = useLocale();
     const handleAddToCart = (productId: string) => {
         if (!user) {
-            router.push(`/${params.lang}/register`);
+            router.push(`/register`);
             return
         };
         dispatch(addToCart({ productId, quantity: 1 }));

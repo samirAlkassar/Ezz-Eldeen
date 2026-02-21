@@ -24,7 +24,7 @@ const ProductsBySlugPage = ({ product, relatedProducts, slug, blurDataURL }: Pag
         <Suspense fallback={<ReviewsSkeleton />}>
           <ReviewsServer product={product}/>
         </Suspense>
-        <RelatedProducts relatedProducts={relatedProducts} />
+        <RelatedProducts relatedProducts={relatedProducts} slug={slug}/>
       </div>
     </>
   );
