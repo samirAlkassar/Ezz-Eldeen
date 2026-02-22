@@ -49,9 +49,24 @@ Check out the live project here: [https://ezz-eldeen.vercel.app](https://ezz-eld
 
 Here are some screenshots of the project (placeholders, replace with actual images):
 
+- ## **Home Page**
 ![Homepage](./screenshots/homepage.png)  
-![Product Page](./screenshots/products.png)  
+
+- ## **Products Page**
+![Product Page](./screenshots/products.png) 
+
+- ## **Product Details Page**
+![Product Page](./screenshots/productdetails.png)  
+
+- ## **Uesr Profile Page**
+![Product Page](./screenshots/userprofile.png)  
+
+- ## **Related Products Page**
+![Product Page](./screenshots/relatedproducts.png)  
+
+- ## **Home Page**
 ![Dashboard](./screenshots/dashboard.png)  
+
 
 *(Add more screenshots as needed to showcase features and UI.)*
 
