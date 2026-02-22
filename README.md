@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ezz-Eldeen
 
-## Getting Started
+[![Website](https://img.shields.io/badge/Live-Demo-blue)](https://ezz-eldeen.vercel.app)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-First, run the development server:
+## Overview
 
+**Ezz-Eldeen** is a modern e-commerce book store that also sells gifts, school supplies, toys, and games.  
+The platform is fully responsive, supports multiple languages (Arabic & English), and provides a seamless shopping experience for users of all ages.
+
+---
+
+## Features
+
+- **Multi-language support** – Arabic & English  
+- **Shopping cart & wishlist**  
+- **Search, filters, categories, subcategories, and tags**  
+- **Related products recommendation**  
+- **Fully responsive design**  
+- **Role-based dashboard for admin**  
+- **Smooth animations with Framer Motion**  
+- **Fast & modern frontend using Next.js + TypeScript**  
+
+---
+
+## Tech Stack
+
+**Frontend:**  
+Next.js, TypeScript, Tailwind CSS, Framer Motion, SplideJS, Next-intl, twMerge  
+
+**Backend:**  
+Node.js, Express.js, JWT authentication  
+
+**Database:**  
+MongoDB  
+
+**Other Tools & Services:**  
+Cloudinary (for image uploads), Vercel (deployment)  
+
+---
+
+## Live Demo
+
+Check out the live project here: [https://ezz-eldeen.vercel.app](https://ezz-eldeen.vercel.app)
+
+---
+
+## Screenshots / Demo
+
+Here are some screenshots of the project (placeholders, replace with actual images):
+
+![Homepage](./screenshots/homepage.png)  
+![Product Page](./screenshots/products.png)  
+![Dashboard](./screenshots/dashboard.png)  
+
+*(Add more screenshots as needed to showcase features and UI.)*
+
+---
+
+## Installation & Setup
+
+### Frontend
+
+1. Clone the repository:  
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd ezz-eldeen-frontend
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

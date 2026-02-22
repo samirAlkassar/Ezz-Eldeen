@@ -128,7 +128,7 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                     ))}
                 </div>
 
-                <div id={"startshopping"} className="bg-primary/3 pb-14 pt-10 md:pt-14 w-full flex flex-col items-center px-4 md:px-8">
+                <div id={"startshopping"} className="bg-primary/1 pb-14 pt-10 md:pt-14 w-full flex flex-col items-center px-4 md:px-8">
                     <MotionH1
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +176,9 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                         <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">
                             {t("exploreBestToysSubtitle")}
                         </p>
-                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">
+                        <button 
+                            onClick={() => router.push(`${lang}/categories/${"Toys & Games".replace(/\s+/g, '_')}`)}
+                            className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">
                             {t("shopNow")}
                         </button>
                         </div>
@@ -215,7 +217,9 @@ const Categories = ({products, sections, lang}:{products: ProductType[], section
                         <p className="md:mt-2 text-base md:text-lg font-medium text-gray-700">
                             {t("backToSchoolSubtitle")}
                         </p>
-                        <button className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">
+                        <button
+                            onClick={() => router.push(`${lang}/categories/${"School Supplies".replace(/\s+/g, '_')}`)}
+                            className="bg-white text-gray-700 font-medium px-6 py-2 text-lg md:text-xl mt-6 cursor-pointer rounded-full border-2 border-gray-700">
                             {t("shopNow")}
                         </button>
                         </div>

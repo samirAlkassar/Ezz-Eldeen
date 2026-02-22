@@ -34,7 +34,7 @@ const Testimonials = () => {
 
 
     return (
-        <div className="overflow-hidden relative py-12 md:py-16 px-4 flex items-center justify-center flex-col bg-primary/3">
+        <div className="overflow-hidden relative py-12 md:py-16 px-4 flex items-center justify-center flex-col bg-primary/2">
             <p className="text-primary uppercase text-sm md:text-base tracking-[1.4px] leading-5 font-bold bg-primary/5 py-0.5 px-2 rounded-full">
                 {t("communityStories")}
             </p>
