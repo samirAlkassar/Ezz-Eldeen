@@ -14,7 +14,7 @@ const Thumbnails = ({product, setImageIndex}: {product: ProductType, setImageInd
     const lang = useLocale();
     const splideOptions = {
         type: "slide",
-        perPage: 5,
+        perPage: 6,
         perMove: 1,
         pagination: false,
         arrows: true,
@@ -26,7 +26,7 @@ const Thumbnails = ({product, setImageIndex}: {product: ProductType, setImageInd
         flickPower: 900 ,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         breakpoints: {
-            1276: { perPage: 9},
+            1276: { perPage: 7},
             430: { perPage: 4 },
         },
     };

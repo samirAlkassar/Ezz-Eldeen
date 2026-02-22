@@ -254,3 +254,8 @@ html {
     opacity: 0;
   }
 }
+
+
+.description {
+  white-space: pre-wrap;
+}

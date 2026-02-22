@@ -75,8 +75,8 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
 
     return (
         <div className="flex gap-8 md:gap-10 lg:gap-15 flex-col xl:flex-row">
-            <div className="flex-1 flex flex-col space-y-6">
-                <div className="relative bg-white h-85 sm:h-100 md:h-155 aspect-square rounded-2xl overflow-hidden">
+            <div className="flex-1 flex flex-col space-y-6 max-w-180">
+                <div className="relative bg-white h-85 sm:h-100 md:h-155 aspect-square rounded-3xl overflow-hidden">
                     <Image
                         src={product?.images[imageIndex]?.url || "/images/placeholder.jpg"}
                         alt={""}
@@ -144,7 +144,7 @@ const ProductSection = ({product, blurDataURL} : {product:  ProductType, blurDat
 
                 <div>
                     <span className="text-lg md:text-xl font-medium text-gray-800">{t("product.descriptionTitle")}</span>
-                    <p className="text-gray-700 text-sm md:text-lg leading-relaxed max-w-3xl">{product?.description}</p>
+                    <p className="description text-gray-700 text-sm md:text-lg leading-relaxed max-w-3xl">{product?.description}</p>
                 </div>
                 
 

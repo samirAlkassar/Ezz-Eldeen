@@ -282,6 +282,7 @@
       "features": "Features"
     },
     "similarProducts": {
+      "label": "Now Viewing",
       "title": "Similar Products",
       "subtitle": "List of products similar to this product",
       "showMore": "Show More",

@@ -26,13 +26,13 @@ const RelatedProductsGrid = ({ products, title, paginationData }: Props) => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto space-y-6 mt-6 px-4">
+    <section className="max-w-340 mx-auto space-y-6 mt-6 px-4 md:px-8">
       <div className="flex items-center justify-self-center gap-2">
         <h2 className="text-base md:text-xl font-medium text-text">{t("title")}</h2>
         <h3 className="text-base md:text-xl text-text">{title}</h3>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 xl:gap-x-8 gap-y-8 xl:gap-y-14">
         {products.map((product, index) => (
           <Product key={product._id} index={index} product={product} showDescription={true} showRatings={true}/>
         ))}
