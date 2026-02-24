@@ -78,6 +78,5 @@ Here are some screenshots of the project (placeholders, replace with actual imag
 
 1. Clone the repository:  
 ```bash
-git clone <your-repo-url>
-cd ezz-eldeen-frontend
+git clone https://github.com/samirAlkassar/Ezz-Eldeen.git
 ```

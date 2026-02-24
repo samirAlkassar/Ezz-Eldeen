@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import getCookies from "@/actions/getCookies";
-import Sidebar from "../components/Sidebar";
-import ProductsTab from "../components/ProductsTab";
-import UsersTab from "../components/UsersTab";
-import StatusTab from "../components/StatusTab";
-import SettingsTab from "../components/SettingsTab";
+import Sidebar from "./Sidebar";
+import ProductsTab from "./ProductsTab";
+import UsersTab from "./UsersTab";
+import StatusTab from "./StatusTab";
+import SettingsTab from "./SettingsTab";
 import ProductFormModal from "./form/ProductFormModal";
-import DeleteConfirm from "../components/DeleteConfirm";
+import DeleteConfirm from "./DeleteConfirm";
 import { AnimatePresence } from "framer-motion"
 import { useToast } from "@/components/Toast";
 import { AlertTriangle, Trash } from "lucide-react";
@@ -19,12 +19,12 @@ import { getProductsAdminApi } from "@/features/admin/productsAPI";
 
 const API_BASE = typeof window !== "undefined" ? (process.env.NEXT_PUBLIC_API_URL ?? "") : "";
 
-export default function Dashboard({lang}:{lang: typeLang}) {
+export default function Dashboard({ lang }: { lang: typeLang }) {
     const [activeTab, setActiveTab] = useState("products");
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    const [limit] = useState(8);
+    const [limit] = useState(7);
     const [total, setTotal] = useState(0);
 
     const [search, setSearch] = useState("");
@@ -35,9 +35,9 @@ export default function Dashboard({lang}:{lang: typeLang}) {
     const [showAddModal, setShowAddModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
-    const {toast} = useToast();
+    const { toast } = useToast();
     const router = useRouter();
-    
+
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
@@ -57,7 +57,7 @@ export default function Dashboard({lang}:{lang: typeLang}) {
         } finally {
             setLoading(false);
         }
-    },[page, limit, search, categoryFilter, minPrice, maxPrice]);
+    }, [page, limit, search, categoryFilter, minPrice, maxPrice]);
 
     useEffect(() => {
         if (activeTab === "products") {
@@ -72,12 +72,12 @@ export default function Dashboard({lang}:{lang: typeLang}) {
             if (!token) throw new Error("Token not found");
 
             const res = await fetch(`${API_BASE}/products`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token.value}`,
-                "Accept-Language": lang,
-            },
-            body: payload,
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token.value}`,
+                    "Accept-Language": lang,
+                },
+                body: payload,
             });
 
             const data = await res.json();
@@ -135,40 +135,43 @@ export default function Dashboard({lang}:{lang: typeLang}) {
                 },
             });
             if (res.status === 403) {
-                 toast({ 
+                toast({
                     title: "Not Authorized",
                     description: "Only admins can delete products",
-                    variant: "error", 
+                    variant: "error",
                     icon: <AlertTriangle />,
-                    position: "bottom-right" });
-                    router.push(`/${lang}`)
-                 return
+                    position: "bottom-right"
+                });
+                router.push(`/${lang}`)
+                return
             }
 
             if (res.status === 401) {
-                toast({ 
+                toast({
                     title: "Login!",
                     description: "you need to login as admin to be able to delete products",
-                    variant: "default", 
+                    variant: "default",
                     icon: <AlertTriangle />,
-                    position: "bottom-right" });
-                    router.push(`/${lang}/login`)
-                 return
+                    position: "bottom-right"
+                });
+                router.push(`/${lang}/login`)
+                return
             }
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || "Failed to delete");
 
-            toast({ 
-                title: "Product deleted", 
-                description: "Product is deleted successfully", 
-                variant: "default", 
-                icon: <Trash />, 
-                position: "bottom-right" });
+            toast({
+                title: "Product deleted",
+                description: "Product is deleted successfully",
+                variant: "default",
+                icon: <Trash />,
+                position: "bottom-right"
+            });
             return data;
 
         } catch (error: unknown) {
             const message = error instanceof Error ? error.message : "Unknown error";
-            toast({ title: "Error", description: message, variant: "error"});
+            toast({ title: "Error", description: message, variant: "error" });
         }
 
     };
@@ -177,9 +180,9 @@ export default function Dashboard({lang}:{lang: typeLang}) {
 
     return (
         <div className="flex bg-slate-50">
-            <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+            {/* <Sidebar activeTab={activeTab} onTabChange={setActiveTab} /> */}
 
-            <div className="flex-1 px-3 md:px-8 pt-4 md:pt-8 pb-2 md:pb-4 max-h-[calc(100vh-76px)] overflow-y-scroll">
+            <div className="flex-1 max-h-[calc(100vh-80px)] overflow-y-scroll">
                 {activeTab === "products" && (
                     <ProductsTab
                         products={products}

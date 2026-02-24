@@ -62,11 +62,13 @@ export interface ProductUpdatePayload {
 
 export type User = {
     _id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     role: string;
     status: string;
     createdAt: string;
+    picturePath: string;
 };
 
 export type Order = {

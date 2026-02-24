@@ -1,12 +1,16 @@
+"use client"
+
 import { Package, Users, Activity, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 type SidebarProps = {
-    activeTab: string;
-    onTabChange: (tab: string) => void;
+    activeTab?: string;
+    onTabChange?: (tab: string) => void;
 };
 
 function Sidebar({ activeTab, onTabChange }: SidebarProps) {
+    const router = useRouter();
     const tabs = [
         { id: "products", label: "Products", icon: Package },
         { id: "users", label: "Users", icon: Users },
@@ -15,7 +19,7 @@ function Sidebar({ activeTab, onTabChange }: SidebarProps) {
     ];
     
     return (
-        <div className="w-fit xl:w-64 bg-white border-r border-slate-200 h-[calc(100vh-76px)] left-0 top-0 flex flex-col">
+        <div className="w-fit xl:w-72 bg-white border-r border-slate-200 h-[calc(100vh-80px)] left-0 top-0 flex flex-col">
             <div className="p-6 border-b border-slate-200 hidden xl:block">
                 <h2 className="text-base md:text-xl font-bold text-slate-800">Admin Panel</h2>
                 <p className="text-xs text-slate-500 mt-1">Dashboard v1.0</p>
@@ -28,7 +32,7 @@ function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                     return (
                         <button
                             key={tab.id}
-                            onClick={() => onTabChange(tab.id)}
+                            onClick={() => router.push(tab.id === "products" ? `/dashboard`: `/dashboard/${tab.id}`)}
                             className={twMerge(
                                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer",
                                 isActive 

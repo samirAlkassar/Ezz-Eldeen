@@ -6,7 +6,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
 import getCookies from "@/actions/getCookies";
 import deleteCookies from "@/actions/deleteCookies";
-import {User} from "./types"
+import { User } from "./types"
 
 
 // State type
@@ -26,18 +26,22 @@ const initialState: UserState = {
 export const fetchCurrentUser = createAsyncThunk(
   'user/fetchCurrentUser',
   async (_, thunkAPI) => {
-      try {
-        const token = await getCookies("token");
-        if (!token || !token.value) {
-          throw new Error("Authentication token not found");
-        }
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/me`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token.value}`,
-          },
-        });
+    try {
+      const token = await getCookies("token");
+      if (!token || !token.value) {
+        throw new Error("Authentication token not found");
+      }
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!baseUrl) {
+        throw new Error('API URL not configured');
+      }
+      const res = await fetch(`${baseUrl}/user/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token.value}`,
+        },
+      });
       const data = await res.json();
       return data.user as User;
     } catch (error: any) {

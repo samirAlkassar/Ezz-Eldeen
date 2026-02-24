@@ -1,7 +1,7 @@
 import getCookies from "@/actions/getCookies";
 import { RegisterPayload } from "./types";
 
-export async function loginApi({ email, password }: {email:string, password:string}) {
+export async function loginApi({ email, password }: { email: string, password: string }) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
@@ -10,7 +10,7 @@ export async function loginApi({ email, password }: {email:string, password:stri
       credentials: 'include',
     });
     if (!res.ok) throw new Error('Login failed');
-    return res.json(); 
+    return res.json();
   } catch (error) {
     console.log(error)
   }
@@ -38,27 +38,30 @@ export async function registernApi(payload: RegisterPayload) {
 export async function fetchCurrentUserApi() {
   const token = await getCookies("token");
   if (!token) {
-      console.log("token not found");
-      return
-  };
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/me`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token?.value}`,
-    },
-    cache: "no-store",
-  });
-
-    if (res.status === 401) {
-      return null;
-    }
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch user");
-    }
-  return res.json();
-};
+    console.log("token not found");
+    return null;
+  }
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!baseUrl) {
+    throw new Error('API URL not configured');
+  }
+  try {
+    const res = await fetch(`${baseUrl}/user/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token?.value}`,
+      },
+      cache: "no-store",
+    });
+    if (res.status === 401) return null;
+    if (!res.ok) throw new Error('Failed to fetch user');
+    return await res.json();
+  } catch (err) {
+    console.error('fetchCurrentUserApi error:', err);
+    return null;
+  }
+}
 
 
 
