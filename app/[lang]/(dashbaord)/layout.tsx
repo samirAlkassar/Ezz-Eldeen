@@ -1,7 +1,7 @@
 
 import type { Metadata } from "next";
-import Sidebar from "./dashboard/components/Sidebar";
 import NavbarServer from "@/components/layout/navbar/NavbarServer";
+import SideBarServer from "./dashboard/components/SideBarServer";
 
 export const metadata: Metadata = {
   title: "Ezz-Eldeen | Login to your account",
@@ -18,7 +18,7 @@ export default function RootLayout({
     <div className="bg-background">
       <NavbarServer />
     <div className="flex w-full">
-      <Sidebar />
+      <SideBarServer />
       <div className="flex-1 px-3 md:px-8 pt-4 md:pt-6 pb-2 md:pb-4 max-h-[calc(100vh-76px)] overflow-y-scroll">
         {children}
       </div>
